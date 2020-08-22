@@ -1,0 +1,3 @@
+#App server
+/heat-preparedness-app-server/node_modules
+/heat-preparedness-app-server/.env
