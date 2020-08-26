@@ -22,23 +22,23 @@ app.get('/', (req, res) => res.send("Heat Preparedness Application Server"))
 con.connect(function (err) {
     if (err) throw err;
 })
-
+//Check for required parameter
 app.get('/api/showSpecificArea/:areaName', [param('areaName').not().isEmpty()],
     async function (req, res) {
-        areaInfo = await getSpecificDistrict(req.params.areaName),
-            res.json(areaInfo)
+        areaInfo = await getSpecificDistrict(req.params.areaName), //call appropriate function
+            res.json(areaInfo) //send response
     })
 
 
 async function getSpecificDistrict(selectedArea) {
     con.query(
-        'SELECT * FROM LGA WHERE lga_area = ?',
-        selectedArea,
+        'SELECT * FROM LGA WHERE lga_area = ?', //? Represents a parameter
+        selectedArea, //parameter you want inserted where the ? is 
         function (err, rows, fields) {
             if (err) throw err
 
             console.log('rows:', rows)
-            return rows
+            return rows //return results
         }
     )
 }
