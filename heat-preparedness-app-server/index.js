@@ -37,14 +37,8 @@ app.get('/api/DistrictThreshold/:suburb', [param('suburb').not().isEmpty()],
 
 async function getSpecificThreshold(userSuburb) {
     con.query(
-        `SELECT threshold
-         FROM District d,
-                LGA l,
-                Suburb s
-         WHERE d.state = l.state
-            AND d.district_name = l.district
-            AND l.council = s.council
-            AND s.suburb = ?;`, //? Represents a parameter
+        `SELECT suburb
+            FROM Suburb;`, //? Represents a parameter
         userSuburb, //parameter you want inserted where the ? is 
         function (err, rows, fields) {
             if (err) throw err
