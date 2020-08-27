@@ -27,21 +27,29 @@ con.connect(function (err) {
     if (err) throw err;
 })
 //Check for required parameter
-app.get('/api/showSpecificArea/:areaName', [param('areaName').not().isEmpty()],
+app.get('/api/DistrictThreshold/:suburb', [param('suburb').not().isEmpty()],
     async function (req, res) {
-        areaInfo = await getSpecificDistrict(req.params.areaName), //call appropriate function
-            res.json(areaInfo) //send response
+        suburbThreshold = await getSpecificThreshold(req.params.suburb), //call appropriate function
+            res.json(suburbThreshold) //send response
     })
 
+//con.query(<sql query>, <parameters you want to pass>, function to return)
 
-async function getSpecificDistrict(selectedArea) {
+async function getSpecificThreshold(userSuburb) {
     con.query(
-        'SELECT * FROM LGA WHERE lga_area = ?', //? Represents a parameter
-        selectedArea, //parameter you want inserted where the ? is 
+        `SELECT threshold
+         FROM District d,
+                LGA l,
+                Suburb s
+         WHERE d.state = l.state
+            AND d.district_name = l.district
+            AND l.council = s.council
+            AND s.suburb = ?;`, //? Represents a parameter
+        userSuburb, //parameter you want inserted where the ? is 
         function (err, rows, fields) {
             if (err) throw err
 
-            console.log('rows:', rows)
+            // console.log('rows:', rows)
             return rows //return results
         }
     )
