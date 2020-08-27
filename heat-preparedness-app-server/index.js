@@ -17,6 +17,10 @@ const con = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
+
+//Example Weather API Call
+//https://api.openweathermap.org/data/2.5/onecall?lat=-38.2551&lon=144.6726&exclude=hourly,current,minutely&units=metric&appid=process.env.OPEN_WEATHER_ONE_CALL_API
+
 app.get('/', (req, res) => res.send("Heat Preparedness Application Server"))
 
 con.connect(function (err) {
