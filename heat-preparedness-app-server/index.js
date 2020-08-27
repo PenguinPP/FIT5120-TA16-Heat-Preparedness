@@ -93,9 +93,9 @@ async function getweatherforecastsuburb(weatherforecast) {
 }
 
 //Check for weather forecast for Melbourne required parameter
-app.get('/api/DistrictThreshold/:suburb', [param('suburb').isEmpty()],
+app.get('/api/DistrictThreshold/:suburb', 
     async function (req, res) {
-        defaultweatherforceast = await getdefaultweatherforceast(req.params.suburb), //call appropriate function
+        defaultweatherforceast = await getdefaultweatherforceast(), //call appropriate function
             res.json(defaultweatherforceast) //send response
     })
 
