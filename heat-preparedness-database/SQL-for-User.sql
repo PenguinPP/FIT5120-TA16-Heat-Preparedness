@@ -6,8 +6,8 @@ FROM District d,
     LGA l,
     Suburb s
 WHERE d.state = l.state
-    AND d.district = l.district
-    AND l.lga_council_name = s.area
+    AND d.district_name = l.district
+    AND l.council = s.council
     AND s.suburb = ?;
 --Get Weather Forecast for user's Suburb
 SELECT f.date,
@@ -19,7 +19,13 @@ SELECT f.date,
 FROM Forecast f,
     LGA l,
     Suburb s
-WHERE l.LGA.co;
+WHERE l.council = s.council
+    AND l.district = s.district
+    AND l.state = s.state
+    AND f.council = l.council
+    AND f.district = l.district
+    AND f.state = l.state
+    AND s.surburb = ?;
 --Get weather forecast for Melbourne (default if user has not selected location)
 SELECT f.date,
     f.state,
@@ -27,8 +33,16 @@ SELECT f.date,
     f.min,
     f.max,
     f.avg
-FROM Forecast
-WHERE area = 'Melbourne';
+FROM Forecast f,
+    LGA l,
+    Suburb s
+WHERE l.council = s.council
+    AND l.district = s.district
+    AND l.state = s.state
+    AND f.council = l.council
+    AND f.district = l.district
+    AND f.state = l.state
+    AND s.surburb = 'Melbourne';
 --Get threshold for Melbourne (default)
 SELECT threshold
 FROM District
@@ -40,5 +54,5 @@ FROM advice_preparation;
 SELECT *
 FROM Advice;
 --Get all suburbs (to display list to user)
-SELECT *
+SELECT suburb
 FROM Suburb;
