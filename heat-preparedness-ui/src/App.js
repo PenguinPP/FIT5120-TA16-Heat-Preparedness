@@ -25,7 +25,7 @@ function MenuDrawer() {
             <AppBar position="static">
                 <Toolbar>
 
-                    <Typography variant="h6" align="center" >
+                    <Typography variant="h4" align="center" >
                         Heat Preparedness
           </Typography>
                     <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
@@ -76,10 +76,10 @@ const App = () => {
                     <Card variant="outlined">
                         <CardContent>
                             <form noValidate autoComplete="off">
-                                <Typography variant="subtitle1" align="flex-start" paragraph={true} >
+                                <Typography variant="h4" align="flex-start" paragraph={true} >
                                     Heat Waves in Victoria
                   </Typography>
-                                <Typography variant="body" align="flex-start">
+                                <Typography variant="h6" align="flex-start">
                                     Info about WHAT Heatwaves are and WHY they are important to aged citizens.
                                     Risks, potential impact on their health, etc...
                             </Typography><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -91,10 +91,10 @@ const App = () => {
                 <Grid item xs={10} lg={6}>
                     <Card variant="outlined">
                         <CardContent>
-                            <Typography variant="subtitle1" align="flex-start" paragraph={true} >
+                            <Typography variant="h4" align="flex-start" paragraph={true} >
                                 Precautions
               </Typography>
-                            <Typography variant="body" align="flex-start">
+                            <Typography variant="h6" align="flex-start">
                                 Info about WHAT can people do to prepare themselvs in order to mitigate heatwaves risks.
                             </Typography><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                         </CardContent>
@@ -103,10 +103,10 @@ const App = () => {
                 <Grid item xs={10} lg={6}>
                     <Card variant="outlined">
                         <CardContent>
-                            <Typography variant="subtitle1" align="flex-start" paragraph={true} >
+                            <Typography variant="h4" align="flex-start" paragraph={true} >
                                 During a heatwave
               </Typography>
-                            <Typography variant="body" align="flex-start">
+                            <Typography variant="h6" align="flex-start">
                                 Info about WHAT people should and should not do During the Heatwve.
                                 This should consider their location to suggets heat shelters, emergency contact info, and other relevant data.
                             </Typography><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -116,10 +116,10 @@ const App = () => {
                 <Grid item xs={10} lg={6}>
                     <Card variant="outlined">
                         <CardContent>
-                            <Typography variant="subtitle1" align="flex-start" paragraph={true} >
+                            <Typography variant="h4" align="flex-start" paragraph={true} >
                                 Weather forecasts and alerts
               </Typography>
-                            <Typography variant="body" align="flex-start">
+                            <Typography variant="h6" align="flex-start">
 
                             </Typography><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                         </CardContent>
