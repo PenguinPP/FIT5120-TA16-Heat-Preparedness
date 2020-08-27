@@ -54,3 +54,38 @@ async function getSpecificThreshold(userSuburb) {
         }
     )
 }
+
+app.get('/api/DistrictThreshold/:suburb', [param('suburb').isEmpty()],
+    async function (req, res) {
+        defaultsuburbThreshold = await getdefaultThreshold(req.params.suburb), //call appropriate function
+            res.json(defaultsuburbThreshold) //send response
+    })
+
+
+async function getdefaultThreshold(defaultSuburb) {
+    con.query(
+        `SELECT f.date,
+            f.state,
+            f.area,
+            f.min,
+            f.max,
+            f.avg
+        FROM Forecast f,
+            LGA l,
+            Suburb s
+        WHERE l.council = s.council
+            AND l.district = s.district
+            AND l.state = s.state
+            AND f.council = l.council
+            AND f.district = l.district
+            AND f.state = l.state
+            AND s.suburb = ?;`, //? Represents a parameter
+        defaultSuburb, //parameter you want inserted where the ? is 
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}

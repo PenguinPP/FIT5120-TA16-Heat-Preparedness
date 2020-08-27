@@ -25,7 +25,7 @@ WHERE l.council = s.council
     AND f.council = l.council
     AND f.district = l.district
     AND f.state = l.state
-    AND s.surburb = ?;
+    AND s.suburb = ?;
 --Get weather forecast for Melbourne (default if user has not selected location)
 SELECT f.date,
     f.state,
