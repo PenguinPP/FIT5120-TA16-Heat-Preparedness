@@ -35,3 +35,16 @@ suburb['State'] = 'Victoria'
 suburb.to_csv('Victoria_suburb.csv',index = False)
 # output data looks like: 
 #               Suburb | Council | District | Latitude | Longitude | State
+
+
+# seperate and order the data to make it easy to inport into database by mysql workbench
+district = suburb[['State','District']]
+district.drop_duplicates(inplace = True)
+district.to_csv('district.csv',index = False)
+
+lga = suburb[['State','District','Council','Latitude','Longitude']]
+lga.drop_duplicates(inplace = True)
+lga.to_csv('concile.csv',index = False)
+
+suburb = suburb[['State','District','Council','Suburb']]
+suburb.to_csv('suburb.csv',index = False)
