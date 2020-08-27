@@ -30,7 +30,8 @@ suburb = pd.merge(suburb_df,district_df,left_on = 'Council',right_on = 'Location
 suburb.drop('Location',axis = 1,inplace = True)
 suburb = suburb.sort_values('Suburb')
 suburb.reset_index(drop = True, inplace = True)
+suburb['State'] = 'Victoria'
 
-suburb.to_csv('Victoria_suburb.csv')
+suburb.to_csv('Victoria_suburb.csv',index = False)
 # output data looks like: 
-#               Suburb | Council | District | Latitude | Longitude
+#               Suburb | Council | District | Latitude | Longitude | State
