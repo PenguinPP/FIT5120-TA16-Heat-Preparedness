@@ -57,14 +57,14 @@ async function getSpecificThreshold(userSuburb) {
 }
 
 //Check for Weather Forecast for user's Suburb required parameter
-app.get('/api/DistrictThreshold/:suburb', [param('suburb').not().isEmpty()],
+app.get('/api/SuburbForecast/:suburb', [param('suburb').not().isEmpty()],
     async function (req, res) {
-        weathersuburb = await getweatherforecastsuburb(req.params.suburb), //call appropriate function
+        weathersuburb = await getWeatherforecastsuburb(req.params.suburb), //call appropriate function
             res.json(weathersuburb) //send response
     })
 
 
-async function getweatherforecastsuburb(weatherforecast) {
+async function getWeatherforecastsuburb(weatherforecast) {
     con.query(
         `SELECT f.date,
             f.state,
@@ -93,14 +93,14 @@ async function getweatherforecastsuburb(weatherforecast) {
 }
 
 //Check for weather forecast for Melbourne required parameter
-app.get('/api/DistrictThreshold/:suburb', 
+app.get('/api/MelbourneForecast/:suburb', 
     async function (req, res) {
-        defaultweatherforceast = await getdefaultweatherforceast(), //call appropriate function
+        defaultweatherforceast = await getDefaultweatherforceast(), //call appropriate function
             res.json(defaultweatherforceast) //send response
     })
 
 
-async function getdefaultweatherforceast() {
+async function getDefaultweatherforceast() {
     con.query(
         `SELECT f.date,
             f.state,
@@ -117,7 +117,7 @@ async function getdefaultweatherforceast() {
             AND f.council = l.council
             AND f.district = l.district
             AND f.state = l.state
-            AND s.surburb = 'Melbourne';`, //? Represents a parameter (parameter you want inserted where the ? is )
+            AND s.surburb = 'Melbourne';`, //? Represents a parameter 
         function (err, rows, fields) {
             if (err) throw err
 
@@ -128,15 +128,15 @@ async function getdefaultweatherforceast() {
 }
 
 //Check for threshold for Melbourne (default) required parameter
-app.get('/api/DistrictThreshold/:suburb', [param('suburb').isEmpty()],
+app.get('/api/MelbourneThreshold/:suburb', 
     async function (req, res) {
-        defaultsuburbThreshold = await getdefaultThreshold(req.params.suburb), //call appropriate function
+        defaultsuburbThreshold = await getDefaultThreshold(), //call appropriate function
             res.json(defaultsuburbThreshold) //send response
     })
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
-async function getdefaultThreshold() {
+async function getDefaultThreshold() {
     con.query(
         `SELECT threshold
          FROM District
@@ -153,13 +153,13 @@ async function getdefaultThreshold() {
 //Check for heatwave preparation advice required parameter
 app.get('/api/Advice_pre/:content', [param('content').not().isEmpty()],
     async function (req, res) {
-        heatprep_advice = await getheatprep(req.params.content), //call appropriate function
+        heatprep_advice = await getHeatprep(req.params.content), //call appropriate function
             res.json(heatprep_advice) //send response
     })
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
-async function getheatprep() {
+async function getHeatprep() {
     con.query(
         `SELECT *
          FROM advice_preparation;`, //? Represents a parameter
@@ -175,13 +175,13 @@ async function getheatprep() {
 //Check for heatwave advice required parameter
 app.get('/api/Advice/:content', [param('content').not().isEmpty()],
     async function (req, res) {
-        heatadvice = await getheatadvice(req.params.content), //call appropriate function
+        heatadvice = await getHeatadvice(req.params.content), //call appropriate function
             res.json(heatadvice) //send response
     })
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
-async function getheatadvice() {
+async function getHeatadvice() {
     con.query(
         `SELECT *
          FROM Advice;`, //? Represents a parameter
@@ -195,15 +195,15 @@ async function getheatadvice() {
 }
 
 //Check for all suburbs required parameter
-app.get('/api/DistrictThreshold/:suburb', [param('suburb').not().isEmpty()],
+app.get('/api/Suburblist/:suburb', [param('suburb').not().isEmpty()],
     async function (req, res) {
-        allsuburb = await getallsubrb(req.params.suburb), //call appropriate function
+        allsuburb = await getAllsuburb(req.params.suburb), //call appropriate function
             res.json(allsuburb) //send response
     })
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
-async function getallsuburb() {
+async function getAllsuburb() {
     con.query(
         `SELECT suburb
          FROM Suburb;`,//? Represents a parameter
