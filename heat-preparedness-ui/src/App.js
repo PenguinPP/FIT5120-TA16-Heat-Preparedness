@@ -99,7 +99,7 @@ const App = () => {
                 <Grid item xs={12}>
 
                 </Grid>
-                <Grid item xs={10} lg={6}>
+                <Grid item xs={10} lg={12}>
                     <Card variant="outlined">
                         <CardContent>
                             <form noValidate autoComplete="off">
