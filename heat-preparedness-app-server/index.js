@@ -87,7 +87,7 @@ async function getWeatherforecastsuburb(weatherforecast) {
 }
 
 //Check for weather forecast for Melbourne required parameter
-app.get('/api/MelbourneForecast/:suburb', 
+app.get('/api/MelbourneForecast/:suburb',
     async function (req, res) {
         defaultweatherforceast = await getDefaultweatherforceast(), //call appropriate function
             res.json(defaultweatherforceast) //send response
@@ -122,7 +122,7 @@ async function getDefaultweatherforceast() {
 }
 
 //Check for threshold for Melbourne (default) required parameter
-app.get('/api/MelbourneThreshold/:suburb', 
+app.get('/api/MelbourneThreshold/:suburb',
     async function (req, res) {
         defaultsuburbThreshold = await getDefaultThreshold(), //call appropriate function
             res.json(defaultsuburbThreshold) //send response
@@ -189,7 +189,7 @@ async function getHeatadvice() {
 }
 
 //Check for all suburbs required parameter
-app.get('/api/Suburblist/:suburb', [param('suburb').not().isEmpty()],
+app.get('/api/SuburbList',
     async function (req, res) {
         allsuburb = await getAllsuburb(req.params.suburb), //call appropriate function
             res.json(allsuburb) //send response
@@ -204,7 +204,7 @@ async function getAllsuburb() {
         function (err, rows, fields) {
             if (err) throw err
 
-            // console.log('rows:', rows)
+            console.log('rows:', rows)
             return rows //return results
         }
     )
