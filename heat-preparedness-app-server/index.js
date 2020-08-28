@@ -26,7 +26,8 @@ app.get('/', (req, res) => res.send("Heat Preparedness Application Server"))
 con.connect(function (err) {
     if (err) throw err;
 })
-//Check for required parameter
+
+//Check for heat threshold for user's suburb required parameter
 app.get('/api/DistrictThreshold/:suburb', [param('suburb').not().isEmpty()],
     async function (req, res) {
         suburbThreshold = await getSpecificThreshold(req.params.suburb), //call appropriate function
@@ -40,6 +41,166 @@ async function getSpecificThreshold(userSuburb) {
         `SELECT suburb
             FROM Suburb;`, //? Represents a parameter
         userSuburb, //parameter you want inserted where the ? is 
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}
+
+//Check for Weather Forecast for user's Suburb required parameter
+app.get('/api/SuburbForecast/:suburb', [param('suburb').not().isEmpty()],
+    async function (req, res) {
+        weathersuburb = await getWeatherforecastsuburb(req.params.suburb), //call appropriate function
+            res.json(weathersuburb) //send response
+    })
+
+
+async function getWeatherforecastsuburb(weatherforecast) {
+    con.query(
+        `SELECT f.date,
+            f.state,
+            f.area,
+            f.min,
+            f.max,
+            f.avg
+         FROM Forecast f,
+            LGA l,
+            Suburb s
+         WHERE l.council = s.council
+            AND l.district = s.district
+            AND l.state = s.state
+            AND f.council = l.council
+            AND f.district = l.district
+            AND f.state = l.state
+            AND s.suburb = ?;`, //? Represents a parameter
+        weatherforecast, //parameter you want inserted where the ? is 
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}
+
+//Check for weather forecast for Melbourne required parameter
+app.get('/api/MelbourneForecast/:suburb', 
+    async function (req, res) {
+        defaultweatherforceast = await getDefaultweatherforceast(), //call appropriate function
+            res.json(defaultweatherforceast) //send response
+    })
+
+
+async function getDefaultweatherforceast() {
+    con.query(
+        `SELECT f.date,
+            f.state,
+            f.area,
+            f.min,
+            f.max,
+            f.avg
+         FROM Forecast f,
+            LGA l,
+            Suburb s
+         WHERE l.council = s.council
+            AND l.district = s.district
+            AND l.state = s.state
+            AND f.council = l.council
+            AND f.district = l.district
+            AND f.state = l.state
+            AND s.surburb = 'Melbourne';`, //? Represents a parameter 
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}
+
+//Check for threshold for Melbourne (default) required parameter
+app.get('/api/MelbourneThreshold/:suburb', 
+    async function (req, res) {
+        defaultsuburbThreshold = await getDefaultThreshold(), //call appropriate function
+            res.json(defaultsuburbThreshold) //send response
+    })
+
+//con.query(<sql query>, <parameters you want to pass>, function to return)
+
+async function getDefaultThreshold() {
+    con.query(
+        `SELECT threshold
+         FROM District
+         WHERE district_name = 'Melbourne';`, //? Represents a parameter
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}
+
+//Check for heatwave preparation advice required parameter
+app.get('/api/Advice_pre/:content', [param('content').not().isEmpty()],
+    async function (req, res) {
+        heatprep_advice = await getHeatprep(req.params.content), //call appropriate function
+            res.json(heatprep_advice) //send response
+    })
+
+//con.query(<sql query>, <parameters you want to pass>, function to return)
+
+async function getHeatprep() {
+    con.query(
+        `SELECT *
+         FROM advice_preparation;`, //? Represents a parameter
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}
+
+//Check for heatwave advice required parameter
+app.get('/api/Advice/:content', [param('content').not().isEmpty()],
+    async function (req, res) {
+        heatadvice = await getHeatadvice(req.params.content), //call appropriate function
+            res.json(heatadvice) //send response
+    })
+
+//con.query(<sql query>, <parameters you want to pass>, function to return)
+
+async function getHeatadvice() {
+    con.query(
+        `SELECT *
+         FROM Advice;`, //? Represents a parameter
+        function (err, rows, fields) {
+            if (err) throw err
+
+            // console.log('rows:', rows)
+            return rows //return results
+        }
+    )
+}
+
+//Check for all suburbs required parameter
+app.get('/api/Suburblist/:suburb', [param('suburb').not().isEmpty()],
+    async function (req, res) {
+        allsuburb = await getAllsuburb(req.params.suburb), //call appropriate function
+            res.json(allsuburb) //send response
+    })
+
+//con.query(<sql query>, <parameters you want to pass>, function to return)
+
+async function getAllsuburb() {
+    con.query(
+        `SELECT suburb
+         FROM Suburb;`,//? Represents a parameter
         function (err, rows, fields) {
             if (err) throw err
 
