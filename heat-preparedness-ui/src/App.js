@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import "./App.css";
 import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
