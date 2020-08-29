@@ -6,7 +6,7 @@ const app = express()
 
 app.use(bodyParser.json())
 const mysql = require('mysql');
-const port = 8080
+const port = 8080;
 
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
 
@@ -267,7 +267,7 @@ async function getAllsuburb() {
     return new Promise(resultData => {
         con.query(
             `SELECT suburb
-             FROM Suburb;`,//? Represents a parameter
+         FROM Suburb;`,//? Represents a parameter
             function (error, result, fields) {
                 if (error) {
                     //Log error message
