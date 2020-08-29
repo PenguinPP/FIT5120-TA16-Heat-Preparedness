@@ -47,6 +47,7 @@ async function getAllCouncils() {
                 try {
                     //set resultData to query result
                     resultData(result);
+                    conTemp.end();
 
                 } catch (error) {
                     resultData({}); //Set resultData to empty
@@ -135,42 +136,8 @@ async function updateAllWeatherData() {
             }
 
         }
-        console.log("All weather data updated")
     }
 
-
-    /*var conTemp = mysql.createConnection({
-        host: process.env.DB_ENDPOINT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME
-    });
-
-    conTemp.query(
-        `SELECT *
-         FROM LGA;`,
-        async function (err, rows, fields) {
-            if (err) {
-                console.log(err)
-            }
-
-            console.log("data retrieved at" + new Date())
-
-            
-
-
-            console.log(rows[0]["latitude"])
-
-
-            //console.log('This job ran at ' + new Date())
-
-            //console.log('rows:', rows)
-            //console.log("it worked!")
-            return (rows) //return results}
-        }
-    )*/
-
-
-
-
+    console.log("All weather data updated")
+    conTemp.end()
 }
