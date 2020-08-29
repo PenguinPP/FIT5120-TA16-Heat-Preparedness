@@ -17,7 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CommentIcon from '@material-ui/icons/Comment';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
-
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function MenuDrawer() {
     const [state, setState] = React.useState(false);
@@ -32,15 +32,15 @@ function MenuDrawer() {
 
     return (
         <React.Fragment>
-            <AppBar position="sticky">
+            <AppBar position="sticky" style={{ "margin": 0 }}>
                 <Toolbar>
-
-                    <Typography variant="h4" align="center" >
-                        Heat Preparedness
-          </Typography>
                     <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
+                    <Typography variant="h4" align="center" >
+                        Heat Preparedness
+          </Typography>
+
                 </Toolbar>
             </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
@@ -92,7 +92,8 @@ const App = () => {
     };
 
     return (
-        <div>
+        <React.Fragment>
+            <CssBaseline />
             <MenuDrawer />
             <Grid container spacing={3} justify="center" wrap='wrap'>
                 <Grid item xs={12}>
@@ -223,7 +224,7 @@ const App = () => {
                     </Card>
                 </Grid>
             </Grid>
-        </div >
+        </React.Fragment>
     )
 }
 
