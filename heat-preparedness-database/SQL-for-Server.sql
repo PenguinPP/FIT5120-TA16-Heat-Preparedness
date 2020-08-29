@@ -1,4 +1,3 @@
---Do not include the ; in the api call
 --This document contains SQL statements relating to server functionality
 --Get all LGA information (to pull temperature data from API)
 SELECT *

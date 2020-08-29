@@ -1,4 +1,3 @@
---Do not include the ; in the api call
 --This document contains SQL statements relating to user functionality
 --Get heat threshold for user's suburb
 SELECT threshold
