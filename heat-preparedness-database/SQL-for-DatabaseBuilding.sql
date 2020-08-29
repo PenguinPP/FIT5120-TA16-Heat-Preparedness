@@ -75,7 +75,6 @@ CREATE TABLE `VictoriaHeat`.`Weather` (
   `min` DECIMAL(5,3) NULL,
   `max` DECIMAL(5,3) NULL,
   `avg` DECIMAL(10,8) NULL,
-  `Weathercol` VARCHAR(45) NULL,
   PRIMARY KEY (`state`, `district`, `council`, `date`),
   CONSTRAINT `lga_weather_fk`
     FOREIGN KEY (`state` , `district` , `council`)
