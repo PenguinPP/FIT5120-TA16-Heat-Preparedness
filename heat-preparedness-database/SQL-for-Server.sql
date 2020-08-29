@@ -1,4 +1,3 @@
---Do not include the ; in the api call
 --This document contains SQL statements relating to server functionality
 --Get all LGA information (to pull temperature data from API)
 SELECT *
@@ -12,3 +11,11 @@ VALUES(min_temp),
 values(max_temp),
     avg_temp =
 values(avg_temp)
+
+
+
+delete from Forecast 
+where date = "yesterday" 
+AND  council IN (SELECT DISTINCT council FROM LGA)
+AND state IN (SELECT DISTINCT state FROM DISTRICT)
+AND 
