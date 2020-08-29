@@ -198,23 +198,25 @@ app.get('/api/SuburbList',
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
 async function getAllsuburb() {
-    return new Promise(con.query(
-        `SELECT suburb
+    return new Promise(resultData => {
+        con.query(
+            `SELECT suburb
          FROM Suburb;`,//? Represents a parameter
-        function (error, result, fields) {
-            if (error) {
-                //Log error message
-                console.log(error)
-                console.log("Failed to retrieve Council Data")
-            }
-            try {
-                //set resultData to query result
-                resultData(result);
+            function (error, result, fields) {
+                if (error) {
+                    //Log error message
+                    console.log(error)
+                    console.log("Failed to retrieve Council Data")
+                }
+                try {
+                    //set resultData to query result
+                    resultData(result);
 
-            } catch (error) {
-                resultData({}); //Set resultData to empty
-                console.log("There was an error with the promise");
+                } catch (error) {
+                    resultData({}); //Set resultData to empty
+                    console.log("There was an error with the promise");
+                }
             }
-        }
-    ))
+        )
+    })
 }
