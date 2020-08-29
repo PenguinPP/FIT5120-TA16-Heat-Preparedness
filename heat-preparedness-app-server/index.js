@@ -6,7 +6,7 @@ const app = express()
 
 app.use(bodyParser.json())
 const mysql = require('mysql');
-const port = 8080
+const port = 8080;
 
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
 
@@ -93,7 +93,7 @@ async function getWeatherforecastsuburb(weatherforecast) {
 }
 
 //Check for weather forecast for Melbourne required parameter
-app.get('/api/MelbourneForecast/:suburb', 
+app.get('/api/MelbourneForecast/:suburb',
     async function (req, res) {
         defaultweatherforceast = await getDefaultweatherforceast(), //call appropriate function
             res.json(defaultweatherforceast) //send response
@@ -128,7 +128,7 @@ async function getDefaultweatherforceast() {
 }
 
 //Check for threshold for Melbourne (default) required parameter
-app.get('/api/MelbourneThreshold/:suburb', 
+app.get('/api/MelbourneThreshold/:suburb',
     async function (req, res) {
         defaultsuburbThreshold = await getDefaultThreshold(), //call appropriate function
             res.json(defaultsuburbThreshold) //send response
@@ -204,14 +204,25 @@ app.get('/api/Suburblist/:suburb', [param('suburb').not().isEmpty()],
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
 async function getAllsuburb() {
-    con.query(
-        `SELECT suburb
-         FROM Suburb;`,//? Represents a parameter
-        function (err, rows, fields) {
-            if (err) throw err
 
-            // console.log('rows:', rows)
-            return rows //return results
-        }
-    )
+    return new Promise(resultData => {
+        con.query(
+            `SELECT suburb
+         FROM Suburb;`,//? Represents a parameter
+            function (err, rows, fields) {
+                if (err) {
+                    console.log(err)
+                    console.log("Failed to retrieve Suburb Data")
+                }
+                try {
+                    //set resultData to query result
+                    resultData(rows);
+                }
+                catch (error) {
+                    resultData({}); //Set resultData to empty
+                    console.log("There was an error with the promise");
+                }
+            }
+        )
+    })
 }
