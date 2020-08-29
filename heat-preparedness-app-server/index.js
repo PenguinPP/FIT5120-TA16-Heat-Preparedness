@@ -167,7 +167,7 @@ async function getDefaultThreshold() {
     return new Promise(resultData => {
             con.query(
             `SELECT threshold
-             FROM ${District}
+             FROM District
              WHERE district_name = 'Melbourne';`, //? Represents a parameter
             function (error, rows, fields) {
                 if (error) {
@@ -234,7 +234,7 @@ async function getHeatadvice() {
     return new Promise(resultData => {
         con.query(
             `SELECT *
-             FROM ${Advice};`, //? Represents a parameter
+             FROM Advice;`, //? Represents a parameter
             function (error, rows, fields) {
                 if (error)  {
                 //Log error message
@@ -267,7 +267,7 @@ async function getAllsuburb() {
     return new Promise(resultData => {
         con.query(
             `SELECT suburb
-             FROM ${Suburb};`,//? Represents a parameter
+             FROM Suburb;`,//? Represents a parameter
             function (error, result, fields) {
                 if (error) {
                     //Log error message
