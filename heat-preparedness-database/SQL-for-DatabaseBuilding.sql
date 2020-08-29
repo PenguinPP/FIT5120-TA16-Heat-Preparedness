@@ -108,3 +108,8 @@ every 1 day
 STARTS '2020-08-29 23:59:55'
 do 
 	delete from Forecast where date < NOW();
+
+
+-- Add a new attribute for Forecast to record latest update time which will also show to users
+ALTER TABLE `VictoriaHeat`.`Forecast` 
+ADD COLUMN `update_time` DATETIME NULL AFTER `avg`;
