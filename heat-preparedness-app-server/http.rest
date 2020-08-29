@@ -1,1 +1,1 @@
-GET http://localhost:8080/api/SuburbList
+GET https://api.openweathermap.org/data/2.5/onecall?lat=-38.2551&lon=144.6726&exclude=hourly,current,minutely&units=metric&appid=01d64831ef3a00f342ecf7d384a36a8c
