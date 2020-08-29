@@ -14,33 +14,6 @@ const schedule = require('node-schedule');
 
 const dateFormat = require('dateformat');
 
-
-
-app.get('/',
-    (req, res) => {
-        var conTemp = mysql.createConnection({
-            host: process.env.DB_ENDPOINT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
-        });
-
-        conTemp.query(
-            `SELECT *
-         FROM LGA;`,
-            function (err, rows, fields) {
-                if (err) throw (err)
-
-                //console.log('This job ran at ' + new Date())
-
-                //console.log('rows:', rows)
-                //console.log("it worked!")
-                res.json(rows) //return results
-            }
-        )
-
-    })
-
 updateAllWeatherData()
 
 var j = schedule.scheduleJob('*/240 * * * *',
@@ -102,6 +75,8 @@ async function updateAllWeatherData() {
 
 
     for (let i in resultData) {
+        //https://api.openweathermap.org/data/2.5/onecall?lat=-38.2551&lon=144.6726&exclude=hourly,current,minutely&units=metric&appid=process.env.OPEN_WEATHER_ONE_CALL_API
+
         const tempRequestStart = "https://api.openweathermap.org/data/2.5/onecall?"
         const tempRequestEnd = "&exclude=hourly,current,minutely&units=metric&appid=" + process.env.OPEN_WEATHER_ONE_CALL_API
 
@@ -160,7 +135,6 @@ async function updateAllWeatherData() {
             }
 
         }
-        conTemp.end()
         console.log("All weather data updated")
     }
 
