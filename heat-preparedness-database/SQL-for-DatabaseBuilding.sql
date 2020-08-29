@@ -82,3 +82,29 @@ CREATE TABLE `VictoriaHeat`.`Weather` (
     REFERENCES `VictoriaHeat`.`LGA` (`state` , `district` , `council`)
     ON DELETE CASCADE
     ON UPDATE RESTRICT);
+
+
+-- Every midnight, the database will autoly remove all the data in Forecast table which before the next day at 23:59:55
+-- and the data rows will be moved into Weather table at the same time.
+
+-- Add trigger for Forecast table when delete data and add new one in Weather table
+DROP TRIGGER IF EXISTS `VictoriaHeat`.`Forecast_AFTER_DELETE`;
+
+DELIMITER $$
+USE `VictoriaHeat`$$
+CREATE DEFINER=`victoria_heat`@`%` TRIGGER `Forecast_AFTER_DELETE` AFTER DELETE ON `Forecast` FOR EACH ROW BEGIN
+	insert into Weather (state, district, council, date, min, max, avg)
+                         VALUES (OLD.state, OLD.district, OLD.council, OLD.date, OLD.min, OLD.max, OLD.avg) ON DUPLICATE KEY
+                         UPDATE min = VALUES(min),
+                                max = values(max),
+                                avg = values(avg); 
+END$$
+DELIMITER ;
+
+-- Create schedule to delete data everyday night
+create event remove_test
+on schedule
+every 1 day
+STARTS '2020-08-29 23:59:55'
+do 
+	delete from Forecast where date < NOW();
