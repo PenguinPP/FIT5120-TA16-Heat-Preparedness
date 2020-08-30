@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Weather from './Weather';
 
 const axios = require('axios').default;
 
@@ -185,7 +186,9 @@ class App extends Component {
                     <Grid item xs={10} lg={6}>
                         <Card variant="outlined">
                             <CardContent>
+                                <Weather weatherInformation={this.state.weatherForecast}>
 
+                                </Weather>
                             </CardContent>
                         </Card>
                     </Grid>
