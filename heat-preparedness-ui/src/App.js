@@ -137,8 +137,9 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
-                weatherData = response.data
+
+                weatherData = response.data.filter(item => item.council == "Melbourne City")
+                console.log(weatherData)
             })
             .catch(function (error) {
                 console.log(error)
