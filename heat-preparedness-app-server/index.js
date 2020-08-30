@@ -9,6 +9,10 @@ app.use(bodyParser.json());
 const mysql = require('mysql');
 const port = 8080;
 
+const cors = require('cors')
+app.use(cors())
+
+
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
 
 //Example Weather API Call
@@ -16,9 +20,8 @@ app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
 
 app.get('/', (req, res) => res.send("Heat Preparedness Application Server"))
 
-updateAllWeatherData()
 const schedule = require('node-schedule');
-const tempUpdateSchedule = schedule.scheduleJob('*/240 * * * *', //schedule weather data update to occur every 4 hours
+const tempUpdateSchedule = schedule.scheduleJob('0 0 */6 * * *', //schedule weather data update to occur every 4 hours
     function () {
         updateAllWeatherData()
     });
@@ -226,7 +229,6 @@ async function getDefaultThreshold(dbConnection) {
 //Check for heatwave preparation advice required parameter
 app.get('/api/Advice_pre',
     async function (req, res) {
-
         const dbConnection = mysql.createConnection({ //open db connection
             host: process.env.DB_ENDPOINT,
             user: process.env.DB_USER,
