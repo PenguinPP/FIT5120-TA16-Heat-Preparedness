@@ -235,7 +235,7 @@ async function getHeatadvice() {
         con.query(
             `SELECT *
              FROM Advice;`, //? Represents a parameter
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error)  {
                 //Log error message
                     console.log(error)
