@@ -458,6 +458,7 @@ async function updateAllWeatherData() {
                         if (error) {
                             //Log error message
                             console.log(error)
+
                             console.log("Failed to update forecast")
                         }
                         else {
