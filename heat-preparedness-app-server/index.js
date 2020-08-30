@@ -42,7 +42,7 @@ async function getSpecificThreshold(userSuburb) {
             `SELECT suburb
             FROM Suburb;`, //? Represents a parameter
             userSuburb, //parameter you want inserted where the ? is 
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error)  {
                 //Log error message
                     console.log(error)
@@ -89,7 +89,7 @@ async function getWeatherforecastsuburb(weatherforecast) {
                 AND f.state = l.state
                 AND s.suburb = ?;`, //? Represents a parameter
             weatherforecast, //parameter you want inserted where the ? is 
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error)  {
                 //Log error message
                     console.log(error)
@@ -135,7 +135,7 @@ async function getDefaultweatherforceast() {
                 AND f.district = l.district
                 AND f.state = l.state
                 AND s.suburb = 'Melbourne';`, //? Represents a parameter 
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error)  {
                 //Log error message
                     console.log(error)
@@ -169,7 +169,7 @@ async function getDefaultThreshold() {
             `SELECT threshold
              FROM District
              WHERE district_name = 'Melbourne';`, //? Represents a parameter
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error) {
                 //Log error message
                     console.log(error)
@@ -202,7 +202,7 @@ async function getHeatprep() {
         con.query(
             `SELECT *
              FROM advice_preparation;`, //? Represents a parameter
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error)  {
                 //Log error message
                     console.log(error)
@@ -235,7 +235,7 @@ async function getHeatadvice() {
         con.query(
             `SELECT *
              FROM Advice;`, //? Represents a parameter
-            function (error, rows, fields) {
+            function (error, result, fields) {
                 if (error)  {
                 //Log error message
                     console.log(error)
