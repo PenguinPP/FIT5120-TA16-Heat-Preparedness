@@ -6,7 +6,7 @@ const app = express()
 
 app.use(bodyParser.json())
 const mysql = require('mysql');
-const port = 8080
+const port = 8080;
 
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
 
@@ -74,7 +74,7 @@ async function getWeatherforecastsuburb(weatherforecast) {
         con.query(
             `SELECT f.date,
                 f.state,
-                f.area,
+                f.council,
                 f.min,
                 f.max,
                 f.avg
@@ -121,7 +121,7 @@ async function getDefaultweatherforceast() {
         con.query(
             `SELECT f.date,
                 f.state,
-                f.area,
+                f.council,
                 f.min,
                 f.max,
                 f.avg
@@ -134,7 +134,7 @@ async function getDefaultweatherforceast() {
                 AND f.council = l.council
                 AND f.district = l.district
                 AND f.state = l.state
-                AND s.surburb = 'Melbourne';`, //? Represents a parameter 
+                AND s.suburb = 'Melbourne';`, //? Represents a parameter 
             function (error, rows, fields) {
                 if (error)  {
                 //Log error message
@@ -167,7 +167,7 @@ async function getDefaultThreshold() {
     return new Promise(resultData => {
             con.query(
             `SELECT threshold
-             FROM ${District}
+             FROM District
              WHERE district_name = 'Melbourne';`, //? Represents a parameter
             function (error, rows, fields) {
                 if (error) {
@@ -234,7 +234,7 @@ async function getHeatadvice() {
     return new Promise(resultData => {
         con.query(
             `SELECT *
-             FROM ${Advice};`, //? Represents a parameter
+             FROM Advice;`, //? Represents a parameter
             function (error, rows, fields) {
                 if (error)  {
                 //Log error message
@@ -267,7 +267,7 @@ async function getAllsuburb() {
     return new Promise(resultData => {
         con.query(
             `SELECT suburb
-             FROM ${Suburb};`,//? Represents a parameter
+         FROM Suburb;`,//? Represents a parameter
             function (error, result, fields) {
                 if (error) {
                     //Log error message
