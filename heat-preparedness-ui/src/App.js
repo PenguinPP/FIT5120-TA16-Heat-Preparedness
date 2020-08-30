@@ -33,7 +33,6 @@ function MenuDrawer() {
                     <Typography variant="h4" align="center" >
                         Heat Preparedness
           </Typography>
-
                 </Toolbar>
             </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
@@ -99,14 +98,46 @@ class App extends Component {
 
     }
 
+    async getSuburbList() {
+        let suburbs = []
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbList"
+
+        await axios.get(dataLink)
+            .then(function (response) {
+                console.log(response.data)
+                suburbs = response.data
+            })
+            .catch(function (error) {
+                //handle error
+                console.log(error);
+            });
+        this.setState({ suburbList: suburbs })
+    }
+
+    async getAdviceData() {
+        let advice = []
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice"
+
+        await axios.get(dataLink)
+            .then(function (response) {
+                console.log(response.data)
+                advice = response.data
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+
+        this.setState({ adviceList: advice })
+    }
+
     componentDidMount() {
         this.getPreparationData()
+        this.getSuburbList()
+        this.getAdviceData()
     }
 
     render() {
         return (
-
-
 
             <React.Fragment>
                 <CssBaseline />
@@ -124,7 +155,6 @@ class App extends Component {
                     <Grid item xs={10} lg={6}>
                         <Card variant="outlined">
                             <CardContent>
-
                             </CardContent>
                         </Card>
                     </Grid>
