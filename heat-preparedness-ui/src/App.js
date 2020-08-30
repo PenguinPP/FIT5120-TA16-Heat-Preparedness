@@ -33,6 +33,7 @@ function MenuDrawer() {
                     <Typography variant="h4" align="center" >
                         Heat Preparedness
           </Typography>
+
                 </Toolbar>
             </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
@@ -130,15 +131,31 @@ class App extends Component {
         this.setState({ adviceList: advice })
     }
 
+    async getWeatherData() {
+        let weatherData = []
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/MelbourneForecast"
+
+        await axios.get(dataLink)
+            .then(function (response) {
+
+                weatherData = response.data.filter(item => item.council == "Melbourne City")
+                console.log(weatherData)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+        this.setState({ weatherForecast: weatherData })
+    }
+
     componentDidMount() {
         this.getPreparationData()
         this.getSuburbList()
         this.getAdviceData()
+        this.getWeatherData()
     }
 
     render() {
         return (
-
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
