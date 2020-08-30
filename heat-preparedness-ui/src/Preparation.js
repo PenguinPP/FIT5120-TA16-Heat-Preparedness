@@ -1,48 +1,103 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Typography from "@material-ui/core/Typography";
-
-
-async function getPreparationData(){
-
-    var preparationData = undefined
-    const dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice_pre"
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import { List, ListItem } from '@material-ui/core'
 
 
 
-    const axios = require('axios').default;
+export default function Preparation(preparationData){
 
-    await axios.get(dataLink)
-            .then(function (response) {
-                preparationData = response.data
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
+    const [category, setCategory] = React.useState("Heat Long Term");
 
-    return preparationData;
-}
+    console.log(preparationData["preparationData"])
+
+    const heat_long_term = preparationData["preparationData"].filter(item => item.category == "Heat Long Term")
+
+    const heat_short_term = preparationData["preparationData"].filter(item => item.category == "Heat Short Term")
+
+    const power_failure = preparationData["preparationData"].filter(item => item.category == "Power Failure")
 
 
 
+    if (category == "Heat Long Term"){
+        return(
+            <React.Fragment>
+                <Typography variant="h4">
+                    Preparation
+                </Typography>
+    
+    
+                <Button variant="outlined" onClick={() => setCategory("Heat Long Term")}>Heat Long Term</Button>
+                <Button variant="outlined" onClick={() => setCategory("Heat Short Term")}>Heat Short Term</Button>
+                <Button variant="outlined" onClick={() => setCategory("Power Failure")}>Power Failure</Button>
+    
+    
+                <List>
+                      {heat_long_term.map(item =>
+                        <ListItem key={item.advice_id}>
+                            <Checkbox />
+                            <Typography>
+                                {item.content}
+                            </Typography>
+                        </ListItem>
+                      )}
+                </List>
+            </React.Fragment>
+        )
+    }
+    else if(category == "Heat Short Term"){
+        return(
+            <React.Fragment>
+                <Typography variant="h4">
+                    Preparation
+                </Typography>
+    
+    
+                <Button variant="outlined" onClick={() => setCategory("Heat Long Term")}>Heat Long Term</Button>
+                <Button variant="outlined" onClick={() => setCategory("Heat Short Term")}>Heat Short Term</Button>
+                <Button variant="outlined" onClick={() => setCategory("Power Failure")}>Power Failure</Button>
+    
+    
+                <List>
+                      {heat_short_term.map(item =>
+                        <ListItem key={item.advice_id}>
+                            <Checkbox />
+                            <Typography>
+                                {item.content}
+                            </Typography>
+                        </ListItem>
+                      )}
+                </List>
+            </React.Fragment>
+        )
+    }
+    else{
+        return(
+            <React.Fragment>
+                <Typography variant="h4">
+                    Preparation
+                </Typography>
+    
+    
+                <Button variant="outlined" onClick={() => setCategory("Heat Long Term")}>Heat Long Term</Button>
+                <Button variant="outlined" onClick={() => setCategory("Heat Short Term")}>Heat Short Term</Button>
+                <Button variant="outlined" onClick={() => setCategory("Power Failure")}>Power Failure</Button>
+    
+    
+                <List>
+                      {power_failure.map(item =>
+                        <ListItem key={item.advice_id}>
+                            <Checkbox />
+                            <Typography>
+                                {item.content}
+                            </Typography>
+                        </ListItem>
+                      )}
+                </List>
+            </React.Fragment>
+        )
+    }
 
-
-
-
-
-
-
-export default async function Preparation(){
-
-    var preparationData = await getPreparationData();
-
-    console.log(preparationData)
-
-    return(
-        <React.Fragment>
-            <Typography variant="h4">
-                Preparation
-            </Typography>
-        </React.Fragment>
-    )
+    
 }
