@@ -3,8 +3,9 @@ const { check, validationResult, query, body, param } = require('express-validat
 const bodyParser = require('body-parser');
 const express = require('express')
 const app = express()
-
-app.use(bodyParser.json())
+const dateFormat = require('dateformat');
+const axios = require('axios').default;
+app.use(bodyParser.json());
 const mysql = require('mysql');
 const port = 8080;
 
@@ -15,7 +16,12 @@ app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
 
 app.get('/', (req, res) => res.send("Heat Preparedness Application Server"))
 
-
+updateAllWeatherData()
+const schedule = require('node-schedule');
+const tempUpdateSchedule = schedule.scheduleJob('*/240 * * * *', //schedule weather data update to occur every 4 hours
+    function () {
+        updateAllWeatherData()
+    });
 
 //Check for heat threshold for user's suburb required parameter
 app.get('/api/DistrictThreshold/:suburb', [param('suburb').not().isEmpty()],
@@ -346,4 +352,128 @@ async function getAllsuburb(dbConnection) {
             }
         )
     })
+}
+
+async function getAllCouncils() {
+    //This function retrieves the details of all Local Government Councils
+    //from the mysql db
+
+    //Establish mySQL connection
+    const conTemp = mysql.createConnection({
+        host: process.env.DB_ENDPOINT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
+    });
+
+    //run query and return as a promise
+    return new Promise(resultData => {
+        conTemp.query(
+            `SELECT *
+         FROM LGA;`,
+            function (error, result, fields) {
+                if (error) {
+                    //Log error message
+                    console.log(error)
+                    console.log("Failed to retrieve Council Data")
+                }
+                try {
+                    //set resultData to query result
+                    resultData(result);
+                    conTemp.end();
+
+                } catch (error) {
+                    resultData({}); //Set resultData to empty
+                    console.log("There was an error with the promise");
+                }
+
+            }
+        )
+    })
+}
+
+
+async function updateAllWeatherData() {
+
+    //Establish mySQL connection
+    const conTemp = mysql.createConnection({
+        host: process.env.DB_ENDPOINT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
+    });
+
+    console.log('UpdateAllWeatherData() ran at ' + new Date())
+    const resultData = await getAllCouncils()
+    console.log('UpdateAllWeatherData() received council data at' + new Date())
+
+
+    for (let i in resultData) {
+        //weather API link format:
+        //https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=hourly,current,minutely&units=metric&appid=process.env.OPEN_WEATHER_ONE_CALL_API
+
+        const tempRequestStart = "https://api.openweathermap.org/data/2.5/onecall?"
+        const tempRequestEnd = "&exclude=hourly,current,minutely&units=metric&appid=" + process.env.OPEN_WEATHER_ONE_CALL_API
+
+        const tempRequestFinal = tempRequestStart + "lat=" + resultData[i]["latitude"] + "&lon=" + resultData[i]["longitude"] + tempRequestEnd
+
+        let temperatureData = undefined
+
+        await axios.get(tempRequestFinal)
+            .then(function (response) {
+                temperatureData = response.data
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+        console.log("Temperature data for " + resultData[i]["council"] + " received at " + new Date())
+        for (let forecast in temperatureData["daily"]) {
+            // console.log("Temperature processing starts here")
+            if (forecast < 7) {
+                var forecastDate = new Date(temperatureData["daily"][forecast]["dt"] * 1000)
+                forecastDate = dateFormat(forecastDate, 'dd-mm-yyyy')
+                const maxTemp = temperatureData["daily"][forecast]["temp"]["max"]
+                const minTemp = temperatureData["daily"][forecast]["temp"]["min"]
+                const nextMinTemp = temperatureData["daily"][parseInt(forecast) + 1]["temp"]["min"]
+                const state = resultData[i]["state"]
+                const councilName = resultData[i]["council"]
+                const district = resultData[i]["district"]
+                var avgTemp = ((parseFloat(maxTemp) + parseFloat(nextMinTemp)) / 2).toFixed(2)
+
+                //console.log(councilName, forecastDate)
+
+                //console.log("Query starts here at " + new Date())
+
+                conTemp.query(
+                    `INSERT INTO Forecast (date, state, council, min, max, avg, district)
+                         VALUES (STR_TO_DATE(?, '%d-%m-%Y'), ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY
+                         UPDATE min = VALUES(min),
+                                max =values(max),
+                                avg = values(avg)`,
+                    [
+                        forecastDate, state, councilName, minTemp, maxTemp, avgTemp, district
+                    ],
+                    function (error, result, fields) {
+                        if (error) {
+                            //Log error message
+                            console.log(error)
+                            console.log("Failed to update forecast")
+                        }
+                        else {
+                            // console.log("Database updated")
+                        }
+
+                    }
+                )
+
+            }
+
+        }
+        console.log("Temperature data for " + resultData[i]["council"] + " updated in db at " + new Date())
+
+    }
+
+    console.log("All weather data updated")
+    conTemp.end()
 }
