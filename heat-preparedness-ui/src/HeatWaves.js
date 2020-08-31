@@ -29,7 +29,8 @@ export default function HeatWaves() {
                     <Typography>
                         Heat waves are Australia's deadliest natural hazard. From 1900 until 2011, extreme heat has been responsible for more deaths in Australia than all other natural hazards combined.
             </Typography>
-                    <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
+                    <VictoryChart domainPadding={20} theme={VictoryTheme.material}
+                    >
                         <VictoryAxis
                             tickValues={[1, 2, 3, 4]}
                             tickFormat={["Extreme Heat", "Cyclones", "Floods", "Bushfires"]}
@@ -63,6 +64,6 @@ export default function HeatWaves() {
                     </Typography>
                 </Grid>
             </Grid>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
