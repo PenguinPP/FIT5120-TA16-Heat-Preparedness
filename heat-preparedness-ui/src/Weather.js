@@ -59,14 +59,14 @@ export default function Weather(weatherInformation) {
                 >
 
                 </TextField>
-                <Typography variant="h5">
+                <Typography variant="h5" style={{ marginTop: "1rem" }}>
                     Temperatures for next week
                 </Typography>
 
                 <List>
                     {weatherData.map(item =>
                         <ListItem key={item.date}>
-                            {item.date.toString().replace(/\T.+/, '').substring(5, 10)}: max {item.max}°     |     min {item.min}°     |     avg {item.avg}°
+                            {item.date ? item.date.toString().replace(/\T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
                         </ListItem>
                     )}
                 </List>
