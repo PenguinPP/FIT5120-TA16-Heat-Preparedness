@@ -100,15 +100,63 @@ class App extends Component {
 
     }
 
+    async getSuburbList() {
+        let suburbs = []
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbList"
+
+        await axios.get(dataLink)
+            .then(function (response) {
+                console.log(response.data)
+                suburbs = response.data
+            })
+            .catch(function (error) {
+                //handle error
+                console.log(error);
+            });
+        this.setState({ suburbList: suburbs })
+    }
+
+    async getAdviceData() {
+        let advice = []
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice"
+
+        await axios.get(dataLink)
+            .then(function (response) {
+                console.log(response.data)
+                advice = response.data
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+
+        this.setState({ adviceList: advice })
+    }
+
+    async getWeatherData() {
+        let weatherData = []
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/MelbourneForecast"
+
+        await axios.get(dataLink)
+            .then(function (response) {
+
+                weatherData = response.data.filter(item => item.council == "Melbourne City")
+                console.log(weatherData)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+        this.setState({ weatherForecast: weatherData })
+    }
+
     componentDidMount() {
         this.getPreparationData()
+        this.getSuburbList()
+        this.getAdviceData()
+        this.getWeatherData()
     }
 
     render() {
         return (
-
-
-
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
