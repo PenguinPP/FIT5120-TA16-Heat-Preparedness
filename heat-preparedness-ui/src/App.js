@@ -35,7 +35,7 @@ function MenuDrawer() {
                     <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h4" align="center" >
+                    <Typography variant="h5" align="center" >
                         Heat Preparedness
           </Typography>
 
