@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Advice from './Advice';
 
 const axios = require('axios').default;
 
@@ -87,7 +88,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 preparationData = response.data
             })
             .catch(function (error) {
@@ -104,7 +105,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 suburbs = response.data
             })
             .catch(function (error) {
@@ -120,7 +121,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 advice = response.data
             })
             .catch(function (error) {
@@ -161,7 +162,7 @@ class App extends Component {
                     <Grid item xs={10} lg={6}>
                         <Card variant="outlined">
                             <CardContent>
-
+                                <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
