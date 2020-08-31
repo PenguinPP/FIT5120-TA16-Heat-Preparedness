@@ -12,6 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
+import { Link } from 'react-scroll'
 
 const axios = require('axios').default;
 
@@ -42,31 +43,73 @@ function MenuDrawer() {
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
                 <Card variant="outlined">
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            Heat Waves in Victoria
-                    </Typography>
+                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"HeatWaves"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
+
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            Precautions
-                    </Typography>
+                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
+                            activeClass="active"
+                            to={"Prep"}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={700}
+                            onClick={toggleDrawer(false)}
+                            style={{ width: "100%" }}
+                        ><Typography variant="h4" align="left">
+                                Precautions
+                    </Typography></Link>
+                        </Button>
+
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            During a heatwave
-                    </Typography>
+                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"Advice"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography variant="h4" align="left">
+                                    On the day
+                    </Typography></Link></Button>
+
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            Weather forecasts and alerts
-                    </Typography>
+
+                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"Advice"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography variant="h4" align="left">
+                                    Forecasts
+                    </Typography></Link></Button>
                     </CardContent>
                 </Card>
                 <Button onClick={toggleDrawer(false)}>
                     Close Menu
                 </Button>
             </Drawer>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 
@@ -165,28 +208,28 @@ class App extends Component {
                 <Grid container spacing={3} justify="center" wrap='wrap'>
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
+                            <CardContent id="HeatWaves">
                                 <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
+                            <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
+                            <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
+                            <CardContent id="Weather">
 
                             </CardContent>
                         </Card>

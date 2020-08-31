@@ -22,7 +22,7 @@ export default function Advice(adviceData) {
                     On the day
                 </Typography>
 
-                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button">
+                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button" style={{ marginTop: "1rem" }}>
                     <Button id="General" onClick={() => setCategory("General")} variant="contained" color="primary">General</Button>
                     <Button id="Keeping Cool" onClick={() => setCategory("Keeping Cool")} variant="contained">Keeping Cool</Button>
                     <Button id="Physical Activity" onClick={() => setCategory("Physical Activity")} variant="contained">Physical Activity</Button>
@@ -54,7 +54,7 @@ export default function Advice(adviceData) {
                     On the day
             </Typography>
 
-                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button">
+                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button" style={{ marginTop: "1rem" }}>
                     <Button id="General" onClick={() => setCategory("General")} variant="contained" >General</Button>
                     <Button id="Keeping Cool" onClick={() => setCategory("Keeping Cool")} variant="contained" color="primary">Keeping Cool</Button>
                     <Button id="Physical Activity" onClick={() => setCategory("Physical Activity")} variant="contained">Physical Activity</Button>
@@ -85,7 +85,7 @@ export default function Advice(adviceData) {
                     On the day
             </Typography>
 
-                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button">
+                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button" style={{ marginTop: "1rem" }}>
                     <Button id="General" onClick={() => setCategory("General")} variant="contained">General</Button>
                     <Button id="Keeping Cool" onClick={() => setCategory("Keeping Cool")} variant="contained">Keeping Cool</Button>
                     <Button id="Physical Activity" onClick={() => setCategory("Physical Activity")} variant="contained" color="primary">Physical Activity</Button>

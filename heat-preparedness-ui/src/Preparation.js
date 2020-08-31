@@ -26,7 +26,7 @@ export default function Preparation(preparationData) {
                     <Button id="Power Failure" onClick={() => setCategory("Power Failure")} variant="contained">Power Failure</Button>
                 </ButtonGroup>
                 <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                    There are a number of things you can do in the long term to improve your ability to cope with extreme heat.
+                    There are a number of things you can do in the long term to improve your ability to cope with extreme heat:
             </Typography>
                 <List>
                     {preparationData["preparationData"].filter(item => item.category === category).map(item =>
@@ -54,7 +54,7 @@ export default function Preparation(preparationData) {
 
 
                 <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                    There are a number of things you can do in the short term to prepare for a heat wave.
+                    There are a number of things you can do in the short term to prepare for a heat wave:
             </Typography>
                 <List>
                     {preparationData["preparationData"].filter(item => item.category === category).map(item =>
@@ -81,7 +81,7 @@ export default function Preparation(preparationData) {
                     <Button id="Power Failure" onClick={() => setCategory("Power Failure")} variant="contained" color="primary">Power Failure</Button>
                 </ButtonGroup>
                 <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                    Power failures can occur during a heat wave and it is important to be be prepared for them.
+                    Power failures can occur during a heat wave and it is important to be be prepared for them:
             </Typography>
                 <List>
                     {preparationData["preparationData"].filter(item => item.category === category).map(item =>
