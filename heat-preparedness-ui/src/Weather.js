@@ -45,7 +45,7 @@ export default function Weather(weatherInformation) {
 
             <React.Fragment>
                 <Typography variant="h4">
-                    Weather Information
+                    Forecast
                 </Typography>
                 <Typography>
                     Enter the name of your suburb below (case sensitive)
@@ -71,7 +71,7 @@ export default function Weather(weatherInformation) {
         return (
             <React.Fragment>
                 <Typography variant="h4">
-                    Weather Information
+                    Forecast
         </Typography>
                 <Typography>
                     Enter the name of your suburb below (case sensitive)
