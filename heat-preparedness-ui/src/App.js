@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
@@ -9,7 +9,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Weather from './Weather';
+import Advice from './Advice';
+import Preparation from './Preparation';
+import HeatWaves from './HeatWaves';
+import { Link } from 'react-scroll';
+import Weather from './Weather'
 
 const axios = require('axios').default;
 
@@ -28,7 +32,7 @@ function MenuDrawer() {
         <React.Fragment>
             <AppBar position="sticky" style={{ "margin": 0 }}>
                 <Toolbar>
-                    <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h4" align="center" >
@@ -40,31 +44,73 @@ function MenuDrawer() {
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
                 <Card variant="outlined">
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            Heat Waves in Victoria
-                    </Typography>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"HeatWaves"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
+
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            Precautions
-                    </Typography>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
+                            activeClass="active"
+                            to={"Prep"}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={700}
+                            onClick={toggleDrawer(false)}
+                            style={{ width: "100%" }}
+                        ><Typography variant="h4" align="left">
+                                Precautions
+                    </Typography></Link>
+                        </Button>
+
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            During a heatwave
-                    </Typography>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"Advice"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography variant="h4" align="left">
+                                    On the day
+                    </Typography></Link></Button>
+
                     </CardContent>
                     <CardContent>
-                        <Typography variant="h4" align="left">
-                            Weather forecasts and alerts
-                    </Typography>
+
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"Advice"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography variant="h4" align="left">
+                                    Forecasts
+                    </Typography></Link></Button>
                     </CardContent>
                 </Card>
                 <Button onClick={toggleDrawer(false)}>
                     Close Menu
                 </Button>
             </Drawer>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 
@@ -89,7 +135,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 preparationData = response.data
             })
             .catch(function (error) {
@@ -106,7 +152,8 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                // console.log("suburbs")
+                //console.log(response.data)
                 suburbs = response.data
             })
             .catch(function (error) {
@@ -122,7 +169,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                //console.log(response.data)
                 advice = response.data
             })
             .catch(function (error) {
@@ -139,8 +186,8 @@ class App extends Component {
         await axios.get(dataLink)
             .then(function (response) {
 
-                weatherData = response.data.filter(item => item.council == "Melbourne City")
-                console.log(weatherData)
+                weatherData = response.data.filter(item => item.council === "Melbourne City")
+                //console.log(weatherData)
             })
             .catch(function (error) {
                 console.log(error)
@@ -161,38 +208,44 @@ class App extends Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item xs={12}>
-
-                    </Grid>
-                    <Grid item xs={10} lg={12}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
+                            <CardContent id="HeatWaves">
+                                <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
+                            <CardContent id="Prep">
+                                <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
-
+                            <CardContent id="Advice">
+                                <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent>
-                                <Weather weatherInformation={this.state.weatherForecast}>
-
-                                </Weather>
+                            <CardContent id="Weather" >
+                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
+                <div style={{
+                    backgroundColor: "#3f51b5", padding: "1rem",
+                    color: "white",
+                    textAlign: "center"
+                }}>
+                    <Typography variant="h5" >
+                        Acknowledgments
+</Typography>
+                </div>
             </React.Fragment >
         )
     }
