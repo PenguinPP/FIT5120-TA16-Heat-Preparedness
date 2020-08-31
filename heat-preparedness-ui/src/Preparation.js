@@ -1,48 +1,92 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Typography from "@material-ui/core/Typography";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import { List, ListItem } from '@material-ui/core'
 
 
-async function getPreparationData(){
+export default function Preparation(preparationData){
 
-    var preparationData = undefined
-    const dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice_pre"
+    const [category, setCategory] = React.useState("Heat Long Term");
 
-
-
-    const axios = require('axios').default;
-
-    await axios.get(dataLink)
-            .then(function (response) {
-                preparationData = response.data
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-
-    return preparationData;
-}
+    console.log(preparationData["preparationData"])
 
 
-
-
-
-
-
-
-
-
-export default async function Preparation(){
-
-    var preparationData = await getPreparationData();
-
-    console.log(preparationData)
-
-    return(
-        <React.Fragment>
-            <Typography variant="h4">
-                Preparation
-            </Typography>
-        </React.Fragment>
-    )
+    if (category == "Heat Long Term"){
+        return(
+            <React.Fragment>
+                <Typography variant="h4">
+                    Preparation
+                </Typography>
+    
+                <ButtonGroup variant="contained" aria-label="contained primary button group">
+                    <Button id="Heat Long Term" variant="outlined" onClick={() => setCategory("Heat Long Term") } variant="contained" color="primary">Heat Long Term</Button>
+                    <Button id="Heat Short Term" variant="outlined" onClick={() => setCategory("Heat Short Term")} variant="contained">Heat Short Term</Button>
+                    <Button id="Power Failure" variant="outlined" onClick={() => setCategory("Power Failure")} variant="contained">Power Failure</Button>
+                </ButtonGroup>
+    
+                <List>
+                      {preparationData["preparationData"].filter(item => item.category == category).map(item =>
+                        <ListItem key={item.advice_id}>
+                            <Checkbox />
+                            <Typography>
+                                {item.content}
+                            </Typography>
+                        </ListItem>
+                      )}
+                </List>
+            </React.Fragment>
+        )
+    }else if(category == "Heat Short Term"){
+        return(
+            <React.Fragment>
+                <Typography variant="h4">
+                    Preparation
+                </Typography>
+    
+                <ButtonGroup variant="contained" aria-label="contained primary button group">
+                    <Button id="Heat Long Term" variant="outlined" onClick={() => setCategory("Heat Long Term") } variant="contained">Heat Long Term</Button>
+                    <Button id="Heat Short Term" variant="outlined" onClick={() => setCategory("Heat Short Term")} variant="contained" color="primary">Heat Short Term</Button>
+                    <Button id="Power Failure" variant="outlined" onClick={() => setCategory("Power Failure")} variant="contained">Power Failure</Button>
+                </ButtonGroup>
+    
+                <List>
+                      {preparationData["preparationData"].filter(item => item.category == category).map(item =>
+                        <ListItem key={item.advice_id}>
+                            <Checkbox />
+                            <Typography>
+                                {item.content}
+                            </Typography>
+                        </ListItem>
+                      )}
+                </List>
+            </React.Fragment>
+        )
+    }else{
+        return(
+            <React.Fragment>
+                <Typography variant="h4">
+                    Preparation
+                </Typography>
+    
+                <ButtonGroup variant="contained" aria-label="contained primary button group">
+                    <Button id="Heat Long Term" variant="outlined" onClick={() => setCategory("Heat Long Term") } variant="contained">Heat Long Term</Button>
+                    <Button id="Heat Short Term" variant="outlined" onClick={() => setCategory("Heat Short Term")} variant="contained">Heat Short Term</Button>
+                    <Button id="Power Failure" variant="outlined" onClick={() => setCategory("Power Failure")} variant="contained" color="primary">Power Failure</Button>
+                </ButtonGroup>
+    
+                <List>
+                      {preparationData["preparationData"].filter(item => item.category == category).map(item =>
+                        <ListItem key={item.advice_id}>
+                            <Checkbox />
+                            <Typography>
+                                {item.content}
+                            </Typography>
+                        </ListItem>
+                      )}
+                </List>
+            </React.Fragment>
+        )
+    }
 }
