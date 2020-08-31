@@ -31,7 +31,7 @@ function MenuDrawer() {
         <React.Fragment>
             <AppBar position="sticky" style={{ "margin": 0 }}>
                 <Toolbar>
-                    <IconButton edge="end" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h4" align="center" >
@@ -235,6 +235,15 @@ class App extends Component {
                         </Card>
                     </Grid>
                 </Grid>
+                <div style={{
+                    backgroundColor: "#3f51b5", padding: "1rem",
+                    color: "white",
+                    textAlign: "center"
+                }}>
+                    <Typography variant="h5" >
+                        Acknowledgments
+</Typography>
+                </div>
             </React.Fragment >
         )
     }
