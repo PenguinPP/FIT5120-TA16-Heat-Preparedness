@@ -9,7 +9,7 @@ export default function Advice(adviceData) {
 
     const [category, setCategory] = React.useState("General");
 
-    console.log(adviceData["adviceData"])
+    //console.log(adviceData["adviceData"])
 
     const heat_general = adviceData["adviceData"].filter(item => item.category === "General")
     const heat_keeping_cool = adviceData["adviceData"].filter(item => item.category === "Keeping Cool")
