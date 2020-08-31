@@ -49,7 +49,7 @@ export default function Weather(weatherInformation) {
                 <Typography variant="h4">
                     Forecast
                 </Typography>
-                <Typography>
+                <Typography style={{ marginTop: "1rem" }}>
                     Enter the name of your suburb below (case sensitive)
                 </Typography>
                 <TextField
@@ -59,7 +59,7 @@ export default function Weather(weatherInformation) {
                 >
 
                 </TextField>
-                <Typography variant="h5" style={{ marginTop: "1rem" }}>
+                <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
                     Temperatures for next week
                 </Typography>
 
