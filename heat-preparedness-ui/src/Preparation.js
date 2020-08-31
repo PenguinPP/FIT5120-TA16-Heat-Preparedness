@@ -8,7 +8,7 @@ import { List, ListItem } from '@material-ui/core'
 
 export default function Preparation(preparationData) {
 
-    const [category, setCategory] = React.useState("Heat Long Term");
+    const [category, setCategory] = React.useState("Heat Short Term");
 
     //console.log(preparationData["preparationData"])
 
@@ -17,15 +17,17 @@ export default function Preparation(preparationData) {
         return (
             <React.Fragment>
                 <Typography variant="h4">
-                    Preparation
+                    Preparations
                 </Typography>
 
-                <ButtonGroup variant="contained" aria-label="contained primary button group">
-                    <Button id="Heat Long Term" onClick={() => setCategory("Heat Long Term")} variant="contained" color="primary">Heat Long Term</Button>
-                    <Button id="Heat Short Term" onClick={() => setCategory("Heat Short Term")} variant="contained">Heat Short Term</Button>
+                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button group" style={{ marginTop: "1rem" }}>
+                    <Button id="Heat Short Term" onClick={() => setCategory("Heat Short Term")} variant="contained">Short Term</Button>
+                    <Button id="Heat Long Term" onClick={() => setCategory("Heat Long Term")} variant="contained" color="primary">Long Term</Button>
                     <Button id="Power Failure" onClick={() => setCategory("Power Failure")} variant="contained">Power Failure</Button>
                 </ButtonGroup>
-
+                <Typography variant="h6" style={{ marginTop: "1rem" }}>
+                    There are a number of things you can do in the long term to improve your ability to cope with extreme heat.
+            </Typography>
                 <List>
                     {preparationData["preparationData"].filter(item => item.category === category).map(item =>
                         <ListItem key={item.advice_id}>
@@ -42,15 +44,18 @@ export default function Preparation(preparationData) {
         return (
             <React.Fragment>
                 <Typography variant="h4">
-                    Preparation
+                    Preparations
                 </Typography>
-
-                <ButtonGroup variant="contained" aria-label="contained primary button group">
-                    <Button id="Heat Long Term" onClick={() => setCategory("Heat Long Term")} variant="contained">Heat Long Term</Button>
-                    <Button id="Heat Short Term" onClick={() => setCategory("Heat Short Term")} variant="contained" color="primary">Heat Short Term</Button>
+                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button group" style={{ marginTop: "1rem" }}>
+                    <Button id="Heat Short Term" onClick={() => setCategory("Heat Short Term")} variant="contained" color="primary">Short Term</Button>
+                    <Button id="Heat Long Term" onClick={() => setCategory("Heat Long Term")} variant="contained">Long Term</Button>
                     <Button id="Power Failure" onClick={() => setCategory("Power Failure")} variant="contained">Power Failure</Button>
                 </ButtonGroup>
 
+
+                <Typography variant="h6" style={{ marginTop: "1rem" }}>
+                    There are a number of things you can do in the short term to prepare for a heat wave.
+            </Typography>
                 <List>
                     {preparationData["preparationData"].filter(item => item.category === category).map(item =>
                         <ListItem key={item.advice_id}>
@@ -67,15 +72,17 @@ export default function Preparation(preparationData) {
         return (
             <React.Fragment>
                 <Typography variant="h4">
-                    Preparation
+                    Preparations
                 </Typography>
 
-                <ButtonGroup variant="contained" aria-label="contained primary button group">
-                    <Button id="Heat Long Term" onClick={() => setCategory("Heat Long Term")} variant="contained">Heat Long Term</Button>
-                    <Button id="Heat Short Term" onClick={() => setCategory("Heat Short Term")} variant="contained">Heat Short Term</Button>
+                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button group" style={{ marginTop: "1rem" }}>
+                    <Button id="Heat Short Term" onClick={() => setCategory("Heat Short Term")} variant="contained">Short Term</Button>
+                    <Button id="Heat Long Term" onClick={() => setCategory("Heat Long Term")} variant="contained">Long Term</Button>
                     <Button id="Power Failure" onClick={() => setCategory("Power Failure")} variant="contained" color="primary">Power Failure</Button>
                 </ButtonGroup>
-
+                <Typography variant="h6" style={{ marginTop: "1rem" }}>
+                    Power failures can occur during a heat wave and it is important to be be prepared for them.
+            </Typography>
                 <List>
                     {preparationData["preparationData"].filter(item => item.category === category).map(item =>
                         <ListItem key={item.advice_id}>

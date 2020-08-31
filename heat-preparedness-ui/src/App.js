@@ -163,28 +163,28 @@ class App extends Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent>
                                 <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent>
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent>
                                 <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={6}>
+                    <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent>
 
