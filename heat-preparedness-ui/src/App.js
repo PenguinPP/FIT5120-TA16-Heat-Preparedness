@@ -9,7 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Preparation from './Preparation'
+import Preparation from './Preparation';
+import HeatWaves from './HeatWaves';
 
 const axios = require('axios').default;
 
@@ -161,12 +162,10 @@ class App extends Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item xs={12}>
-
-                    </Grid>
-                    <Grid item xs={10} lg={12}>
+                    <Grid item xs={10} lg={6}>
                         <Card variant="outlined">
                             <CardContent>
+                                <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
