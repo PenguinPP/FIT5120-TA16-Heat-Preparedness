@@ -89,5 +89,4 @@ export default function Preparation(preparationData){
             </React.Fragment>
         )
     }
-    
 }
