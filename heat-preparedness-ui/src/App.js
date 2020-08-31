@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
@@ -90,7 +90,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                // console.log(response.data)
                 preparationData = response.data
             })
             .catch(function (error) {
@@ -107,7 +107,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                // console.log(response.data)
                 suburbs = response.data
             })
             .catch(function (error) {
@@ -123,7 +123,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
-                console.log(response.data)
+                // console.log(response.data)
                 advice = response.data
             })
             .catch(function (error) {
@@ -140,8 +140,8 @@ class App extends Component {
         await axios.get(dataLink)
             .then(function (response) {
 
-                weatherData = response.data.filter(item => item.council == "Melbourne City")
-                console.log(weatherData)
+                weatherData = response.data.filter(item => item.council === "Melbourne City")
+                //console.log(weatherData)
             })
             .catch(function (error) {
                 console.log(error)
