@@ -232,7 +232,7 @@ class App extends Component {
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Weather" >
-                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
+                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> */}
                             </CardContent>
                         </Card>
                     </Grid>
