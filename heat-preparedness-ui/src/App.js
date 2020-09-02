@@ -12,7 +12,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
-import { Link } from 'react-scroll'
+import { Link } from 'react-scroll';
+import Weather from './Weather'
 
 const axios = require('axios').default;
 
@@ -34,7 +35,7 @@ function MenuDrawer() {
                     <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h4" align="center" >
+                    <Typography variant="h5" align="center" >
                         Heat Preparedness
           </Typography>
 
@@ -43,7 +44,7 @@ function MenuDrawer() {
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
                 <Card variant="outlined">
                     <CardContent>
-                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
                             <Link
                                 activeClass="active"
                                 to={"HeatWaves"}
@@ -57,7 +58,7 @@ function MenuDrawer() {
 
                     </CardContent>
                     <CardContent>
-                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
                             activeClass="active"
                             to={"Prep"}
                             spy={true}
@@ -73,7 +74,7 @@ function MenuDrawer() {
 
                     </CardContent>
                     <CardContent>
-                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
                             <Link
                                 activeClass="active"
                                 to={"Advice"}
@@ -90,7 +91,7 @@ function MenuDrawer() {
                     </CardContent>
                     <CardContent>
 
-                        <Button fullWidth="true" size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
                             <Link
                                 activeClass="active"
                                 to={"Advice"}
@@ -151,6 +152,7 @@ class App extends Component {
 
         await axios.get(dataLink)
             .then(function (response) {
+                // console.log("suburbs")
                 //console.log(response.data)
                 suburbs = response.data
             })
@@ -229,8 +231,8 @@ class App extends Component {
                     </Grid>
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
-                            <CardContent id="Weather">
-
+                            <CardContent id="Weather" >
+                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> */}
                             </CardContent>
                         </Card>
                     </Grid>
@@ -243,6 +245,18 @@ class App extends Component {
                     <Typography variant="h5" >
                         Acknowledgments
 </Typography>
+                    <br />
+                    <Typography>
+                        The weather forecast information is updated every 6 hours based on available data from <a href="https://openweathermap.org/" style={{ color: "white" }}>OpenWeather</a> ( ©  Creative Commons Attribution-ShareAlike 4.0 International licence).
+
+</Typography><br />
+                    <Typography>
+                        The definitions of heatwaves, suggested preparations and further advice are extracted from the Victorian State Government . To access up-to-date information about current  heatwaves in Victoria, please refer to Victoria Health’s resources:
+
+</Typography>
+                    <a style={{ color: "white" }} href="https://www2.health.vic.gov.au/public-health/environmental-health/climate-weather-and-public-health/heatwaves-and-extreme-heat/.">Health Victoria, Extreme Heat and Heatwaves</a>
+                    <br />
+                    <a style={{ color: "white" }} href="https://www.betterhealth.vic.gov.au/campaigns/Survive-the-heat">Better Health Channel, Survive the Heat </a>
                 </div>
             </React.Fragment >
         )
