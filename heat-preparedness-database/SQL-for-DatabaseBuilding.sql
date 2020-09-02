@@ -110,3 +110,112 @@ do
 -- Add a new attribute for Forecast to record latest update time which will also show to users
 ALTER TABLE `VictoriaHeat`.`Forecast` 
 ADD COLUMN `update_time` DATETIME NULL AFTER `avg`;
+
+
+
+-- add surrogate key for several tables
+ALTER TABLE `VictoriaHeat`.`LGA` 
+DROP FOREIGN KEY `district_lga_fk`;
+
+ALTER TABLE `VictoriaHeat`.`District` 
+ADD COLUMN `district_id` INT NOT NULL AUTO_INCREMENT FIRST,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`district_id`),
+ADD UNIQUE INDEX `unique_district` (`state` ASC, `district_name` ASC) VISIBLE;
+;
+
+ALTER TABLE `VictoriaHeat`.`Suburb` 
+DROP FOREIGN KEY `lga_suburb_fk`;
+
+ALTER TABLE `VictoriaHeat`.`Forecast` 
+DROP FOREIGN KEY `lga_forcast_fk`;
+
+ALTER TABLE `VictoriaHeat`.`Weather` 
+DROP FOREIGN KEY `lga_weather_fk`;
+
+ALTER TABLE `VictoriaHeat`.`LGA` 
+CHANGE COLUMN `state` `council_id` INT NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `district` `district` INT NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`council_id`),
+ADD UNIQUE INDEX `unique_council` (`district` ASC, `council` ASC) INVISIBLE;
+;
+
+ALTER TABLE `VictoriaHeat`.`LGA` 
+ADD CONSTRAINT `district_lga_fk`
+  FOREIGN KEY (`district`)
+  REFERENCES `VictoriaHeat`.`District` (`district_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `VictoriaHeat`.`Suburb` 
+DROP COLUMN `district`,
+DROP COLUMN `state`,
+ADD COLUMN `suburb_id` INT NOT NULL AUTO_INCREMENT FIRST,
+ADD COLUMN `postcode` INT NULL AFTER `suburb`,
+CHANGE COLUMN `council` `council` INT NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`suburb_id`),
+ADD UNIQUE INDEX `unique_suburb` (`council` ASC, `suburb` ASC) VISIBLE;
+;
+
+ALTER TABLE `VictoriaHeat`.`Suburb` 
+ADD INDEX `lga_suburb_fk_idx` (`council` ASC) INVISIBLE;
+ALTER TABLE `VictoriaHeat`.`Suburb` ALTER INDEX `unique_suburb` VISIBLE;
+ALTER TABLE `VictoriaHeat`.`Suburb` 
+ADD CONSTRAINT `lga_suburb_fk`
+  FOREIGN KEY (`council`)
+  REFERENCES `VictoriaHeat`.`LGA` (`council_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `VictoriaHeat`.`Weather` 
+DROP COLUMN `district`,
+DROP COLUMN `state`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`council`, `date`);
+;
+
+ALTER TABLE `VictoriaHeat`.`Forecast` 
+DROP COLUMN `district`,
+DROP COLUMN `state`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`council`, `date`);
+;
+
+ALTER TABLE `VictoriaHeat`.`Forecast` 
+CHANGE COLUMN `council` `council_id` INT NOT NULL ;
+ALTER TABLE `VictoriaHeat`.`Forecast` 
+ADD CONSTRAINT `lga_forecast`
+  FOREIGN KEY (`council_id`)
+  REFERENCES `VictoriaHeat`.`LGA` (`council_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `VictoriaHeat`.`Weather` 
+CHANGE COLUMN `council` `council_id` INT NOT NULL ;
+ALTER TABLE `VictoriaHeat`.`Weather` 
+ADD CONSTRAINT `lga_weather_fk`
+  FOREIGN KEY (`council_id`)
+  REFERENCES `VictoriaHeat`.`LGA` (`council_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+DROP TRIGGER IF EXISTS `VictoriaHeat`.`Forecast_AFTER_DELETE`;
+
+DELIMITER $$
+USE `VictoriaHeat`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `VictoriaHeat`.`Forecast_AFTER_DELETE` AFTER DELETE ON `Forecast` FOR EACH ROW
+BEGIN
+insert into Weather (council_id, date, min, max, avg)
+                         VALUES (OLD.council_id, OLD.date, OLD.min, OLD.max, OLD.avg) ON DUPLICATE KEY
+                         UPDATE min = VALUES(min),
+                                max = values(max),
+                                avg = values(avg); 
+END$$
+DELIMITER ;
+
+ALTER TABLE `VictoriaHeat`.`LGA` 
+RENAME TO  `VictoriaHeat`.`Council` ;
