@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { List, ListItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import WarningIcon from '@material-ui/icons/Warning';
 
 const axios = require('axios').default;
 
@@ -54,7 +54,7 @@ export default function Weather(weatherInformation) {
                 </Typography>
 
             <Typography variant="h6" style={{ marginBottom: "1rem" }}>
-                Select your suburb below
+                Select your suburb
                 </Typography>
 
             <Autocomplete
@@ -74,9 +74,12 @@ export default function Weather(weatherInformation) {
 
                 </TextField>*/}
             <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-                Temperatures in {currentSuburb != undefined && currentSuburb.suburb + ", " + currentSuburb.postcode} for the next week
+                Weather in {currentSuburb != undefined && currentSuburb.suburb + " (" + currentSuburb.postcode + ")"} for the next week
                 </Typography>
-
+            <br />
+            <Typography variant="h6">
+                <WarningIcon /> next to the day indicates a heat wave alert
+            </Typography>
             <List>
                 {weatherData.map(item =>
                     <ListItem key={item.date}>
