@@ -229,13 +229,13 @@ class App extends Component {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={8}>
+                    {/* <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Weather" >
                                 <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <div style={{
                     backgroundColor: "#3f51b5", padding: "1rem",
