@@ -37,22 +37,22 @@ function MenuDrawer() {
 
     return (
         <React.Fragment>
-            <div style={divStyle}>
+            {/* <div style={divStyle}>
                 <center>
                     <img src={Img} alt="pic" style={divStyle} />
-                    <AppBar position="sticky" style={{ "margin": 0 }}>
-                        <Toolbar>
-                            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography variant="h5" align="center" >
-                                Heat Preparedness
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
+                    
                 </center>
-            </div>
-
+            </div> */}
+            <AppBar position="sticky" style={{ "margin": 0 }}>
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h5" align="center" >
+                        Heat Preparedness
+                            </Typography>
+                </Toolbar>
+            </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
                 <Card variant="outlined">
 
