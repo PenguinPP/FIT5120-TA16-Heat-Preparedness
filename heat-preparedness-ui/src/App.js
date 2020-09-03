@@ -35,7 +35,7 @@ function MenuDrawer() {
                     <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h4" align="center" >
+                    <Typography variant="h5" align="center" >
                         Heat Preparedness
           </Typography>
 
@@ -232,7 +232,7 @@ class App extends Component {
                     {/* <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Weather" >
-                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
+                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> */}
                             </CardContent>
                         </Card>
                     </Grid> */}
@@ -245,6 +245,18 @@ class App extends Component {
                     <Typography variant="h5" >
                         Acknowledgments
 </Typography>
+                    <br />
+                    <Typography>
+                        The weather forecast information is updated every 6 hours based on available data from <a href="https://openweathermap.org/" style={{ color: "white" }}>OpenWeather</a> ( ©  Creative Commons Attribution-ShareAlike 4.0 International licence).
+
+</Typography><br />
+                    <Typography>
+                        The definitions of heatwaves, suggested preparations and further advice are extracted from the Victorian State Government . To access up-to-date information about current  heatwaves in Victoria, please refer to Victoria Health’s resources:
+
+</Typography>
+                    <a style={{ color: "white" }} href="https://www2.health.vic.gov.au/public-health/environmental-health/climate-weather-and-public-health/heatwaves-and-extreme-heat/.">Health Victoria, Extreme Heat and Heatwaves</a>
+                    <br />
+                    <a style={{ color: "white" }} href="https://www.betterhealth.vic.gov.au/campaigns/Survive-the-heat">Better Health Channel, Survive the Heat </a>
                 </div>
             </React.Fragment >
         )
