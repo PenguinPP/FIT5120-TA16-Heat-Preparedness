@@ -229,13 +229,13 @@ class App extends Component {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={8}>
+                    {/* <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Weather" >
-                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> */}
+                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> 
                             </CardContent>
                         </Card>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <div style={{
                     backgroundColor: "#3f51b5", padding: "1rem",
@@ -244,16 +244,15 @@ class App extends Component {
                 }}>
                     <Typography variant="h5" >
                         Acknowledgments
-</Typography>
+                    </Typography>
                     <br />
                     <Typography>
                         The weather forecast information is updated every 6 hours based on available data from <a href="https://openweathermap.org/" style={{ color: "white" }}>OpenWeather</a> ( ©  Creative Commons Attribution-ShareAlike 4.0 International licence).
-
-</Typography><br />
+                    </Typography>
+                    <br />
                     <Typography>
                         The definitions of heatwaves, suggested preparations and further advice are extracted from the Victorian State Government . To access up-to-date information about current  heatwaves in Victoria, please refer to Victoria Health’s resources:
-
-</Typography>
+                    </Typography>
                     <a style={{ color: "white" }} href="https://www2.health.vic.gov.au/public-health/environmental-health/climate-weather-and-public-health/heatwaves-and-extreme-heat/.">Health Victoria, Extreme Heat and Heatwaves</a>
                     <br />
                     <a style={{ color: "white" }} href="https://www.betterhealth.vic.gov.au/campaigns/Survive-the-heat">Better Health Channel, Survive the Heat </a>
