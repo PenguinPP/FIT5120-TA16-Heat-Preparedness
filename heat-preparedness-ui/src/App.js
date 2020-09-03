@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Img from './heatback.jpg';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +15,8 @@ import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
 import { Link } from 'react-scroll';
 import Weather from './Weather'
+import SvgIcon from '@material-ui/core/SvgIcon';
+
 
 const axios = require('axios').default;
 
@@ -27,21 +30,30 @@ function MenuDrawer() {
         setState(open);
     };
 
+    const divStyle = {
+        width: '100%',
+        height: 'auto/8'
+    };
 
     return (
         <React.Fragment>
-            <AppBar position="sticky" style={{ "margin": 0 }}>
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h5" align="center" >
-                        Heat Preparedness
-          </Typography>
+            <div style={divStyle}>
+                <center>
+                    <img src={Img} alt="pic" style={divStyle} />
+                    <AppBar position="sticky" style={{ "margin": 0 }}>
+                        <Toolbar>
+                            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h5" align="center" >
+                                Heat Preparedness
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                </center>
+            </div>
 
-                </Toolbar>
-            </AppBar>
-            <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
+            <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
                 <Card variant="outlined">
 
                     <CardContent>
