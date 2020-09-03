@@ -208,13 +208,7 @@ class App extends Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item xs={10} lg={8}>
-                        <Card variant="outlined">
-                            <CardContent id="HeatWaves">
-                                <HeatWaves />
-                            </CardContent>
-                        </Card>
-                    </Grid>
+
                     <Grid item xs={10} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Prep">
@@ -236,6 +230,13 @@ class App extends Component {
                             </CardContent>
                         </Card>
                     </Grid> */}
+                    <Grid item xs={10} lg={8}>
+                        <Card variant="outlined">
+                            <CardContent id="HeatWaves">
+                                <HeatWaves />
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
                 <div style={{
                     backgroundColor: "#3f51b5", padding: "1rem",
