@@ -2,99 +2,113 @@ import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { List, ListItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+
 const axios = require('axios').default;
 
 
 export default function Weather(weatherInformation) {
 
 
-    var suburbList = []
+    const suburbData = weatherInformation["suburbList"]
 
-    for (let entry in weatherInformation["suburbList"]) {
-        suburbList.push(weatherInformation["suburbList"][entry]["suburb"])
-    }
 
-    const [suburb, setSuburb] = React.useState("Melbourne")
+    const [suburbId, setSuburbId] = React.useState(1794) //Currently selected suburb (Default ID is for Melbourne 3000)
     const [weatherData, setWeatherData] = React.useState([weatherInformation["weatherInformation"]])
 
+    var currentSuburb = suburbData.filter(suburb => suburb.suburb_id === suburbId)[0]
+    console.log(currentSuburb)
 
     React.useEffect(() => {
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbForecast/" + suburb
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbForecast/" + suburbId
 
         axios.get(dataLink)
             .then(results => results.data)
             .then(data => {
-                if (suburb === "Melbourne") {
-                    setWeatherData(data.filter(item => item.council === "Melbourne City"))
-                }
-                else {
-                    setWeatherData(data)
-                }
+
+                setWeatherData(data)
                 //console.log(weatherData)
             })
             .catch(function (error) {
                 console.log(error)
             })
-    }, [suburb])
+    }, [suburbId])
 
-    if (suburbList.includes(suburb)) {
-        return (
+    const inputProps = {
+        color: "primary"
+    }
 
-            /*        <Button onClick = {() => setSuburb("Bellfield")>
 
-            NEED TO ADD COUNCIL {item.council}
-            */
+    //if (suburbList.includes(suburb)) {
+    return (
 
-            <React.Fragment>
-                <Typography variant="h4">
-                    Forecast
+        /*        <Button onClick = {() => setSuburb("Bellfield")>
+
+        NEED TO ADD COUNCIL {item.council}
+        */
+
+        <React.Fragment>
+            <Typography variant="h4" >
+                Forecast
                 </Typography>
-                <Typography style={{ marginTop: "1rem" }}>
-                    Enter the name of your suburb below (case sensitive)
+
+            <Typography variant="h6" style={{ marginBottom: "1rem" }}>
+                Select your suburb below
                 </Typography>
-                <TextField
+
+            <Autocomplete
+                id="combo-box-demo"
+                options={suburbData}
+                getOptionLabel={(option) => option.suburb + ", " + option.postcode}
+                fullWidth={true}
+                onChange={(event, newValue) => { newValue != undefined && setSuburbId(newValue.suburb_id) }}
+                renderInput={(params) => <TextField {...params} label="Filter by name or postcode" InputLabelProps={{ style: { color: "black" } }} variant="outlined" />}
+            />
+
+            {/* <TextField
                     fullWidth={true}
                     value={suburb}
                     onChange={(event) => setSuburb(event.target.value)}
                 >
 
-                </TextField>
-                <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-                    Temperatures for next week
+                </TextField>*/}
+            <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+                Temperatures in {currentSuburb != undefined && currentSuburb.suburb + ", " + currentSuburb.postcode} for the next week
                 </Typography>
 
-                <List>
-                    {weatherData.map(item =>
-                        <ListItem key={item.date}>
-                            {item.date ? item.date.toString().replace(/\T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
+            <List>
+                {weatherData.map(item =>
+                    <ListItem key={item.date}>
+                        {item.date ? item.date.toString().replace(/\T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
                         </ListItem>
-                    )}
-                </List>
-            </React.Fragment>
-        )
-    }
-    else {
-        return (
-            <React.Fragment>
-                <Typography variant="h4">
-                    Forecast
-        </Typography>
-                <Typography>
-                    Enter the name of your suburb below (case sensitive)
-</Typography>
-                <TextField
-                    fullWidth={true}
-                    value={suburb}
-                    onChange={(event) => setSuburb(event.target.value)}
-                >
+                )}
+            </List>
+        </React.Fragment>
+    )
+    //  }
+    //     else {
+    //         return (
+    //             <React.Fragment>
+    //                 <Typography variant="h4">
+    //                     Forecast
+    //         </Typography>
+    //                 <Typography>
+    //                     Enter the name of your suburb below (case sensitive)
+    // </Typography>
+    //                 <TextField
+    //                     fullWidth={true}
+    //                     value={suburb}
+    //                     onChange={(event) => setSuburb(event.target.value)}
+    //                 >
 
-                </TextField>
-                <Typography>
-                    Please enter a valid suburb name. For example, "Melbourne" or "Oakleigh East" Please note that the form is case-sensitive.
-                </Typography>
-            </React.Fragment>
-        )
-    }
+    //                 </TextField>
+    //                 <Typography>
+    //                     Please enter a valid suburb name. For example, "Melbourne" or "Oakleigh East" Please note that the form is case-sensitive.
+    //                 </Typography>
+    //             </React.Fragment>
+    //         )
+    //     }
 }
 
 /*

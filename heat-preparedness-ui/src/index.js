@@ -6,7 +6,16 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 
 const theme = createMuiTheme({
-    typography: {
+    overrides: {
+        // Style sheet name ⚛️
+        MuiSvgIcon: {
+            // Name of the rule
+            fontSizeLarge: {
+                // Some CSS
+                fontSize: "5rem",
+            },
+        },
+    }, typography: {
         fontSize: 19
     }
 })

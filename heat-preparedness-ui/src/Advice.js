@@ -2,111 +2,117 @@ import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-import { List, ListItem, ListItemIcon } from '@material-ui/core'
+import { List, ListItem, ListItemIcon, makeStyles } from '@material-ui/core'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { ReactComponent as BottleIcon } from './icons/bottle-icon.svg';
+import { ReactComponent as PhysicalIcon } from './icons/physical-activity-icon.svg';
+import { ReactComponent as CoolIcon } from './icons/keep-cool-icon.svg';
+
+import SvgIcon from '@material-ui/core/SvgIcon';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles({
+    active: { //Style for active category button
+        background: "#3f51b5",
+        color: "white",
+        '&:hover': {
+            backgroundColor: "#7986cb"
+        }
+    }
+})
+
+//Use SVG to create SVGIcons
+const GeneralIcon = (props) => {
+    return (
+        <SvgIcon {...props} component={BottleIcon} viewBox="0 0 600 476.6" >
+
+        </SvgIcon>
+    )
+}
+
+const PhysicalActivityIcon = (props) => {
+    return (
+        <SvgIcon {...props} component={PhysicalIcon} viewBox="0 0 600 476.6" >
+
+        </SvgIcon>
+    )
+}
+
+const KeepCoolIcon = (props) => {
+    return (
+        <SvgIcon {...props} component={CoolIcon} viewBox="0 0 600 476.6" >
+
+        </SvgIcon>
+    )
+}
 
 export default function Advice(adviceData) {
-
-    const [category, setCategory] = React.useState("General");
+    const classes = useStyles()
+    const [category, setCategory] = React.useState("General"); //Current selected category
 
     //console.log(adviceData["adviceData"])
 
-    const heat_general = adviceData["adviceData"].filter(item => item.category === "General")
-    const heat_keeping_cool = adviceData["adviceData"].filter(item => item.category === "Keeping Cool")
-    const heat_physical_activity = adviceData["adviceData"].filter(item => item.category === "Physical Activity")
-
-    if (category === "General") {
-        return (
-            <React.Fragment>
-                <Typography variant="h4">
-                    On the day
-                </Typography>
-
-                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button" style={{ marginTop: "1rem" }}>
-                    <Button id="General" onClick={() => setCategory("General")} variant="contained" color="primary">General</Button>
-                    <Button id="Keeping Cool" onClick={() => setCategory("Keeping Cool")} variant="contained">Keeping Cool</Button>
-                    <Button id="Physical Activity" onClick={() => setCategory("Physical Activity")} variant="contained">Physical Activity</Button>
-                </ButtonGroup>
-                <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                    Some general bits of advice to get you through the day:
-            </Typography>
-
-                <List>
-                    {heat_general.map(item =>
-                        <ListItem key={item.advice_id}>
-                            <ListItemIcon>
-                                <FiberManualRecordIcon style={{ fontSize: "1.1rem" }} />
-                            </ListItemIcon>
-                            <Typography>
-                                {item.content}
-                            </Typography>
-                        </ListItem>
-                    )}
-                </List>
-            </React.Fragment>
-        )
+    var messages = { //Message to display for each category before bullet points
+        "General": "Some general bits of advice to get you through the day:",
+        "Keeping Cool": "Here are a few things that you can do to keep cool:",
+        "Physical Activity": "When it comes to physical activity during a heat wave:"
     }
 
-    else if (category === "Keeping Cool") {
-        return (
-            <React.Fragment>
-                <Typography variant="h4">
-                    On the day
-            </Typography>
 
-                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button" style={{ marginTop: "1rem" }}>
-                    <Button id="General" onClick={() => setCategory("General")} variant="contained" >General</Button>
-                    <Button id="Keeping Cool" onClick={() => setCategory("Keeping Cool")} variant="contained" color="primary">Keeping Cool</Button>
-                    <Button id="Physical Activity" onClick={() => setCategory("Physical Activity")} variant="contained">Physical Activity</Button>
-                </ButtonGroup>
-                <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                    Here are a few things that you can do to keep cool:
-            </Typography>
-                <List>
-                    {heat_keeping_cool.map(item =>
-                        <ListItem key={item.advice_id}>
-                            <ListItemIcon>
-                                <FiberManualRecordIcon style={{ fontSize: "1.1rem" }} />
-                            </ListItemIcon>
-                            <Typography>
-                                {item.content}
-                            </Typography>
-                        </ListItem>
-                    )}
-                </List>
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            <Typography variant="h4" style={{ marginBottom: "1rem" }}>
+                On the Day
+                 </Typography>
+            <Grid container>
+                <Grid item xs={12} lg={4}>
+                    <Button
+                        id="General"
+                        className={category == "General" && classes.active} //Set style to active style if current category
+                        fullWidth={true}
+                        onClick={() => setCategory("General")}
+                        variant="contained">
+                        <GeneralIcon fontSize="large" />
+                        General
+                        </Button>
+                </Grid>
+                <Grid item xs={12} lg={4}>
+                    <Button
+                        id="Keeping Cool"
+                        className={category == "Keeping Cool" && classes.active}
+                        fullWidth={true}
+                        onClick={() => setCategory("Keeping Cool")}
+                        variant="contained" >
 
-    else {
-        return (
-            <React.Fragment>
-                <Typography variant="h4">
-                    On the day
+                        <KeepCoolIcon fontSize="large" />
+                        Keep Cool
+                    </Button>
+                </Grid>
+                <Grid item xs={12} lg={4}>
+                    <Button
+                        id="Physical Activity"
+                        className={category == "Physical Activity" && classes.active}
+                        fullWidth={true} onClick={() => setCategory("Physical Activity")}
+                        variant="contained">
+                        <PhysicalActivityIcon
+                            fontSize="large" />
+                    Physical Activity
+                    </Button>
+                </Grid>
+            </Grid>
+            <Typography variant="h6" style={{ marginTop: "1rem" }}>
+                {messages[category]}
             </Typography>
-
-                <ButtonGroup fullWidth={true} variant="contained" aria-label="contained primary button" style={{ marginTop: "1rem" }}>
-                    <Button id="General" onClick={() => setCategory("General")} variant="contained">General</Button>
-                    <Button id="Keeping Cool" onClick={() => setCategory("Keeping Cool")} variant="contained">Keeping Cool</Button>
-                    <Button id="Physical Activity" onClick={() => setCategory("Physical Activity")} variant="contained" color="primary">Physical Activity</Button>
-                </ButtonGroup>
-                <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                    When it comes to physical activity during a heat wave:
-            </Typography>
-                <List>
-                    {heat_physical_activity.map(item =>
-                        <ListItem key={item.advice_id}>
-                            <ListItemIcon>
-                                <FiberManualRecordIcon style={{ fontSize: "1.1rem" }} />
-                            </ListItemIcon>
-                            <Typography>
-                                {item.content}
-                            </Typography>
-                        </ListItem>
-                    )}
-                </List>
-            </React.Fragment>
-        )
-    }
-
+            <List>
+                {adviceData["adviceData"].filter(item => item.category === category).map(item =>
+                    <ListItem key={item.advice_id}>
+                        <Typography>
+                            {item.content}
+                        </Typography>
+                    </ListItem>
+                )}
+            </List>
+        </React.Fragment >
+    )
 }

@@ -7,10 +7,10 @@ export default function HeatWaves() {
 
 
     const hazardData = [
-        { hazard: 1, deaths: 4555 }, //Extreme heat
-        { hazard: 2, deaths: 1285 }, //Cyclones
-        { hazard: 3, deaths: 1221 }, //Floods
-        { hazard: 4, deaths: 866 } //Bushfires
+        { hazard: 1, deaths: 4555, fill: "#ff9800" }, //Extreme heat
+        { hazard: 2, deaths: 1285, fill: "#7986cb" }, //Cyclones
+        { hazard: 3, deaths: 1221, fill: "#7986cb" }, //Floods
+        { hazard: 4, deaths: 866, fill: "#7986cb" } //Bushfires
     ];
 
     const deathData = [
@@ -39,7 +39,14 @@ export default function HeatWaves() {
                             dependentAxis
                             tickFormat={(x) => (`${x}`)}
                         />
-                        <VictoryBar data={hazardData} x="hazard" y="deaths" />
+                        <VictoryBar
+                            data={hazardData} x="hazard" y="deaths"
+                            style={{
+                                data: {
+                                    fill: ({ datum }) => datum.fill,
+                                }
+                            }}
+                        />
                     </VictoryChart>
 
                 </Grid>
@@ -54,6 +61,7 @@ export default function HeatWaves() {
                         data={deathData}
                         x="ageGroup"
                         y="percentage"
+                        colorScale={["#ff9800", "#7986cb"]}
                     />
                 </Grid>
 

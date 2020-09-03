@@ -43,20 +43,7 @@ function MenuDrawer() {
             </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)}  >
                 <Card variant="outlined">
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
 
-                    </CardContent>
                     <CardContent>
                         <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
                             activeClass="active"
@@ -68,7 +55,7 @@ function MenuDrawer() {
                             onClick={toggleDrawer(false)}
                             style={{ width: "100%" }}
                         ><Typography variant="h4" align="left">
-                                Precautions
+                                Be Prepared!
                     </Typography></Link>
                         </Button>
 
@@ -94,7 +81,7 @@ function MenuDrawer() {
                         <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
                             <Link
                                 activeClass="active"
-                                to={"Advice"}
+                                to={"Forecast"}
                                 spy={true}
                                 smooth={true}
                                 offset={-60}
@@ -104,6 +91,20 @@ function MenuDrawer() {
                             ><Typography variant="h4" align="left">
                                     Forecasts
                     </Typography></Link></Button>
+                    </CardContent>
+                    <CardContent>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"HeatWaves"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
+
                     </CardContent>
                 </Card>
                 <Button onClick={toggleDrawer(false)}>
@@ -208,34 +209,35 @@ class App extends Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item xs={10} lg={8}>
-                        <Card variant="outlined">
-                            <CardContent id="HeatWaves">
-                                <HeatWaves />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={10} lg={8}>
+
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={8}>
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    {/* <Grid item xs={10} lg={8}>
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
-                            <CardContent id="Weather" >
-                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> 
+                            <CardContent id="Forecast" >
+                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
-                    </Grid> */}
+                    </Grid>
+                    <Grid item sm={12} lg={8}>
+                        <Card variant="outlined">
+                            <CardContent id="HeatWaves">
+                                <HeatWaves />
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
                 <div style={{
                     backgroundColor: "#3f51b5", padding: "1rem",
