@@ -209,28 +209,28 @@ class App extends Component {
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
 
-                    <Grid item xs={10} lg={8}>
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} lg={8}>
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    {/* <Grid item xs={10} lg={8}>
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="Weather" >
-                                {/* <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} /> 
+                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
-                    </Grid> */}
-                    <Grid item xs={10} lg={8}>
+                    </Grid>
+                    <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
                             <CardContent id="HeatWaves">
                                 <HeatWaves />
