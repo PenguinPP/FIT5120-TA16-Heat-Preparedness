@@ -52,7 +52,7 @@ export default function Preparation(preparationData) {
     var messages = {//Message to display for each category before bullet points
         "Heat Short Term": "There are a number of things you can do in the short term to prepare for a heat wave:",
         "Heat Long Term": "There are a number of things you can do in the long term to improve your ability to cope with extreme heat:",
-        "Power Failures": "Power failures can occur during a heat wave and it is important to be be prepared for them:"
+        "Power Failure": "Power failures can occur during a heat wave and it is important to be be prepared for them:"
     }
 
     //console.log(preparationData["preparationData"])
