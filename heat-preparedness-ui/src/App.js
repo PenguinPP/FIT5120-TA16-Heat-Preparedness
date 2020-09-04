@@ -55,7 +55,20 @@ function MenuDrawer() {
             </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
                 <Card variant="outlined">
+                    <CardContent>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"HeatWaves"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
 
+                    </CardContent>
                     <CardContent>
                         <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
                             activeClass="active"
@@ -104,20 +117,7 @@ function MenuDrawer() {
                                     Forecasts
                     </Typography></Link></Button>
                     </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
 
-                    </CardContent>
                 </Card>
                 <Button onClick={toggleDrawer(false)}>
                     Close Menu
