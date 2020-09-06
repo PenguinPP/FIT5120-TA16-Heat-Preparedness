@@ -8,17 +8,25 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Img from './heatback.jpg';
 import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
 import { Link } from 'react-scroll';
-import Weather from './Weather'
+import Weather from './Weather';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import Sidebar from 'react-sidebar';
 
+const divStyle = {
+    width: '100%',
+    height: 'auto/8',
+    backgroundImage: `url(${Img})`
+};
 
 const axios = require('axios').default;
+
+const mql = window.matchMedia(`(max-width: 800px)`);
+
 
 function MenuDrawer() {
     const [state, setState] = React.useState(false);
@@ -30,115 +38,129 @@ function MenuDrawer() {
         setState(open);
     };
 
-    const divStyle = {
-        width: '100%',
-        height: 'auto/8'
-    };
 
     return (
         <React.Fragment>
-            {/* <div style={divStyle}>
-                <center>
-                    <img src={Img} alt="pic" style={divStyle} />
-                    
-                </center>
-            </div> */}
             <AppBar position="sticky" style={{ "margin": 0 }}>
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                    {/*<IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
                         <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h5" align="center" >
+    </IconButton>*/}
+                    <Typography variant="h5" align="left" >
                         Heat Preparedness
                             </Typography>
                 </Toolbar>
             </AppBar>
-            <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
+
+            {/*<Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'column'} >
                 <Card variant="outlined">
 
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
-                            activeClass="active"
-                            to={"Prep"}
-                            spy={true}
-                            smooth={true}
-                            offset={-60}
-                            duration={700}
-                            onClick={toggleDrawer(false)}
-                            style={{ width: "100%" }}
-                        ><Typography variant="h4" align="left">
-                                Be Prepared!
+            {/*<CardContent>*/}
+
+            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}><Link
+                activeClass="active"
+                to={"HeatWaves"}
+                spy={true}
+                smooth={true}
+                offset={-60}
+                duration={700}
+                onClick={toggleDrawer(false)}
+                style={{ width: "100%" }}
+            ><Typography variant="h6" align="right">
+                    HeatWaves
                     </Typography></Link>
-                        </Button>
+            </Button>
 
-                    </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"Advice"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography variant="h4" align="left">
-                                    On the day
+            {/*</CardContent>
+                <CardContent>*/}
+            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}>
+                <Link
+                    activeClass="active"
+                    to={"Forecast"}
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={700}
+                    onClick={toggleDrawer(false)}
+                    style={{ width: "100%" }}
+                ><Typography variant="h6" align="right">
+                        Forecast
                     </Typography></Link></Button>
 
-                    </CardContent>
-                    <CardContent>
+            {/*</CardContent>
+                <CardContent>*/}
 
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"Forecast"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography variant="h4" align="left">
-                                    Forecasts
+            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}>
+                <Link
+                    activeClass="active"
+                    to={"Advice"}
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={700}
+                    onClick={toggleDrawer(false)}
+                    style={{ width: "100%" }}
+                ><Typography variant="h6" align="right">
+                        On the day
                     </Typography></Link></Button>
-                    </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
+            {/*</CardContent>
+                <CardContent>*/}
+            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}>
+                <Link
+                    activeClass="active"
+                    to={"Prep"}
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={700}
+                    onClick={toggleDrawer(false)}
+                    style={{ width: "100%" }}
+                ><Typography variant="h6" align="right">Be Prepared!</Typography></Link></Button>
 
-                    </CardContent>
-                </Card>
-                <Button onClick={toggleDrawer(false)}>
+            {/*</CardContent>
+            </Card>*/}
+            {/*<Button onClick={toggleDrawer(false)}>
                     Close Menu
                 </Button>
-            </Drawer>
+            </Drawer>*/}
         </React.Fragment >
     );
 }
 
 
-class App extends Component {
+
+class App extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            sidebarDocked: mql.matches,
+            sidebarOpen: false,
             suburbList: [],
             preparationsList: [],
             adviceList: [],
             weatherForecast: []
-        }
+        };
+        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
+
+    componentWillMount() {
+        mql.addListener(this.mediaQueryChanged);
+    }
+
+    componentWillUnmount() {
+        mql.removeListener(this.mediaQueryChanged);
+    }
+
+    onSetSidebarOpen(open) {
+        this.setState({ sidebarOpen: open });
+    }
+
+    mediaQueryChanged() {
+        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
+    }
+
 
     async getPreparationData() {
 
@@ -215,11 +237,27 @@ class App extends Component {
         this.getWeatherData()
     }
 
+
+
+
     render() {
+
         return (
             <React.Fragment>
                 <CssBaseline />
-                <MenuDrawer />
+
+                <Sidebar
+                    sidebar={<b>menu</b>}
+                    open={this.state.sidebarOpen}
+                    docked={this.state.sidebarDocked}
+                    onSetOpen={this.onSetSidebarOpen}
+                ><MenuDrawer /> </Sidebar>
+                <div style={divStyle}>
+                    <center>
+                        <img src={Img} alt="pic" style={divStyle} />
+
+                    </center>
+                </div>
                 <Grid container spacing={3} justify="center" wrap='wrap'>
                     <Grid item sm={12} lg={8}>
                         <Card variant="outlined">
