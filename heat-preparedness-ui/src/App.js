@@ -144,7 +144,7 @@ class App extends Component {
 
 
         let preparationData = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice_pre"
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:/api/Advice_pre"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -161,7 +161,7 @@ class App extends Component {
 
     async getSuburbList() {
         let suburbs = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbList"
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com/api/SuburbList"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -178,7 +178,7 @@ class App extends Component {
 
     async getAdviceData() {
         let advice = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice"
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com/api/Advice"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -194,7 +194,7 @@ class App extends Component {
 
     async getWeatherData() {
         let weatherData = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/MelbourneForecast"
+        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com/api/MelbourneForecast"
 
         await axios.get(dataLink)
             .then(function (response) {
