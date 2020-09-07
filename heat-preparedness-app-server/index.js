@@ -7,7 +7,7 @@ const dateFormat = require('dateformat');
 const axios = require('axios').default;
 app.use(bodyParser.json());
 const mysql = require('mysql');
-const port = 8080;
+const port = 5000;
 
 const cors = require('cors')
 app.use(cors())
