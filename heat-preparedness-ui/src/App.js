@@ -55,7 +55,20 @@ function MenuDrawer() {
             </AppBar>
             <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
                 <Card variant="outlined">
+                    <CardContent>
+                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
+                            <Link
+                                activeClass="active"
+                                to={"HeatWaves"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
 
+                    </CardContent>
                     <CardContent>
                         <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
                             activeClass="active"
@@ -104,20 +117,7 @@ function MenuDrawer() {
                                     Forecasts
                     </Typography></Link></Button>
                     </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
 
-                    </CardContent>
                 </Card>
                 <Button onClick={toggleDrawer(false)}>
                     Close Menu
@@ -144,7 +144,7 @@ class App extends Component {
 
 
         let preparationData = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice_pre"
+        let dataLink = "https://www.victoria-heat.tk/api/Advice_pre"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -161,7 +161,7 @@ class App extends Component {
 
     async getSuburbList() {
         let suburbs = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbList"
+        let dataLink = "https://www.victoria-heat.tk/api/SuburbList"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -178,7 +178,7 @@ class App extends Component {
 
     async getAdviceData() {
         let advice = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice"
+        let dataLink = "https://www.victoria-heat.tk/api/Advice"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -194,7 +194,7 @@ class App extends Component {
 
     async getWeatherData() {
         let weatherData = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/MelbourneForecast"
+        let dataLink = "https://www.victoria-heat.tk/api/MelbourneForecast"
 
         await axios.get(dataLink)
             .then(function (response) {
