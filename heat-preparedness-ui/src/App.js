@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import Img from './heatback.jpg';
 import MenuIcon from '@material-ui/icons/Menu';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,8 +13,14 @@ import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
 import { Link } from 'react-scroll';
 import Weather from './Weather';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import Sidebar from 'react-sidebar';
+import Drawer from '@material-ui/core/Drawer';
+import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from '@material-ui/core/ListItemText'
 
 const divStyle = {
     width: '100%',
@@ -23,106 +28,159 @@ const divStyle = {
     backgroundImage: `url(${Img})`
 };
 
+const WhiteTextTypography = withStyles({
+    root: {
+        color: "white",
+        fontStyle: 'italic',
+        width: "auto",
+        textAlign: "center"
+    }
+})(Typography);
+
 const axios = require('axios').default;
 
-const mql = window.matchMedia(`(max-width: 800px)`);
+const drawerWidth = 200;
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: "flex"
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1
+    },
+    drawer: {
+        flexShrink: 0,
+        width: drawerWidth
+    },
+    drawerPaper: {
+        width: drawerWidth
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up("md")]: {
+            display: "none"
+        }
+    },
+    toolbar: {
+        ...theme.mixins.toolbar,
+        [theme.breakpoints.down("sm")]: {
+            display: "none"
+        }
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3)
+    }
+}));
 
 function MenuDrawer() {
-    const [state, setState] = React.useState(false);
+    const classes = useStyles();
+    const theme = useTheme();
+    const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
+    const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        setState(open);
+        setOpen(open);
     };
 
 
     return (
         <React.Fragment>
-            <AppBar position="sticky" style={{ "margin": 0 }}>
-                <Toolbar>
-                    {/*<IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-                        <MenuIcon />
-    </IconButton>*/}
-                    <Typography variant="h5" align="left" >
-                        Heat Preparedness
-                            </Typography>
-                </Toolbar>
-            </AppBar>
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar position="fixed" className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={toggleDrawer(true)}
+                            className={classes.menuButton}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap>
+                            Heat Preparedness
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    className={classes.drawer}
+                    variant={isMdUp ? "permanent" : "temporary"}
+                    classes={{
+                        paper: classes.drawerPaper
+                    }}
+                    anchor="left"
+                    open={open}
+                    onClose={toggleDrawer(false)}
+                >
+                    <div className={classes.toolbar} />
+                    <List>
+                        <ListItem button >
+                            <Link
+                                activeClass="active"
+                                to={"HeatWaves"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            >
+                                <ListItemText primary={"HeatWaves"} /></Link>
+                        </ListItem>
 
-            {/*<Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'column'} >
-                <Card variant="outlined">
 
-            {/*<CardContent>*/}
+                        <ListItem button >
+                            <Link
+                                activeClass="active"
+                                to={"Prep"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            >
+                                <ListItemText primary={"Be prepared!"} /></Link>
+                        </ListItem>
 
-            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}><Link
-                activeClass="active"
-                to={"HeatWaves"}
-                spy={true}
-                smooth={true}
-                offset={-60}
-                duration={700}
-                onClick={toggleDrawer(false)}
-                style={{ width: "100%" }}
-            ><Typography variant="h6" align="right">
-                    HeatWaves
-                    </Typography></Link>
-            </Button>
+                        <ListItem button >
+                            <Link
+                                activeClass="active"
+                                to={"Advice"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            >
+                                <ListItemText primary={"On the day"} /></Link>
+                        </ListItem>
 
-            {/*</CardContent>
-                <CardContent>*/}
-            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}>
-                <Link
-                    activeClass="active"
-                    to={"Forecast"}
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={700}
-                    onClick={toggleDrawer(false)}
-                    style={{ width: "100%" }}
-                ><Typography variant="h6" align="right">
-                        Forecast
-                    </Typography></Link></Button>
+                        <ListItem button >
+                            <Link
+                                activeClass="active"
+                                to={"Forecast"}
+                                spy={true}
+                                smooth={true}
+                                offset={-60}
+                                duration={700}
+                                onClick={toggleDrawer(false)}
+                                style={{ width: "100%" }}
+                            >
+                                <ListItemText primary={"Forecast"} /></Link>
+                        </ListItem>
 
-            {/*</CardContent>
-                <CardContent>*/}
-
-            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}>
-                <Link
-                    activeClass="active"
-                    to={"Advice"}
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={700}
-                    onClick={toggleDrawer(false)}
-                    style={{ width: "100%" }}
-                ><Typography variant="h6" align="right">
-                        On the day
-                    </Typography></Link></Button>
-            {/*</CardContent>
-                <CardContent>*/}
-            <Button href="#text-buttons" size="small" style={{ textTransform: "none", paddingRight: "20px", marginTop: 0, float: "right" }}>
-                <Link
-                    activeClass="active"
-                    to={"Prep"}
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={700}
-                    onClick={toggleDrawer(false)}
-                    style={{ width: "100%" }}
-                ><Typography variant="h6" align="right">Be Prepared!</Typography></Link></Button>
-
-            {/*</CardContent>
-            </Card>*/}
-            {/*<Button onClick={toggleDrawer(false)}>
-                    Close Menu
-                </Button>
-            </Drawer>*/}
+                    </List>
+                </Drawer>
+            </div>
         </React.Fragment >
     );
 }
@@ -134,33 +192,12 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sidebarDocked: mql.matches,
-            sidebarOpen: false,
             suburbList: [],
             preparationsList: [],
             adviceList: [],
             weatherForecast: []
         };
-        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
-
-    componentWillMount() {
-        mql.addListener(this.mediaQueryChanged);
-    }
-
-    componentWillUnmount() {
-        mql.removeListener(this.mediaQueryChanged);
-    }
-
-    onSetSidebarOpen(open) {
-        this.setState({ sidebarOpen: open });
-    }
-
-    mediaQueryChanged() {
-        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-    }
-
 
     async getPreparationData() {
 
@@ -245,18 +282,15 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <CssBaseline />
-
-                <Sidebar
-                    sidebar={<b>menu</b>}
-                    open={this.state.sidebarOpen}
-                    docked={this.state.sidebarDocked}
-                    onSetOpen={this.onSetSidebarOpen}
-                ><MenuDrawer /> </Sidebar>
+                <MenuDrawer />
                 <div style={divStyle}>
                     <center>
                         <img src={Img} alt="pic" style={divStyle} />
 
                     </center>
+                    <WhiteTextTypography variant="h4">
+                        Stay ready Stay safe
+                            </WhiteTextTypography>
                 </div>
                 <Grid container spacing={3} justify="center" wrap='wrap'>
                     <Grid item sm={12} lg={8}>
