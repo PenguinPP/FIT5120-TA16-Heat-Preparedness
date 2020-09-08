@@ -20,7 +20,10 @@ import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from '@material-ui/core/ListItemText'
+import ListItemText from '@material-ui/core/ListItemText';
+import PropTypes from "prop-types";
+import AppBarCollapse from "./AppBarClose";
+import myIcon from './favicon.ico';
 
 const divStyle = {
     width: '100%',
@@ -39,7 +42,20 @@ const WhiteTextTypography = withStyles({
 
 const axios = require('axios').default;
 
-const drawerWidth = 200;
+const styles = {
+    root: {
+        flexGrow: 1
+    },
+    grow: {
+        flexGrow: 1
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20
+    }
+};
+
+{/*const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -72,11 +88,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3)
     }
-}));
+}));*/}
 
-function MenuDrawer() {
-    const classes = useStyles();
-    const theme = useTheme();
+function MenuDrawer(props) {
+    {/*const theme = useTheme();
     const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
     const [open, setOpen] = React.useState(false);
@@ -86,30 +101,17 @@ function MenuDrawer() {
             return;
         }
         setOpen(open);
-    };
+    };*/}
 
 
     return (
         <React.Fragment>
-            <div className={classes.root}>
-                <CssBaseline />
-                <AppBar position="fixed" className={classes.appBar}>
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={toggleDrawer(true)}
-                            className={classes.menuButton}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" noWrap>
-                            Heat Preparedness
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
+            <AppBar position="fixed" >
+                <Toolbar>
+                    <AppBarCollapse /><img src={myIcon} />
+                </Toolbar>
+            </AppBar>
+            {/*<Drawer
                     className={classes.drawer}
                     variant={isMdUp ? "permanent" : "temporary"}
                     classes={{
@@ -179,12 +181,14 @@ function MenuDrawer() {
                         </ListItem>
 
                     </List>
-                </Drawer>
-            </div>
+                </Drawer>*/}
         </React.Fragment >
     );
 }
 
+MenuDrawer.propTypes = {
+    classes: PropTypes.object.isRequired
+};
 
 
 class App extends React.Component {
