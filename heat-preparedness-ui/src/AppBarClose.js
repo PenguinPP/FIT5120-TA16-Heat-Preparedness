@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, MenuItem } from "@material-ui/core";
+import { Button, ListItem, Divider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonAppBarCollapse from "./ButtonAppBarClose";
 import { Link } from 'react-scroll';
 import ListItemText from '@material-ui/core/ListItemText';
+
 
 const styles = theme => ({
     root: {
@@ -23,10 +24,12 @@ const styles = theme => ({
     }
 });
 
+
+
 const AppBarClose = props => (
     <div className={props.classes.root}>
         <ButtonAppBarCollapse>
-            <MenuItem>
+            <ListItem>
                 <Link
                     activeClass="active"
                     to={"HeatWaves"}
@@ -36,9 +39,9 @@ const AppBarClose = props => (
                     duration={700}
                     style={{ width: "100%" }}
                 ><ListItemText primary={"HeatWaves"} /></Link>
-            </MenuItem>
-
-            <MenuItem>
+            </ListItem>
+            <Divider light />
+            <ListItem>
                 <Link
                     activeClass="active"
                     to={"Prep"}
@@ -49,9 +52,9 @@ const AppBarClose = props => (
                     style={{ width: "100%" }}
                 >
                     <ListItemText primary={"Be prepared!"} /></Link>
-            </MenuItem>
-
-            <MenuItem>
+            </ListItem>
+            <Divider light />
+            <ListItem>
                 <Link
                     activeClass="active"
                     to={"Advice"}
@@ -62,9 +65,9 @@ const AppBarClose = props => (
                     style={{ width: "100%" }}
                 >
                     <ListItemText primary={"On the day"} /></Link>
-            </MenuItem>
-
-            <MenuItem>
+            </ListItem>
+            <Divider light />
+            <ListItem>
                 <Link
                     activeClass="active"
                     to={"Forecast"}
@@ -75,7 +78,7 @@ const AppBarClose = props => (
                     style={{ width: "100%" }}
                 >
                     <ListItemText primary={"Forecast"} /></Link>
-            </MenuItem>
+            </ListItem>
         </ButtonAppBarCollapse>
         <div className={props.classes.buttonBar} id="appbar-collapse">
             <Button color="inherit">

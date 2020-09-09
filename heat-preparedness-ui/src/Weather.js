@@ -21,7 +21,7 @@ export default function Weather(weatherInformation) {
     console.log(currentSuburb)
 
     React.useEffect(() => {
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbForecast/" + suburbId
+        let dataLink = "https://www.victoria-heat.tk/api/SuburbForecast/" + suburbId
 
         axios.get(dataLink)
             .then(results => results.data)

@@ -4,23 +4,13 @@ import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import Img from './heatback.jpg';
-import MenuIcon from '@material-ui/icons/Menu';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
-import { Link } from 'react-scroll';
 import Weather from './Weather';
-import Drawer from '@material-ui/core/Drawer';
-import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import AppBarCollapse from "./AppBarClose";
 import myIcon from './favicon.ico';
@@ -42,146 +32,16 @@ const WhiteTextTypography = withStyles({
 
 const axios = require('axios').default;
 
-const styles = {
-    root: {
-        flexGrow: 1
-    },
-    grow: {
-        flexGrow: 1
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20
-    }
-};
-
-{/*const drawerWidth = 200;
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: "flex"
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1
-    },
-    drawer: {
-        flexShrink: 0,
-        width: drawerWidth
-    },
-    drawerPaper: {
-        width: drawerWidth
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up("md")]: {
-            display: "none"
-        }
-    },
-    toolbar: {
-        ...theme.mixins.toolbar,
-        [theme.breakpoints.down("sm")]: {
-            display: "none"
-        }
-    },
-    content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3)
-    }
-}));*/}
 
 function MenuDrawer(props) {
-    {/*const theme = useTheme();
-    const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
-
-    const [open, setOpen] = React.useState(false);
-
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setOpen(open);
-    };*/}
-
 
     return (
         <React.Fragment>
             <AppBar position="fixed" >
                 <Toolbar>
-                    <AppBarCollapse /><img src={myIcon} />
+                    <AppBarCollapse /><img src={myIcon} alt="pic" onClick={event => window.location.href = '/'} />
                 </Toolbar>
             </AppBar>
-            {/*<Drawer
-                    className={classes.drawer}
-                    variant={isMdUp ? "permanent" : "temporary"}
-                    classes={{
-                        paper: classes.drawerPaper
-                    }}
-                    anchor="left"
-                    open={open}
-                    onClose={toggleDrawer(false)}
-                >
-                    <div className={classes.toolbar} />
-                    <List>
-                        <ListItem button >
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            >
-                                <ListItemText primary={"HeatWaves"} /></Link>
-                        </ListItem>
-
-
-                        <ListItem button >
-                            <Link
-                                activeClass="active"
-                                to={"Prep"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            >
-                                <ListItemText primary={"Be prepared!"} /></Link>
-                        </ListItem>
-
-                        <ListItem button >
-                            <Link
-                                activeClass="active"
-                                to={"Advice"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            >
-                                <ListItemText primary={"On the day"} /></Link>
-                        </ListItem>
-
-                        <ListItem button >
-                            <Link
-                                activeClass="active"
-                                to={"Forecast"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            >
-                                <ListItemText primary={"Forecast"} /></Link>
-                        </ListItem>
-
-                    </List>
-                </Drawer>*/}
         </React.Fragment >
     );
 }
@@ -207,7 +67,7 @@ class App extends React.Component {
 
 
         let preparationData = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice_pre"
+        let dataLink = "https://www.victoria-heat.tk/api/Advice_pre"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -224,7 +84,7 @@ class App extends React.Component {
 
     async getSuburbList() {
         let suburbs = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/SuburbList"
+        let dataLink = "https://www.victoria-heat.tk/api/SuburbList"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -241,7 +101,7 @@ class App extends React.Component {
 
     async getAdviceData() {
         let advice = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/Advice"
+        let dataLink = "https://www.victoria-heat.tk/api/Advice"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -257,7 +117,7 @@ class App extends React.Component {
 
     async getWeatherData() {
         let weatherData = []
-        let dataLink = "http://ec2-52-65-67-96.ap-southeast-2.compute.amazonaws.com:8080/api/MelbourneForecast"
+        let dataLink = "https://www.victoria-heat.tk/MelbourneForecast"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -277,7 +137,6 @@ class App extends React.Component {
         this.getAdviceData()
         this.getWeatherData()
     }
-
 
 
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Menu } from "@material-ui/core";
+import { Drawer } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import HomeIcon from "@material-ui/icons/Home";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = theme => ({
     buttonCollapse: {
@@ -13,6 +13,7 @@ const styles = theme => ({
         boxShadow: "none"
     }
 });
+
 
 class ButtonAppBarClose extends React.Component {
     constructor(props) {
@@ -28,6 +29,8 @@ class ButtonAppBarClose extends React.Component {
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
+
+
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
@@ -36,11 +39,11 @@ class ButtonAppBarClose extends React.Component {
         return (
             <div className={classes.buttonCollapse}>
                 <IconButton onClick={this.handleMenu}>
-                    <HomeIcon />
+                    <MenuIcon />
                 </IconButton>
-                <Menu
+                <Drawer
                     id="menu-appbar"
-                    anchorEl={anchorEl}
+                    anchor={"right"}
                     anchorOrigin={{
                         vertical: "top",
                         horizontal: "right"
@@ -53,7 +56,7 @@ class ButtonAppBarClose extends React.Component {
                     onClose={this.handleClose}
                 >
                     {this.props.children}
-                </Menu>
+                </Drawer>
             </div>
         );
     }
