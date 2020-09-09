@@ -17,6 +17,8 @@ const theme = createMuiTheme({
         },
     }, typography: {
         fontSize: 19
+    }, palette: {
+        white: "#FFFFFF"
     }
 })
 

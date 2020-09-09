@@ -16,11 +16,62 @@ import HeatWaves from './HeatWaves';
 import { Link } from 'react-scroll';
 import Weather from './Weather'
 import SvgIcon from '@material-ui/core/SvgIcon';
-
+import { makeStyles } from '@material-ui/core/styles';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 const axios = require('axios').default;
 
+const ScrollHandler = props => {
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+        target: props.window ? window() : undefined
+    });
+
+    return React.cloneElement(props.children, {
+        style: {
+            backgroundColor: trigger ? "#3f51b5" : "#594241",
+            color: "white",
+            transition: trigger ? "0.3s" : "0.5s",
+            boxShadow: "none",
+            padding: "10px 0px"
+        }
+    });
+};
+
+const ScrollToColor01 = props => {
+    return <ScrollHandler {...props}>{props.children}</ScrollHandler>;
+};
+
+
+const useStyles = makeStyles((theme) => ({
+    grow: {
+        flexGrow: 1
+    },
+    desktopBar: {
+        display: "none",
+        [theme.breakpoints.up("md")]: {
+            display: "flex"
+        }
+    },
+    mobileBar: {
+        display: "flex",
+        [theme.breakpoints.up("md")]: {
+            display: "none"
+        }
+    }, buttonText: {
+        color: "white",
+        textTransform: "none",
+        marginRight: "0.5rem",
+        marginLeft: "0.5rem",
+        fontSize: "1.5rem"
+    }
+}))
+
 function MenuDrawer() {
+
+    const classes = useStyles()
     const [state, setState] = React.useState(false);
 
     const toggleDrawer = (open) => (event) => {
@@ -32,28 +83,94 @@ function MenuDrawer() {
 
     const divStyle = {
         width: '100%',
-        height: 'auto/8'
+        height: 'auto/8',
+        filter: "brightness(0.9)"
     };
 
     return (
         <React.Fragment>
-            {/* <div style={divStyle}>
+
+            <ScrollToColor01>
+                <AppBar position="sticky" style={{ "margin": 0 }}>
+                    <Toolbar>
+
+                        <Typography variant="h5" align="center" noWrap>
+                            Heat Preparedness
+                    </Typography>
+                        <div className={classes.grow} />
+                        <div className={classes.mobileBar}>
+                            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                                <MenuIcon />
+                            </IconButton>
+                        </div>
+                        <div className={classes.desktopBar}>
+                            <Button size="small" >
+                                <Link
+                                    activeClass="active"
+                                    to={"HeatWaves"}
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-60}
+                                    duration={700}
+                                >
+                                    <Typography variant="h6" className={classes.buttonText}>
+                                        Heat Waves
+                         </Typography>
+                                </Link>
+                            </Button>
+                            <Button size="small" >
+                                <Link
+                                    activeClass="active"
+                                    to={"Prep"}
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-60}
+                                    duration={700}
+                                >
+                                    <Typography variant="h6" className={classes.buttonText}>
+                                        Be Prepared!
+                         </Typography>
+                                </Link>
+                            </Button>
+                            <Button size="small" >
+                                <Link
+                                    activeClass="active"
+                                    to={"Advice"}
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-60}
+                                    duration={700}
+                                >
+                                    <Typography variant="h6" className={classes.buttonText}>
+                                        On the Day
+                         </Typography>
+                                </Link>
+                            </Button>
+                            <Button size="small" >
+                                <Link
+                                    activeClass="active"
+                                    to={"Forecast"}
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-60}
+                                    duration={700}
+                                >
+                                    <Typography variant="h6" className={classes.buttonText}>
+                                        Forecasts
+                         </Typography>
+                                </Link>
+                            </Button>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </ScrollToColor01>
+            <div style={divStyle}>
                 <center>
                     <img src={Img} alt="pic" style={divStyle} />
-                    
+
                 </center>
-            </div> */}
-            <AppBar position="sticky" style={{ "margin": 0 }}>
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h5" align="center" >
-                        Heat Preparedness
-                            </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
+            </div>
+            <Drawer anchor={'right'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
                 <Card variant="outlined">
                     <CardContent>
                         <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
@@ -221,28 +338,28 @@ class App extends Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item sm={12} lg={8}>
+                    <Grid item sm={12} lg={12}>
                         <Card variant="outlined">
                             <CardContent id="HeatWaves">
                                 <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
+                    <Grid item sm={12} lg={12}>
                         <Card variant="outlined">
                             <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
+                    <Grid item sm={12} lg={12}>
                         <Card variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
+                    <Grid item sm={12} lg={12}>
                         <Card variant="outlined">
                             <CardContent id="Forecast" >
                                 <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />

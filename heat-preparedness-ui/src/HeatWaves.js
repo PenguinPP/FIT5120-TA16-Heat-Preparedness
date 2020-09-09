@@ -23,13 +23,13 @@ export default function HeatWaves() {
             <Typography variant="h4">
                 Heat Waves
         </Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} >
                 <Grid item xs={12} md={6}>
 
                     <Typography>
                         Heat waves are Australia's deadliest natural hazard. From 1900 until 2011, extreme heat has been responsible for more deaths in Australia than all other natural hazards combined.
             </Typography>
-                    <VictoryChart domainPadding={20} theme={VictoryTheme.material}
+                    <VictoryChart domainPadding={20} theme={VictoryTheme.material} height={300}
                     >
                         <VictoryAxis
                             tickValues={[1, 2, 3, 4]}
@@ -56,6 +56,7 @@ export default function HeatWaves() {
                     </Typography>
 
                     <VictoryPie
+                        height={300}
                         startAngle={180}
                         endAngle={540}
                         data={deathData}
