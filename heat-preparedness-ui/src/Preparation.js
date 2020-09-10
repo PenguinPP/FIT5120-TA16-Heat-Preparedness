@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import { List, ListItem, makeStyles } from '@material-ui/core';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -68,7 +67,7 @@ export default function Preparation(preparationData) {
                 <Grid item xs={12} lg={4}>
                     <Button
                         id="Heat Short Term"
-                        className={category == "Heat Short Term" && classes.active}//Set style to active style if current category
+                        className={category === "Heat Short Term" && classes.active}//Set style to active style if current category
                         fullWidth={true}
                         onClick={() => setCategory("Heat Short Term")}
                         variant="contained">
@@ -79,7 +78,7 @@ export default function Preparation(preparationData) {
                 <Grid item xs={12} lg={4}>
                     <Button
                         id="Heat Long Term"
-                        className={category == "Heat Long Term" && classes.active}
+                        className={category === "Heat Long Term" && classes.active}
                         fullWidth={true}
                         onClick={() => setCategory("Heat Long Term")}
                         variant="contained" ><LongTermIcon
@@ -90,7 +89,7 @@ export default function Preparation(preparationData) {
                 <Grid item xs={12} lg={4}>
                     <Button
                         id="Power Failure"
-                        className={category == "Power Failure" && classes.active}
+                        className={category === "Power Failure" && classes.active}
                         fullWidth={true} onClick={() => setCategory("Power Failure")}
                         variant="contained">
                         <PowerFailureIcon

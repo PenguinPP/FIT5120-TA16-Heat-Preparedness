@@ -4,13 +4,11 @@ import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Img from './heatback.jpg';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
 import Weather from './Weather';
-import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import AppBarCollapse from "./AppBarClose";
 import myIcon from './favicon.ico';

@@ -2,8 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid'
 import landingBg from './heatback-7.jpg';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-scroll';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({

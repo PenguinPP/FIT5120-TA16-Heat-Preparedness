@@ -37,10 +37,6 @@ export default function Weather(weatherInformation) {
             })
     }, [suburbId])
 
-    const inputProps = {
-        color: "primary"
-    }
-
 
     //if (suburbList.includes(suburb)) {
     return (
@@ -65,7 +61,7 @@ export default function Weather(weatherInformation) {
                 options={suburbData}
                 getOptionLabel={(option) => option.suburb + ", " + option.postcode}
                 fullWidth={true}
-                onChange={(event, newValue) => { newValue != undefined && setSuburbId(newValue.suburb_id) }}
+                onChange={(event, newValue) => { newValue !== undefined && setSuburbId(newValue.suburb_id) }}
                 renderInput={(params) => <TextField {...params} label="Filter by name or postcode" InputLabelProps={{ style: { color: "black" } }} variant="outlined" />}
             />
 
@@ -77,7 +73,7 @@ export default function Weather(weatherInformation) {
 
                 </TextField>*/}
             <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-                Weather in {currentSuburb != undefined && currentSuburb.suburb + " (" + currentSuburb.postcode + ")"} for the next week
+                Weather in {currentSuburb !== undefined && currentSuburb.suburb + " (" + currentSuburb.postcode + ")"} for the next week
                 </Typography>
             <br />
             <Typography variant="h6">
@@ -86,7 +82,7 @@ export default function Weather(weatherInformation) {
             <List>
                 {weatherData.map(item =>
                     <ListItem key={item.date}>
-                        {item.date ? item.date.toString().replace(/\T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
+                        {item.date ? item.date.toString().replace(/T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
                         </ListItem>
                 )}
             </List>
