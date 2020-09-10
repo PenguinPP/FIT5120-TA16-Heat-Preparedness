@@ -14,6 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import AppBarCollapse from "./AppBarClose";
 import myIcon from './favicon.ico';
+import LandingPage from './LandingPage';
 
 const axios = require('axios').default;
 
@@ -133,6 +134,9 @@ class App extends React.Component {
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={2} justify="center" wrap='wrap'>
+                    <Grid item xs={12}>
+                        <LandingPage />
+                    </Grid>
                     <Grid item sm={12} lg={12} >
                         <Card variant="outlined" id="HeatWaves">
                             <CardContent >

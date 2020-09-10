@@ -70,7 +70,7 @@ export default function HeatWaves() {
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Typography>
-                        Watch the video by Better Health Victoria below to get to know some key points regarding the danger of heat waves.
+                        Watch the video by Better Health Victoria below to learn some key points regarding the danger of heat waves.
                     </Typography>
                     <br />
                     <br />

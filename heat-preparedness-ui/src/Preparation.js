@@ -118,8 +118,8 @@ export default function Preparation(preparationData) {
 
                 </Grid>
 
-                <Grid item xs={12} justify="center">
-                    <Button variant="contained" fullWidth={true} color="primary">
+                <Grid item xs={12} justify="center" >
+                    <Button variant="contained" fullWidth={true} color="primary" >
                         <Link
                             activeClass="active"
                             to={"Advice"}
