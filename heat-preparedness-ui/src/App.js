@@ -1,286 +1,43 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import landingBg from './heatback-3.jpg';
-import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
+import Img from './heatback.jpg';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
-import { Link } from 'react-scroll';
-import Weather from './Weather'
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles } from '@material-ui/core/styles';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Weather from './Weather';
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import AppBarCollapse from "./AppBarClose";
+import myIcon from './favicon.ico';
 
 const axios = require('axios').default;
 
-const ScrollHandler = props => {
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0,
-        target: props.window ? window() : undefined
-    });
-
-    return React.cloneElement(props.children, {
-        style: {
-            backgroundColor: trigger ? "#3f51b5" : "#594241",
-            color: "white",
-            transition: trigger ? "0.3s" : "0.5s",
-            boxShadow: "none",
-            padding: "10px 0px"
-        }
-    });
-};
-
-const ScrollToColor01 = props => {
-    return <ScrollHandler {...props}>{props.children}</ScrollHandler>;
-};
 
 
-const useStyles = makeStyles((theme) => ({
-    grow: {
-        flexGrow: 1
-    },
-    desktopBar: {
-        display: "none",
-        [theme.breakpoints.up("md")]: {
-            display: "flex"
-        }
-    },
-    mobileBar: {
-        display: "flex",
-        [theme.breakpoints.up("md")]: {
-            display: "none"
-        }
-    }, buttonText: {
-        color: "white",
-        textTransform: "none",
-        marginRight: "0.5rem",
-        marginLeft: "0.5rem",
-        fontSize: "1.5rem"
-    }, landingBg: {
-        width: '100%',
-        maxHeight: '100%',
-        minHeight: "600px"
-    }, landingText: {
-        color: "white"
-    }
-}))
-
-function MenuDrawer() {
-
-
-    const bgPath = './heatback.jpg'
-
-    const classes = useStyles()
-    const [state, setState] = React.useState(false);
-
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setState(open);
-    };
+function MenuDrawer(props) {
 
     return (
         <React.Fragment>
-
-            <ScrollToColor01>
-                <AppBar position="sticky" style={{ "margin": 0 }}>
-                    <Toolbar>
-
-                        <Typography variant="h5" align="center" noWrap>
-                            Heat Preparedness
-                    </Typography>
-                        <div className={classes.grow} />
-                        <div className={classes.mobileBar}>
-                            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-                                <MenuIcon />
-                            </IconButton>
-                        </div>
-                        <div className={classes.desktopBar}>
-                            <Button size="small" >
-                                <Link
-                                    activeClass="active"
-                                    to={"HeatWaves"}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-80}
-                                    duration={700}
-                                >
-                                    <Typography variant="h6" className={classes.buttonText}>
-                                        Heat Waves
-                         </Typography>
-                                </Link>
-                            </Button>
-                            <Button size="small" >
-                                <Link
-                                    activeClass="active"
-                                    to={"Prep"}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-80}
-                                    duration={700}
-                                >
-                                    <Typography variant="h6" className={classes.buttonText}>
-                                        Be Prepared!
-                         </Typography>
-                                </Link>
-                            </Button>
-                            <Button size="small" >
-                                <Link
-                                    activeClass="active"
-                                    to={"Advice"}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-80}
-                                    duration={700}
-                                >
-                                    <Typography variant="h6" className={classes.buttonText}>
-                                        On the Day
-                         </Typography>
-                                </Link>
-                            </Button>
-                            <Button size="small" >
-                                <Link
-                                    activeClass="active"
-                                    to={"Forecast"}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-80}
-                                    duration={700}
-                                >
-                                    <Typography variant="h6" className={classes.buttonText}>
-                                        Forecasts
-                         </Typography>
-                                </Link>
-                            </Button>
-                        </div>
-                    </Toolbar>
-                </AppBar>
-            </ScrollToColor01>
-            <Grid container
-                direction="column"
-                justify="center"
-                alignItems="center"
-                className={classes.landingBg}
-                style={{ backgroundImage: `url("${landingBg}")` }}>
-
-                <div className={classes.grow} />
-                <Grid item>
-                    <Typography variant="h2" className={classes.landingText} align="center">
-                        Victoria Heat
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <Typography variant="subtitle1" className={classes.landingText} align="center">
-                        Stay Ready, Stay Safe!
-                        </Typography>
-                </Grid>
-
-                <div className={classes.grow} />
-                <Grid item style={{ marginBottom: "1rem" }}>
-                    <Button size="small" variant="contained" color="primary">
-                        <Link
-                            activeClass="active"
-                            to={"HeatWaves"}
-                            spy={true}
-                            smooth={true}
-                            offset={-80}
-                            duration={700}
-                        >
-                            <Typography variant="h4" className={classes.buttonText}>
-                                Know the dangers!
-                         </Typography>
-                        </Link>
-                    </Button>
-                </Grid>
-
-            </Grid>
-            <Drawer anchor={'right'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
-                <Card variant="outlined">
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
-
-                    </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
-                            activeClass="active"
-                            to={"Prep"}
-                            spy={true}
-                            smooth={true}
-                            offset={-60}
-                            duration={700}
-                            onClick={toggleDrawer(false)}
-                            style={{ width: "100%" }}
-                        ><Typography variant="h4" align="left">
-                                Be Prepared!
-                    </Typography></Link>
-                        </Button>
-
-                    </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"Advice"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography variant="h4" align="left">
-                                    On the day
-                    </Typography></Link></Button>
-
-                    </CardContent>
-                    <CardContent>
-
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"Forecast"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography variant="h4" align="left">
-                                    Forecasts
-                    </Typography></Link></Button>
-                    </CardContent>
-
-                </Card>
-                <Button onClick={toggleDrawer(false)}>
-                    Close Menu
-                </Button>
-            </Drawer>
+            <AppBar position="fixed" >
+                <Toolbar>
+                    <AppBarCollapse /><img src={myIcon} alt="pic" onClick={event => window.location.href = '/'} />
+                </Toolbar>
+            </AppBar>
         </React.Fragment >
     );
 }
 
+MenuDrawer.propTypes = {
+    classes: PropTypes.object.isRequired
+};
 
-class App extends Component {
+
+class App extends React.Component {
 
     constructor(props) {
         super(props);
@@ -289,7 +46,7 @@ class App extends Component {
             preparationsList: [],
             adviceList: [],
             weatherForecast: []
-        }
+        };
     }
 
     async getPreparationData() {
@@ -367,13 +124,16 @@ class App extends Component {
         this.getWeatherData()
     }
 
+
+
     render() {
+
         return (
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
                 <Grid container spacing={2} justify="center" wrap='wrap'>
-                    <Grid item sm={12} lg={12}>
+                    <Grid item sm={12} lg={12} >
                         <Card variant="outlined" id="HeatWaves">
                             <CardContent >
                                 <HeatWaves />
@@ -381,8 +141,8 @@ class App extends Component {
                         </Card>
                     </Grid>
 
-                    <Grid item sm={12} lg={12}>
-                        <Card variant="outlined">
+                    <Grid item sm={12} lg={12} >
+                        <Card variant="outlined" >
                             <CardContent id="Alerts" >
                                 <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
