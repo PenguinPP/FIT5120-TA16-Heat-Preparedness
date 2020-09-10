@@ -27,7 +27,7 @@ export default function HeatWaves() {
                 Heat Waves
         </Typography>
             <Grid container spacing={2} >
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6} lg={4}>
 
                     <Typography>
                         Heat waves are Australia's deadliest natural hazard. From 1900 until 2011, extreme heat has been responsible for more deaths in Australia than all other natural hazards combined.
@@ -53,7 +53,7 @@ export default function HeatWaves() {
                     </VictoryChart>
 
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6} lg={4}>
                     <Typography>
                         Victoria recorded a combined total of 541 deaths during the heatwaves in 2009 and 2014. 80% percent of these individuals were aged 65 and over.
                     </Typography>
@@ -68,7 +68,7 @@ export default function HeatWaves() {
                         colorScale={["#ff9800", "#7986cb"]}
                     />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={12} lg={4}>
                     <Typography>
                         Watch the video by Better Health Victoria below to learn some key points regarding the danger of heat waves.
                     </Typography>
@@ -88,20 +88,21 @@ export default function HeatWaves() {
                 </Grid>
 
                 <Grid item xs={12} justify="center">
-                    <Button variant="contained" fullWidth={true} color="primary">
-                        <Link
-                            activeClass="active"
-                            to={"Alerts"}
-                            spy={true}
-                            smooth={true}
-                            offset={-80}
-                            duration={700}
-                        >
+                    <Link
+                        activeClass="active"
+                        to={"Alerts"}
+                        spy={true}
+                        smooth={true}
+                        offset={-80}
+                        duration={700}
+                    >
+                        <Button variant="contained" fullWidth={true} color="primary">
                             <Typography variant="h6" >
-                                Check out our forecasts and alerts!
+                                Stay Alert!
                          </Typography>
-                        </Link>
-                    </Button>
+                        </Button>
+
+                    </Link>
                 </Grid>
 
             </Grid>

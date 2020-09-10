@@ -64,7 +64,7 @@ export default function Preparation(preparationData) {
                 Be Prepared!
                  </Typography>
             <Grid container>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Heat Short Term"
                         className={category === "Heat Short Term" && classes.active}//Set style to active style if current category
@@ -75,7 +75,7 @@ export default function Preparation(preparationData) {
                         Short Term
                         </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Heat Long Term"
                         className={category === "Heat Long Term" && classes.active}
@@ -86,7 +86,7 @@ export default function Preparation(preparationData) {
                     Long Term
                     </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Power Failure"
                         className={category === "Power Failure" && classes.active}
@@ -118,20 +118,21 @@ export default function Preparation(preparationData) {
                 </Grid>
 
                 <Grid item xs={12} justify="center" >
-                    <Button variant="contained" fullWidth={true} color="primary" >
-                        <Link
-                            activeClass="active"
-                            to={"Advice"}
-                            spy={true}
-                            smooth={true}
-                            offset={-80}
-                            duration={700}
-                        >
+                    <Link
+                        activeClass="active"
+                        to={"Advice"}
+                        spy={true}
+                        smooth={true}
+                        offset={-80}
+                        duration={700}
+                    > <Button variant="contained" fullWidth={true} color="primary" >
+
                             <Typography variant="h6" >
-                                Know what to do on the day!
+                                Take Precautions!
                          </Typography>
-                        </Link>
-                    </Button>
+                        </Button>
+
+                    </Link>
                 </Grid>
 
             </Grid>

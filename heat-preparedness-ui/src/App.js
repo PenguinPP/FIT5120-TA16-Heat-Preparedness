@@ -131,12 +131,12 @@ class App extends React.Component {
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
-                <Grid container spacing={2} justify="center" wrap='wrap'>
+                <Grid container spacing={2} justify="center" wrap='wrap' >
                     <Grid item xs={12}>
                         <LandingPage />
                     </Grid>
                     <Grid item sm={12} lg={12} >
-                        <Card variant="outlined" id="HeatWaves">
+                        <Card raised={true} variant="outlined" id="HeatWaves">
                             <CardContent >
                                 <HeatWaves />
                             </CardContent>
@@ -144,21 +144,21 @@ class App extends React.Component {
                     </Grid>
 
                     <Grid item sm={12} lg={12} >
-                        <Card variant="outlined" >
+                        <Card raised={true} variant="outlined" >
                             <CardContent id="Alerts" >
                                 <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
                     </Grid>
                     <Grid item sm={12} lg={12}>
-                        <Card variant="outlined">
+                        <Card raised={true} variant="outlined">
                             <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
                     <Grid item sm={12} lg={12}>
-                        <Card variant="outlined">
+                        <Card raised={true} variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
                             </CardContent>

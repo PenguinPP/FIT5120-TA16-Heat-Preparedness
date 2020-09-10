@@ -86,20 +86,22 @@ export default function Weather(weatherInformation) {
                         </ListItem>
                 )}
             </List>
-            <Button variant="contained" fullWidth={true} color="primary">
-                <Link
-                    activeClass="active"
-                    to={"Prep"}
-                    spy={true}
-                    smooth={true}
-                    offset={-80}
-                    duration={700}
-                >
+            <Link
+                activeClass="active"
+                to={"Prep"}
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={700}
+            >
+                <Button variant="contained" fullWidth={true} color="primary">
+
                     <Typography variant="h6" >
                         Be Prepared!
                          </Typography>
-                </Link>
-            </Button>
+                </Button>
+
+            </Link>
         </React.Fragment>
     )
 }

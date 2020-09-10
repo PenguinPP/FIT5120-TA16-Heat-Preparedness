@@ -62,7 +62,7 @@ export default function Advice(adviceData) {
                 On the Day
                  </Typography>
             <Grid container>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="General"
                         className={category === "General" && classes.active} //Set style to active style if current category
@@ -73,7 +73,7 @@ export default function Advice(adviceData) {
                         General
                         </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Keeping Cool"
                         className={category === "Keeping Cool" && classes.active}
@@ -85,7 +85,7 @@ export default function Advice(adviceData) {
                         Keep Cool
                     </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Physical Activity"
                         className={category === "Physical Activity" && classes.active}
