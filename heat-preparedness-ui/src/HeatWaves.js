@@ -2,6 +2,9 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryPie } from 'victory';
 import Grid from '@material-ui/core/Grid';
+import ReactPlayer from "react-player";
+import { Link } from 'react-scroll';
+import Button from '@material-ui/core/Button';
 
 export default function HeatWaves() {
 
@@ -24,12 +27,12 @@ export default function HeatWaves() {
                 Heat Waves
         </Typography>
             <Grid container spacing={2} >
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={4}>
 
                     <Typography>
                         Heat waves are Australia's deadliest natural hazard. From 1900 until 2011, extreme heat has been responsible for more deaths in Australia than all other natural hazards combined.
             </Typography>
-                    <VictoryChart domainPadding={20} theme={VictoryTheme.material} height={300}
+                    <VictoryChart domainPadding={20} theme={VictoryTheme.material} height={250}
                     >
                         <VictoryAxis
                             tickValues={[1, 2, 3, 4]}
@@ -50,7 +53,7 @@ export default function HeatWaves() {
                     </VictoryChart>
 
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={4}>
                     <Typography>
                         Victoria recorded a combined total of 541 deaths during the heatwaves in 2009 and 2014. 80% percent of these individuals were aged 65 and over.
                     </Typography>
@@ -65,13 +68,42 @@ export default function HeatWaves() {
                         colorScale={["#ff9800", "#7986cb"]}
                     />
                 </Grid>
+                <Grid item xs={12} md={4}>
+                    <Typography>
+                        Watch the video by Better Health Victoria below to get to know some key points regarding the danger of heat waves.
+                    </Typography>
+                    <br />
+                    <br />
+
+                    <ReactPlayer width="100%" height="350px" style={{ marginTop: "1.2rem" }} alt={"Extreme heat - English"} url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"} controls={true} config={{ youtube: { playerVars: { showinfo: 1 } } }} />
+                    <small className="mediaText">{"Extreme heat - English"}</small>
+                </Grid>
 
                 <Grid item xs={12}>
                     <Typography>
                         Heat waves exacerbate pre-existing medical conditions and are therefore also a significant cause for concern to those with chronic medical issues.
                         A heat wave is said to occur when unusually high maximum and minimum temperatures are observed for three or more days.
                     </Typography>
+
                 </Grid>
+
+                <Grid item xs={12} justify="center">
+                    <Button variant="contained" fullWidth={true} color="primary">
+                        <Link
+                            activeClass="active"
+                            to={"Alerts"}
+                            spy={true}
+                            smooth={true}
+                            offset={-80}
+                            duration={700}
+                        >
+                            <Typography variant="h6" >
+                                Check out our forecasts and alerts!
+                         </Typography>
+                        </Link>
+                    </Button>
+                </Grid>
+
             </Grid>
         </React.Fragment >
     )

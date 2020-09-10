@@ -4,6 +4,8 @@ import { List, ListItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import WarningIcon from '@material-ui/icons/Warning';
+import { Link } from 'react-scroll';
+import Button from '@material-ui/core/Button';
 
 const axios = require('axios').default;
 
@@ -50,10 +52,11 @@ export default function Weather(weatherInformation) {
 
         <React.Fragment>
             <Typography variant="h4" >
-                Forecast
+
+                Weather Forecasts {"&"} Alerts
                 </Typography>
 
-            <Typography variant="h6" style={{ marginBottom: "1rem" }}>
+            <Typography variant="h6" style={{ marginBottom: "1rem", marginTop: "1rem" }}>
                 Select your suburb
                 </Typography>
 
@@ -87,31 +90,22 @@ export default function Weather(weatherInformation) {
                         </ListItem>
                 )}
             </List>
+            <Button variant="contained" fullWidth={true} color="primary">
+                <Link
+                    activeClass="active"
+                    to={"Prep"}
+                    spy={true}
+                    smooth={true}
+                    offset={-80}
+                    duration={700}
+                >
+                    <Typography variant="h6" >
+                        Be Prepared!
+                         </Typography>
+                </Link>
+            </Button>
         </React.Fragment>
     )
-    //  }
-    //     else {
-    //         return (
-    //             <React.Fragment>
-    //                 <Typography variant="h4">
-    //                     Forecast
-    //         </Typography>
-    //                 <Typography>
-    //                     Enter the name of your suburb below (case sensitive)
-    // </Typography>
-    //                 <TextField
-    //                     fullWidth={true}
-    //                     value={suburb}
-    //                     onChange={(event) => setSuburb(event.target.value)}
-    //                 >
-
-    //                 </TextField>
-    //                 <Typography>
-    //                     Please enter a valid suburb name. For example, "Melbourne" or "Oakleigh East" Please note that the form is case-sensitive.
-    //                 </Typography>
-    //             </React.Fragment>
-    //         )
-    //     }
 }
 
 /*

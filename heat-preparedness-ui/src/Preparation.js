@@ -9,6 +9,7 @@ import { ReactComponent as ShortIcon } from './icons/short-term-icon.svg';
 import { ReactComponent as LongIcon } from './icons/long-term-icon.svg';
 import { ReactComponent as PowerIcon } from './icons/power-failure-icon.svg';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-scroll';
 
 const useStyles = makeStyles({
     active: {
@@ -97,20 +98,44 @@ export default function Preparation(preparationData) {
                     Power Failure
                     </Button>
                 </Grid>
+
+                <Grid item xs={12}>
+                    <Typography variant="h6" style={{ marginTop: "1rem" }}>
+                        {messages[category]}
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <List>
+                        {preparationData["preparationData"].filter(item => item.category === category).map(item =>
+                            <ListItem key={item.advice_id}>
+                                <Checkbox />
+                                <Typography>
+                                    {item.content}
+                                </Typography>
+                            </ListItem>
+                        )}
+                    </List>
+
+                </Grid>
+
+                <Grid item xs={12} justify="center">
+                    <Button variant="contained" fullWidth={true} color="primary">
+                        <Link
+                            activeClass="active"
+                            to={"Advice"}
+                            spy={true}
+                            smooth={true}
+                            offset={-80}
+                            duration={700}
+                        >
+                            <Typography variant="h6" >
+                                Know what to do on the day!
+                         </Typography>
+                        </Link>
+                    </Button>
+                </Grid>
+
             </Grid>
-            <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                {messages[category]}
-            </Typography>
-            <List>
-                {preparationData["preparationData"].filter(item => item.category === category).map(item =>
-                    <ListItem key={item.advice_id}>
-                        <Checkbox />
-                        <Typography>
-                            {item.content}
-                        </Typography>
-                    </ListItem>
-                )}
-            </List>
         </React.Fragment >
     )
 }

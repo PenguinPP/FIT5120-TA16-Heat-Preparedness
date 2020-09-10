@@ -7,7 +7,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { ReactComponent as BottleIcon } from './icons/bottle-icon.svg';
 import { ReactComponent as PhysicalIcon } from './icons/physical-activity-icon.svg';
 import { ReactComponent as CoolIcon } from './icons/keep-cool-icon.svg';
-
+import { Link } from 'react-scroll';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import Grid from '@material-ui/core/Grid';

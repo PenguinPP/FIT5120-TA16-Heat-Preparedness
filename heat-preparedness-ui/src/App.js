@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Img from './heatback.jpg';
+import landingBg from './heatback-3.jpg';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -66,10 +66,19 @@ const useStyles = makeStyles((theme) => ({
         marginRight: "0.5rem",
         marginLeft: "0.5rem",
         fontSize: "1.5rem"
+    }, landingBg: {
+        width: '100%',
+        maxHeight: '100%',
+        minHeight: "600px"
+    }, landingText: {
+        color: "white"
     }
 }))
 
 function MenuDrawer() {
+
+
+    const bgPath = './heatback.jpg'
 
     const classes = useStyles()
     const [state, setState] = React.useState(false);
@@ -79,12 +88,6 @@ function MenuDrawer() {
             return;
         }
         setState(open);
-    };
-
-    const divStyle = {
-        width: '100%',
-        height: 'auto/8',
-        filter: "brightness(0.9)"
     };
 
     return (
@@ -110,7 +113,7 @@ function MenuDrawer() {
                                     to={"HeatWaves"}
                                     spy={true}
                                     smooth={true}
-                                    offset={-60}
+                                    offset={-80}
                                     duration={700}
                                 >
                                     <Typography variant="h6" className={classes.buttonText}>
@@ -124,7 +127,7 @@ function MenuDrawer() {
                                     to={"Prep"}
                                     spy={true}
                                     smooth={true}
-                                    offset={-60}
+                                    offset={-80}
                                     duration={700}
                                 >
                                     <Typography variant="h6" className={classes.buttonText}>
@@ -138,7 +141,7 @@ function MenuDrawer() {
                                     to={"Advice"}
                                     spy={true}
                                     smooth={true}
-                                    offset={-60}
+                                    offset={-80}
                                     duration={700}
                                 >
                                     <Typography variant="h6" className={classes.buttonText}>
@@ -152,7 +155,7 @@ function MenuDrawer() {
                                     to={"Forecast"}
                                     spy={true}
                                     smooth={true}
-                                    offset={-60}
+                                    offset={-80}
                                     duration={700}
                                 >
                                     <Typography variant="h6" className={classes.buttonText}>
@@ -164,12 +167,44 @@ function MenuDrawer() {
                     </Toolbar>
                 </AppBar>
             </ScrollToColor01>
-            <div style={divStyle}>
-                <center>
-                    <img src={Img} alt="pic" style={divStyle} />
+            <Grid container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                className={classes.landingBg}
+                style={{ backgroundImage: `url("${landingBg}")` }}>
 
-                </center>
-            </div>
+                <div className={classes.grow} />
+                <Grid item>
+                    <Typography variant="h2" className={classes.landingText} align="center">
+                        Victoria Heat
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant="subtitle1" className={classes.landingText} align="center">
+                        Stay Ready, Stay Safe!
+                        </Typography>
+                </Grid>
+
+                <div className={classes.grow} />
+                <Grid item style={{ marginBottom: "1rem" }}>
+                    <Button size="small" variant="contained" color="primary">
+                        <Link
+                            activeClass="active"
+                            to={"HeatWaves"}
+                            spy={true}
+                            smooth={true}
+                            offset={-80}
+                            duration={700}
+                        >
+                            <Typography variant="h4" className={classes.buttonText}>
+                                Know the dangers!
+                         </Typography>
+                        </Link>
+                    </Button>
+                </Grid>
+
+            </Grid>
             <Drawer anchor={'right'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
                 <Card variant="outlined">
                     <CardContent>
@@ -337,11 +372,19 @@ class App extends Component {
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
-                <Grid container spacing={3} justify="center" wrap='wrap'>
+                <Grid container spacing={2} justify="center" wrap='wrap'>
+                    <Grid item sm={12} lg={12}>
+                        <Card variant="outlined" id="HeatWaves">
+                            <CardContent >
+                                <HeatWaves />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
                     <Grid item sm={12} lg={12}>
                         <Card variant="outlined">
-                            <CardContent id="HeatWaves">
-                                <HeatWaves />
+                            <CardContent id="Alerts" >
+                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
                     </Grid>
@@ -356,13 +399,6 @@ class App extends Component {
                         <Card variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item sm={12} lg={12}>
-                        <Card variant="outlined">
-                            <CardContent id="Forecast" >
-                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
                     </Grid>
