@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup'
-import { List, ListItem, ListItemIcon, makeStyles } from '@material-ui/core'
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import { List, ListItem, makeStyles } from '@material-ui/core'
 import { ReactComponent as BottleIcon } from './icons/bottle-icon.svg';
 import { ReactComponent as PhysicalIcon } from './icons/physical-activity-icon.svg';
 import { ReactComponent as CoolIcon } from './icons/keep-cool-icon.svg';
-
 import SvgIcon from '@material-ui/core/SvgIcon';
-import AcUnitIcon from '@material-ui/icons/AcUnit';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
@@ -66,10 +62,10 @@ export default function Advice(adviceData) {
                 On the Day
                  </Typography>
             <Grid container>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="General"
-                        className={category == "General" && classes.active} //Set style to active style if current category
+                        className={category === "General" && classes.active} //Set style to active style if current category
                         fullWidth={true}
                         onClick={() => setCategory("General")}
                         variant="contained">
@@ -77,10 +73,10 @@ export default function Advice(adviceData) {
                         General
                         </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Keeping Cool"
-                        className={category == "Keeping Cool" && classes.active}
+                        className={category === "Keeping Cool" && classes.active}
                         fullWidth={true}
                         onClick={() => setCategory("Keeping Cool")}
                         variant="contained" >
@@ -89,10 +85,10 @@ export default function Advice(adviceData) {
                         Keep Cool
                     </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Physical Activity"
-                        className={category == "Physical Activity" && classes.active}
+                        className={category === "Physical Activity" && classes.active}
                         fullWidth={true} onClick={() => setCategory("Physical Activity")}
                         variant="contained">
                         <PhysicalActivityIcon

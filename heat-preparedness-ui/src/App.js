@@ -1,134 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Img from './heatback.jpg';
-import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
-import { Link } from 'react-scroll';
-import Weather from './Weather'
-import SvgIcon from '@material-ui/core/SvgIcon';
-
+import Weather from './Weather';
+import PropTypes from "prop-types";
+import AppBarCollapse from "./AppBarClose";
+import myIcon from './favicon.ico';
+import LandingPage from './LandingPage';
 
 const axios = require('axios').default;
 
-function MenuDrawer() {
-    const [state, setState] = React.useState(false);
 
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setState(open);
-    };
 
-    const divStyle = {
-        width: '100%',
-        height: 'auto/8'
-    };
+function MenuDrawer(props) {
 
     return (
         <React.Fragment>
-            {/* <div style={divStyle}>
-                <center>
-                    <img src={Img} alt="pic" style={divStyle} />
-                    
-                </center>
-            </div> */}
-            <AppBar position="sticky" style={{ "margin": 0 }}>
+            <AppBar position="fixed" >
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h5" align="center" >
-                        Heat Preparedness
-                            </Typography>
+                    <AppBarCollapse /><img src={myIcon} alt="pic" onClick={event => window.location.href = '/'} />
                 </Toolbar>
             </AppBar>
-            <Drawer anchor={'left'} open={state} onClose={toggleDrawer(false)} direction={'row'} >
-                <Card variant="outlined">
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"HeatWaves"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography align="left" variant="h4">Heat Waves</Typography></Link></Button>
-
-                    </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}><Link
-                            activeClass="active"
-                            to={"Prep"}
-                            spy={true}
-                            smooth={true}
-                            offset={-60}
-                            duration={700}
-                            onClick={toggleDrawer(false)}
-                            style={{ width: "100%" }}
-                        ><Typography variant="h4" align="left">
-                                Be Prepared!
-                    </Typography></Link>
-                        </Button>
-
-                    </CardContent>
-                    <CardContent>
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"Advice"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography variant="h4" align="left">
-                                    On the day
-                    </Typography></Link></Button>
-
-                    </CardContent>
-                    <CardContent>
-
-                        <Button fullWidth={true} size="small" style={{ textTransform: "none", padding: "0px", marginTop: 0 }}>
-                            <Link
-                                activeClass="active"
-                                to={"Forecast"}
-                                spy={true}
-                                smooth={true}
-                                offset={-60}
-                                duration={700}
-                                onClick={toggleDrawer(false)}
-                                style={{ width: "100%" }}
-                            ><Typography variant="h4" align="left">
-                                    Forecasts
-                    </Typography></Link></Button>
-                    </CardContent>
-
-                </Card>
-                <Button onClick={toggleDrawer(false)}>
-                    Close Menu
-                </Button>
-            </Drawer>
         </React.Fragment >
     );
 }
 
+MenuDrawer.propTypes = {
+    classes: PropTypes.object.isRequired
+};
 
-class App extends Component {
+
+class App extends React.Component {
 
     constructor(props) {
         super(props);
@@ -137,7 +45,7 @@ class App extends Component {
             preparationsList: [],
             adviceList: [],
             weatherForecast: []
-        }
+        };
     }
 
     async getPreparationData() {
@@ -215,37 +123,44 @@ class App extends Component {
         this.getWeatherData()
     }
 
+
+
     render() {
+
         return (
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
-                <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
-                            <CardContent id="HeatWaves">
+                <Grid container spacing={2} justify="center" wrap='wrap' >
+                    <Grid item xs={12}>
+                        <LandingPage />
+                    </Grid>
+                    <Grid item sm={12} lg={12} >
+                        <Card raised={true} variant="outlined" id="HeatWaves">
+                            <CardContent >
                                 <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
+
+                    <Grid item sm={12} lg={12} >
+                        <Card raised={true} variant="outlined" >
+                            <CardContent id="Alerts" >
+                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item sm={12} lg={12}>
+                        <Card raised={true} variant="outlined">
                             <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
+                    <Grid item sm={12} lg={12}>
+                        <Card raised={true} variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
-                            <CardContent id="Forecast" >
-                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
                     </Grid>
