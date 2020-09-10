@@ -1,36 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Card, CardContent } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Img from './heatback.jpg';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
 import Weather from './Weather';
-import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import AppBarCollapse from "./AppBarClose";
 import myIcon from './favicon.ico';
-
-const divStyle = {
-    width: '100%',
-    height: 'auto/8',
-    backgroundImage: `url(${Img})`
-};
-
-const WhiteTextTypography = withStyles({
-    root: {
-        color: "white",
-        fontStyle: 'italic',
-        width: "auto",
-        textAlign: "center"
-    }
-})(Typography);
+import LandingPage from './LandingPage';
 
 const axios = require('axios').default;
+
 
 
 function MenuDrawer(props) {
@@ -117,7 +102,7 @@ class App extends React.Component {
 
     async getWeatherData() {
         let weatherData = []
-        let dataLink = "https://www.victoria-heat.tk/MelbourneForecast"
+        let dataLink = "https://www.victoria-heat.tk/api/MelbourneForecast"
 
         await axios.get(dataLink)
             .then(function (response) {
@@ -146,41 +131,36 @@ class App extends React.Component {
             <React.Fragment>
                 <CssBaseline />
                 <MenuDrawer />
-                <div style={divStyle}>
-                    <center>
-                        <img src={Img} alt="pic" style={divStyle} />
-
-                    </center>
-                    <WhiteTextTypography variant="h4">
-                        Stay ready Stay safe
-                            </WhiteTextTypography>
-                </div>
-                <Grid container spacing={3} justify="center" wrap='wrap'>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
-                            <CardContent id="HeatWaves">
+                <Grid container spacing={2} justify="center" wrap='wrap' >
+                    <Grid item xs={12}>
+                        <LandingPage />
+                    </Grid>
+                    <Grid item sm={12} lg={12} >
+                        <Card raised={true} variant="outlined" id="HeatWaves">
+                            <CardContent >
                                 <HeatWaves />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
+
+                    <Grid item sm={12} lg={12} >
+                        <Card raised={true} variant="outlined" >
+                            <CardContent id="Alerts" >
+                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item sm={12} lg={12}>
+                        <Card raised={true} variant="outlined">
                             <CardContent id="Prep">
                                 <Preparation preparationData={this.state.preparationsList} />
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
+                    <Grid item sm={12} lg={12}>
+                        <Card raised={true} variant="outlined">
                             <CardContent id="Advice">
                                 <Advice adviceData={this.state.adviceList} />
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item sm={12} lg={8}>
-                        <Card variant="outlined">
-                            <CardContent id="Forecast" >
-                                <Weather suburbList={this.state.suburbList} weatherInformation={this.state.weatherForecast} />
                             </CardContent>
                         </Card>
                     </Grid>

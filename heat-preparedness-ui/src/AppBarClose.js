@@ -24,8 +24,6 @@ const styles = theme => ({
     }
 });
 
-
-
 const AppBarClose = props => (
     <div className={props.classes.root}>
         <ButtonAppBarCollapse>
@@ -44,6 +42,19 @@ const AppBarClose = props => (
             <ListItem>
                 <Link
                     activeClass="active"
+                    to={"Alerts"}
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={700}
+                    style={{ width: "100%" }}
+                >
+                    <ListItemText primary={"Forecasts"} /></Link>
+            </ListItem>
+            <Divider light />
+            <ListItem>
+                <Link
+                    activeClass="active"
                     to={"Prep"}
                     spy={true}
                     smooth={true}
@@ -66,21 +77,10 @@ const AppBarClose = props => (
                 >
                     <ListItemText primary={"On the day"} /></Link>
             </ListItem>
-            <Divider light />
-            <ListItem>
-                <Link
-                    activeClass="active"
-                    to={"Forecast"}
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={700}
-                    style={{ width: "100%" }}
-                >
-                    <ListItemText primary={"Forecast"} /></Link>
-            </ListItem>
+
         </ButtonAppBarCollapse>
         <div className={props.classes.buttonBar} id="appbar-collapse">
+
             <Button color="inherit">
                 <Link
                     activeClass="active"
@@ -91,7 +91,20 @@ const AppBarClose = props => (
                     duration={700}
                     style={{ width: "100%", textTransform: "capitalize" }}
                 >
-                    <ListItemText primary={"HeatWaves"} /></Link>
+                    <ListItemText primary={"Heat Waves"} /></Link>
+            </Button>
+            <Button color="inherit" >
+                <Link
+                    activeClass="active"
+                    to={"Alerts"}
+                    spy={true}
+                    smooth={true}
+                    offset={-60}
+                    duration={700}
+                    style={{ width: "100%", textTransform: "capitalize" }}
+                >
+                    <ListItemText primary={"Forecasts"} /></Link>
+
             </Button>
             <Button color="inherit">
                 <Link
@@ -117,19 +130,7 @@ const AppBarClose = props => (
                 >
                     <ListItemText primary={"On the day"} /></Link>
             </Button>
-            <Button color="inherit" >
-                <Link
-                    activeClass="active"
-                    to={"Forecast"}
-                    spy={true}
-                    smooth={true}
-                    offset={-60}
-                    duration={700}
-                    style={{ width: "100%", textTransform: "capitalize" }}
-                >
-                    <ListItemText primary={"Forecast"} /></Link>
 
-            </Button>
         </div>
     </div>
 );

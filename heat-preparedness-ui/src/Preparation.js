@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import { List, ListItem, makeStyles } from '@material-ui/core';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -9,6 +8,7 @@ import { ReactComponent as ShortIcon } from './icons/short-term-icon.svg';
 import { ReactComponent as LongIcon } from './icons/long-term-icon.svg';
 import { ReactComponent as PowerIcon } from './icons/power-failure-icon.svg';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-scroll';
 
 const useStyles = makeStyles({
     active: {
@@ -52,7 +52,7 @@ export default function Preparation(preparationData) {
     var messages = {//Message to display for each category before bullet points
         "Heat Short Term": "There are a number of things you can do in the short term to prepare for a heat wave:",
         "Heat Long Term": "There are a number of things you can do in the long term to improve your ability to cope with extreme heat:",
-        "Power Failures": "Power failures can occur during a heat wave and it is important to be be prepared for them:"
+        "Power Failure": "Power failures can occur during a heat wave and it is important to be be prepared for them:"
     }
 
     //console.log(preparationData["preparationData"])
@@ -64,10 +64,10 @@ export default function Preparation(preparationData) {
                 Be Prepared!
                  </Typography>
             <Grid container>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Heat Short Term"
-                        className={category == "Heat Short Term" && classes.active}//Set style to active style if current category
+                        className={category === "Heat Short Term" && classes.active}//Set style to active style if current category
                         fullWidth={true}
                         onClick={() => setCategory("Heat Short Term")}
                         variant="contained">
@@ -75,10 +75,10 @@ export default function Preparation(preparationData) {
                         Short Term
                         </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Heat Long Term"
-                        className={category == "Heat Long Term" && classes.active}
+                        className={category === "Heat Long Term" && classes.active}
                         fullWidth={true}
                         onClick={() => setCategory("Heat Long Term")}
                         variant="contained" ><LongTermIcon
@@ -86,10 +86,10 @@ export default function Preparation(preparationData) {
                     Long Term
                     </Button>
                 </Grid>
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12} md={4}>
                     <Button
                         id="Power Failure"
-                        className={category == "Power Failure" && classes.active}
+                        className={category === "Power Failure" && classes.active}
                         fullWidth={true} onClick={() => setCategory("Power Failure")}
                         variant="contained">
                         <PowerFailureIcon
@@ -97,20 +97,45 @@ export default function Preparation(preparationData) {
                     Power Failure
                     </Button>
                 </Grid>
+
+                <Grid item xs={12}>
+                    <Typography variant="h6" style={{ marginTop: "1rem" }}>
+                        {messages[category]}
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <List>
+                        {preparationData["preparationData"].filter(item => item.category === category).map(item =>
+                            <ListItem key={item.advice_id}>
+                                <Checkbox />
+                                <Typography>
+                                    {item.content}
+                                </Typography>
+                            </ListItem>
+                        )}
+                    </List>
+
+                </Grid>
+
+                <Grid item xs={12} justify="center" >
+                    <Link
+                        activeClass="active"
+                        to={"Advice"}
+                        spy={true}
+                        smooth={true}
+                        offset={-80}
+                        duration={700}
+                    > <Button variant="contained" fullWidth={true} color="primary" >
+
+                            <Typography variant="h6" >
+                                Take Precautions!
+                         </Typography>
+                        </Button>
+
+                    </Link>
+                </Grid>
+
             </Grid>
-            <Typography variant="h6" style={{ marginTop: "1rem" }}>
-                {messages[category]}
-            </Typography>
-            <List>
-                {preparationData["preparationData"].filter(item => item.category === category).map(item =>
-                    <ListItem key={item.advice_id}>
-                        <Checkbox />
-                        <Typography>
-                            {item.content}
-                        </Typography>
-                    </ListItem>
-                )}
-            </List>
         </React.Fragment >
     )
 }

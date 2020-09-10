@@ -4,6 +4,8 @@ import { List, ListItem } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import WarningIcon from '@material-ui/icons/Warning';
+import { Link } from 'react-scroll';
+import Button from '@material-ui/core/Button';
 
 const axios = require('axios').default;
 
@@ -35,10 +37,6 @@ export default function Weather(weatherInformation) {
             })
     }, [suburbId])
 
-    const inputProps = {
-        color: "primary"
-    }
-
 
     //if (suburbList.includes(suburb)) {
     return (
@@ -50,10 +48,11 @@ export default function Weather(weatherInformation) {
 
         <React.Fragment>
             <Typography variant="h4" >
-                Forecast
+
+                Weather Forecasts {"&"} Alerts
                 </Typography>
 
-            <Typography variant="h6" style={{ marginBottom: "1rem" }}>
+            <Typography variant="h6" style={{ marginBottom: "1rem", marginTop: "1rem" }}>
                 Select your suburb
                 </Typography>
 
@@ -62,7 +61,7 @@ export default function Weather(weatherInformation) {
                 options={suburbData}
                 getOptionLabel={(option) => option.suburb + ", " + option.postcode}
                 fullWidth={true}
-                onChange={(event, newValue) => { newValue != undefined && setSuburbId(newValue.suburb_id) }}
+                onChange={(event, newValue) => { newValue !== undefined && setSuburbId(newValue.suburb_id) }}
                 renderInput={(params) => <TextField {...params} label="Filter by name or postcode" InputLabelProps={{ style: { color: "black" } }} variant="outlined" />}
             />
 
@@ -74,7 +73,7 @@ export default function Weather(weatherInformation) {
 
                 </TextField>*/}
             <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-                Weather in {currentSuburb != undefined && currentSuburb.suburb + " (" + currentSuburb.postcode + ")"} for the next week
+                Weather in {currentSuburb !== undefined && currentSuburb.suburb + " (" + currentSuburb.postcode + ")"} for the next week
                 </Typography>
             <br />
             <Typography variant="h6">
@@ -83,35 +82,28 @@ export default function Weather(weatherInformation) {
             <List>
                 {weatherData.map(item =>
                     <ListItem key={item.date}>
-                        {item.date ? item.date.toString().replace(/\T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
+                        {item.date ? item.date.toString().replace(/T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
                         </ListItem>
                 )}
             </List>
+            <Link
+                activeClass="active"
+                to={"Prep"}
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={700}
+            >
+                <Button variant="contained" fullWidth={true} color="primary">
+
+                    <Typography variant="h6" >
+                        Be Prepared!
+                         </Typography>
+                </Button>
+
+            </Link>
         </React.Fragment>
     )
-    //  }
-    //     else {
-    //         return (
-    //             <React.Fragment>
-    //                 <Typography variant="h4">
-    //                     Forecast
-    //         </Typography>
-    //                 <Typography>
-    //                     Enter the name of your suburb below (case sensitive)
-    // </Typography>
-    //                 <TextField
-    //                     fullWidth={true}
-    //                     value={suburb}
-    //                     onChange={(event) => setSuburb(event.target.value)}
-    //                 >
-
-    //                 </TextField>
-    //                 <Typography>
-    //                     Please enter a valid suburb name. For example, "Melbourne" or "Oakleigh East" Please note that the form is case-sensitive.
-    //                 </Typography>
-    //             </React.Fragment>
-    //         )
-    //     }
 }
 
 /*
