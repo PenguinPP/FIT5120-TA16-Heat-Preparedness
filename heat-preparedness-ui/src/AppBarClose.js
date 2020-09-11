@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ListItem, Divider } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import ButtonAppBarCollapse from "./ButtonAppBarClose";
+import ButtonAppBarClose from "./ButtonAppBarClose";
 import { Link } from 'react-scroll';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -26,8 +26,8 @@ const styles = theme => ({
 
 const AppBarClose = props => (
     <div className={props.classes.root}>
-        <ButtonAppBarCollapse>
-            <ListItem>
+        <ButtonAppBarClose>
+            {/*<ListItem >
                 <Link
                     activeClass="active"
                     to={"HeatWaves"}
@@ -76,9 +76,9 @@ const AppBarClose = props => (
                     style={{ width: "100%" }}
                 >
                     <ListItemText primary={"On the day"} /></Link>
-            </ListItem>
+            </ListItem>*/}
 
-        </ButtonAppBarCollapse>
+        </ButtonAppBarClose>
         <div className={props.classes.buttonBar} id="appbar-collapse">
 
             <Button color="inherit">

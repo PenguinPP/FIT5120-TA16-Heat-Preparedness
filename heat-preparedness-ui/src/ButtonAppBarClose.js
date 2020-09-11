@@ -3,6 +3,9 @@ import { withStyles } from "@material-ui/core/styles";
 import { Drawer } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Button, ListItem, Divider } from "@material-ui/core";
+import { Link } from 'react-scroll';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = theme => ({
     buttonCollapse: {
@@ -38,7 +41,7 @@ class ButtonAppBarClose extends React.Component {
 
         return (
             <div className={classes.buttonCollapse}>
-                <IconButton onClick={this.handleMenu}>
+                <IconButton onClick={this.handleMenu} color="inherit">
                     <MenuIcon />
                 </IconButton>
                 <Drawer
@@ -56,7 +59,61 @@ class ButtonAppBarClose extends React.Component {
                     onClose={this.handleClose}
                 >
                     {this.props.children}
-                </Drawer>
+
+                    <ListItem >
+                        <Link
+                            activeClass="active"
+                            to={"HeatWaves"}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={700}
+                            onClick={this.handleClose}
+                            style={{ width: "100%" }}
+                        ><ListItemText primary={"HeatWaves"} /></Link>
+                    </ListItem>
+                    <Divider light />
+                    <ListItem >
+                        <Link
+                            activeClass="active"
+                            to={"Alerts"}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={700}
+                            onClick={this.handleClose}
+                            style={{ width: "100%" }}
+                        >
+                            <ListItemText primary={"Forecasts"} /></Link>
+                    </ListItem>
+                    <Divider light />
+                    <ListItem >
+                        <Link
+                            activeClass="active"
+                            to={"Prep"}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={700}
+                            onClick={this.handleClose}
+                            style={{ width: "100%" }}
+                        >
+                            <ListItemText primary={"Be prepared!"} /></Link>
+                    </ListItem>
+                    <Divider light />
+                    <ListItem >
+                        <Link
+                            activeClass="active"
+                            to={"Advice"}
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={700}
+                            onClick={this.handleClose}
+                            style={{ width: "100%" }}
+                        >
+                            <ListItemText primary={"On the day"} /></Link>
+                    </ListItem></Drawer>
             </div>
         );
     }
