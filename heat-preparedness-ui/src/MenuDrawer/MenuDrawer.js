@@ -12,6 +12,9 @@ import { useScrollTrigger, IconButton, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     logoStyle: {
         transform: "scale(2.5)",
+    },
+    buttonStyle: {
+        margin: "0.2rem"
     }
 }))
 
@@ -41,7 +44,7 @@ const IconScroll = props => {
     })
     return React.cloneElement(props.children, {
         style: {
-            backgroundColor: trigger ? "#70a9ff" : "transparent",
+            backgroundColor: trigger ? "rgb(77, 70, 77, 0.8)" : "transparent",
             transition: trigger ? "0.3s" : "0.5s",
             boxShadow: "none"
         }
@@ -57,7 +60,7 @@ export default function MenuDrawer(props) {
                     <Toolbar>
                         <AppBarClose />
                         <IconScroll>
-                            <IconButton onClick={event => window.location.href = '/'}>
+                            <IconButton onClick={event => window.location.href = '/'} className={classes.buttonStyle}>
                                 <SvgIcon viewBox="0 0 600 476.6" >
                                     <TeamIcon className={classes.logoStyle} />
                                 </SvgIcon>

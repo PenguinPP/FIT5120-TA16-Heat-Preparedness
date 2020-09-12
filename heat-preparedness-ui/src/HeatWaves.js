@@ -5,15 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import ReactPlayer from "react-player";
 import { Link } from 'react-scroll';
 import Button from '@material-ui/core/Button';
+import { useTheme } from '@material-ui/core/styles';
+
+
 
 export default function HeatWaves() {
 
+    const theme = useTheme()
 
     const hazardData = [
-        { hazard: 1, deaths: 4555, fill: "#ff9800" }, //Extreme heat
-        { hazard: 2, deaths: 1285, fill: "#7986cb" }, //Cyclones
-        { hazard: 3, deaths: 1221, fill: "#7986cb" }, //Floods
-        { hazard: 4, deaths: 866, fill: "#7986cb" } //Bushfires
+        { hazard: 1, deaths: 4555, fill: theme.palette.primary.main }, //Extreme heat
+        { hazard: 2, deaths: 1285, fill: theme.palette.secondary.main }, //Cyclones
+        { hazard: 3, deaths: 1221, fill: theme.palette.secondary.main }, //Floods
+        { hazard: 4, deaths: 866, fill: theme.palette.secondary.main } //Bushfires
     ];
 
     const deathData = [
@@ -65,7 +69,7 @@ export default function HeatWaves() {
                         data={deathData}
                         x="ageGroup"
                         y="percentage"
-                        colorScale={["#ff9800", "#7986cb"]}
+                        colorScale={[theme.palette.primary.main, theme.palette.secondary.main]}
                     />
                 </Grid>
                 <Grid item xs={12} md={12} lg={4}>
