@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { List, ListItem, makeStyles } from '@material-ui/core'
-import { ReactComponent as BottleIcon } from '../icons/bottle-icon.svg';
-import { ReactComponent as PhysicalIcon } from '../icons/physical-activity-icon.svg';
-import { ReactComponent as CoolIcon } from '../icons/keep-cool-icon.svg';
+import { ReactComponent as BottleIcon } from './icons/bottle-icon.svg';
+import { ReactComponent as PhysicalIcon } from './icons/physical-activity-icon.svg';
+import { ReactComponent as CoolIcon } from './icons/keep-cool-icon.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Grid from '@material-ui/core/Grid';
-import QuickGuide from './QuickGuide/QuickGuide';
 
 const useStyles = makeStyles({
     active: { //Style for active category button
@@ -50,18 +49,12 @@ export default function Advice(adviceData) {
 
     //console.log(adviceData["adviceData"])
 
-    const messages = { //Message to display for each category before bullet points
+    var messages = { //Message to display for each category before bullet points
         "General": "Some general bits of advice to get you through the day:",
         "Keeping Cool": "Here are a few things that you can do to keep cool:",
         "Physical Activity": "When it comes to physical activity during a heat wave:"
     }
 
-    const display = {
-        "General": <QuickGuide />,
-        "Keeping Cool": <h1>Nothing</h1>,
-        "Physical Activity": <h1>Nothing</h1>
-
-    }
 
     return (
         <React.Fragment>
@@ -104,8 +97,7 @@ export default function Advice(adviceData) {
                     </Button>
                 </Grid>
             </Grid>
-            {display[category]}
-            {/* <Typography variant="h6" style={{ marginTop: "1rem" }}>
+            <Typography variant="h6" style={{ marginTop: "1rem" }}>
                 {messages[category]}
             </Typography>
             <List>
@@ -116,7 +108,7 @@ export default function Advice(adviceData) {
                         </Typography>
                     </ListItem>
                 )}
-            </List> */}
+            </List>
         </React.Fragment >
     )
 }
