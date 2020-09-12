@@ -9,15 +9,20 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Grid from '@material-ui/core/Grid';
 import QuickGuide from './QuickGuide/QuickGuide';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     active: { //Style for active category button
-        background: "#3f51b5",
-        color: "white",
+        background: theme.palette.primary.main,
+        color: "black",
         '&:hover': {
-            backgroundColor: "#7986cb"
+            backgroundColor: theme.palette.secondary.main
+        }
+    },
+    inactive: {
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.main
         }
     }
-})
+}))
 
 //Use SVG to create SVGIcons
 const GeneralIcon = (props) => {
@@ -72,7 +77,7 @@ export default function Advice(adviceData) {
                 <Grid item xs={12} md={4}>
                     <Button
                         id="General"
-                        className={category === "General" && classes.active} //Set style to active style if current category
+                        className={category === "General" ? classes.active : classes.inactive} //Set style to active style if current category
                         fullWidth={true}
                         onClick={() => setCategory("General")}
                         variant="contained">
@@ -83,7 +88,7 @@ export default function Advice(adviceData) {
                 <Grid item xs={12} md={4}>
                     <Button
                         id="Keeping Cool"
-                        className={category === "Keeping Cool" && classes.active}
+                        className={category === "Keeping Cool" ? classes.active : classes.inactive}
                         fullWidth={true}
                         onClick={() => setCategory("Keeping Cool")}
                         variant="contained" >
@@ -95,7 +100,7 @@ export default function Advice(adviceData) {
                 <Grid item xs={12} md={4}>
                     <Button
                         id="Physical Activity"
-                        className={category === "Physical Activity" && classes.active}
+                        className={category === "Physical Activity" ? classes.active : classes.inactive}
                         fullWidth={true} onClick={() => setCategory("Physical Activity")}
                         variant="contained">
                         <PhysicalActivityIcon

@@ -11,14 +11,17 @@ import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import CardOne from './Cards';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     grow1: {
         flexGrow: 1
     },
-    cardStyle: {
+    containerStyle: {
+        [theme.breakpoints.up("md")]: {
+            padding: "5rem"
+        },
         padding: "0.5rem"
+
     },
     chevronStyle: {
         fontSize: "3rem",
@@ -27,7 +30,8 @@ const useStyles = makeStyles({
     },
     cardContentStyle: {
         minHeight: "450px",
-        padding: "1rem"
+        padding: "1rem",
+        backgroundColor: "#ffc570"
     },
     iconStyle: {
         fontSize: "3rem"
@@ -35,7 +39,7 @@ const useStyles = makeStyles({
     hideCard: {
         display: "none"
     }
-})
+}));
 
 
 
@@ -120,134 +124,175 @@ export default function QuickGuide() {
     ]
 
     return (
-        <Card >
+        <div className={classes.containerStyle}>
             <Grid container alignItems="center" alignContent="space-around">
                 {/*Page 1*/}
-                <Slide in={activePage === 0 ? true : false} direction="left" className={activePage !== 0 && classes.hideCard}>
+                <Slide
+                    in={activePage === 0 ? true : false}
+                    direction="left"
+                    mountOnEnter
+                    unmountOnExit
+                    className={activePage !== 0 && classes.hideCard}
+                    timeout={700}
+                >
+
                     <Grid item xs={12}>
-                        <CardContent className={classes.cardContentStyle}>
-                            <Typography variant="h5">
-                                {content[0]["title"]}
-                            </Typography>
-                            <List>
-                                {content[0]["content"].map((item, index) =>
+
+                        <Card raised={true}>
+                            <CardContent className={classes.cardContentStyle}>
+                                <Typography variant="h5">
+                                    {content[0]["title"]}
+                                </Typography>
+                                <List>
+                                    {content[0]["content"].map((item, index) =>
 
 
-                                    <React.Fragment>
-                                        <ListItem id={index}>
-                                            <ListItemIcon>
-                                                {content[0]["icons"][index] === "Do" ? <CheckIcon /> : <ClearIcon />}
-                                            </ListItemIcon>
-                                            <Typography variant="body1">
-                                                {item}
-                                            </Typography>
-                                        </ListItem>
+                                        <React.Fragment>
+                                            <ListItem id={index}>
+                                                <ListItemIcon>
+                                                    {content[0]["icons"][index] === "Do" ? <CheckIcon /> : <ClearIcon />}
+                                                </ListItemIcon>
+                                                <Typography variant="body1">
+                                                    {item}
+                                                </Typography>
+                                            </ListItem>
 
-                                    </React.Fragment>
-                                )}
-                            </List>
-                        </CardContent>
+                                        </React.Fragment>
+                                    )}
+                                </List>
+                            </CardContent>
 
+                        </Card >
                     </Grid>
+
                 </Slide>
+
                 {/*Page 2*/}
-                <Slide in={activePage === 1 ? true : false} direction="left" className={activePage !== 1 && classes.hideCard}>
+                <Slide
+                    in={activePage === 1 ? true : false}
+                    direction="left"
+                    mountOnEnter
+                    unmountOnExit
+                    className={activePage !== 1 && classes.hideCard}
+                    timeout={700}>
                     <Grid item xs={12}>
-                        <CardContent className={classes.cardContentStyle}>
-                            <Typography variant="h5">
-                                {content[1]["title"]}
-                            </Typography>
-                            <List>
-                                {content[1]["content"].map((item, index) =>
+                        <Card raised={true}>
+                            <CardContent className={classes.cardContentStyle}>
+                                <Typography variant="h5">
+                                    {content[1]["title"]}
+                                </Typography>
+                                <List>
+                                    {content[1]["content"].map((item, index) =>
 
 
-                                    <React.Fragment>
-                                        <ListItem id={index}>
-                                            <Typography variant="body1">
-                                                {item}
-                                            </Typography>
-                                        </ListItem>
+                                        <React.Fragment>
+                                            <ListItem id={index}>
+                                                <Typography variant="body1">
+                                                    {item}
+                                                </Typography>
+                                            </ListItem>
 
-                                    </React.Fragment>
-                                )}
-                            </List>
-                        </CardContent>
-
+                                        </React.Fragment>
+                                    )}
+                                </List>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Slide>
                 {/*Page 3*/}
-                <Slide in={activePage === 2 ? true : false} direction="left" className={activePage !== 2 && classes.hideCard}>
+                <Slide
+                    in={activePage === 2 ? true : false}
+                    direction="left"
+                    mountOnEnter
+                    unmountOnExit
+                    className={activePage !== 2 && classes.hideCard}
+                    timeout={700}>
                     <Grid item xs={12}>
-                        <CardContent className={classes.cardContentStyle}>
-                            <Typography variant="h5">
-                                {content[2]["title"]}
-                            </Typography>
-                            <List>
-                                {content[2]["content"].map((item, index) =>
+                        <Card raised={true}>
+                            <CardContent className={classes.cardContentStyle}>
+                                <Typography variant="h5">
+                                    {content[2]["title"]}
+                                </Typography>
+                                <List>
+                                    {content[2]["content"].map((item, index) =>
 
 
-                                    <React.Fragment>
-                                        <ListItem id={index}>
-                                            <Typography variant="body1">
-                                                {item}
-                                            </Typography>
-                                        </ListItem>
+                                        <React.Fragment>
+                                            <ListItem id={index}>
+                                                <Typography variant="body1">
+                                                    {item}
+                                                </Typography>
+                                            </ListItem>
 
-                                    </React.Fragment>
-                                )}
-                            </List>
-                        </CardContent>
-
+                                        </React.Fragment>
+                                    )}
+                                </List>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Slide>
                 {/*Page 4*/}
-                <Slide in={activePage === 3 ? true : false} direction="left" className={activePage !== 3 && classes.hideCard}>
+                <Slide
+                    in={activePage === 3 ? true : false}
+                    direction="left"
+                    mountOnEnter
+                    unmountOnExit
+                    className={activePage !== 3 && classes.hideCard}
+                    timeout={700}>
                     <Grid item xs={12}>
-                        <CardContent className={classes.cardContentStyle}>
-                            <Typography variant="h5">
-                                {content[3]["title"]}
-                            </Typography>
-                            <List>
-                                {content[3]["content"].map((item, index) =>
+                        <Card raised={true}>
+                            <CardContent className={classes.cardContentStyle}>
+                                <Typography variant="h5">
+                                    {content[3]["title"]}
+                                </Typography>
+                                <List>
+                                    {content[3]["content"].map((item, index) =>
 
 
-                                    <React.Fragment>
-                                        <ListItem id={index}>
-                                            <Typography variant="body1">
-                                                {item}
-                                            </Typography>
-                                        </ListItem>
+                                        <React.Fragment>
+                                            <ListItem id={index}>
+                                                <Typography variant="body1">
+                                                    {item}
+                                                </Typography>
+                                            </ListItem>
 
-                                    </React.Fragment>
-                                )}
-                            </List>
-                        </CardContent>
-
+                                        </React.Fragment>
+                                    )}
+                                </List>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Slide>
                 {/*Page 5*/}
-                <Slide in={activePage === 4 ? true : false} direction="left" className={activePage !== 4 && classes.hideCard}>
+                <Slide
+                    in={activePage === 4 ? true : false}
+                    direction="left"
+                    mountOnEnter
+                    unmountOnExit
+                    className={activePage !== 4 && classes.hideCard}
+                    timeout={700}>
                     <Grid item xs={12}>
-                        <CardContent className={classes.cardContentStyle}>
-                            <Typography variant="h5">
-                                {content[4]["title"]}
-                            </Typography>
-                            <List>
-                                {content[4]["content"].map((item, index) =>
+                        <Card raised={true}>
+                            <CardContent className={classes.cardContentStyle}>
+                                <Typography variant="h5">
+                                    {content[4]["title"]}
+                                </Typography>
+                                <List>
+                                    {content[4]["content"].map((item, index) =>
 
 
-                                    <React.Fragment>
-                                        <ListItem id={index}>
-                                            <Typography variant="body1">
-                                                {item}
-                                            </Typography>
-                                        </ListItem>
+                                        <React.Fragment>
+                                            <ListItem id={index}>
+                                                <Typography variant="body1">
+                                                    {item}
+                                                </Typography>
+                                            </ListItem>
 
-                                    </React.Fragment>
-                                )}
-                            </List>
-                        </CardContent>
-
+                                        </React.Fragment>
+                                    )}
+                                </List>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Slide>
                 <IconButton onClick={handleBack} color={activePage > 0 ? "primary" : "default"} className={classes.chevronStyle}>
@@ -263,7 +308,7 @@ export default function QuickGuide() {
                 </IconButton>
 
             </Grid>
-        </Card >
+        </div>
     )
 
 }

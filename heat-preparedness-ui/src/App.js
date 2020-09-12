@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, useScrollTrigger } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography"
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,17 +16,36 @@ import LandingPage from './LandingPage';
 
 const axios = require('axios').default;
 
+const ScrollHandler = props => {
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+        target: props.window ? window() : undefined
+    });
+
+    return React.cloneElement(props.children, {
+        style: {
+            backgroundColor: trigger ? "#ffc570" : "transparent",
+            color: trigger ? "black" : "white",
+            transition: trigger ? "0.3s" : "0.5s",
+            boxShadow: "none"
+        }
+    });
+};
+
 
 
 function MenuDrawer(props) {
 
     return (
         <React.Fragment>
-            <AppBar position="fixed" >
-                <Toolbar>
-                    <AppBarCollapse /><img src={myIcon} alt="pic" onClick={event => window.location.href = '/'} />
-                </Toolbar>
-            </AppBar>
+            <ScrollHandler>
+                <AppBar position="fixed" >
+                    <Toolbar>
+                        <AppBarCollapse /><img src={myIcon} alt="pic" onClick={event => window.location.href = '/'} />
+                    </Toolbar>
+                </AppBar>
+            </ScrollHandler>
         </React.Fragment >
     );
 }

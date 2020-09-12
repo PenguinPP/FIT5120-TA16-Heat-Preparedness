@@ -10,15 +10,20 @@ import { ReactComponent as PowerIcon } from './icons/power-failure-icon.svg';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-scroll';
 
-const useStyles = makeStyles({
-    active: {
-        background: "#3f51b5",
-        color: "white",
+const useStyles = makeStyles((theme) => ({
+    active: { //Style for active category button
+        background: theme.palette.primary.main,
+        color: "black",
         '&:hover': {
-            backgroundColor: "#7986cb"
+            backgroundColor: theme.palette.secondary.main
+        }
+    },
+    inactive: {
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.main
         }
     }
-})
+}))
 
 const ShortTermIcon = (props) => {
     return (
@@ -67,7 +72,7 @@ export default function Preparation(preparationData) {
                 <Grid item xs={12} md={4}>
                     <Button
                         id="Heat Short Term"
-                        className={category === "Heat Short Term" && classes.active}//Set style to active style if current category
+                        className={category === "Heat Short Term" ? classes.active : classes.inactive}//Set style to active style if current category
                         fullWidth={true}
                         onClick={() => setCategory("Heat Short Term")}
                         variant="contained">
@@ -78,7 +83,7 @@ export default function Preparation(preparationData) {
                 <Grid item xs={12} md={4}>
                     <Button
                         id="Heat Long Term"
-                        className={category === "Heat Long Term" && classes.active}
+                        className={category === "Heat Long Term" ? classes.active : classes.inactive}
                         fullWidth={true}
                         onClick={() => setCategory("Heat Long Term")}
                         variant="contained" ><LongTermIcon
@@ -89,7 +94,7 @@ export default function Preparation(preparationData) {
                 <Grid item xs={12} md={4}>
                     <Button
                         id="Power Failure"
-                        className={category === "Power Failure" && classes.active}
+                        className={category === "Power Failure" ? classes.active : classes.inactive}
                         fullWidth={true} onClick={() => setCategory("Power Failure")}
                         variant="contained">
                         <PowerFailureIcon
