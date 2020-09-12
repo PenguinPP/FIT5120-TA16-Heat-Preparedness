@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useScrollTrigger, IconButton, makeStyles } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     logoStyle: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ScrollHandler = props => {
+    const theme = useTheme()
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 0,
@@ -27,8 +29,8 @@ const ScrollHandler = props => {
 
     return React.cloneElement(props.children, {
         style: {
-            backgroundColor: trigger ? "#ffc570" : "transparent",
-            color: trigger ? "black" : "white",
+            backgroundColor: trigger ? theme.palette.primary.main : "transparent",
+            color: trigger ? theme.palette.primary.contrastText : theme.palette.common.white,
             transition: trigger ? "0.3s" : "0.5s",
             boxShadow: "none"
         }
