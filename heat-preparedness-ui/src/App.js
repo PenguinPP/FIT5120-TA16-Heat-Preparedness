@@ -1,58 +1,17 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Card, CardContent, useScrollTrigger } from '@material-ui/core';
-import Typography from "@material-ui/core/Typography"
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import { Card, CardContent } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Advice from './Advice/Advice';
 import Preparation from './Preparation';
 import HeatWaves from './HeatWaves';
 import Weather from './Weather';
-import PropTypes from "prop-types";
-import AppBarCollapse from "./AppBarClose";
-import myIcon from './favicon.ico';
 import LandingPage from './LandingPage';
+import Acknowledgements from './Acknowledgments'
+import MenuDrawer from './MenuDrawer/MenuDrawer'
 
 const axios = require('axios').default;
 
-const ScrollHandler = props => {
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0,
-        target: props.window ? window() : undefined
-    });
-
-    return React.cloneElement(props.children, {
-        style: {
-            backgroundColor: trigger ? "#ffc570" : "transparent",
-            color: trigger ? "black" : "white",
-            transition: trigger ? "0.3s" : "0.5s",
-            boxShadow: "none"
-        }
-    });
-};
-
-
-
-function MenuDrawer(props) {
-
-    return (
-        <React.Fragment>
-            <ScrollHandler>
-                <AppBar position="fixed" >
-                    <Toolbar>
-                        <AppBarCollapse /><img src={myIcon} alt="pic" onClick={event => window.location.href = '/'} />
-                    </Toolbar>
-                </AppBar>
-            </ScrollHandler>
-        </React.Fragment >
-    );
-}
-
-MenuDrawer.propTypes = {
-    classes: PropTypes.object.isRequired
-};
 
 
 class App extends React.Component {
@@ -183,28 +142,8 @@ class App extends React.Component {
                             </CardContent>
                         </Card>
                     </Grid>
-
                 </Grid>
-                <div style={{
-                    backgroundColor: "#3f51b5", padding: "1rem",
-                    color: "white",
-                    textAlign: "center"
-                }}>
-                    <Typography variant="h5" >
-                        Acknowledgments
-                    </Typography>
-                    <br />
-                    <Typography>
-                        The weather forecast information is updated every 6 hours based on available data from <a href="https://openweathermap.org/" style={{ color: "white" }}>OpenWeather</a> ( ©  Creative Commons Attribution-ShareAlike 4.0 International licence).
-                    </Typography>
-                    <br />
-                    <Typography>
-                        The definitions of heatwaves, suggested preparations and further advice are extracted from the Victorian State Government . To access up-to-date information about current  heatwaves in Victoria, please refer to Victoria Health’s resources:
-                    </Typography>
-                    <a style={{ color: "white" }} href="https://www2.health.vic.gov.au/public-health/environmental-health/climate-weather-and-public-health/heatwaves-and-extreme-heat/.">Health Victoria, Extreme Heat and Heatwaves</a>
-                    <br />
-                    <a style={{ color: "white" }} href="https://www.betterhealth.vic.gov.au/campaigns/Survive-the-heat">Better Health Channel, Survive the Heat </a>
-                </div>
+                <Acknowledgements />
             </React.Fragment >
         )
     }
