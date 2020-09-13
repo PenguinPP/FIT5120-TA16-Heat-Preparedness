@@ -28,11 +28,6 @@ export default function HeatReadinessQuiz() {
   const [question, setQuestion] = React.useState(99);
   const classes = useStyles();
 
-  handleNextQuestion = () => {
-    const increment = question + 1;
-    setQuestion(increment);
-  };
-
   return (
     <React.Fragment>
       <Grid container justify="center">
@@ -73,7 +68,7 @@ export default function HeatReadinessQuiz() {
               Welcome to our Heat Readiness Quiz!"
               />
 
-              <Button onClick={() => handleNextQuestion}>Next Question</Button>
+              <Button>Next Question</Button>
             </Card>
           </Slide>
           <Slide
