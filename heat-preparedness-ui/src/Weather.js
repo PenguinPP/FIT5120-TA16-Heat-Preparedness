@@ -6,6 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
+import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
 
 const axios = require("axios").default;
 
@@ -104,6 +105,8 @@ export default function Weather(weatherInformation) {
           </ListItem>
         ))}
       </List>
+
+      <HeatReadinessQuiz />
       <Link
         activeClass="active"
         to={"Prep"}

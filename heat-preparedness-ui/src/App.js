@@ -118,17 +118,17 @@ class App extends React.Component {
             </Card>
           </Grid>
 
-          <Grid item sm={12} lg={12}>
-            <Card raised={true} variant="outlined">
-              <CardContent id="Alerts">
-                <Weather
-                  suburbList={this.state.suburbList}
-                  weatherInformation={this.state.weatherForecast}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
           <QuizContextProvider>
+            <Grid item sm={12} lg={12}>
+              <Card raised={true} variant="outlined">
+                <CardContent id="Alerts">
+                  <Weather
+                    suburbList={this.state.suburbList}
+                    weatherInformation={this.state.weatherForecast}
+                  />
+                </CardContent>
+              </Card>
+            </Grid>
             <Grid item sm={12} lg={12}>
               <Card raised={true} variant="outlined">
                 <CardContent id="Prep">
