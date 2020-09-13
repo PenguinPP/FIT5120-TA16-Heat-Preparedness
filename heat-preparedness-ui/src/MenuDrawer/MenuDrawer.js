@@ -67,6 +67,7 @@ export default function MenuDrawer(props) {
                                     <TeamIcon className={classes.logoStyle} />
                                 </SvgIcon>
                             </IconButton>
+
                         </IconScroll>
                     </Toolbar>
                 </AppBar>

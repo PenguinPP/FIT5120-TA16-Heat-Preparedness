@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import Slide from '@material-ui/core/Slide';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Typography, List, ListItem, Paper } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import { StayHydrated, HeatIllnesses, FanAirconUse, FinalTips, CoolEnvironment } from './GuideContent';
 
+//Use SVG to create SVGIcons
 const useStyles = makeStyles((theme) => ({
     grow1: {
         flexGrow: 1
@@ -38,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
     },
     hideCard: {
         display: "none"
-    }
+    },
+    cover: {
+        width: 151,
+    },
 }));
 
 
@@ -46,21 +48,14 @@ const useStyles = makeStyles((theme) => ({
 export default function QuickGuide() {
 
     const classes = useStyles()
+    const theme = useTheme()
 
     const [activePage, setActivePage] = React.useState(0)
-    const [slide, setSlide] = React.useState(true)
-
-    const icons = {
-        "Do": <CheckIcon className={classes.iconStyle} />,
-        "Dont": <ClearIcon className={classes.iconStyle} />
-    }
 
     const handleNext = () => {
 
         if (activePage < 4) {
             setActivePage((prevActivePage) => prevActivePage + 1);
-            setSlide(false)
-            setSlide(true)
         }
     };
 
@@ -68,8 +63,6 @@ export default function QuickGuide() {
 
         if (activePage > 0) {
             setActivePage((prevActivePage) => prevActivePage - 1);
-            setSlide(false)
-            setSlide(true)
         }
     };
 
@@ -135,38 +128,11 @@ export default function QuickGuide() {
                     className={activePage !== 0 && classes.hideCard}
                     timeout={700}
                 >
-
                     <Grid item xs={12}>
-
-                        <Card raised={true}>
-                            <CardContent className={classes.cardContentStyle}>
-                                <Typography variant="h5">
-                                    {content[0]["title"]}
-                                </Typography>
-                                <List>
-                                    {content[0]["content"].map((item, index) =>
-
-
-                                        <React.Fragment>
-                                            <ListItem id={index}>
-                                                <ListItemIcon>
-                                                    {content[0]["icons"][index] === "Do" ? <CheckIcon /> : <ClearIcon />}
-                                                </ListItemIcon>
-                                                <Typography variant="body1">
-                                                    {item}
-                                                </Typography>
-                                            </ListItem>
-
-                                        </React.Fragment>
-                                    )}
-                                </List>
-                            </CardContent>
-
-                        </Card >
+                        <StayHydrated />
                     </Grid>
 
                 </Slide>
-
                 {/*Page 2*/}
                 <Slide
                     in={activePage === 1 ? true : false}
@@ -176,27 +142,7 @@ export default function QuickGuide() {
                     className={activePage !== 1 && classes.hideCard}
                     timeout={700}>
                     <Grid item xs={12}>
-                        <Card raised={true}>
-                            <CardContent className={classes.cardContentStyle}>
-                                <Typography variant="h5">
-                                    {content[1]["title"]}
-                                </Typography>
-                                <List>
-                                    {content[1]["content"].map((item, index) =>
-
-
-                                        <React.Fragment>
-                                            <ListItem id={index}>
-                                                <Typography variant="body1">
-                                                    {item}
-                                                </Typography>
-                                            </ListItem>
-
-                                        </React.Fragment>
-                                    )}
-                                </List>
-                            </CardContent>
-                        </Card>
+                        <HeatIllnesses />
                     </Grid>
                 </Slide>
                 {/*Page 3*/}
@@ -208,27 +154,7 @@ export default function QuickGuide() {
                     className={activePage !== 2 && classes.hideCard}
                     timeout={700}>
                     <Grid item xs={12}>
-                        <Card raised={true}>
-                            <CardContent className={classes.cardContentStyle}>
-                                <Typography variant="h5">
-                                    {content[2]["title"]}
-                                </Typography>
-                                <List>
-                                    {content[2]["content"].map((item, index) =>
-
-
-                                        <React.Fragment>
-                                            <ListItem id={index}>
-                                                <Typography variant="body1">
-                                                    {item}
-                                                </Typography>
-                                            </ListItem>
-
-                                        </React.Fragment>
-                                    )}
-                                </List>
-                            </CardContent>
-                        </Card>
+                        <CoolEnvironment />
                     </Grid>
                 </Slide>
                 {/*Page 4*/}
@@ -240,27 +166,7 @@ export default function QuickGuide() {
                     className={activePage !== 3 && classes.hideCard}
                     timeout={700}>
                     <Grid item xs={12}>
-                        <Card raised={true}>
-                            <CardContent className={classes.cardContentStyle}>
-                                <Typography variant="h5">
-                                    {content[3]["title"]}
-                                </Typography>
-                                <List>
-                                    {content[3]["content"].map((item, index) =>
-
-
-                                        <React.Fragment>
-                                            <ListItem id={index}>
-                                                <Typography variant="body1">
-                                                    {item}
-                                                </Typography>
-                                            </ListItem>
-
-                                        </React.Fragment>
-                                    )}
-                                </List>
-                            </CardContent>
-                        </Card>
+                        <FanAirconUse />
                     </Grid>
                 </Slide>
                 {/*Page 5*/}
@@ -272,30 +178,10 @@ export default function QuickGuide() {
                     className={activePage !== 4 && classes.hideCard}
                     timeout={700}>
                     <Grid item xs={12}>
-                        <Card raised={true}>
-                            <CardContent className={classes.cardContentStyle}>
-                                <Typography variant="h5">
-                                    {content[4]["title"]}
-                                </Typography>
-                                <List>
-                                    {content[4]["content"].map((item, index) =>
-
-
-                                        <React.Fragment>
-                                            <ListItem id={index}>
-                                                <Typography variant="body1">
-                                                    {item}
-                                                </Typography>
-                                            </ListItem>
-
-                                        </React.Fragment>
-                                    )}
-                                </List>
-                            </CardContent>
-                        </Card>
+                        <FinalTips />
                     </Grid>
                 </Slide>
-                <IconButton onClick={handleBack} color={activePage > 0 ? "primary" : "default"} className={classes.chevronStyle}>
+                <IconButton onClick={handleBack} color={activePage > 0 ? theme.palette.primary.dark : "default"} className={classes.chevronStyle}>
                     <ChevronLeftIcon fontSize="inherit" />
                 </IconButton>
                 <Grid item xs={2}>

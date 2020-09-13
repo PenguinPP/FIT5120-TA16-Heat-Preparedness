@@ -26,6 +26,12 @@ const theme = createMuiTheme({
         },
         secondary: {
             main: "#70a9ff"
+        },
+        cross: {
+            main: "#ff4d29"
+        },
+        tick: {
+            main: "#009700"
         }
     }
 })
