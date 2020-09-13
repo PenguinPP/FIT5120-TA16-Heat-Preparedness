@@ -31,7 +31,7 @@ export default function HeatWaves() {
                 Heat Waves
         </Typography>
             <Grid container spacing={2} >
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6} lg={6}>
 
                     <Typography>
                         Heat waves are Australia's deadliest natural hazard. From 1900 until 2011, extreme heat has been responsible for more deaths in Australia than all other natural hazards combined.
@@ -57,7 +57,7 @@ export default function HeatWaves() {
                     </VictoryChart>
 
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6} lg={6}>
                     <Typography>
                         Victoria recorded a combined total of 541 deaths during the heatwaves in 2009 and 2014. 80% percent of these individuals were aged 65 and over.
                     </Typography>
@@ -72,15 +72,16 @@ export default function HeatWaves() {
                         colorScale={[theme.palette.primary.main, theme.palette.secondary.main]}
                     />
                 </Grid>
-                <Grid item xs={12} md={12} lg={4}>
-                    <Typography>
-                        Watch the video by Better Health Victoria below to learn some key points regarding the danger of heat waves.
+                <Grid container item xs={12} md={12} justify="center">
+                    <Grid item xs={12}>
+                        <Typography variant="h5">
+                            The Hidden Killer Among Us
                     </Typography>
-                    <br />
-                    <br />
-
-                    <ReactPlayer width="100%" height="350px" style={{ marginTop: "1.2rem" }} alt={"Extreme heat - English"} url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"} controls={true} config={{ youtube: { playerVars: { showinfo: 1 } } }} />
-                    <small className="mediaText">{"Extreme heat - English"}</small>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <ReactPlayer alt={"Extreme heat - English"} url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"} controls={true} config={{ youtube: { playerVars: { showinfo: 1 } } }} />
+                        <small className="mediaText">{"Extreme heat - English"}</small>
+                    </Grid>
                 </Grid>
 
                 <Grid item xs={12}>

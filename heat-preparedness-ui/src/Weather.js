@@ -1,109 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import Typography from '@material-ui/core/Typography';
-import { List, ListItem } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import WarningIcon from '@material-ui/icons/Warning';
-import { Link } from 'react-scroll';
-import Button from '@material-ui/core/Button';
+import React, { useState, useEffect } from "react";
+import Typography from "@material-ui/core/Typography";
+import { List, ListItem } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import WarningIcon from "@material-ui/icons/Warning";
+import { Link } from "react-scroll";
+import Button from "@material-ui/core/Button";
 
-const axios = require('axios').default;
-
+const axios = require("axios").default;
 
 export default function Weather(weatherInformation) {
+  const suburbData = weatherInformation["suburbList"];
 
+  const [suburbId, setSuburbId] = React.useState(1794); //Currently selected suburb (Default ID is for Melbourne 3000)
+  const [weatherData, setWeatherData] = React.useState([
+    weatherInformation["weatherInformation"],
+  ]);
 
-    const suburbData = weatherInformation["suburbList"]
+  var currentSuburb = suburbData.filter(
+    (suburb) => suburb.suburb_id === suburbId
+  )[0];
+  //console.log(currentSuburb)
 
+  React.useEffect(() => {
+    let dataLink =
+      "https://www.victoria-heat.tk/api/SuburbForecast/" + suburbId;
 
-    const [suburbId, setSuburbId] = React.useState(1794) //Currently selected suburb (Default ID is for Melbourne 3000)
-    const [weatherData, setWeatherData] = React.useState([weatherInformation["weatherInformation"]])
+    axios
+      .get(dataLink)
+      .then((results) => results.data)
+      .then((data) => {
+        setWeatherData(data);
+        //console.log(weatherData)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [suburbId]);
 
-    var currentSuburb = suburbData.filter(suburb => suburb.suburb_id === suburbId)[0]
-    console.log(currentSuburb)
-
-    React.useEffect(() => {
-        let dataLink = "https://www.victoria-heat.tk/api/SuburbForecast/" + suburbId
-
-        axios.get(dataLink)
-            .then(results => results.data)
-            .then(data => {
-
-                setWeatherData(data)
-                //console.log(weatherData)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-    }, [suburbId])
-
-
-    //if (suburbList.includes(suburb)) {
-    return (
-
-        /*        <Button onClick = {() => setSuburb("Bellfield")>
+  //if (suburbList.includes(suburb)) {
+  return (
+    /*        <Button onClick = {() => setSuburb("Bellfield")>
 
         NEED TO ADD COUNCIL {item.council}
         */
 
-        <React.Fragment>
-            <Typography variant="h4" >
+    <React.Fragment>
+      <Typography variant="h4">Weather Forecasts {"&"} Alerts</Typography>
 
-                Weather Forecasts {"&"} Alerts
-                </Typography>
+      <Typography
+        variant="h6"
+        style={{ marginBottom: "1rem", marginTop: "1rem" }}
+      >
+        Select your suburb
+      </Typography>
 
-            <Typography variant="h6" style={{ marginBottom: "1rem", marginTop: "1rem" }}>
-                Select your suburb
-                </Typography>
+      <Autocomplete
+        id="combo-box-demo"
+        options={suburbData}
+        getOptionLabel={(option) => option.suburb + ", " + option.postcode}
+        fullWidth={true}
+        onChange={(event, newValue) => {
+          newValue !== undefined && setSuburbId(newValue.suburb_id);
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Filter by name or postcode"
+            InputLabelProps={{ style: { color: "black" } }}
+            variant="outlined"
+          />
+        )}
+      />
 
-            <Autocomplete
-                id="combo-box-demo"
-                options={suburbData}
-                getOptionLabel={(option) => option.suburb + ", " + option.postcode}
-                fullWidth={true}
-                onChange={(event, newValue) => { newValue !== undefined && setSuburbId(newValue.suburb_id) }}
-                renderInput={(params) => <TextField {...params} label="Filter by name or postcode" InputLabelProps={{ style: { color: "black" } }} variant="outlined" />}
-            />
-
-            {/* <TextField
+      {/* <TextField
                     fullWidth={true}
                     value={suburb}
                     onChange={(event) => setSuburb(event.target.value)}
                 >
 
                 </TextField>*/}
-            <Typography variant="h5" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
-                Weather in {currentSuburb !== undefined && currentSuburb.suburb + " (" + currentSuburb.postcode + ")"} for the next week
-                </Typography>
-            <br />
-            <Typography variant="h6">
-                <WarningIcon /> next to the day indicates a heat wave alert
-            </Typography>
-            <List>
-                {weatherData.map(item =>
-                    <ListItem key={item.date}>
-                        {item.date ? item.date.toString().replace(/T.+/, '').substring(5, 10) : ""} : max {item.max ? item.max : ""}°     |     min {item.min ? item.min : ""}°     |     avg {item.avg ? item.avg : ""}°
-                        </ListItem>
-                )}
-            </List>
-            <Link
-                activeClass="active"
-                to={"Prep"}
-                spy={true}
-                smooth={true}
-                offset={-80}
-                duration={700}
-            >
-                <Button variant="contained" fullWidth={true} color="primary">
-
-                    <Typography variant="h6" >
-                        Be Prepared!
-                         </Typography>
-                </Button>
-
-            </Link>
-        </React.Fragment>
-    )
+      <Typography
+        variant="h5"
+        style={{ marginTop: "2rem", marginBottom: "1rem" }}
+      >
+        Weather in{" "}
+        {currentSuburb !== undefined &&
+          currentSuburb.suburb + " (" + currentSuburb.postcode + ")"}{" "}
+        for the next week
+      </Typography>
+      <br />
+      <Typography variant="h6">
+        <WarningIcon /> next to the day indicates a heat wave alert
+      </Typography>
+      <List>
+        {weatherData.map((item) => (
+          <ListItem key={item.date}>
+            {item.date
+              ? item.date.toString().replace(/T.+/, "").substring(5, 10)
+              : ""}{" "}
+            : max {item.max ? item.max : ""}° | min {item.min ? item.min : ""}°
+            | avg {item.avg ? item.avg : ""}°
+          </ListItem>
+        ))}
+      </List>
+      <Link
+        activeClass="active"
+        to={"Prep"}
+        spy={true}
+        smooth={true}
+        offset={-80}
+        duration={700}
+      >
+        <Button variant="contained" fullWidth={true} color="primary">
+          <Typography variant="h6">Be Prepared!</Typography>
+        </Button>
+      </Link>
+    </React.Fragment>
+  );
 }
 
 /*

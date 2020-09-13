@@ -113,7 +113,6 @@ export function HeatIllnesses() {
                                     {item}
                                 </Typography>
                             </ListItem>
-
                         </React.Fragment>
                     )}
                 </List>
@@ -130,7 +129,7 @@ export function CoolEnvironment() {
             "content": [
                 "Draw your blinds",
                 "Close-off any rooms that you are not using",
-                "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature."
+                "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature"
             ]
         }
     ]
@@ -146,10 +145,9 @@ export function CoolEnvironment() {
                         <React.Fragment>
                             <ListItem id={index}>
                                 <Typography variant="body1">
-                                    {item}
+                                    {index + 1}. {item}
                                 </Typography>
                             </ListItem>
-
                         </React.Fragment>
                     )}
                 </List>
