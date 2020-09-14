@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
-import { List, ListItem } from "@material-ui/core";
+import { List, ListItem, makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -10,6 +10,18 @@ import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
 
 const axios = require("axios").default;
 
+const useStyles = makeStyles((theme) => ({
+  active: {
+    //Style for active category button
+    background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+}));
+
 export default function Weather(weatherInformation) {
   const suburbData = weatherInformation["suburbList"];
 
@@ -17,6 +29,8 @@ export default function Weather(weatherInformation) {
   const [weatherData, setWeatherData] = React.useState([
     weatherInformation["weatherInformation"],
   ]);
+
+  const classes = useStyles();
 
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
@@ -115,7 +129,12 @@ export default function Weather(weatherInformation) {
         offset={-80}
         duration={700}
       >
-        <Button variant="contained" fullWidth={true} color="primary">
+        <Button
+          variant="contained"
+          fullWidth={true}
+          color="primary"
+          className={classes.active}
+        >
           <Typography variant="h6">Be Prepared!</Typography>
         </Button>
       </Link>

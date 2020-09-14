@@ -10,7 +10,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
     marginBottom: "1rem",
   },
   quizButton: {

@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
     minHeight: "450px",
     padding: "1rem",
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
   },
   mediaCoffee: {
     height: 200,

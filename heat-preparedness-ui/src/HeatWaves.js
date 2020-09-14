@@ -11,18 +11,30 @@ import Grid from "@material-ui/core/Grid";
 import ReactPlayer from "react-player";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
 import eightyPercent from "./images/eighty-percent.png";
 import Container from "@material-ui/core/Container";
 
+const useStyles = makeStyles((theme) => ({
+  active: {
+    //Style for active category button
+    background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+}));
+
 export default function HeatWaves() {
   const theme = useTheme();
-
+  const classes = useStyles();
   const hazardData = [
-    { hazard: 1, deaths: 4555, fill: theme.palette.primary.main }, //Extreme heat
-    { hazard: 2, deaths: 1285, fill: theme.palette.secondary.main }, //Cyclones
-    { hazard: 3, deaths: 1221, fill: theme.palette.secondary.main }, //Floods
-    { hazard: 4, deaths: 866, fill: theme.palette.secondary.main }, //Bushfires
+    { hazard: 1, deaths: 4555, fill: theme.palette.secondary.main }, //Extreme heat
+    { hazard: 2, deaths: 1285, fill: theme.palette.primary.main }, //Cyclones
+    { hazard: 3, deaths: 1221, fill: theme.palette.primary.main }, //Floods
+    { hazard: 4, deaths: 866, fill: theme.palette.primary.main }, //Bushfires
   ];
 
   const deathData = [
@@ -121,7 +133,12 @@ export default function HeatWaves() {
             offset={-80}
             duration={700}
           >
-            <Button variant="contained" fullWidth={true} color="primary">
+            <Button
+              variant="contained"
+              fullWidth={true}
+              color="primary"
+              className={classes.active}
+            >
               <Typography variant="h6">Stay Alert!</Typography>
             </Button>
           </Link>

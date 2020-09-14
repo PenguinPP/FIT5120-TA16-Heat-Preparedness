@@ -14,14 +14,16 @@ const useStyles = makeStyles((theme) => ({
   active: {
     //Style for active category button
     background: theme.palette.primary.main,
-    color: "black",
+    color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
   inactive: {
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
 }));
