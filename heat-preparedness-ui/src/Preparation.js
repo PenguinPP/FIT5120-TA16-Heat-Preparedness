@@ -15,14 +15,16 @@ const useStyles = makeStyles((theme) => ({
   active: {
     //Style for active category button
     background: theme.palette.primary.main,
-    color: "black",
+    color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
   inactive: {
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
 }));
@@ -145,7 +147,12 @@ export default function Preparation(preparationData) {
             duration={700}
           >
             {" "}
-            <Button variant="contained" fullWidth={true} color="primary">
+            <Button
+              variant="contained"
+              fullWidth={true}
+              color="primary"
+              className={classes.active}
+            >
               <Typography variant="h6">Take Precautions!</Typography>
             </Button>
           </Link>
