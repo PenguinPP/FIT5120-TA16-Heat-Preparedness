@@ -5,15 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import ReactPlayer from "react-player";
 import { Link } from 'react-scroll';
 import Button from '@material-ui/core/Button';
+import { useTheme } from '@material-ui/core/styles';
+
+
 
 export default function HeatWaves() {
 
+    const theme = useTheme()
 
     const hazardData = [
-        { hazard: 1, deaths: 4555, fill: "#ff9800" }, //Extreme heat
-        { hazard: 2, deaths: 1285, fill: "#7986cb" }, //Cyclones
-        { hazard: 3, deaths: 1221, fill: "#7986cb" }, //Floods
-        { hazard: 4, deaths: 866, fill: "#7986cb" } //Bushfires
+        { hazard: 1, deaths: 4555, fill: theme.palette.primary.main }, //Extreme heat
+        { hazard: 2, deaths: 1285, fill: theme.palette.secondary.main }, //Cyclones
+        { hazard: 3, deaths: 1221, fill: theme.palette.secondary.main }, //Floods
+        { hazard: 4, deaths: 866, fill: theme.palette.secondary.main } //Bushfires
     ];
 
     const deathData = [
@@ -27,7 +31,7 @@ export default function HeatWaves() {
                 Heat Waves
         </Typography>
             <Grid container spacing={2} >
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6} lg={6}>
 
                     <Typography>
                         Heat waves are Australia's deadliest natural hazard. From 1900 until 2011, extreme heat has been responsible for more deaths in Australia than all other natural hazards combined.
@@ -53,7 +57,7 @@ export default function HeatWaves() {
                     </VictoryChart>
 
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6} lg={6}>
                     <Typography>
                         Victoria recorded a combined total of 541 deaths during the heatwaves in 2009 and 2014. 80% percent of these individuals were aged 65 and over.
                     </Typography>
@@ -65,18 +69,19 @@ export default function HeatWaves() {
                         data={deathData}
                         x="ageGroup"
                         y="percentage"
-                        colorScale={["#ff9800", "#7986cb"]}
+                        colorScale={[theme.palette.primary.main, theme.palette.secondary.main]}
                     />
                 </Grid>
-                <Grid item xs={12} md={12} lg={4}>
-                    <Typography>
-                        Watch the video by Better Health Victoria below to learn some key points regarding the danger of heat waves.
+                <Grid container item xs={12} md={12} justify="center">
+                    <Grid item xs={12}>
+                        <Typography variant="h5">
+                            The Hidden Killer Among Us
                     </Typography>
-                    <br />
-                    <br />
-
-                    <ReactPlayer width="100%" height="350px" style={{ marginTop: "1.2rem" }} alt={"Extreme heat - English"} url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"} controls={true} config={{ youtube: { playerVars: { showinfo: 1 } } }} />
-                    <small className="mediaText">{"Extreme heat - English"}</small>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <ReactPlayer alt={"Extreme heat - English"} url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"} controls={true} config={{ youtube: { playerVars: { showinfo: 1 } } }} />
+                        <small className="mediaText">{"Extreme heat - English"}</small>
+                    </Grid>
                 </Grid>
 
                 <Grid item xs={12}>
