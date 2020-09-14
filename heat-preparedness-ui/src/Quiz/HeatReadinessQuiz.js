@@ -15,8 +15,8 @@ import { QuestionOne, QuestionTwo, QuestionThree } from "./QuizQuestions";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.tertiary.main,
+    color: theme.palette.tertiary.contrastText,
     marginBottom: "1rem",
     padding: "1rem",
   },
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   startQuizButton: {
-    background: theme.palette.primary.light,
+    background: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     textTransform: "none",
     marginBottom: "1rem",
@@ -34,8 +34,13 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "1rem",
       textTransform: "none",
     },
-    nextQuestionButton: {
-      color: "white",
+  },
+  nextQuestionButton: {
+    background: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
 }));
@@ -99,7 +104,10 @@ export default function HeatReadinessQuiz() {
               Welcome to our Heat Readiness Quiz!"
               />
 
-              <Button onClick={handleNext} style={{ color: "white" }}>
+              <Button
+                onClick={handleNext}
+                className={classes.nextQuestionButton}
+              >
                 Next Question
               </Button>
             </Card>
@@ -116,7 +124,10 @@ export default function HeatReadinessQuiz() {
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
               <QuestionOne />
-              <Button onClick={handleNext} style={{ color: "white" }}>
+              <Button
+                onClick={handleNext}
+                className={classes.nextQuestionButton}
+              >
                 Next Question
               </Button>
             </Card>
@@ -133,7 +144,10 @@ export default function HeatReadinessQuiz() {
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
               <QuestionTwo />
-              <Button onClick={handleNext} style={{ color: "white" }}>
+              <Button
+                onClick={handleNext}
+                className={classes.nextQuestionButton}
+              >
                 Next Question
               </Button>
             </Card>
@@ -150,7 +164,10 @@ export default function HeatReadinessQuiz() {
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
               <QuestionThree />
-              <Button onClick={handleNext} style={{ color: "white" }}>
+              <Button
+                onClick={handleNext}
+                className={classes.nextQuestionButton}
+              >
                 Next Question
               </Button>
             </Card>

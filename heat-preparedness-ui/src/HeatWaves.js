@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.secondary.contrastText,
     },
   },
+  gridStyle: {
+    maxWidth: "100%",
+  },
 }));
 
 export default function HeatWaves() {
@@ -45,13 +48,15 @@ export default function HeatWaves() {
   return (
     <React.Fragment>
       <Typography variant="h4">Heat Waves</Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6} lg={6}>
+      <Grid container spacing={2} wrap="wrap">
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
           <Typography>
             Heat waves are Australia's deadliest natural hazard. From 1900 until
             2011, extreme heat has been responsible for more deaths in Australia
             than all other natural hazards combined.
           </Typography>
+        </Grid>
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
           <VictoryChart
             domainPadding={20}
             theme={VictoryTheme.material}
@@ -74,20 +79,24 @@ export default function HeatWaves() {
             />
           </VictoryChart>
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
-          <Typography>
-            Victoria recorded a combined total of 541 deaths during the
-            heatwaves in 2009 and 2014. 80% percent of these individuals were
-            aged 65 and over.
-          </Typography>
-          <img
-            src={eightyPercent}
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
+          <div
             style={{
-              height: 600,
-              width: 381,
-              marginTop: "1rem",
+              textAlign: "center",
+              width: "100%",
+              padding: "1rem",
+              marginBottom: "1rem",
             }}
-          ></img>
+          >
+            <img
+              src={eightyPercent}
+              style={{
+                maxHeight: 500,
+                marginTop: "1rem",
+                maxWidth: "90%",
+              }}
+            ></img>
+          </div>
 
           {/* <VictoryPie
                         height={300}
@@ -99,11 +108,26 @@ export default function HeatWaves() {
                         colorScale={[theme.palette.primary.main, theme.palette.secondary.main]}
                     /> */}
         </Grid>
-        <Grid container item xs={12} md={12} justify="center">
-          <Grid item xs={12}>
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
+          <Typography>
+            Victoria recorded a combined total of 541 deaths during the
+            heatwaves in 2009 and 2014. 80% percent of these individuals were
+            aged 65 and over.
+          </Typography>
+        </Grid>
+
+        <Grid
+          container
+          item
+          xs={12}
+          md={12}
+          justify="center"
+          textAlign="center"
+        >
+          <Grid item className={classes.gridStyle} xs={12}>
             <Typography variant="h5">The Hidden Killer Among Us</Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item className={classes.gridStyle} xs={6}>
             <ReactPlayer
               alt={"Extreme heat - English"}
               url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"}
@@ -114,7 +138,7 @@ export default function HeatWaves() {
           </Grid>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item className={classes.gridStyle} xs={12}>
           <Typography>
             Heat waves exacerbate pre-existing medical conditions and are
             therefore also a significant cause for concern to those with chronic
@@ -124,7 +148,7 @@ export default function HeatWaves() {
           </Typography>
         </Grid>
 
-        <Grid item xs={12} justify="center">
+        <Grid item className={classes.gridStyle} xs={12} justify="center">
           <Link
             activeClass="active"
             to={"Alerts"}

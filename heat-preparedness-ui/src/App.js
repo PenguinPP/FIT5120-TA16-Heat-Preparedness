@@ -106,7 +106,7 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <MenuDrawer />
-        <Grid container spacing={2} justify="center" wrap="wrap">
+        <Grid container spacing={2} wrap="wrap">
           <Grid item xs={12}>
             <LandingPage />
           </Grid>
@@ -117,7 +117,6 @@ class App extends React.Component {
               </CardContent>
             </Card>
           </Grid>
-
           <QuizContextProvider>
             <Grid item sm={12} lg={12}>
               <Card raised={true} variant="outlined">
