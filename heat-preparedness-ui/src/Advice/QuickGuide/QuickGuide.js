@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "4rem",
     flexGrow: 1,
     justifyContent: "center",
-    color: theme.palette.primary.dark,
+    color: theme.palette.primary.light,
   },
   inactiveChevronStyle: {
     fontSize: "4rem",
