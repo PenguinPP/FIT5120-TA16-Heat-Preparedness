@@ -64,16 +64,16 @@ export default function Advice(adviceData) {
 
   const messages = {
     //Message to display for each category before bullet points
-    General: "Some general bits of advice to get you through the day:",
+    "Essentials Guide":
+      "Some general bits of advice to get you through the day:",
     "Keeping Cool": "Here are a few things that you can do to keep cool:",
-    "Physical Activity":
-      "When it comes to physical activity during a heat wave:",
+    Pets: "When it comes to physical activity during a heat wave:",
   };
 
   const display = {
-    General: <QuickGuide />,
+    "Essentials Guide": <QuickGuide />,
     "Keeping Cool": <h1>Keep Cool Not created yet</h1>,
-    "Physical Activity": <h1>Physical Activity Not created yet</h1>,
+    Pets: <h1>Pets Not created yet</h1>,
   };
 
   return (
@@ -86,12 +86,12 @@ export default function Advice(adviceData) {
           <Button
             id="General"
             className={
-              adviceActiveCategory === "General"
+              adviceActiveCategory === "Essentials Guide"
                 ? classes.active
                 : classes.inactive
             } //Set style to active style if current category
             fullWidth={true}
-            onClick={() => setAdviceCategory("General")}
+            onClick={() => setAdviceCategory("Essentials Guide")}
             variant="contained"
           >
             <GeneralIcon fontSize="large" />
@@ -118,16 +118,16 @@ export default function Advice(adviceData) {
           <Button
             id="Physical Activity"
             className={
-              adviceActiveCategory === "Physical Activity"
+              adviceActiveCategory === "Pets"
                 ? classes.active
                 : classes.inactive
             }
             fullWidth={true}
-            onClick={() => setAdviceCategory("Physical Activity")}
+            onClick={() => setAdviceCategory("Pets")}
             variant="contained"
           >
             <PhysicalActivityIcon fontSize="large" />
-            Physical Activity
+            Pets
           </Button>
         </Grid>
       </Grid>

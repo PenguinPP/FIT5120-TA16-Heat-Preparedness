@@ -4,13 +4,14 @@ export const QuizContext = createContext();
 
 class QuizContextProvider extends Component {
   state = {
-    prepActiveCategory: "Heat Short Term",
-    adviceActiveCategory: "General",
+    prepActiveCategory: "Symptoms",
+    adviceActiveCategory: "Essentials Guide",
     q1Correct: false,
     q2Correct: false,
     q3Correct: false,
-    q4Correct: false,
-    q5Correct: false,
+    q1Answered: false,
+    q2Answered: false,
+    q3Answered: false,
   };
 
   setPrepCategory = (category) => {
@@ -29,11 +30,14 @@ class QuizContextProvider extends Component {
   setQ3Result = (result) => {
     this.setState({ q3Correct: result });
   };
-  setQ4Result = (result) => {
-    this.setState({ q4Correct: result });
+  setQ1Answered = (result) => {
+    this.setState({ q1Answered: result });
   };
-  setQ5Result = (result) => {
-    this.setState({ q5Correct: result });
+  setQ2Answered = (result) => {
+    this.setState({ q2Answered: result });
+  };
+  setQ3Answered = (result) => {
+    this.setState({ q3Answered: result });
   };
   render() {
     return (
@@ -45,8 +49,9 @@ class QuizContextProvider extends Component {
           setQ1Result: this.setQ1Result,
           setQ2Result: this.setQ2Result,
           setQ3Result: this.setQ3Result,
-          setQ4Result: this.setQ4Result,
-          setQ5Result: this.setQ5Result,
+          setQ1Answered: this.setQ1Answered,
+          setQ2Answered: this.setQ2Answered,
+          setQ3Answered: this.setQ3Answered,
         }}
       >
         {this.props.children}

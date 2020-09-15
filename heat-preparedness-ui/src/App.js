@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { Card, CardContent } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Advice from "./Advice/Advice";
-import Preparation from "./Preparation";
+import Preparation from "./Preparation/Preparation";
 import HeatWaves from "./HeatWaves";
 import Weather from "./Weather";
 import LandingPage from "./LandingPage";
@@ -110,7 +110,7 @@ class App extends React.Component {
           <Grid item xs={12}>
             <LandingPage />
           </Grid>
-          <Grid item sm={12} lg={12}>
+          <Grid item xs={12} lg={12}>
             <Card raised={true} variant="outlined" id="HeatWaves">
               <CardContent>
                 <HeatWaves />
