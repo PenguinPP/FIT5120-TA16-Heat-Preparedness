@@ -203,7 +203,7 @@ export function QuestionThree(status) {
         <CardContent className={classes.quizContent}>
           <FormControl component="fieldset">
             <Typography>
-              Should you call “000” if you see a child or a pet leff inside a
+              Should you call “000” if you see a child or a pet left inside a
               car?
             </Typography>
             {/*Put Question here ^^^^^^^^^^^ */}
