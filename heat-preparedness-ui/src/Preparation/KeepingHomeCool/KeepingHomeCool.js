@@ -9,12 +9,12 @@ import IconButton from "@material-ui/core/IconButton";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import {
-  StayHydrated,
-  HeatIllnesses,
-  FanAirconUse,
-  FinalTips,
-  CoolEnvironment,
-} from "./GuideContent";
+  Insulation,
+  DraughtProofing,
+  Windows,
+  Ventilation,
+  Landscaping,
+} from "./KeepHomeCoolContent";
 
 //Use SVG to create SVGIcons
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuickGuide() {
+export default function KeepingHomeCool() {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -69,49 +69,6 @@ export default function QuickGuide() {
     }
   };
 
-  const content = [
-    {
-      cardNumber: 1,
-      title: "Stay Hydrated and avoid strenuous activity",
-      content: [
-        "Keep a full drink bottle with you and take small sips of water frequently.",
-        "Avoid Caffeine and alcohol.",
-        "Avoid heavy activity like sport, renovating and gardening.",
-      ],
-      icons: ["Do", "Dont", "Dont"],
-    },
-    {
-      cardNumber: 2,
-      title: "Look out for signs of heat related illness",
-      content: ["Heat Cramps", "Heat Exhaustion", "Heat Stroke"],
-    },
-    {
-      cardNumber: 3,
-      title: "Keep your environment cool",
-      content: [
-        "Draw your blinds",
-        "Close-off any rooms that you are not using",
-        "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature.",
-      ],
-    },
-    {
-      cardNumber: 4,
-      title: "Fan / Air Conditioner usage",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-    {
-      cardNumber: 5,
-      title: "Final Tips",
-      content: [
-        "Stay out of the sun! Especially during the hottest part of the day! (usually 11am-3pm)",
-        "If you cannot stay cool in your home, make arrangements to visit a friend or spend time in air-conditioned public spaces!",
-      ],
-    },
-  ];
-
   return (
     <div className={classes.containerStyle}>
       <Grid container alignItems="center" alignContent="space-around">
@@ -125,7 +82,7 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <StayHydrated />
+            <Insulation />
           </Grid>
         </Slide>
         {/*Page 2*/}
@@ -138,7 +95,7 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <HeatIllnesses />
+            <DraughtProofing />
           </Grid>
         </Slide>
         {/*Page 3*/}
@@ -151,10 +108,9 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <CoolEnvironment />
+            <Windows />
           </Grid>
         </Slide>
-        {/*Page 4*/}
         <Slide
           in={activePage === 3 ? true : false}
           direction="left"
@@ -164,10 +120,9 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <FanAirconUse />
+            <Ventilation />
           </Grid>
         </Slide>
-        {/*Page 5*/}
         <Slide
           in={activePage === 4 ? true : false}
           direction="left"
@@ -177,7 +132,7 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <FinalTips />
+            <Landscaping />
           </Grid>
         </Slide>
         <IconButton
@@ -198,7 +153,7 @@ export default function QuickGuide() {
         <IconButton
           onClick={handleNext}
           className={
-            activePage < 4
+            activePage < 2
               ? classes.activeChevronStyle
               : classes.inactiveChevronStyle
           }

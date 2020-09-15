@@ -11,8 +11,6 @@ import {
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
-import noCoffeeAlcohol from "./images/nocoffeealcohol.png";
-import noExercise from "./images/no-exercise.png";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -39,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function StayHydrated() {
+export function HeatCramps() {
   const content = [
     {
-      title: "Stay Hydrated and avoid strenuous activity",
+      title: "Heat Cramps",
       content: [
         "Keep a full drink bottle with you and take small sips of water frequently.",
         "Avoid Caffeine and alcohol.",
@@ -76,54 +74,17 @@ export function StayHydrated() {
               ))}
             </List>
           </Grid>
-          <Grid item xs={12} md={3}>
-            <CardMedia
-              image={noCoffeeAlcohol}
-              className={classes.mediaCoffee}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <CardMedia image={noExercise} className={classes.mediaExercise} />
-          </Grid>
         </Grid>
       </CardContent>
     </Card>
   );
 }
 
-export function HeatIllnesses() {
-  const content = [
-    {
-      title: "Look out for signs of heat related illness",
-      content: ["Heat Cramps", "Heat Exhaustion", "Heat Stroke"],
-    },
-  ];
-
-  const classes = useStyles();
-
-  return (
-    <Card raised={true}>
-      <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
-  );
-}
-
-export function CoolEnvironment() {
+export function HeatExhaustion() {
   const classes = useStyles();
   const content = [
     {
-      title: "Keep your environment cool",
+      title: "Heat Exhaustion",
       content: [
         "Draw your blinds",
         "Close-off any rooms that you are not using",
@@ -152,44 +113,14 @@ export function CoolEnvironment() {
   );
 }
 
-export function FanAirconUse() {
+export function HeatStroke() {
   const classes = useStyles();
   const content = [
     {
-      title: "Fan / Air Conditioner usage",
+      title: "Heat Stroke",
       content: [
         "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
         "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-  ];
-
-  return (
-    <Card raised={true}>
-      <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
-  );
-}
-
-export function FinalTips() {
-  const classes = useStyles();
-  const content = [
-    {
-      title: "Final Tips",
-      content: [
-        "Stay out of the sun! Especially during the hottest part of the day! (usually 11am-3pm)",
-        "If you cannot stay cool in your home, make arrangements to visit a friend or spend time in air-conditioned public spaces!",
       ],
     },
   ];

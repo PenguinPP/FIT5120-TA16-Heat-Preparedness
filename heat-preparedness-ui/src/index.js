@@ -18,20 +18,27 @@ const theme = createMuiTheme({
     fontSize: 19,
   },
   palette: {
-    white: "#FFFFFF",
     primary: {
-      main: "#ffc570",
-      dark: "#fb8c00",
-      contrastText: "#000000",
+      light: "#785396",
+      main: "#4a2968",
+      dark: "#1f013d",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#70a9ff",
+      light: "#ffa040",
+      main: "#FF6D00",
+      dark: "#c43e00",
+      contrastText: "#000000",
+    },
+    tertiary: {
+      main: "F8F4F9",
+      contrastText: "#000000",
     },
     cross: {
-      main: "#ff4d29",
+      main: "#CE2D4F",
     },
     tick: {
-      main: "#009700",
+      main: "#148F74",
     },
   },
 });

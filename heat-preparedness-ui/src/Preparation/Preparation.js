@@ -4,25 +4,29 @@ import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import { List, ListItem, makeStyles } from "@material-ui/core";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { ReactComponent as ShortIcon } from "./icons/short-term-icon.svg";
-import { ReactComponent as LongIcon } from "./icons/long-term-icon.svg";
-import { ReactComponent as PowerIcon } from "./icons/power-failure-icon.svg";
+import { ReactComponent as ShortIcon } from "../icons/short-term-icon.svg";
+import { ReactComponent as LongIcon } from "../icons/long-term-icon.svg";
+import { ReactComponent as PowerIcon } from "../icons/power-failure-icon.svg";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-scroll";
-import { QuizContext } from "./Contexts/QuizContext";
+import { QuizContext } from "../Contexts/QuizContext";
+import Symptoms from "./Symptoms/Symptoms";
+import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
 
 const useStyles = makeStyles((theme) => ({
   active: {
     //Style for active category button
     background: theme.palette.primary.main,
-    color: "black",
+    color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
   inactive: {
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
     },
   },
 }));
@@ -62,6 +66,12 @@ export default function Preparation(preparationData) {
 
   //console.log(preparationData["preparationData"])
 
+  const display = {
+    Symptoms: <Symptoms />,
+    "Cooling your home": <KeepingHomeCool />,
+    Pets: <h1>Pets Not created yet</h1>,
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h4" style={{ marginBottom: "1rem" }}>
@@ -70,34 +80,34 @@ export default function Preparation(preparationData) {
       <Grid container>
         <Grid item xs={12} md={4}>
           <Button
-            id="Heat Short Term"
+            id="Symptoms"
             className={
-              prepActiveCategory === "Heat Short Term"
+              prepActiveCategory === "Symptoms"
                 ? classes.active
                 : classes.inactive
             } //Set style to active style if current category
             fullWidth={true}
-            onClick={() => setPrepCategory("Heat Short Term")}
+            onClick={() => setPrepCategory("Symptoms")}
             variant="contained"
           >
             <ShortTermIcon fontSize="large" />
-            Short Term
+            Symptoms
           </Button>
         </Grid>
         <Grid item xs={12} md={4}>
           <Button
-            id="Heat Long Term"
+            id="Cooling your home"
             className={
-              prepActiveCategory === "Heat Long Term"
+              prepActiveCategory === "Cooling your home"
                 ? classes.active
                 : classes.inactive
             }
             fullWidth={true}
-            onClick={() => setPrepCategory("Heat Long Term")}
+            onClick={() => setPrepCategory("Cooling your home")}
             variant="contained"
           >
             <LongTermIcon fontSize="large" />
-            Long Term
+            Cooling your home
           </Button>
         </Grid>
         <Grid item xs={12} md={4}>
@@ -136,6 +146,9 @@ export default function Preparation(preparationData) {
         </Grid>
 
         <Grid item xs={12} justify="center">
+          {display[prepActiveCategory]}
+        </Grid>
+        <Grid item xs={12} justify="center">
           <Link
             activeClass="active"
             to={"Advice"}
@@ -145,7 +158,12 @@ export default function Preparation(preparationData) {
             duration={700}
           >
             {" "}
-            <Button variant="contained" fullWidth={true} color="primary">
+            <Button
+              variant="contained"
+              fullWidth={true}
+              color="primary"
+              className={classes.active}
+            >
               <Typography variant="h6">Take Precautions!</Typography>
             </Button>
           </Link>
