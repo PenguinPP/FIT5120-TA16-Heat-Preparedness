@@ -10,7 +10,6 @@ import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import {
   StayHydrated,
-  HeatIllnesses,
   FanAirconUse,
   FinalTips,
   CoolEnvironment,
@@ -58,7 +57,7 @@ export default function QuickGuide() {
   const [activePage, setActivePage] = React.useState(0);
 
   const handleNext = () => {
-    if (activePage < 4) {
+    if (activePage < 3) {
       setActivePage((prevActivePage) => prevActivePage + 1);
     }
   };
@@ -129,6 +128,7 @@ export default function QuickGuide() {
           </Grid>
         </Slide>
         {/*Page 2*/}
+
         <Slide
           in={activePage === 1 ? true : false}
           direction="left"
@@ -138,10 +138,11 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <HeatIllnesses />
+            <CoolEnvironment />
           </Grid>
         </Slide>
         {/*Page 3*/}
+
         <Slide
           in={activePage === 2 ? true : false}
           direction="left"
@@ -151,7 +152,7 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <CoolEnvironment />
+            <FanAirconUse />
           </Grid>
         </Slide>
         {/*Page 4*/}
@@ -164,22 +165,10 @@ export default function QuickGuide() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <FanAirconUse />
-          </Grid>
-        </Slide>
-        {/*Page 5*/}
-        <Slide
-          in={activePage === 4 ? true : false}
-          direction="left"
-          mountOnEnter
-          unmountOnExit
-          className={activePage !== 4 && classes.hideCard}
-          timeout={700}
-        >
-          <Grid item xs={12}>
             <FinalTips />
           </Grid>
         </Slide>
+        {/*Card Navigation*/}
         <IconButton
           onClick={handleBack}
           className={
@@ -192,13 +181,13 @@ export default function QuickGuide() {
         </IconButton>
         <Grid item xs={2}>
           <Typography variant="body1" align="center">
-            Page {activePage + 1} / 5
+            Page {activePage + 1} / 4
           </Typography>
         </Grid>
         <IconButton
           onClick={handleNext}
           className={
-            activePage < 4
+            activePage < 3
               ? classes.activeChevronStyle
               : classes.inactiveChevronStyle
           }

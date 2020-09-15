@@ -84,7 +84,7 @@ export default function Advice(adviceData) {
       <Grid container>
         <Grid item xs={12} md={4}>
           <Button
-            id="General"
+            id="Essentials Guide"
             className={
               adviceActiveCategory === "Essentials Guide"
                 ? classes.active
@@ -95,7 +95,7 @@ export default function Advice(adviceData) {
             variant="contained"
           >
             <GeneralIcon fontSize="large" />
-            General
+            Essentials Guide
           </Button>
         </Grid>
         <Grid item xs={12} md={4}>
@@ -116,7 +116,7 @@ export default function Advice(adviceData) {
         </Grid>
         <Grid item xs={12} md={4}>
           <Button
-            id="Physical Activity"
+            id="Pets"
             className={
               adviceActiveCategory === "Pets"
                 ? classes.active

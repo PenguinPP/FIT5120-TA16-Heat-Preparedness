@@ -91,34 +91,6 @@ export function StayHydrated() {
   );
 }
 
-export function HeatIllnesses() {
-  const content = [
-    {
-      title: "Look out for signs of heat related illness",
-      content: ["Heat Cramps", "Heat Exhaustion", "Heat Stroke"],
-    },
-  ];
-
-  const classes = useStyles();
-
-  return (
-    <Card raised={true}>
-      <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
-  );
-}
-
 export function CoolEnvironment() {
   const classes = useStyles();
   const content = [

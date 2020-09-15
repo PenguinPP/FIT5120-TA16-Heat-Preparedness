@@ -81,7 +81,12 @@ export default function QuizResults() {
                 offset={-80}
                 duration={700}
               >
-                <Button className={classes.buttonStyle}>Symptoms</Button>
+                <Button
+                  className={classes.buttonStyle}
+                  onClick={handleSymptoms}
+                >
+                  Symptoms
+                </Button>
               </Link>
             </Grid>
           )}
@@ -95,7 +100,10 @@ export default function QuizResults() {
                 offset={-80}
                 duration={700}
               >
-                <Button className={classes.buttonStyle}>
+                <Button
+                  className={classes.buttonStyle}
+                  onClick={handleEssential}
+                >
                   Essentials Guide
                 </Button>
               </Link>
@@ -111,7 +119,9 @@ export default function QuizResults() {
                 offset={-80}
                 duration={700}
               >
-                <Button className={classes.buttonStyle}>Pets</Button>
+                <Button className={classes.buttonStyle} onClick={handlePets}>
+                  Pets
+                </Button>
               </Link>
             </Grid>
           )}
