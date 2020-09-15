@@ -116,7 +116,7 @@ export default function KeepingHomeCool() {
           direction="left"
           mountOnEnter
           unmountOnExit
-          className={activePage !== 2 && classes.hideCard}
+          className={activePage !== 3 && classes.hideCard}
           timeout={700}
         >
           <Grid item xs={12}>
@@ -124,11 +124,11 @@ export default function KeepingHomeCool() {
           </Grid>
         </Slide>
         <Slide
-          in={activePage === 2 ? true : false}
+          in={activePage === 4 ? true : false}
           direction="left"
           mountOnEnter
           unmountOnExit
-          className={activePage !== 2 && classes.hideCard}
+          className={activePage !== 4 && classes.hideCard}
           timeout={700}
         >
           <Grid item xs={12}>
