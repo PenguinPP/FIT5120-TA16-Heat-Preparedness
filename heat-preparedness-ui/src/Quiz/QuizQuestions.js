@@ -7,6 +7,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
@@ -18,163 +20,235 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     marginBottom: "1rem",
   },
+  crossStyle: {
+    color: theme.palette.cross.main,
+  },
+  tickStyle: {
+    color: theme.palette.tick.main,
+  },
+  quizContent: {
+    textAlign: "center",
+  },
 }));
 
-export function QuestionOne() {
+export function QuestionOne(status) {
   const classes = useStyles();
 
-  const { q1Correct, setQ1Result } = useContext(QuizContext);
+  const { q1Correct, setQ1Result, setQ1Answered } = useContext(QuizContext);
   const [answer, setAnswer] = React.useState("Unanswered");
-
   const handleChange = (event) => {
     setAnswer(event.target.value);
     if (event.target.value === "Wrong") {
       setQ1Result(false);
+      setQ1Answered(true);
     } else {
       setQ1Result(true);
+      setQ1Answered(true);
     }
   };
-
   return (
     <React.Fragment>
       <CardHeader title="Question 1" />
-      <CardContent>
-        <FormControl component="fieldset">
-          <Typography>Do you think you are correct or wrong?</Typography>{" "}
-          {/*Put Question here ^^^^^^^^^^^ */}
-          <RadioGroup
-            aria-label="question 2"
-            name="Question1"
-            value={answer}
-            onChange={handleChange}
-          >
-            {/*Each <FormControlLabel> represents one option
+
+      {!status.status ? (
+        <CardContent className={classes.quizContent}>
+          <FormControl component="fieldset">
+            <Typography>Is the following statement TRUE or FALSE?</Typography>
+            <Typography>
+              Heat strokes are fatal in up to 25% of cases.
+            </Typography>
+            {/*Put Question here ^^^^^^^^^^^ */}
+            <RadioGroup
+              aria-label="question 2"
+              name="Question1"
+              value={answer}
+              onChange={handleChange}
+            >
+              {/*Each <FormControlLabel> represents one option
                Value stores whether option is right or wrong
                Label is what the user will see as the option
                */}
-            <FormControlLabel
-              value="Wrong"
-              control={<Radio color="primary" />}
-              label="Wrong"
-            />{" "}
-            <FormControlLabel
-              value="Correct"
-              control={<Radio color="primary" />}
-              label="Correct"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Typography>The answer you have chosen is {answer}</Typography>
-        <Typography>
-          The context state boolean value is now {q1Correct.toString()}
-        </Typography>
-      </CardContent>
+              <FormControlLabel
+                value="Wrong"
+                control={<Radio color="primary" />}
+                label="True"
+              />{" "}
+              <FormControlLabel
+                value="Correct"
+                control={<Radio color="primary" />}
+                label="False"
+              />
+            </RadioGroup>
+          </FormControl>
+        </CardContent>
+      ) : (
+        <CardContent className={classes.quizContent}>
+          <Typography>
+            The answer you have chosen is {answer}{" "}
+            {answer === "Wrong" ? (
+              <ClearIcon className={classes.crossStyle} />
+            ) : (
+              <CheckIcon className={classes.tickStyle} />
+            )}
+          </Typography>
+          {answer === "Wrong" && (
+            <Typography>The correct answer is FALSE</Typography>
+          )}
+          <Typography>
+            Heat strokes are fatal in up to 80% of cases. It is a medical
+            emergency that requires urgent attention.
+          </Typography>
+        </CardContent>
+      )}
     </React.Fragment>
   );
 }
 
-export function QuestionTwo() {
+export function QuestionTwo(status) {
   const classes = useStyles();
 
-  const { q2Correct, setQ2Result } = useContext(QuizContext);
+  const { q2Correct, setQ2Result, setQ2Answered } = useContext(QuizContext);
   const [answer, setAnswer] = React.useState("Unanswered");
 
   const handleChange = (event) => {
     setAnswer(event.target.value);
     if (event.target.value === "Wrong") {
       setQ2Result(false);
+      setQ2Answered(true);
     } else {
       setQ2Result(true);
+      setQ2Answered(true);
     }
   };
 
   return (
     <React.Fragment>
       <CardHeader title="Question 2" />
-      <CardContent>
-        <FormControl component="fieldset">
-          <Typography>Do you think you are correct or wrong?</Typography>
-          {/*Put Question here ^^^^^^^^^^^ */}
-          <RadioGroup
-            aria-label="question 2"
-            name="question2"
-            value={answer}
-            onChange={handleChange}
-          >
-            {/*Each <FormControlLabel> represents one option
+      {!status.status ? (
+        <CardContent className={classes.quizContent}>
+          <FormControl component="fieldset">
+            <Typography>Is the following statement TRUE or FALSE?</Typography>
+            <Typography>
+              During a heatwave people should avoid the consumption of caffeine
+              and alcohol.
+            </Typography>
+            {/*Put Question here ^^^^^^^^^^^ */}
+            <RadioGroup
+              aria-label="question 2"
+              name="question2"
+              value={answer}
+              onChange={handleChange}
+            >
+              {/*Each <FormControlLabel> represents one option
                Value stores whether option is right or wrong
                Label is what the user will see as the option
                */}
-            <FormControlLabel
-              value="Wrong"
-              control={<Radio color="primary" />}
-              label="Wrong"
-            />
-            <FormControlLabel
-              value="Correct"
-              control={<Radio color="primary" />}
-              label="Correct"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Typography>The answer you have chosen is {answer}</Typography>
-        <Typography>
-          The context state boolean value is now {q2Correct.toString()}
-        </Typography>
-      </CardContent>
+              <FormControlLabel
+                value="Wrong"
+                control={<Radio color="primary" />}
+                label="False"
+              />
+              <FormControlLabel
+                value="Correct"
+                control={<Radio color="primary" />}
+                label="True"
+              />
+            </RadioGroup>
+          </FormControl>
+        </CardContent>
+      ) : (
+        <CardContent className={classes.quizContent}>
+          <Typography>
+            The answer you have chosen is {answer}{" "}
+            {answer === "Wrong" ? (
+              <ClearIcon className={classes.crossStyle} />
+            ) : (
+              <CheckIcon className={classes.tickStyle} />
+            )}
+          </Typography>
+          {answer === "Wrong" && (
+            <Typography>The correct answer is TRUE</Typography>
+          )}
+          <Typography>
+            These can create conditions that make the body more vulnerable to
+            heat stress.
+          </Typography>
+        </CardContent>
+      )}
     </React.Fragment>
   );
 }
 
-export function QuestionThree() {
+export function QuestionThree(status) {
   const classes = useStyles();
 
-  const { q3Correct, setQ3Result } = useContext(QuizContext);
+  const { q3Correct, setQ3Result, setQ3Answered } = useContext(QuizContext);
   const [answer, setAnswer] = React.useState("Unanswered");
 
   const handleChange = (event) => {
     setAnswer(event.target.value);
     if (event.target.value === "Wrong") {
       setQ3Result(false);
+      setQ3Answered(true);
     } else {
       setQ3Result(true);
+      setQ3Answered(true);
     }
   };
 
   return (
     <React.Fragment>
       <CardHeader title="Question 3" />
-      <CardContent>
-        <FormControl component="fieldset">
-          <Typography>Do you think you are correct or wrong?</Typography>
-          {/*Put Question here ^^^^^^^^^^^ */}
-          <RadioGroup
-            aria-label="question 3"
-            name="question3"
-            value={answer}
-            onChange={handleChange}
-          >
-            {/*Each <FormControlLabel> represents one option
+      {!status.status ? (
+        <CardContent className={classes.quizContent}>
+          <FormControl component="fieldset">
+            <Typography>
+              Should you call “000” if you see a child or a pet left inside a
+              car?
+            </Typography>
+            {/*Put Question here ^^^^^^^^^^^ */}
+            <RadioGroup
+              aria-label="question 3"
+              name="question3"
+              value={answer}
+              onChange={handleChange}
+            >
+              {/*Each <FormControlLabel> represents one option
                Value stores whether option is right or wrong
                Label is what the user will see as the option
                */}
-            <FormControlLabel
-              value="Wrong"
-              control={<Radio color="primary" />}
-              label="Wrong"
-            />
-            <FormControlLabel
-              value="Correct"
-              control={<Radio color="primary" />}
-              label="Correct"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Typography>The answer you have chosen is {answer}</Typography>
-        <Typography>
-          The context state boolean value is now {q3Correct.toString()}
-        </Typography>
-      </CardContent>
+              <FormControlLabel
+                value="Wrong"
+                control={<Radio color="primary" />}
+                label="No"
+              />
+              <FormControlLabel
+                value="Correct"
+                control={<Radio color="primary" />}
+                label="Yes"
+              />
+            </RadioGroup>
+          </FormControl>
+        </CardContent>
+      ) : (
+        <CardContent className={classes.quizContent}>
+          <Typography>
+            The answer you have chosen is {answer}{" "}
+            {answer === "Wrong" ? (
+              <ClearIcon className={classes.crossStyle} />
+            ) : (
+              <CheckIcon className={classes.tickStyle} />
+            )}
+          </Typography>
+          {answer === "Wrong" && (
+            <Typography>The correct answer is YES</Typography>
+          )}
+          <Typography>
+            It is illegal and dangerous to leave children and pets in cars,
+            especially when experiencing extreme heat.
+          </Typography>
+        </CardContent>
+      )}
     </React.Fragment>
   );
 }

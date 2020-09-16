@@ -47,24 +47,29 @@ export default function HeatWaves() {
 
   return (
     <React.Fragment>
-      <Typography variant="h4">Heat Waves</Typography>
-      <Grid container spacing={2} wrap="wrap">
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
+      <Grid
+        container
+        spacing={2}
+        wrap="wrap"
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item xs={12}>
+          <Typography variant="h4">Heat Waves</Typography>
+        </Grid>
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
           <Typography>
             Heat waves are Australia's deadliest natural hazard. From 1900 until
             2011, extreme heat has been responsible for more deaths in Australia
             than all other natural hazards combined.
           </Typography>
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
-          <VictoryChart
-            domainPadding={20}
-            theme={VictoryTheme.material}
-            height={250}
-          >
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
+          <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
             <VictoryAxis
               tickValues={[1, 2, 3, 4]}
               tickFormat={["Extreme Heat", "Cyclones", "Floods", "Bushfires"]}
+              height={200}
             />
             <VictoryAxis dependentAxis tickFormat={(x) => `${x}`} />
             <VictoryBar
@@ -79,7 +84,7 @@ export default function HeatWaves() {
             />
           </VictoryChart>
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
           <div
             style={{
               textAlign: "center",
@@ -108,7 +113,7 @@ export default function HeatWaves() {
                         colorScale={[theme.palette.primary.main, theme.palette.secondary.main]}
                     /> */}
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={6}>
+        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
           <Typography>
             Victoria recorded a combined total of 541 deaths during the
             heatwaves in 2009 and 2014. 80% percent of these individuals were
@@ -125,16 +130,31 @@ export default function HeatWaves() {
           textAlign="center"
         >
           <Grid item className={classes.gridStyle} xs={12}>
-            <Typography variant="h5">The Hidden Killer Among Us</Typography>
-          </Grid>
-          <Grid item className={classes.gridStyle} xs={6}>
-            <ReactPlayer
-              alt={"Extreme heat - English"}
-              url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"}
-              controls={true}
-              config={{ youtube: { playerVars: { showinfo: 1 } } }}
-            />
-            <small className="mediaText">{"Extreme heat - English"}</small>
+            <Typography
+              variant="h5"
+              align="center"
+              style={{ marginTop: "1rem" }}
+            >
+              The Hidden Killer Among Us
+            </Typography>
+            <Grid item className={classes.gridStyle} xs={12}>
+              <ReactPlayer
+                alt={"Extreme heat - English"}
+                url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"}
+                controls={true}
+                config={{ youtube: { playerVars: { showinfo: 1 } } }}
+                width="100%"
+                maxHeight="400px"
+                style={{
+                  justifyContent: "center",
+                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "3px 0",
+                }}
+              />
+              <small className="mediaText">{"Extreme heat - English"}</small>
+            </Grid>
           </Grid>
         </Grid>
 

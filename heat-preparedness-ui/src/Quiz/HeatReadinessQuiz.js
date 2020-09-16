@@ -12,6 +12,7 @@ import Slide from "@material-ui/core/Slide";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { QuizContext } from "../Contexts/QuizContext";
 import { QuestionOne, QuestionTwo, QuestionThree } from "./QuizQuestions";
+import QuizResults from "./QuizResults";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.tertiary.contrastText,
     marginBottom: "1rem",
     padding: "1rem",
+    textAlign: "center",
   },
   hideCard: {
     display: "none",
@@ -46,18 +48,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeatReadinessQuiz() {
+  const {
+    q1Answered,
+    q2Answered,
+    q3Answered,
+    setQ1Answered,
+    setQ2Answered,
+    setQ3Answered,
+  } = useContext(QuizContext);
   const [question, setQuestion] = React.useState(99);
+  const [answered, setAnswered] = React.useState(false);
+  const [mustChoose, setMustChoose] = React.useState(false);
   const classes = useStyles();
 
   const handleNext = () => {
     if (question < 4) {
       setQuestion((prevQuestion) => prevQuestion + 1);
+      setMustChoose(false);
+      setAnswered(false);
+      setQ1Answered(false);
+      setQ2Answered(false);
+      setQ3Answered(false);
     }
   };
 
-  const handleBack = () => {
-    if (question > 0) {
-      setQuestion((prevQuestion) => prevQuestion - 1);
+  const handleSubmit = () => {
+    if (question === 1) {
+      if (q1Answered) {
+        setAnswered(true);
+      } else {
+        setMustChoose(true);
+      }
+    } else if (question === 2) {
+      if (q2Answered) {
+        setAnswered(true);
+      } else {
+        setMustChoose(true);
+      }
+    } else if (question === 3) {
+      if (q3Answered) {
+        setAnswered(true);
+      } else {
+        setMustChoose(true);
+      }
     }
   };
 
@@ -123,10 +156,23 @@ export default function HeatReadinessQuiz() {
         >
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
-              <QuestionOne />
+              <QuestionOne status={answered} />
+              {mustChoose && (
+                <Typography>You must choose an answer to continue!</Typography>
+              )}
+              <Button
+                onClick={handleSubmit}
+                className={
+                  answered ? classes.hideCard : classes.nextQuestionButton
+                }
+              >
+                Submit Answer
+              </Button>
               <Button
                 onClick={handleNext}
-                className={classes.nextQuestionButton}
+                className={
+                  answered ? classes.nextQuestionButton : classes.hideCard
+                }
               >
                 Next Question
               </Button>
@@ -143,10 +189,23 @@ export default function HeatReadinessQuiz() {
         >
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
-              <QuestionTwo />
+              <QuestionTwo status={answered} />
+              {mustChoose && (
+                <Typography>You must choose an answer to continue!</Typography>
+              )}
+              <Button
+                onClick={handleSubmit}
+                className={
+                  answered ? classes.hideCard : classes.nextQuestionButton
+                }
+              >
+                Submit Answer
+              </Button>
               <Button
                 onClick={handleNext}
-                className={classes.nextQuestionButton}
+                className={
+                  answered ? classes.nextQuestionButton : classes.hideCard
+                }
               >
                 Next Question
               </Button>
@@ -163,10 +222,23 @@ export default function HeatReadinessQuiz() {
         >
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
-              <QuestionThree />
+              <QuestionThree status={answered} />
+              {mustChoose && (
+                <Typography>You must choose an answer to continue!</Typography>
+              )}
+              <Button
+                onClick={handleSubmit}
+                className={
+                  answered ? classes.hideCard : classes.nextQuestionButton
+                }
+              >
+                Submit Answer
+              </Button>
               <Button
                 onClick={handleNext}
-                className={classes.nextQuestionButton}
+                className={
+                  answered ? classes.nextQuestionButton : classes.hideCard
+                }
               >
                 Next Question
               </Button>
@@ -184,7 +256,7 @@ export default function HeatReadinessQuiz() {
           <Grid item xs={10}>
             <Card raised={true} className={classes.quizCard}>
               <CardContent>
-                <Typography>You finished the quiz!</Typography>
+                <QuizResults />
               </CardContent>
             </Card>
           </Grid>
