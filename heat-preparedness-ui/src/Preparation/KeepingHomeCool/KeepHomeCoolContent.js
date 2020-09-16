@@ -2,17 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  CardMedia,
-} from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
+import { Typography, List, ListItem } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
 import eskyImage from "./images/esky.png";
 import thermosImage from "./images/thermos.png";
 import ReactPlayer from "react-player";
@@ -44,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     textAlign: "center",
     display: "flex",
-    justifyContent: "space-between",
     padding: "3px 0",
     marginBottom: "1rem",
   },
@@ -84,13 +74,21 @@ export function Insulation() {
             <Grid item xs={12} sm={6}>
               <Typography align="center">Thermos in winter:</Typography>
               <div className={classes.imgContainer}>
-                <img src={thermosImage} className={classes.thermosStyle} />
+                <img
+                  src={thermosImage}
+                  alt="thermos warm inside"
+                  className={classes.thermosStyle}
+                />
               </div>
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography align="center">Esky in summer:</Typography>
               <div className={classes.imgContainer}>
-                <img src={eskyImage} className={classes.eskyStyle} />
+                <img
+                  src={eskyImage}
+                  alt="esky cool inside"
+                  className={classes.eskyStyle}
+                />
               </div>
             </Grid>
           </Grid>
@@ -215,7 +213,11 @@ export function Windows() {
                 in during winter.
               </Typography>
               <div className={classes.imgContainer}>
-                <img src={northWindow} className={classes.windowStyle} />
+                <img
+                  src={northWindow}
+                  alt="north windows"
+                  className={classes.windowStyle}
+                />
               </div>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -225,7 +227,11 @@ export function Windows() {
                 windows.{" "}
               </Typography>
               <div className={classes.imgContainer}>
-                <img src={eastWestWindow} className={classes.windowStyle} />
+                <img
+                  src={eastWestWindow}
+                  alt="east and west windows"
+                  className={classes.windowStyle}
+                />
               </div>
             </Grid>
             <Grid item xs={12} sm={6}>

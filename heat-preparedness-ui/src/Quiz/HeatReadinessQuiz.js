@@ -97,27 +97,34 @@ export default function HeatReadinessQuiz() {
   return (
     <React.Fragment>
       <Grid container justify="center">
-        <Grid item xs={12}>
-          <Link
-            activeClass="active"
-            to={"Quiz"}
-            spy={true}
-            smooth={true}
-            offset={-65}
-            duration={1000}
-          >
-            <Button
-              variant="contained"
-              fullWidth={true}
-              color="secondary"
-              onClick={() => setQuestion(0)}
-              className={classes.startQuizButton}
+        <Grid container item xs={12} wrap="wrap" justify="center">
+          <Grid item xs={12}>
+            <Typography paragraph align="center" variant="h5">
+              Not sure where to start?
+            </Typography>
+          </Grid>
+          <Grid container item xs={12} justify="center">
+            <Link
+              activeClass="active"
+              to={"Quiz"}
+              spy={true}
+              smooth={true}
+              offset={-65}
+              duration={1000}
             >
-              <Typography variant="h4">
-                Take our Heat Readiness Quiz!
-              </Typography>
-            </Button>
-          </Link>
+              <Grid container wrap="wrap" justify="center">
+                <Button
+                  variant="contained"
+                  onClick={() => setQuestion(0)}
+                  className={classes.startQuizButton}
+                >
+                  <Typography variant="h4">
+                    Take our Heat Readiness Quiz!
+                  </Typography>
+                </Button>
+              </Grid>
+            </Link>
+          </Grid>
         </Grid>
 
         <div id="Quiz" />

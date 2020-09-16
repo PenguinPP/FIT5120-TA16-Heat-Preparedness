@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { List, ListItem, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { ReactComponent as BottleIcon } from "../icons/bottle-icon.svg";
 import { ReactComponent as PhysicalIcon } from "../icons/physical-activity-icon.svg";
 import { ReactComponent as CoolIcon } from "../icons/keep-cool-icon.svg";
@@ -61,14 +61,6 @@ export default function Advice(adviceData) {
   const classes = useStyles();
 
   //console.log(adviceData["adviceData"])
-
-  const messages = {
-    //Message to display for each category before bullet points
-    "Essentials Guide":
-      "Some general bits of advice to get you through the day:",
-    "Keeping Cool": "Here are a few things that you can do to keep cool:",
-    Pets: "When it comes to physical activity during a heat wave:",
-  };
 
   const display = {
     "Essentials Guide": <QuickGuide />,

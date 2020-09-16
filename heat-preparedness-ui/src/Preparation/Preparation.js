@@ -12,6 +12,7 @@ import { Link } from "react-scroll";
 import { QuizContext } from "../Contexts/QuizContext";
 import Symptoms from "./Symptoms/Symptoms";
 import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -24,6 +25,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   inactive: {
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+  callToAction: {
+    background: theme.palette.primary.main,
+    textTransform: "none",
+    color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
@@ -148,7 +158,7 @@ export default function Preparation(preparationData) {
         <Grid item xs={12} justify="center">
           {display[prepActiveCategory]}
         </Grid>
-        <Grid item xs={12} justify="center">
+        <Grid container item xs={12} justify="center">
           <Link
             activeClass="active"
             to={"Advice"}
@@ -157,15 +167,22 @@ export default function Preparation(preparationData) {
             offset={-80}
             duration={700}
           >
-            {" "}
-            <Button
-              variant="contained"
-              fullWidth={true}
-              color="primary"
-              className={classes.active}
-            >
-              <Typography variant="h6">Take Precautions!</Typography>
-            </Button>
+            <Grid container wrap="wrap" justify="center">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.callToAction}
+              >
+                <Grid container wrap="wrap" justify="center">
+                  <Grid item xs={12}>
+                    <Typography variant="h6">Take Precautions!</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <KeyboardArrowDownIcon />
+                  </Grid>
+                </Grid>
+              </Button>
+            </Grid>
           </Link>
         </Grid>
       </Grid>

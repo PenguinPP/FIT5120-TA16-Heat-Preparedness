@@ -1,20 +1,12 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import {
-  VictoryBar,
-  VictoryChart,
-  VictoryAxis,
-  VictoryTheme,
-  VictoryPie,
-} from "victory";
 import Grid from "@material-ui/core/Grid";
 import ReactPlayer from "react-player";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
-import { useTheme, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import eightyPercent from "./images/eighty-percent.png";
 import heatDeaths from "./images/heat-deaths.png";
-import Container from "@material-ui/core/Container";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +31,18 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  callToAction: {
+    background: theme.palette.primary.main,
+    textTransform: "none",
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
 }));
 
 export default function HeatWaves() {
-  const theme = useTheme();
   const classes = useStyles();
 
   return (
@@ -81,6 +81,7 @@ export default function HeatWaves() {
                 marginTop: "1rem",
                 maxWidth: "90%",
               }}
+              alt="deaths from natural disasters"
             ></img>
           </div>
         </Grid>
@@ -106,6 +107,7 @@ export default function HeatWaves() {
                 marginTop: "1rem",
                 maxWidth: "90%",
               }}
+              alt="Elderly deaths percentage"
             ></img>
           </div>
         </Grid>
@@ -158,6 +160,7 @@ export default function HeatWaves() {
                 marginTop: "1rem",
                 maxWidth: "90%",
               }}
+              alt="Elderly deaths percentage"
             ></img>
           </div>
         </Grid>
@@ -190,7 +193,6 @@ export default function HeatWaves() {
                   justifyContent: "center",
                   textAlign: "center",
                   display: "flex",
-                  justifyContent: "space-between",
                   padding: "3px 0",
                 }}
               />
@@ -222,7 +224,7 @@ export default function HeatWaves() {
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.active}
+                className={classes.callToAction}
               >
                 <Grid container wrap="wrap" justify="center">
                   <Grid item xs={12}>

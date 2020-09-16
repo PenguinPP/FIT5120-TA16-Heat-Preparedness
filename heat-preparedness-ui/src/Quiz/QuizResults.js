@@ -6,7 +6,7 @@ import {
   Button,
   Grid,
 } from "@material-ui/core";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { QuizContext } from "../Contexts/QuizContext";
 import { Link } from "react-scroll";
 
