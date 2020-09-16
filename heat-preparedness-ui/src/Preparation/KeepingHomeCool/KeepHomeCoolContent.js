@@ -34,9 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
   eskyStyle: {
     height: 200,
+    maxWidth: "95%",
   },
   thermosStyle: {
     height: 220,
+    maxWidth: "95%",
   },
   videoContainer: {
     justifyContent: "center",
@@ -47,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   windowStyle: {
-    height: 275,
+    height: 250,
+    maxWidth: "95%",
   },
 }));
 
