@@ -51,6 +51,18 @@ export default function Acknowledgements() {
         >
           Better Health Channel, Survive the Heat{" "}
         </a>
+        <br />
+
+        <br />
+        <Typography>
+          Vector silhouettes were obtained from{" "}
+          <a
+            href="https://www.freevector.com/elderly-people-silhouettes"
+            className={classes.linkStyle}
+          >
+            freevector.com
+          </a>
+        </Typography>
       </div>
     </React.Fragment>
   );

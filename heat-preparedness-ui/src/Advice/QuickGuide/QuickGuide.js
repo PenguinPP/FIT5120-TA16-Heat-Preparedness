@@ -67,50 +67,6 @@ export default function QuickGuide() {
       setActivePage((prevActivePage) => prevActivePage - 1);
     }
   };
-
-  const content = [
-    {
-      cardNumber: 1,
-      title: "Stay Hydrated and avoid strenuous activity",
-      content: [
-        "Keep a full drink bottle with you and take small sips of water frequently.",
-        "Avoid Caffeine and alcohol.",
-        "Avoid heavy activity like sport, renovating and gardening.",
-      ],
-      icons: ["Do", "Dont", "Dont"],
-    },
-    {
-      cardNumber: 2,
-      title: "Look out for signs of heat related illness",
-      content: ["Heat Cramps", "Heat Exhaustion", "Heat Stroke"],
-    },
-    {
-      cardNumber: 3,
-      title: "Keep your environment cool",
-      content: [
-        "Draw your blinds",
-        "Close-off any rooms that you are not using",
-        "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature.",
-      ],
-    },
-    {
-      cardNumber: 4,
-      title: "Fan / Air Conditioner usage",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-    {
-      cardNumber: 5,
-      title: "Final Tips",
-      content: [
-        "Stay out of the sun! Especially during the hottest part of the day! (usually 11am-3pm)",
-        "If you cannot stay cool in your home, make arrangements to visit a friend or spend time in air-conditioned public spaces!",
-      ],
-    },
-  ];
-
   return (
     <div className={classes.containerStyle}>
       <Grid container alignItems="center" alignContent="space-around">

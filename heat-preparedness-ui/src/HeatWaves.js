@@ -13,37 +13,37 @@ import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import eightyPercent from "./images/eighty-percent.png";
+import heatDeaths from "./images/heat-deaths.png";
 import Container from "@material-ui/core/Container";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const useStyles = makeStyles((theme) => ({
   active: {
     //Style for active category button
     background: theme.palette.primary.main,
+    padding: "none",
+    textTransform: "none",
     color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
     },
   },
-  gridStyle: {
-    maxWidth: "100%",
+  elderlyDeathsDesktop: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  elderlyDeathsMobile: {
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
 }));
 
 export default function HeatWaves() {
   const theme = useTheme();
   const classes = useStyles();
-  const hazardData = [
-    { hazard: 1, deaths: 4555, fill: theme.palette.secondary.main }, //Extreme heat
-    { hazard: 2, deaths: 1285, fill: theme.palette.primary.main }, //Cyclones
-    { hazard: 3, deaths: 1221, fill: theme.palette.primary.main }, //Floods
-    { hazard: 4, deaths: 866, fill: theme.palette.primary.main }, //Bushfires
-  ];
-
-  const deathData = [
-    { ageGroup: "Aged >= 65", percentage: 80 }, //Aged 65 and over
-    { ageGroup: "Aged < 65", percentage: 20 }, //Aged under 65
-  ];
 
   return (
     <React.Fragment>
@@ -57,34 +57,40 @@ export default function HeatWaves() {
         <Grid item xs={12}>
           <Typography variant="h4">Heat Waves</Typography>
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
+        <Grid item xs={12} md={6} lg={5}>
           <Typography>
             Heat waves are Australia's deadliest natural hazard. From 1900 until
             2011, extreme heat has been responsible for more deaths in Australia
-            than all other natural hazards combined.
+            than all other natural hazards combined. Each plane on the right
+            represents approximately 250 people, the capacity of a Airbus A330.
           </Typography>
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
-          <VictoryChart domainPadding={20} theme={VictoryTheme.material}>
-            <VictoryAxis
-              tickValues={[1, 2, 3, 4]}
-              tickFormat={["Extreme Heat", "Cyclones", "Floods", "Bushfires"]}
-              height={200}
-            />
-            <VictoryAxis dependentAxis tickFormat={(x) => `${x}`} />
-            <VictoryBar
-              data={hazardData}
-              x="hazard"
-              y="deaths"
+        <Grid item xs={12} md={6} lg={5}>
+          <div
+            style={{
+              textAlign: "center",
+              width: "100%",
+              padding: "1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <img
+              src={heatDeaths}
               style={{
-                data: {
-                  fill: ({ datum }) => datum.fill,
-                },
+                maxHeight: 500,
+                marginTop: "1rem",
+                maxWidth: "90%",
               }}
-            />
-          </VictoryChart>
+            ></img>
+          </div>
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
+        <Grid
+          className={classes.elderlyDeathsDesktop}
+          item
+          xs={12}
+          md={6}
+          lg={5}
+        >
           <div
             style={{
               textAlign: "center",
@@ -102,23 +108,58 @@ export default function HeatWaves() {
               }}
             ></img>
           </div>
-
-          {/* <VictoryPie
-                        height={300}
-                        startAngle={180}
-                        endAngle={540}
-                        data={deathData}
-                        x="ageGroup"
-                        y="percentage"
-                        colorScale={[theme.palette.primary.main, theme.palette.secondary.main]}
-                    /> */}
         </Grid>
-        <Grid item className={classes.gridStyle} xs={12} md={6} lg={5}>
+        <Grid
+          className={classes.elderlyDeathsDesktop}
+          item
+          xs={12}
+          md={6}
+          lg={5}
+        >
           <Typography>
             Victoria recorded a combined total of 541 deaths during the
             heatwaves in 2009 and 2014. 80% percent of these individuals were
             aged 65 and over.
           </Typography>
+        </Grid>
+
+        <Grid
+          className={classes.elderlyDeathsMobile}
+          item
+          xs={12}
+          md={6}
+          lg={5}
+        >
+          <Typography>
+            Victoria recorded a combined total of 541 deaths during the
+            heatwaves in 2009 and 2014. 80% percent of these individuals were
+            aged 65 and over.
+          </Typography>
+        </Grid>
+        <Grid
+          className={classes.elderlyDeathsMobile}
+          item
+          xs={12}
+          md={6}
+          lg={5}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              width: "100%",
+              padding: "1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <img
+              src={eightyPercent}
+              style={{
+                maxHeight: 500,
+                marginTop: "1rem",
+                maxWidth: "90%",
+              }}
+            ></img>
+          </div>
         </Grid>
 
         <Grid
@@ -129,7 +170,7 @@ export default function HeatWaves() {
           justify="center"
           textAlign="center"
         >
-          <Grid item className={classes.gridStyle} xs={12}>
+          <Grid item xs={12}>
             <Typography
               variant="h5"
               align="center"
@@ -137,7 +178,7 @@ export default function HeatWaves() {
             >
               The Hidden Killer Among Us
             </Typography>
-            <Grid item className={classes.gridStyle} xs={12}>
+            <Grid item xs={12}>
               <ReactPlayer
                 alt={"Extreme heat - English"}
                 url={"https://www.youtube.com/watch?v=CHhHbzCQ8Vk"}
@@ -158,7 +199,7 @@ export default function HeatWaves() {
           </Grid>
         </Grid>
 
-        <Grid item className={classes.gridStyle} xs={12}>
+        <Grid item xs={12}>
           <Typography>
             Heat waves exacerbate pre-existing medical conditions and are
             therefore also a significant cause for concern to those with chronic
@@ -168,7 +209,7 @@ export default function HeatWaves() {
           </Typography>
         </Grid>
 
-        <Grid item className={classes.gridStyle} xs={12} justify="center">
+        <Grid container item xs={12} justify="center">
           <Link
             activeClass="active"
             to={"Alerts"}
@@ -177,14 +218,22 @@ export default function HeatWaves() {
             offset={-80}
             duration={700}
           >
-            <Button
-              variant="contained"
-              fullWidth={true}
-              color="primary"
-              className={classes.active}
-            >
-              <Typography variant="h6">Stay Alert!</Typography>
-            </Button>
+            <Grid container wrap="wrap" justify="center">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.active}
+              >
+                <Grid container wrap="wrap" justify="center">
+                  <Grid item xs={12}>
+                    <Typography variant="h6">Stay Alert!</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <KeyboardArrowDownIcon />
+                  </Grid>
+                </Grid>
+              </Button>
+            </Grid>
           </Link>
         </Grid>
       </Grid>
