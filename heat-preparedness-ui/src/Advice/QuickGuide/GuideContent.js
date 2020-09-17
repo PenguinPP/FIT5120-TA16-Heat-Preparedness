@@ -13,6 +13,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import noCoffeeAlcohol from "./images/nocoffeealcohol.png";
 import noExercise from "./images/no-exercise.png";
+import fan from "./images/fan.png";
+import airConditioner from "./images/airConditioner.png";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -28,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   mediaExercise: {
+    height: 200,
+    width: 200,
+  },
+  mediaFan:{
+    height: 200,
+    width: 200,
+  },
+  mediaAirConditioner:{
     height: 200,
     width: 200,
   },
@@ -118,7 +128,7 @@ export function CoolEnvironment() {
               </ListItem>
             </React.Fragment>
           ))}
-        </List>
+        </List>  
       </CardContent>
     </Card>
   );
@@ -139,16 +149,29 @@ export function FanAirconUse() {
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start">
+          <Grid item xs={12}>
+            <Typography variant="h5">{content[0]["title"]}</Typography>
+            <List>
+              {content[0]["content"].map((item, index) => (
+                <React.Fragment>
+                  <ListItem id={index}>
+                    <Typography variant="body1">{item}</Typography>
+                  </ListItem>
+                </React.Fragment>
+              ))}
+            </List>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <CardMedia
+              image={fan}
+              className={classes.mediaFan}
+            />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <CardMedia image={airConditioner} className={classes.mediaAirConditioner} />
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
