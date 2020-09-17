@@ -4,14 +4,15 @@ import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import { List, ListItem, makeStyles } from "@material-ui/core";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { ReactComponent as ShortIcon } from "../icons/short-term-icon.svg";
-import { ReactComponent as LongIcon } from "../icons/long-term-icon.svg";
+import { ReactComponent as SymptomSVG } from "../icons/symptoms.svg";
+import { ReactComponent as CoolHomeIcon } from "../icons/keep-cool-icon.svg";
 import { ReactComponent as PowerIcon } from "../icons/power-failure-icon.svg";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-scroll";
 import { QuizContext } from "../Contexts/QuizContext";
 import Symptoms from "./Symptoms/Symptoms";
 import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -29,17 +30,34 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.secondary.contrastText,
     },
   },
+  callToAction: {
+    background: theme.palette.primary.main,
+    textTransform: "none",
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
 }));
 
-const ShortTermIcon = (props) => {
+const SymptomsIcon = (props) => {
   return (
-    <SvgIcon {...props} component={ShortIcon} viewBox="0 0 600 476.6"></SvgIcon>
+    <SvgIcon
+      {...props}
+      component={SymptomSVG}
+      viewBox="0 0 600 476.6"
+    ></SvgIcon>
   );
 };
 
-const LongTermIcon = (props) => {
+const KeepHomeCoolIcon = (props) => {
   return (
-    <SvgIcon {...props} component={LongIcon} viewBox="0 0 600 476.6"></SvgIcon>
+    <SvgIcon
+      {...props}
+      component={CoolHomeIcon}
+      viewBox="0 0 600 476.6"
+    ></SvgIcon>
   );
 };
 
@@ -90,7 +108,7 @@ export default function Preparation(preparationData) {
             onClick={() => setPrepCategory("Symptoms")}
             variant="contained"
           >
-            <ShortTermIcon fontSize="large" />
+            <SymptomsIcon fontSize="large" />
             Symptoms
           </Button>
         </Grid>
@@ -106,7 +124,7 @@ export default function Preparation(preparationData) {
             onClick={() => setPrepCategory("Cooling your home")}
             variant="contained"
           >
-            <LongTermIcon fontSize="large" />
+            <KeepHomeCoolIcon fontSize="large" />
             Cooling your home
           </Button>
         </Grid>
@@ -148,7 +166,7 @@ export default function Preparation(preparationData) {
         <Grid item xs={12} justify="center">
           {display[prepActiveCategory]}
         </Grid>
-        <Grid item xs={12} justify="center">
+        <Grid container item xs={12} justify="center">
           <Link
             activeClass="active"
             to={"Advice"}
@@ -157,15 +175,22 @@ export default function Preparation(preparationData) {
             offset={-80}
             duration={700}
           >
-            {" "}
-            <Button
-              variant="contained"
-              fullWidth={true}
-              color="primary"
-              className={classes.active}
-            >
-              <Typography variant="h6">Take Precautions!</Typography>
-            </Button>
+            <Grid container wrap="wrap" justify="center">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.callToAction}
+              >
+                <Grid container wrap="wrap" justify="center">
+                  <Grid item xs={12}>
+                    <Typography variant="h6">Take Precautions!</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <KeyboardArrowDownIcon />
+                  </Grid>
+                </Grid>
+              </Button>
+            </Grid>
           </Link>
         </Grid>
       </Grid>

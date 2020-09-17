@@ -6,7 +6,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export function QuestionOne(status) {
   const classes = useStyles();
 
-  const { q1Correct, setQ1Result, setQ1Answered } = useContext(QuizContext);
+  const { setQ1Result, setQ1Answered } = useContext(QuizContext);
   const [answer, setAnswer] = React.useState("Unanswered");
   const handleChange = (event) => {
     setAnswer(event.target.value);
@@ -107,7 +106,7 @@ export function QuestionOne(status) {
 export function QuestionTwo(status) {
   const classes = useStyles();
 
-  const { q2Correct, setQ2Result, setQ2Answered } = useContext(QuizContext);
+  const { setQ2Result, setQ2Answered } = useContext(QuizContext);
   const [answer, setAnswer] = React.useState("Unanswered");
 
   const handleChange = (event) => {
@@ -182,7 +181,7 @@ export function QuestionTwo(status) {
 export function QuestionThree(status) {
   const classes = useStyles();
 
-  const { q3Correct, setQ3Result, setQ3Answered } = useContext(QuizContext);
+  const { setQ3Result, setQ3Answered } = useContext(QuizContext);
   const [answer, setAnswer] = React.useState("Unanswered");
 
   const handleChange = (event) => {
@@ -203,7 +202,7 @@ export function QuestionThree(status) {
         <CardContent className={classes.quizContent}>
           <FormControl component="fieldset">
             <Typography>
-              Should you call “000” if you see a child or a pet leff inside a
+              Should you call “000” if you see a child or a pet left inside a
               car?
             </Typography>
             {/*Put Question here ^^^^^^^^^^^ */}
