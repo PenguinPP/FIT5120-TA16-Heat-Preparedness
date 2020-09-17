@@ -278,7 +278,7 @@ export function Landscaping() {
           <Grid item xs={12} md={8}>
             <Typography paragraph align="center">
               Well thought out selection and placement of plants can provide
-              shade and buffer against hot winds in the summer!
+              shade and buffer against hot winds in summer!
             </Typography>
           </Grid>
           <Grid
