@@ -51,17 +51,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function StayHome() {
-  const content = [
-    {
-      title: "Bring them inside",
-      content: [
-        "Let them enjoy the cool tiles or provide them a sturdy icepack or a frozen water bottle.",
-        "Be sure to provide numerous sources of water and keep the water cool.",
-        "If your pet seems to be in discomfort, try wetting their feet and misting water onto their face as many animals control their inner temperature through their feet.",
-      ],
-    },
-  ];
-
   const classes = useStyles();
   return (
     <Card raised={true}>
@@ -130,16 +119,6 @@ export function StayHome() {
 
 export function OutDoor() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "If your pet is outside or you need to walk them",
-      content: [
-        "NEVER leave your pet in the car in warm weather.",
-        "Your fair-skinned pet needs a special sunscreen for animals to protect it from the discomfort of sunburn and the added risk of skin cancer.Especially their noses.",
-        "You can walk them early morning or evening or a ground that feels hot to touch can do serious damage to your pooch’s paws.",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
