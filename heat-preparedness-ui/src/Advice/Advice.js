@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { List, ListItem, makeStyles } from "@material-ui/core";
-import { ReactComponent as BottleIcon } from "../icons/bottle-icon.svg";
-import { ReactComponent as PhysicalIcon } from "../icons/physical-activity-icon.svg";
+import { makeStyles } from "@material-ui/core";
+import { ReactComponent as GuideIcon } from "../icons/guide-icon.svg";
+import { ReactComponent as PetIcon } from "../icons/pet-icon.svg";
 import { ReactComponent as CoolIcon } from "../icons/keep-cool-icon.svg";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Grid from "@material-ui/core/Grid";
@@ -30,23 +30,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Use SVG to create SVGIcons
-const GeneralIcon = (props) => {
+const EssentialGuideIcon = (props) => {
   return (
     <SvgIcon
       {...props}
-      component={BottleIcon}
+      component={GuideIcon}
+      style={{ color: "#000000" }}
       viewBox="0 0 600 476.6"
     ></SvgIcon>
   );
 };
 
-const PhysicalActivityIcon = (props) => {
+const PetsIcon = (props) => {
   return (
-    <SvgIcon
-      {...props}
-      component={PhysicalIcon}
-      viewBox="0 0 600 476.6"
-    ></SvgIcon>
+    <SvgIcon {...props} component={PetIcon} viewBox="0 0 600 476.6"></SvgIcon>
   );
 };
 
@@ -62,14 +59,6 @@ export default function Advice(adviceData) {
   const classes = useStyles();
 
   //console.log(adviceData["adviceData"])
-
-  const messages = {
-    //Message to display for each category before bullet points
-    "Essentials Guide":
-      "Some general bits of advice to get you through the day:",
-    "Keeping Cool": "Here are a few things that you can do to keep cool:",
-    Pets: "When it comes to physical activity during a heat wave:",
-  };
 
   const display = {
     "Essentials Guide": <QuickGuide />,
@@ -95,7 +84,7 @@ export default function Advice(adviceData) {
             onClick={() => setAdviceCategory("Essentials Guide")}
             variant="contained"
           >
-            <GeneralIcon fontSize="large" />
+            <EssentialGuideIcon fontSize="large" />
             Essentials Guide
           </Button>
         </Grid>
@@ -127,7 +116,7 @@ export default function Advice(adviceData) {
             onClick={() => setAdviceCategory("Pets")}
             variant="contained"
           >
-            <PhysicalActivityIcon fontSize="large" />
+            <PetsIcon fontSize="large" />
             Pets
           </Button>
         </Grid>
