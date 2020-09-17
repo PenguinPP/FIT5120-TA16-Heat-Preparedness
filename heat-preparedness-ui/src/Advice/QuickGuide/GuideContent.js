@@ -96,89 +96,92 @@ export function StayHydrated() {
 
 export function CoolEnvironment() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Keep your environment cool",
-      content: [
-        "Draw your blinds",
-        "Close-off any rooms that you are not using",
-        "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Grid container alignItems="flex-start">
-          <Typography variant="h5">{content[0]["title"]}</Typography>
-          <List>
-            {content[0]["content"].map((item, index) => (
-              <React.Fragment>
-                <ListItem id={index}>
-                  <Typography variant="body1">
-                    {index + 1}. {item}
-                  </Typography>
-                </ListItem>
-              </React.Fragment>
-            ))}
-          </List>
-          <Grid item xs={12} md={3}>
-            <div
-              style={{
-                textAlign: "center",
-                width: "100%",
-                padding: "1rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <img
-                src={drawyourblinds}
-                style={{
-                  height: 200,
-                  width: 200,
-                }}
-                alt="blinds"
-              ></img>
-            </div>
+        <Grid container alignItems="flex-start" justify="center" >
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Keep your environment cool
+            </Typography>
           </Grid>
-          <Grid item xs={12} md={3}>
-            <div
-              style={{
-                textAlign: "center",
-                width: "100%",
-                padding: "1rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <img
-                src={openwindow}
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={10}
+            alignItems="flex-start"
+            justify="space-evenly"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Draw your blinds
+              </Typography>
+              <div
                 style={{
-                  height: 200,
-                  width: 200,
+                  textAlign: "center",
+                  width: "100%",
+                  padding: "1rem",
+                  marginBottom: "1rem",
                 }}
-                alt="window"
-              ></img>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={3} >
-            <div
-              style={{
-                textAlign: "center",
-                width: "100%",
-                padding: "1rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <img
-                src={closethedoor}
+              >
+                <img
+                  src={drawyourblinds}
+                  style={{
+                    height: 200,
+                    width: 200,
+                  }}
+                  alt="coolblinds"
+                ></img>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Close-off any rooms that you are not using
+              </Typography>
+              <div
                 style={{
-                  height: 200,
-                  width: 200,
+                  textAlign: "center",
+                  width: "100%",
+                  padding: "1rem",
+                  marginBottom: "1rem",
                 }}
-                alt="door"
-              ></img>
-            </div>
+              >
+                <img
+                  src={closethedoor}
+                  style={{
+                    height: 200,
+                    width: 200,
+                  }}
+                  alt="coolclsdoor"
+                ></img>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature
+              </Typography>
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  padding: "1rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <img
+                  src={openwindow}
+                  style={{
+                    height: 200,
+                    width: 200,
+                  }}
+                  alt="coolwin"
+                ></img>
+              </div>
+            </Grid>
           </Grid>
         </Grid>
       </CardContent>
