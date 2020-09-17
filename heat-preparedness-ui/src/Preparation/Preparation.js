@@ -95,6 +95,10 @@ export default function Preparation(preparationData) {
       <Typography variant="h4" style={{ marginBottom: "1rem" }}>
         Be Prepared!
       </Typography>
+
+      <Typography variant="h8" paragraph>
+        Mitigate risks by having the necessary preparations in place for when a heat wave comes.
+      </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
           <Button
