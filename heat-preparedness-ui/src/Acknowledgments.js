@@ -102,13 +102,21 @@ export default function Acknowledgements() {
 
         <br />
         <Typography>
-          Vector silhouettes were obtained from{" "}
+          Vector silhouettes for heat wave deaths were obtained from{" "}
           <a
             href="https://www.freevector.com/elderly-people-silhouettes"
             className={classes.linkStyle}
           >
             freevector.com
+          </a>{" "}
+          and{" "}
+          <a
+            className={classes.linkStyle}
+            href="https://www.vecteezy.com/free-vector/human-silhouette-vector-free"
+          >
+            Vecteezy
           </a>
+          .
         </Typography>
 
         <Button className={classes.buttonStyle} onClick={handleClickOpen}>
