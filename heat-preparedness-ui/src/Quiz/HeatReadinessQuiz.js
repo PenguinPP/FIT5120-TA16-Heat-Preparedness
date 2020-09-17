@@ -13,6 +13,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { QuizContext } from "../Contexts/QuizContext";
 import { QuestionOne, QuestionTwo, QuestionThree } from "./QuizQuestions";
 import QuizResults from "./QuizResults";
+import quizImage from "./images/certificate.png";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
@@ -44,6 +45,15 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
     },
+  },
+  imgContainer: {
+    textAlign: "center",
+    width: "100%",
+    padding: "1rem",
+    marginBottom: "1rem",
+  },
+  imageStyle: {
+    maxWidth: 250,
   },
 }));
 
@@ -109,7 +119,7 @@ export default function HeatReadinessQuiz() {
               to={"Quiz"}
               spy={true}
               smooth={true}
-              offset={-65}
+              offset={-30}
               duration={1000}
             >
               <Grid container wrap="wrap" justify="center">
@@ -124,6 +134,16 @@ export default function HeatReadinessQuiz() {
                 </Button>
               </Grid>
             </Link>
+          </Grid>
+
+          <Grid container item xs={12} justify="center">
+            <div className={classes.imgContainer}>
+              <img
+                src={quizImage}
+                className={classes.imageStyle}
+                alt="Quiz Logo"
+              />
+            </div>
           </Grid>
         </Grid>
 

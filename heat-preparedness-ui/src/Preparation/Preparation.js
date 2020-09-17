@@ -4,8 +4,8 @@ import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import { List, ListItem, makeStyles } from "@material-ui/core";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { ReactComponent as ShortIcon } from "../icons/short-term-icon.svg";
-import { ReactComponent as LongIcon } from "../icons/long-term-icon.svg";
+import { ReactComponent as SymptomSVG } from "../icons/symptoms.svg";
+import { ReactComponent as CoolHomeIcon } from "../icons/keep-cool-icon.svg";
 import { ReactComponent as PowerIcon } from "../icons/power-failure-icon.svg";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-scroll";
@@ -41,15 +41,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ShortTermIcon = (props) => {
+const SymptomsIcon = (props) => {
   return (
-    <SvgIcon {...props} component={ShortIcon} viewBox="0 0 600 476.6"></SvgIcon>
+    <SvgIcon
+      {...props}
+      component={SymptomSVG}
+      viewBox="0 0 600 476.6"
+    ></SvgIcon>
   );
 };
 
-const LongTermIcon = (props) => {
+const KeepHomeCoolIcon = (props) => {
   return (
-    <SvgIcon {...props} component={LongIcon} viewBox="0 0 600 476.6"></SvgIcon>
+    <SvgIcon
+      {...props}
+      component={CoolHomeIcon}
+      viewBox="0 0 600 476.6"
+    ></SvgIcon>
   );
 };
 
@@ -100,7 +108,7 @@ export default function Preparation(preparationData) {
             onClick={() => setPrepCategory("Symptoms")}
             variant="contained"
           >
-            <ShortTermIcon fontSize="large" />
+            <SymptomsIcon fontSize="large" />
             Symptoms
           </Button>
         </Grid>
@@ -116,7 +124,7 @@ export default function Preparation(preparationData) {
             onClick={() => setPrepCategory("Cooling your home")}
             variant="contained"
           >
-            <LongTermIcon fontSize="large" />
+            <KeepHomeCoolIcon fontSize="large" />
             Cooling your home
           </Button>
         </Grid>
