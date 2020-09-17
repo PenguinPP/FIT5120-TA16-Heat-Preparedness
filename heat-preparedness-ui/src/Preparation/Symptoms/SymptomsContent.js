@@ -2,10 +2,13 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Typography, List, ListItem, ListItemIcon } from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
+import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import eskyImage from "../KeepingHomeCool/images/esky.png";
+import thermosImage from "../KeepingHomeCool/images/thermos.png";
+import ReactPlayer from "react-player";
+import northWindow from "../KeepingHomeCool/images/north-window.png";
+import eastWestWindow from "../KeepingHomeCool/images/east-west-window.png";
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -14,58 +17,91 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.tertiary.main,
     color: theme.palette.tertiary.contrastText,
   },
-  mediaCoffee: {
+  imgContainer: {
+    textAlign: "center",
+    width: "100%",
+    padding: "1rem",
+    marginBottom: "1rem",
+  },
+  videoContainer: {
+    justifyContent: "center",
+    textAlign: "center",
+    display: "flex",
+    padding: "3px 0",
+    marginBottom: "1rem",
+  },
+  eskyStyle: {
     height: 200,
-    width: 200,
+    maxWidth: "95%",
   },
-  mediaExercise: {
-    height: 200,
-    width: 200,
+  thermosStyle: {
+    height: 220,
+    maxWidth: "95%",
   },
-  crossStyle: {
-    color: theme.palette.cross.main,
-  },
-  tickStyle: {
-    color: theme.palette.tick.main,
+  windowStyle: {
+    height: 250,
+    maxWidth: "95%",
   },
 }));
 
 export function HeatCramps() {
-  const content = [
-    {
-      title: "Heat Cramps",
-      content: [
-        "Keep a full drink bottle with you and take small sips of water frequently.",
-        "Avoid Caffeine and alcohol.",
-        "Avoid heavy activity like sport, renovating and gardening.",
-      ],
-      icons: ["Do", "Dont", "Dont"],
-    },
-  ];
-
   const classes = useStyles();
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Grid container alignItems="flex-start">
+        <Grid container alignItems="flex-start" justify="center">
           <Grid item xs={12}>
-            <Typography variant="h5">{content[0]["title"]}</Typography>
-            <List>
-              {content[0]["content"].map((item, index) => (
-                <React.Fragment>
-                  <ListItem id={index}>
-                    <ListItemIcon>
-                      {content[0]["icons"][index] === "Do" ? (
-                        <CheckIcon className={classes.tickStyle} />
-                      ) : (
-                        <ClearIcon className={classes.crossStyle} />
-                      )}
-                    </ListItemIcon>
-                    <Typography variant="body1">{item}</Typography>
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
+            <Typography variant="h5" paragraph align="center">
+              Insulation
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Typography paragraph align="center">
+              Insulation is the most cost-effective way to improve your home's
+              energy efficiency and comfort. Fully insulating your home can
+              reduce the cost of heating or cooling by up to 50%! With good
+              insulation, your home becomes a...
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={8}
+            alignItems="flex-start"
+            justify="space-around"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">Thermos in winter:</Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={thermosImage}
+                  alt="thermos warm inside"
+                  className={classes.thermosStyle}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">Esky in summer:</Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={eskyImage}
+                  alt="esky cool inside"
+                  className={classes.eskyStyle}
+                />
+              </div>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Typography align="center">
+              You can find out more about insulation on the{" "}
+              <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Building-and-renovating/Insulation">
+                Sustainability Victoria website
+              </a>
+              .
+            </Typography>
           </Grid>
         </Grid>
       </CardContent>
@@ -75,32 +111,69 @@ export function HeatCramps() {
 
 export function HeatExhaustion() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Heat Exhaustion",
-      content: [
-        "Draw your blinds",
-        "Close-off any rooms that you are not using",
-        "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">
-                  {index + 1}. {item}
-                </Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start" justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" align="center">
+              Draught Proofing
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={10} lg={8}>
+            <Typography paragraph align="center">
+              Draughts cause your home to lose warm air in winter and allow hot
+              air to enter your home in summer. It is estimated that 9/10
+              Victorian homes have unwanted draughts!
+            </Typography>
+            <Typography paragraph align="center">
+              Watch the video by Sustainability Victoria below to learn more
+              about draught proofing.
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={8}
+            justify="center"
+            className={classes.videoContainer}
+          >
+            <Grid item xs={12}>
+              <ReactPlayer
+                alt={"Energy Efficiency At Home: Draft-proofing"}
+                url={
+                  "https://www.youtube.com/watch?v=qA8fjlYIgf8&feature=emb_logo"
+                }
+                controls={true}
+                config={{ youtube: { playerVars: { showinfo: 1 } } }}
+                width="100%"
+                maxHeight="400px"
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={10} lg={8}>
+            <Typography align="center" paragraph>
+              You may also be eligible for the
+              <a href="https://www.victorianenergysaver.vic.gov.au/save-energy-and-money/discount-energy-saving-products">
+                {" "}
+                Victorian Energy Saver Incentive Scheme{" "}
+              </a>
+              if you choose to install certain draugh proofing measures!
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={10} lg={8}>
+            <Typography align="center">
+              You can find out more about draught proofing on the{" "}
+              <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Save-energy/Draught-proofing">
+                Sustainability Victoria website
+              </a>
+              .
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
@@ -108,29 +181,81 @@ export function HeatExhaustion() {
 
 export function HeatStroke() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Heat Stroke",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start" justify="center" spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Window Size {"&"} Orientation
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={10}>
+            <Typography paragraph align="center">
+              The size and orientation of your windows determine the amount of
+              sunlight entering your home. External shading is much mroe
+              efficient than blinds or curtains at cooling your home, but the
+              use of both means is recommended!
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={12}
+            lg={10}
+            alignItems="flex-start"
+            justify="space-around"
+            spacing={3}
+          >
+            <Grid item xs={12} lg={5}>
+              <Typography align="center">
+                North-facing windows should have fixed horizontal shading
+                devices that keep the sun out in summer, but allow the low sun
+                in during winter.
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={northWindow}
+                  alt="north windows"
+                  className={classes.windowStyle}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={12} lg={5}>
+              <Typography align="center">
+                You should have adjustable external shading devices such as
+                blinds, awnings, louvres or shutters on East and West facing
+                windows.{" "}
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={eastWestWindow}
+                  alt="east and west windows"
+                  className={classes.windowStyle}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={12} lg={10}>
+              <Typography align="center">
+                South facing windows receive almost no direct sunlight and are
+                useful for ventilation as they allow cooling breezes from the
+                South to enter your home!
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={10} lg={8}>
+            <Typography align="center">
+              You can find out more about minimising heat gain through windows
+              on the{" "}
+              <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Building-and-renovating/Windows/Reduce-heat-gain-through-windows">
+                Sustainability Victoria website
+              </a>
+              .
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );

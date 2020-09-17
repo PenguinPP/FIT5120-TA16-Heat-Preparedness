@@ -69,11 +69,13 @@ export function Insulation() {
             container
             item
             xs={12}
-            md={8}
+            md={10}
+            lg={8}
             alignItems="flex-start"
-            justify="center"
+            justify="space-around"
+            spacing={3}
           >
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <Typography align="center">Thermos in winter:</Typography>
               <div className={classes.imgContainer}>
                 <img
@@ -83,7 +85,7 @@ export function Insulation() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <Typography align="center">Esky in summer:</Typography>
               <div className={classes.imgContainer}>
                 <img
@@ -121,7 +123,7 @@ export function DraughtProofing() {
               Draught Proofing
             </Typography>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10} lg={8}>
             <Typography paragraph align="center">
               Draughts cause your home to lose warm air in winter and allow hot
               air to enter your home in summer. It is estimated that 9/10
@@ -136,8 +138,8 @@ export function DraughtProofing() {
             container
             item
             xs={12}
-            md={8}
-            lg={6}
+            md={10}
+            lg={8}
             justify="center"
             className={classes.videoContainer}
           >
@@ -154,7 +156,7 @@ export function DraughtProofing() {
               />
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10} lg={8}>
             <Typography align="center" paragraph>
               You may also be eligible for the
               <a href="https://www.victorianenergysaver.vic.gov.au/save-energy-and-money/discount-energy-saving-products">
@@ -164,7 +166,7 @@ export function DraughtProofing() {
               if you choose to install certain draugh proofing measures!
             </Typography>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10} lg={8}>
             <Typography align="center">
               You can find out more about draught proofing on the{" "}
               <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Save-energy/Draught-proofing">
@@ -191,7 +193,7 @@ export function Windows() {
               Window Size {"&"} Orientation
             </Typography>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <Typography paragraph align="center">
               The size and orientation of your windows determine the amount of
               sunlight entering your home. External shading is much mroe
@@ -203,12 +205,13 @@ export function Windows() {
             container
             item
             xs={12}
-            md={10}
+            md={12}
+            lg={10}
             alignItems="flex-start"
-            justify="center"
+            justify="space-around"
             spacing={3}
           >
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} lg={5}>
               <Typography align="center">
                 North-facing windows should have fixed horizontal shading
                 devices that keep the sun out in summer, but allow the low sun
@@ -222,7 +225,7 @@ export function Windows() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} lg={5}>
               <Typography align="center">
                 You should have adjustable external shading devices such as
                 blinds, awnings, louvres or shutters on East and West facing
@@ -236,7 +239,7 @@ export function Windows() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} lg={10}>
               <Typography align="center">
                 South facing windows receive almost no direct sunlight and are
                 useful for ventilation as they allow cooling breezes from the
@@ -244,7 +247,7 @@ export function Windows() {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10} lg={8}>
             <Typography align="center">
               You can find out more about minimising heat gain through windows
               on the{" "}
@@ -262,15 +265,6 @@ export function Windows() {
 
 export function Landscaping() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Landscaping",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
@@ -291,11 +285,13 @@ export function Landscaping() {
             container
             item
             xs={12}
-            md={8}
+            md={10}
+            lg={8}
             alignItems="flex-start"
-            justify="center"
+            justify="space-around"
+            spacing={3}
           >
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={5}>
               <Typography align="center">
                 Tall deciduous trees can provide shade to North facing windows
                 in summer while allowing the sun in during winter
@@ -308,7 +304,7 @@ export function Landscaping() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={5}>
               <Typography align="center" paragraph>
                 Deciduous shrubs can be very useful for shading East and West
                 facing windows and walls
