@@ -81,7 +81,7 @@ export default function Advice(adviceData) {
       <Typography variant="h4" style={{ marginBottom: "1rem" }}>
         On the Day
       </Typography>
-      <Typography variant="h8" style={{ marginBottom: "1rem" }}>
+      <Typography variant="h8" paragraph>
         Check what things you should and what you should not do during a heat wave!
       </Typography>
       <Grid container>
