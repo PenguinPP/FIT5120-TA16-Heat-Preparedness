@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   logoStyle: {
-    maxWidth: 400,
+    maxWidth: "95%",
   },
   aboutUsText: {
     color: "black",
