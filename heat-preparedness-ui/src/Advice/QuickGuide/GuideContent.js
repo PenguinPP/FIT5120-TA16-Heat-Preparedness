@@ -20,6 +20,7 @@ import drawyourblinds from "./images/Draw_your_blinds.png";
 import openwindow from "./images/open_window.png";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
+import water from "./images/water.png";
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -28,21 +29,25 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.tertiary.main,
     color: theme.palette.tertiary.contrastText,
   },
+  mediaWater: {
+    height: 200,
+    maxWidth: "95%",
+  },
   mediaCoffee: {
     height: 200,
-    width: 200,
+    maxWidth: "95%",
   },
   mediaExercise: {
     height: 200,
-    width: 200,
+    maxWidth: "95%",
   },
   mediaFan: {
     height: 200,
-    width: 200,
+    maxWidth: 200,
   },
   mediaAirConditioner: {
     height: 200,
-    width: 200,
+    maxWidth: 200,
   },
   crossStyle: {
     color: theme.palette.cross.main,
@@ -53,22 +58,65 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function StayHydrated() {
-  const content = [
-    {
-      title: "Stay Hydrated and avoid strenuous activity",
-      content: [
-        "Keep a full drink bottle with you and take small sips of water frequently.",
-        "Avoid Caffeine and alcohol.",
-        "Avoid heavy activity like sport, renovating and gardening.",
-      ],
-      icons: ["Do", "Dont", "Dont"],
-    },
-  ];
-
   const classes = useStyles();
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
+        <Grid container alignItems="flex-start" justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Stay Hydrated and avoid strenuous activity
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={10}
+            alignItems="flex-start"
+            justify="space-evenly"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Keep a full drink bottle with you and take small sips of water
+                frequently.
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={water}
+                  alt="Water bottle"
+                  className={classes.mediaWater}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Avoid Caffeine and alcohol.
+              </Typography>
+              <div className={classes.noCoffeeAlcohol}>
+                <img
+                  src={noCoffeeAlcohol}
+                  alt="No caffeine and alcohol"
+                  className={classes.mediaCoffee}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={10}>
+              <Typography align="center">
+                Avoid heavy activity like sport, renovating and gardening.
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={noExercise}
+                  alt="Minimise physical activity"
+                  className={classes.mediaExercise}
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
         <Grid container alignItems="flex-start">
           <Grid item xs={12}>
             <Typography variant="h5">{content[0]["title"]}</Typography>
@@ -131,7 +179,7 @@ export function CoolEnvironment() {
               <div
                 style={{
                   textAlign: "center",
-                  width: "100%",
+                  maxWidth: "100%",
                   padding: "1rem",
                   marginBottom: "1rem",
                 }}
@@ -140,7 +188,7 @@ export function CoolEnvironment() {
                   src={drawyourblinds}
                   style={{
                     height: 200,
-                    width: 200,
+                    maxWidth: 200,
                   }}
                   alt="coolblinds"
                 ></img>
@@ -153,7 +201,7 @@ export function CoolEnvironment() {
               <div
                 style={{
                   textAlign: "center",
-                  width: "100%",
+                  maxWidth: "100%",
                   padding: "1rem",
                   marginBottom: "1rem",
                 }}
@@ -162,7 +210,7 @@ export function CoolEnvironment() {
                   src={closethedoor}
                   style={{
                     height: 200,
-                    width: 200,
+                    maxWidth: 200,
                   }}
                   alt="coolclsdoor"
                 ></img>
@@ -176,7 +224,7 @@ export function CoolEnvironment() {
               <div
                 style={{
                   textAlign: "center",
-                  width: "100%",
+                  maxWidth: "100%",
                   padding: "1rem",
                   marginBottom: "1rem",
                 }}
@@ -185,7 +233,7 @@ export function CoolEnvironment() {
                   src={openwindow}
                   style={{
                     height: 200,
-                    width: 200,
+                    maxWidth: 200,
                   }}
                   alt="coolwin"
                 ></img>
