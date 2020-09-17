@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import Slide from "@material-ui/core/Slide";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Typography } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
 import {
   Insulation,
   DraughtProofing,
   Windows,
-  Ventilation,
   Landscaping,
 } from "./KeepHomeCoolContent";
 
@@ -53,12 +50,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function KeepingHomeCool() {
   const classes = useStyles();
-  const theme = useTheme();
 
   const [activePage, setActivePage] = React.useState(0);
 
   const handleNext = () => {
-    if (activePage < 4) {
+    if (activePage < 3) {
       setActivePage((prevActivePage) => prevActivePage + 1);
     }
   };
@@ -120,18 +116,6 @@ export default function KeepingHomeCool() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <Ventilation />
-          </Grid>
-        </Slide>
-        <Slide
-          in={activePage === 4 ? true : false}
-          direction="left"
-          mountOnEnter
-          unmountOnExit
-          className={activePage !== 4 && classes.hideCard}
-          timeout={700}
-        >
-          <Grid item xs={12}>
             <Landscaping />
           </Grid>
         </Slide>
@@ -147,13 +131,13 @@ export default function KeepingHomeCool() {
         </IconButton>
         <Grid item xs={2}>
           <Typography variant="body1" align="center">
-            Page {activePage + 1} / 5
+            Page {activePage + 1} / 4
           </Typography>
         </Grid>
         <IconButton
           onClick={handleNext}
           className={
-            activePage < 2
+            activePage < 3
               ? classes.activeChevronStyle
               : classes.inactiveChevronStyle
           }
