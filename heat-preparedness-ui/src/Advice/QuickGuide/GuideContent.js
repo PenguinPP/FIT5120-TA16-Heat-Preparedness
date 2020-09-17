@@ -13,6 +13,9 @@ import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import noCoffeeAlcohol from "./images/nocoffeealcohol.png";
 import noExercise from "./images/no-exercise.png";
+import closethedoor from "./images/close_the_door.png";
+import drawyourblinds from "./images/Draw_your_blinds.png";
+import openwindow from "./images/open_window.png";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -67,8 +70,8 @@ export function StayHydrated() {
                       {content[0]["icons"][index] === "Do" ? (
                         <CheckIcon className={classes.tickStyle} />
                       ) : (
-                        <ClearIcon className={classes.crossStyle} />
-                      )}
+                          <ClearIcon className={classes.crossStyle} />
+                        )}
                     </ListItemIcon>
                     <Typography variant="body1">{item}</Typography>
                   </ListItem>
@@ -107,18 +110,77 @@ export function CoolEnvironment() {
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">
-                  {index + 1}. {item}
-                </Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start">
+          <Typography variant="h5">{content[0]["title"]}</Typography>
+          <List>
+            {content[0]["content"].map((item, index) => (
+              <React.Fragment>
+                <ListItem id={index}>
+                  <Typography variant="body1">
+                    {index + 1}. {item}
+                  </Typography>
+                </ListItem>
+              </React.Fragment>
+            ))}
+          </List>
+          <Grid item xs={12} md={3}>
+            <div
+              style={{
+                textAlign: "center",
+                width: "100%",
+                padding: "1rem",
+                marginBottom: "1rem",
+              }}
+            >
+              <img
+                src={drawyourblinds}
+                style={{
+                  height: 200,
+                  width: 200,
+                }}
+                alt="blinds"
+              ></img>
+            </div>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <div
+              style={{
+                textAlign: "center",
+                width: "100%",
+                padding: "1rem",
+                marginBottom: "1rem",
+              }}
+            >
+              <img
+                src={openwindow}
+                style={{
+                  height: 200,
+                  width: 200,
+                }}
+                alt="window"
+              ></img>
+            </div>
+          </Grid>
+          <Grid item xs={12} md={3} >
+            <div
+              style={{
+                textAlign: "center",
+                width: "100%",
+                padding: "1rem",
+                marginBottom: "1rem",
+              }}
+            >
+              <img
+                src={closethedoor}
+                style={{
+                  height: 200,
+                  width: 200,
+                }}
+                alt="door"
+              ></img>
+            </div>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
