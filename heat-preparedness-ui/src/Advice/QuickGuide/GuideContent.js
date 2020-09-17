@@ -22,6 +22,7 @@ import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 import water from "./images/water.png";
 import oven from "./images/oven.png";
+import noSun from "./images/out-of-sun.png";
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -297,16 +298,42 @@ export function FinalTips() {
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid
+          container
+          alignItems="flex-start"
+          spacing={2}
+          wrap="wrap"
+          alignItems="center"
+          justify="center"
+        >
+          <Grid item xs={12} md={6} lg={5}>
+            <Typography variant="h5">{content[0]["title"]}</Typography>
+            <List>
+              {content[0]["content"].map((item, index) => (
+                <React.Fragment>
+                  <ListItem id={index}>
+                    <Typography variant="body1">
+                      {index + 1}. {item}
+                    </Typography>
+                  </ListItem>
+                </React.Fragment>
+              ))}
+            </List>
+          </Grid>
+          <Grid item xs={12} md={6} lg={5}>
+            <div className={classes.imgContainer}>
+              <img
+                src={noSun}
+                style={{
+                  maxHeight: 500,
+                  marginTop: "1rem",
+                  maxWidth: "90%",
+                }}
+                alt="Stay out of the sun"
+              ></img>
+            </div>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
