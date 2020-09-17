@@ -9,6 +9,8 @@ import thermosImage from "./images/thermos.png";
 import ReactPlayer from "react-player";
 import northWindow from "./images/north-window.png";
 import eastWestWindow from "./images/east-west-window.png";
+import tree from "./images/tree.png";
+import bushes from "./images/bushes.png";
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -258,36 +260,6 @@ export function Windows() {
   );
 }
 
-export function Ventilation() {
-  const classes = useStyles();
-  const content = [
-    {
-      title: "Ventilation",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-  ];
-
-  return (
-    <Card raised={true}>
-      <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
-  );
-}
-
 export function Landscaping() {
   const classes = useStyles();
   const content = [
@@ -303,16 +275,54 @@ export function Landscaping() {
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start" justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Landscaping
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Typography paragraph align="center">
+              Well thought out selection and placement of plants can provide
+              shade and buffer against hot winds in the summer!
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={8}
+            alignItems="flex-start"
+            justify="center"
+          >
+            <Grid item xs={12} sm={6}>
+              <Typography align="center">
+                Tall deciduous trees can provide shade to North facing windows
+                in summer while allowing the sun in during winter
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={tree}
+                  alt="Tall Deciduous Tree"
+                  className={classes.thermosStyle}
+                />
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography align="center" paragraph>
+                Deciduous shrubs can be very useful for shading East and West
+                facing windows and walls
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={bushes}
+                  alt="Deciduous Shrubs"
+                  className={classes.eskyStyle}
+                />
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );

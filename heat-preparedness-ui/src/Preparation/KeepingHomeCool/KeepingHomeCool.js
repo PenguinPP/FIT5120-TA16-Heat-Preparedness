@@ -10,7 +10,6 @@ import {
   Insulation,
   DraughtProofing,
   Windows,
-  Ventilation,
   Landscaping,
 } from "./KeepHomeCoolContent";
 
@@ -55,7 +54,7 @@ export default function KeepingHomeCool() {
   const [activePage, setActivePage] = React.useState(0);
 
   const handleNext = () => {
-    if (activePage < 4) {
+    if (activePage < 3) {
       setActivePage((prevActivePage) => prevActivePage + 1);
     }
   };
@@ -117,18 +116,6 @@ export default function KeepingHomeCool() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <Ventilation />
-          </Grid>
-        </Slide>
-        <Slide
-          in={activePage === 4 ? true : false}
-          direction="left"
-          mountOnEnter
-          unmountOnExit
-          className={activePage !== 4 && classes.hideCard}
-          timeout={700}
-        >
-          <Grid item xs={12}>
             <Landscaping />
           </Grid>
         </Slide>
@@ -144,13 +131,13 @@ export default function KeepingHomeCool() {
         </IconButton>
         <Grid item xs={2}>
           <Typography variant="body1" align="center">
-            Page {activePage + 1} / 5
+            Page {activePage + 1} / 4
           </Typography>
         </Grid>
         <IconButton
           onClick={handleNext}
           className={
-            activePage < 2
+            activePage < 3
               ? classes.activeChevronStyle
               : classes.inactiveChevronStyle
           }
