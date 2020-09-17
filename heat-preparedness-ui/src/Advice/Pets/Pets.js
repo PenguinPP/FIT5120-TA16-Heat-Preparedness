@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import Slide from "@material-ui/core/Slide";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Typography } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 import {
-  Insulation,
-  DraughtProofing,
-  Windows,
-  Landscaping,
-} from "./KeepHomeCoolContent";
+  StayHome,
+  OutDoor,
+} from "./PetsContent";
 
 //Use SVG to create SVGIcons
 const useStyles = makeStyles((theme) => ({
@@ -48,13 +48,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function KeepingHomeCool() {
+export default function QuickGuide() {
   const classes = useStyles();
+  const theme = useTheme();
 
   const [activePage, setActivePage] = React.useState(0);
 
   const handleNext = () => {
-    if (activePage < 3) {
+    if (activePage < 1) {
       setActivePage((prevActivePage) => prevActivePage + 1);
     }
   };
@@ -78,10 +79,11 @@ export default function KeepingHomeCool() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <Insulation />
+            <StayHome />
           </Grid>
         </Slide>
         {/*Page 2*/}
+
         <Slide
           in={activePage === 1 ? true : false}
           direction="left"
@@ -91,34 +93,11 @@ export default function KeepingHomeCool() {
           timeout={700}
         >
           <Grid item xs={12}>
-            <DraughtProofing />
+            <OutDoor />
           </Grid>
         </Slide>
-        {/*Page 3*/}
-        <Slide
-          in={activePage === 2 ? true : false}
-          direction="left"
-          mountOnEnter
-          unmountOnExit
-          className={activePage !== 2 && classes.hideCard}
-          timeout={700}
-        >
-          <Grid item xs={12}>
-            <Windows />
-          </Grid>
-        </Slide>
-        <Slide
-          in={activePage === 3 ? true : false}
-          direction="left"
-          mountOnEnter
-          unmountOnExit
-          className={activePage !== 3 && classes.hideCard}
-          timeout={700}
-        >
-          <Grid item xs={12}>
-            <Landscaping />
-          </Grid>
-        </Slide>
+        
+        {/*Card Navigation*/}
         <IconButton
           onClick={handleBack}
           className={
@@ -131,13 +110,13 @@ export default function KeepingHomeCool() {
         </IconButton>
         <Grid item xs={2}>
           <Typography variant="body1" align="center">
-            Page {activePage + 1} / 4
+            Page {activePage + 1} / 2
           </Typography>
         </Grid>
         <IconButton
           onClick={handleNext}
           className={
-            activePage < 3
+            activePage < 1
               ? classes.activeChevronStyle
               : classes.inactiveChevronStyle
           }

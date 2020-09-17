@@ -13,6 +13,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { QuizContext } from "../Contexts/QuizContext";
 import { QuestionOne, QuestionTwo, QuestionThree } from "./QuizQuestions";
 import QuizResults from "./QuizResults";
+import quizImage from "./images/certificate.png";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
@@ -44,6 +45,15 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
     },
+  },
+  imgContainer: {
+    textAlign: "center",
+    width: "100%",
+    padding: "1rem",
+    marginBottom: "1rem",
+  },
+  imageStyle: {
+    maxWidth: 250,
   },
 }));
 
@@ -97,27 +107,44 @@ export default function HeatReadinessQuiz() {
   return (
     <React.Fragment>
       <Grid container justify="center">
-        <Grid item xs={12}>
-          <Link
-            activeClass="active"
-            to={"Quiz"}
-            spy={true}
-            smooth={true}
-            offset={-65}
-            duration={1000}
-          >
-            <Button
-              variant="contained"
-              fullWidth={true}
-              color="secondary"
-              onClick={() => setQuestion(0)}
-              className={classes.startQuizButton}
+        <Grid container item xs={12} wrap="wrap" justify="center">
+          <Grid item xs={12}>
+            <Typography paragraph align="center" variant="h5">
+              Not sure where to start?
+            </Typography>
+          </Grid>
+          <Grid container item xs={12} justify="center">
+            <Link
+              activeClass="active"
+              to={"Quiz"}
+              spy={true}
+              smooth={true}
+              offset={-30}
+              duration={1000}
             >
-              <Typography variant="h4">
-                Take our Heat Readiness Quiz!
-              </Typography>
-            </Button>
-          </Link>
+              <Grid container wrap="wrap" justify="center">
+                <Button
+                  variant="contained"
+                  onClick={() => setQuestion(0)}
+                  className={classes.startQuizButton}
+                >
+                  <Typography variant="h4">
+                    Take our Heat Readiness Quiz!
+                  </Typography>
+                </Button>
+              </Grid>
+            </Link>
+          </Grid>
+
+          <Grid container item xs={12} justify="center">
+            <div className={classes.imgContainer}>
+              <img
+                src={quizImage}
+                className={classes.imageStyle}
+                alt="Quiz Logo"
+              />
+            </div>
+          </Grid>
         </Grid>
 
         <div id="Quiz" />

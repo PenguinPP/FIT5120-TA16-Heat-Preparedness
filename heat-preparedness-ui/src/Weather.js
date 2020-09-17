@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
-import { List, ListItem, makeStyles } from "@material-ui/core";
+import { List, ListItem, makeStyles, Grid } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -8,6 +8,7 @@ import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
 import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
 import Alert from '@material-ui/lab/Alert';
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const axios = require("axios").default;
 
@@ -17,6 +18,15 @@ const useStyles = makeStyles((theme) => ({
   active: {
     //Style for active category button
     background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+  callToAction: {
+    background: theme.palette.primary.main,
+    textTransform: "none",
     color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
@@ -163,23 +173,33 @@ render() {
       </List>
 
       <HeatReadinessQuiz />
-      <Link
-        activeClass="active"
-        to={"Prep"}
-        spy={true}
-        smooth={true}
-        offset={-80}
-        duration={700}
-      >
-        <Button
-          variant="contained"
-          fullWidth={true}
-          color="primary"
-          className={classes.active}
+      <Grid container justify="center">
+        <Link
+          activeClass="active"
+          to={"Prep"}
+          spy={true}
+          smooth={true}
+          offset={-80}
+          duration={700}
         >
-          <Typography variant="h6">Be Prepared!</Typography>
-        </Button>
-      </Link>
+          <Grid container wrap="wrap" justify="center">
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.callToAction}
+            >
+              <Grid container wrap="wrap" justify="center">
+                <Grid item xs={12}>
+                  <Typography variant="h6">Be Prepared!</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <KeyboardArrowDownIcon />
+                </Grid>
+              </Grid>
+            </Button>
+          </Grid>
+        </Link>
+      </Grid>
     </React.Fragment>
   );
 }

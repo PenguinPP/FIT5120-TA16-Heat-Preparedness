@@ -13,6 +13,11 @@ import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import noCoffeeAlcohol from "./images/nocoffeealcohol.png";
 import noExercise from "./images/no-exercise.png";
+import fan from "./images/fan.png";
+import airConditioner from "./images/airConditioner.png";
+import closethedoor from "./images/close_the_door.png";
+import drawyourblinds from "./images/Draw_your_blinds.png";
+import openwindow from "./images/open_window.png";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -28,6 +33,14 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   mediaExercise: {
+    height: 200,
+    width: 200,
+  },
+  mediaFan: {
+    height: 200,
+    width: 200,
+  },
+  mediaAirConditioner: {
     height: 200,
     width: 200,
   },
@@ -93,32 +106,93 @@ export function StayHydrated() {
 
 export function CoolEnvironment() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Keep your environment cool",
-      content: [
-        "Draw your blinds",
-        "Close-off any rooms that you are not using",
-        "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">
-                  {index + 1}. {item}
-                </Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start" justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Keep your environment cool
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={10}
+            alignItems="flex-start"
+            justify="space-evenly"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">Draw your blinds</Typography>
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  padding: "1rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <img
+                  src={drawyourblinds}
+                  style={{
+                    height: 200,
+                    width: 200,
+                  }}
+                  alt="coolblinds"
+                ></img>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Close-off any rooms that you are not using
+              </Typography>
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  padding: "1rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <img
+                  src={closethedoor}
+                  style={{
+                    height: 200,
+                    width: 200,
+                  }}
+                  alt="coolclsdoor"
+                ></img>
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Open the windows when there is a cool breeze or when the
+                temperature inside rises above the outside temperature
+              </Typography>
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  padding: "1rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <img
+                  src={openwindow}
+                  style={{
+                    height: 200,
+                    width: 200,
+                  }}
+                  alt="coolwin"
+                ></img>
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
@@ -139,16 +213,29 @@ export function FanAirconUse() {
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start">
+          <Grid item xs={12}>
+            <Typography variant="h5">{content[0]["title"]}</Typography>
+            <List>
+              {content[0]["content"].map((item, index) => (
+                <React.Fragment>
+                  <ListItem id={index}>
+                    <Typography variant="body1">{item}</Typography>
+                  </ListItem>
+                </React.Fragment>
+              ))}
+            </List>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <CardMedia image={fan} className={classes.mediaFan} />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <CardMedia
+              image={airConditioner}
+              className={classes.mediaAirConditioner}
+            />
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
