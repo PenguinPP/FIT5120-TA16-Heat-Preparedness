@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
     },
+    minWidth: 225,
   },
 }));
 
@@ -231,7 +232,7 @@ export default function HeatWaves() {
                     <Typography variant="h6">Stay Alert!</Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <KeyboardArrowDownIcon />
+                    <KeyboardArrowDownIcon style={{ marginBottom: 0 }} />
                   </Grid>
                 </Grid>
               </Button>
