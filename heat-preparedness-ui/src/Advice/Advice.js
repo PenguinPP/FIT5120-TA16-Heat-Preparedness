@@ -8,7 +8,8 @@ import { ReactComponent as CoolIcon } from "../icons/keep-cool-icon.svg";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Grid from "@material-ui/core/Grid";
 import QuickGuide from "./QuickGuide/QuickGuide";
-import Pets from "./Pets/Pets"
+import Pets from "./Pets/Pets";
+import KeepCool from "./KeepCool/KeepCool";
 import { QuizContext } from "../Contexts/QuizContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,8 +63,8 @@ export default function Advice(adviceData) {
 
   const display = {
     "Essentials Guide": <QuickGuide />,
-    "Keeping Cool": <h1>Keep Cool Not created yet</h1>,
     Pets: <Pets />,
+    "Keeping Cool": <KeepCool />,
   };
 
   return (
