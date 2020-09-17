@@ -21,6 +21,7 @@ import openwindow from "./images/open_window.png";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/core/styles";
 import water from "./images/water.png";
+import oven from "./images/oven.png";
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -34,26 +35,30 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "95%",
   },
   mediaCoffee: {
-    height: 200,
+    height: 250,
     maxWidth: "95%",
   },
   mediaExercise: {
-    height: 200,
+    height: 250,
     maxWidth: "95%",
   },
   mediaFan: {
-    height: 200,
-    maxWidth: 200,
+    height: 250,
+    maxWidth: "95%",
   },
   mediaAirConditioner: {
+    height: 250,
+    maxWidth: "95%",
+  },
+  mediaOven: {
     height: 200,
-    maxWidth: 200,
+    maxWidth: "95%",
   },
-  crossStyle: {
-    color: theme.palette.cross.main,
-  },
-  tickStyle: {
-    color: theme.palette.tick.main,
+  imgContainer: {
+    textAlign: "center",
+    maxWidth: "100%",
+    padding: "1rem",
+    marginBottom: "1rem",
   },
 }));
 
@@ -95,7 +100,7 @@ export function StayHydrated() {
               <Typography align="center">
                 Avoid Caffeine and alcohol.
               </Typography>
-              <div className={classes.noCoffeeAlcohol}>
+              <div className={classes.imgContainer}>
                 <img
                   src={noCoffeeAlcohol}
                   alt="No caffeine and alcohol"
@@ -115,36 +120,6 @@ export function StayHydrated() {
                 />
               </div>
             </Grid>
-          </Grid>
-        </Grid>
-        <Grid container alignItems="flex-start">
-          <Grid item xs={12}>
-            <Typography variant="h5">{content[0]["title"]}</Typography>
-            <List>
-              {content[0]["content"].map((item, index) => (
-                <React.Fragment>
-                  <ListItem id={index}>
-                    <ListItemIcon>
-                      {content[0]["icons"][index] === "Do" ? (
-                        <CheckIcon className={classes.tickStyle} />
-                      ) : (
-                        <ClearIcon className={classes.crossStyle} />
-                      )}
-                    </ListItemIcon>
-                    <Typography variant="body1">{item}</Typography>
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <CardMedia
-              image={noCoffeeAlcohol}
-              className={classes.mediaCoffee}
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <CardMedia image={noExercise} className={classes.mediaExercise} />
           </Grid>
         </Grid>
       </CardContent>
@@ -248,40 +223,58 @@ export function CoolEnvironment() {
 
 export function FanAirconUse() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Fan / Air Conditioner usage",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-  ];
 
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Grid container alignItems="flex-start">
+        <Grid container alignItems="flex-start" justify="center">
           <Grid item xs={12}>
-            <Typography variant="h5">{content[0]["title"]}</Typography>
-            <List>
-              {content[0]["content"].map((item, index) => (
-                <React.Fragment>
-                  <ListItem id={index}>
-                    <Typography variant="body1">{item}</Typography>
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
+            <Typography variant="h5" paragraph align="center">
+              Fan / Air Conditioner usage
+            </Typography>
           </Grid>
-          <Grid item xs={12} md={3}>
-            <CardMedia image={fan} className={classes.mediaFan} />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <CardMedia
-              image={airConditioner}
-              className={classes.mediaAirConditioner}
-            />
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={10}
+            alignItems="flex-start"
+            justify="space-evenly"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                If using a fan, ensure there is adequate ventilation and that it
+                is set-up to bring cooler air in from the outside.
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img src={fan} alt="Fan" className={classes.mediaFan} />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                It is dangerous to use a fan without proper ventilation if the
+                temperature inside is more than 34 degrees! This can cause a
+                very dangerous convection oven type effect.
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img src={oven} alt="Oven" className={classes.mediaOven} />
+              </div>
+            </Grid>
+            <Grid item xs={12} md={10}>
+              <Typography align="center">
+                If using an air conditioner, make sure it is on the right
+                setting (snowflake symbol)
+              </Typography>
+              <div className={classes.imgContainer}>
+                <img
+                  src={airConditioner}
+                  alt="Air Conditioner"
+                  className={classes.mediaAirConditioner}
+                />
+              </div>
+            </Grid>
           </Grid>
         </Grid>
       </CardContent>
