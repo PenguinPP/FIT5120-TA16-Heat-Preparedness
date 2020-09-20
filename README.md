@@ -28,7 +28,7 @@ Our front-end and application server are both hosted on an Amazon EC2 instance. 
 JavaScript library for building user interfaces.
 
 ### <a href="https://material-ui.com/">Material-UI</a>
-React components based on Materian Design.
+React components based on Material Design.
 
 ### <a href="https://www.npmjs.com/package/axios" >Axios </a>
 HTTP client for browser and NodeJS
@@ -41,6 +41,9 @@ Animated scroll component for React
 
 ### <a href="https://expressjs.com/" >Express</a>
 A web framework for Node.js.
+
+### <a href="https://www.nginx.com/">Nginx</a>
+Web Server /  Reverse Proxy
 
 # Credits
 The weather information we use is provided by <a href="https://openweathermap.org/" >OpenWeather</a> under a Creative Commons Attribution-ShareAlike 4.0 International licence.
