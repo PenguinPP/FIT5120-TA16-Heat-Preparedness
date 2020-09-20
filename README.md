@@ -3,6 +3,7 @@
 We are a highly motivated team with a diverse range of skills and educational backgrounds. As a team we hope to develop a project that will have a positive impact on the lives of others. Upon receiving our topic, we recognised that high temperatures are a growing public health concern in Australia, and we are determined to provide vulnerable individuals with the knowledge and resources they will need to safeguard their health.
 
 The second iteration can be accessed from <a href="https://victoria-heat.ml">www.victoria-heat.ml</a>
+
 The first iteration can be accessed from <a href="https://victoria-heat.tk">victoria-heat.tk</a>
  
 # Features
@@ -23,8 +24,23 @@ Our front-end and application server are both hosted on an Amazon EC2 instance. 
 
 ## List of Libraries/Packages Used
 
+### <a href="https://reactjs.org/">React</a>
+JavaScript library for building user interfaces.
+
 ### <a href="https://material-ui.com/">Material-UI</a>
-React components based on Materian Design
+React components based on Materian Design.
+
+### <a href="https://www.npmjs.com/package/axios" >Axios </a>
+HTTP client for browser and NodeJS
+
+### <a href="https://www.npmjs.com/package/react-player" >React Player</a>
+React component for streaming URLs
+
+### <a href="https://www.npmjs.com/package/react-scroll" >React Scroll</a>
+Animated scroll component for React
+
+### <a href="https://expressjs.com/" >Express</a>
+A web framework for Node.js.
 
 # Credits
 The weather information we use is provided by <a href="https://openweathermap.org/" >OpenWeather</a> under a Creative Commons Attribution-ShareAlike 4.0 International licence.
