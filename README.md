@@ -8,13 +8,13 @@ The first iteration can be accessed from <a href="https://victoria-heat.tk">vict
  
 # Features
 
-## Heat Wave forecast
+### Heat Wave forecast
 The app provides a temperature forecast for the next week for government district. Users are able to search for their suburbs to receive localised weather information. They forecast will highlight future heat waves.
 
-## Heat Readiness Quiz
+### Heat Readiness Quiz
 The quiz asks users three questions to test their knowledge of heat waves and recommends them different sections of the website depending on their results.
 
-## Heat Wave Information
+### Heat Wave Information
 The site has two informative sections. The "Be Prepared" section contains advice for users to prepare for future heatwaves. The "On the Day" section contains advice that users need on the day of a heatwave.
 
 # Technology / Frameworks
