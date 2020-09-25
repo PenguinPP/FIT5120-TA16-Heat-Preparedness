@@ -1,103 +1,133 @@
-import React, { useState } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { List, ListItem, makeStyles } from '@material-ui/core'
-import { ReactComponent as BottleIcon } from './icons/bottle-icon.svg';
-import { ReactComponent as PhysicalIcon } from './icons/physical-activity-icon.svg';
-import { ReactComponent as CoolIcon } from './icons/keep-cool-icon.svg';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import Grid from '@material-ui/core/Grid';
+import React, { useState, useContext } from "react";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core";
+import { ReactComponent as GuideIcon } from "../icons/guide-icon.svg";
+import { ReactComponent as PetIcon } from "../icons/pet-icon.svg";
+import { ReactComponent as CoolIcon } from "../icons/keep-cool-icon.svg";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import Grid from "@material-ui/core/Grid";
+import QuickGuide from "./QuickGuide/QuickGuide";
+import Pets from "./Pets/Pets";
+import KeepCool from "./KeepCool/KeepCool";
+import { QuizContext } from "../Contexts/QuizContext";
 
-const useStyles = makeStyles({
-    active: { //Style for active category button
-        background: "#3f51b5",
-        color: "white",
-        '&:hover': {
-            backgroundColor: "#7986cb"
-        }
-    }
-})
+const useStyles = makeStyles((theme) => ({
+  active: {
+    //Style for active category button
+    background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+  inactive: {
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+}));
 
 //Use SVG to create SVGIcons
-const GeneralIcon = (props) => {
-    return (
-        <SvgIcon {...props} component={BottleIcon} viewBox="0 0 600 476.6" >
+const EssentialGuideIcon = (props) => {
+  return (
+    <SvgIcon
+      {...props}
+      component={GuideIcon}
+      style={{ color: "#000000" }}
+      viewBox="0 0 600 476.6"
+    ></SvgIcon>
+  );
+};
 
-        </SvgIcon>
-    )
-}
-
-const PhysicalActivityIcon = (props) => {
-    return (
-        <SvgIcon {...props} component={PhysicalIcon} viewBox="0 0 600 476.6" >
-
-        </SvgIcon>
-    )
-}
+const PetsIcon = (props) => {
+  return (
+    <SvgIcon {...props} component={PetIcon} viewBox="0 0 600 476.6"></SvgIcon>
+  );
+};
 
 const KeepCoolIcon = (props) => {
-    return (
-        <SvgIcon {...props} component={CoolIcon} viewBox="0 0 600 476.6" >
-
-        </SvgIcon>
-    )
-}
+  return (
+    <SvgIcon {...props} component={CoolIcon} viewBox="0 0 600 476.6"></SvgIcon>
+  );
+};
 
 export default function Advice(adviceData) {
-    const classes = useStyles()
-    const [category, setCategory] = React.useState("General"); //Current selected category
+  const { adviceActiveCategory, setAdviceCategory } = useContext(QuizContext);
 
-    //console.log(adviceData["adviceData"])
+  const classes = useStyles();
 
-    var messages = { //Message to display for each category before bullet points
-        "General": "Some general bits of advice to get you through the day:",
-        "Keeping Cool": "Here are a few things that you can do to keep cool:",
-        "Physical Activity": "When it comes to physical activity during a heat wave:"
-    }
+  //console.log(adviceData["adviceData"])
 
+  const display = {
+    "Essentials Guide": <QuickGuide />,
+    Pets: <Pets />,
+    "Keeping Cool": <KeepCool />,
+  };
 
-    return (
-        <React.Fragment>
-            <Typography variant="h4" style={{ marginBottom: "1rem" }}>
-                On the Day
-                 </Typography>
-            <Grid container>
-                <Grid item xs={12} md={4}>
-                    <Button
-                        id="General"
-                        className={category === "General" && classes.active} //Set style to active style if current category
-                        fullWidth={true}
-                        onClick={() => setCategory("General")}
-                        variant="contained">
-                        <GeneralIcon fontSize="large" />
-                        General
-                        </Button>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <Button
-                        id="Keeping Cool"
-                        className={category === "Keeping Cool" && classes.active}
-                        fullWidth={true}
-                        onClick={() => setCategory("Keeping Cool")}
-                        variant="contained" >
-
-                        <KeepCoolIcon fontSize="large" />
-                        Keep Cool
-                    </Button>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <Button
-                        id="Physical Activity"
-                        className={category === "Physical Activity" && classes.active}
-                        fullWidth={true} onClick={() => setCategory("Physical Activity")}
-                        variant="contained">
-                        <PhysicalActivityIcon
-                            fontSize="large" />
-                    Physical Activity
-                    </Button>
-                </Grid>
-            </Grid>
-            <Typography variant="h6" style={{ marginTop: "1rem" }}>
+  return (
+    <React.Fragment>
+      <Typography variant="h4" style={{ marginBottom: "1rem" }}>
+        On the Day
+      </Typography>
+      <Typography variant="h8" paragraph>
+        Check what things you should and what you should not do during a heat
+        wave!
+      </Typography>
+      <Grid container>
+        <Grid item xs={12} md={4}>
+          <Button
+            id="Essentials Guide"
+            className={
+              adviceActiveCategory === "Essentials Guide"
+                ? classes.active
+                : classes.inactive
+            } //Set style to active style if current category
+            fullWidth={true}
+            onClick={() => setAdviceCategory("Essentials Guide")}
+            variant="contained"
+          >
+            <EssentialGuideIcon fontSize="large" />
+            Essentials Guide
+          </Button>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Button
+            id="Keeping Cool"
+            className={
+              adviceActiveCategory === "Keeping Cool"
+                ? classes.active
+                : classes.inactive
+            }
+            fullWidth={true}
+            onClick={() => setAdviceCategory("Keeping Cool")}
+            variant="contained"
+          >
+            <KeepCoolIcon fontSize="large" />
+            Keep Cool
+          </Button>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Button
+            id="Pets"
+            className={
+              adviceActiveCategory === "Pets"
+                ? classes.active
+                : classes.inactive
+            }
+            fullWidth={true}
+            onClick={() => setAdviceCategory("Pets")}
+            variant="contained"
+          >
+            <PetsIcon fontSize="large" />
+            Pets
+          </Button>
+        </Grid>
+      </Grid>
+      {display[adviceActiveCategory]}
+      {/* <Typography variant="h6" style={{ marginTop: "1rem" }}>
                 {messages[category]}
             </Typography>
             <List>
@@ -108,7 +138,7 @@ export default function Advice(adviceData) {
                         </Typography>
                     </ListItem>
                 )}
-            </List>
-        </React.Fragment >
-    )
+            </List> */}
+    </React.Fragment>
+  );
 }
