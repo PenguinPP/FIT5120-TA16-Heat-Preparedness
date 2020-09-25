@@ -83,10 +83,13 @@ class App extends React.Component {
     await axios
       .get(dataLink)
       .then(function (response) {
-        weatherData = response.data.filter(
-          (item) => item.council === "Melbourne City"
-        );
-        //console.log(weatherData)
+        weatherData = response.data;
+
+        for (let day in weatherData) {
+          weatherData[day]["date"] = new Date(
+            Date.parse(weatherData[day]["date"])
+          );
+        }
       })
       .catch(function (error) {
         console.log(error);

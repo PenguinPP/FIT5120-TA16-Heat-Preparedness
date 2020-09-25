@@ -40,6 +40,7 @@ export default function Weather(weatherInformation) {
     weatherInformation["weatherInformation"],
   ]);
 
+  console.log(weatherData);
   const classes = useStyles();
 
   var currentSuburb = suburbData.filter(
@@ -55,6 +56,9 @@ export default function Weather(weatherInformation) {
       .get(dataLink)
       .then((results) => results.data)
       .then((data) => {
+        for (let day in data) {
+          data[day]["date"] = new Date(Date.parse(data[day]["date"]));
+        }
         setWeatherData(data);
         //console.log(weatherData)
       })
@@ -122,7 +126,11 @@ export default function Weather(weatherInformation) {
         {weatherData.map((item) => (
           <ListItem key={item.date}>
             {item.date
-              ? item.date.toString().replace(/T.+/, "").substring(5, 10)
+              ? item.date.getDate() +
+                "-" +
+                (item.date.getMonth() + 1) +
+                "-" +
+                item.date.getFullYear()
               : ""}{" "}
             : max {item.max ? item.max : ""}° | min {item.min ? item.min : ""}°
             | avg {item.avg ? item.avg : ""}°
