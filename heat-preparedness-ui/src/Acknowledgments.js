@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   logoStyle: {
-    maxWidth: 400,
+    maxWidth: "95%",
   },
   aboutUsText: {
     color: "black",
@@ -67,9 +67,10 @@ export default function Acknowledgements() {
   return (
     <React.Fragment>
       <div className={classes.bgStyle}>
-        <Typography variant="h5">Acknowledgments</Typography>
-        <br />
-        <Typography>
+        <Typography variant="h5" paragraph>
+          Acknowledgments
+        </Typography>
+        <Typography paragraph>
           The weather forecast information is updated every 6 hours based on
           available data from{" "}
           <a href="https://openweathermap.org/" className={classes.linkStyle}>
@@ -78,8 +79,16 @@ export default function Acknowledgements() {
           ( © Creative Commons Attribution-ShareAlike 4.0 International
           licence).
         </Typography>
-        <br />
-        <Typography>
+        <Typography paragraph>
+          Advice on improving your home's cooling efficiency was sourced from{" "}
+          <a
+            href="https://www.sustainability.vic.gov.au/You-and-your-home/Save-energy/Cooling/Cool-your-home-in-summer"
+            className={classes.linkStyle}
+          >
+            Sustainability Victoria
+          </a>{" "}
+        </Typography>
+        <Typography paragraph>
           The definitions of heatwaves, suggested preparations and further
           advice are extracted from the Victorian State Government . To access
           up-to-date information about current heatwaves in Victoria, please
@@ -101,14 +110,22 @@ export default function Acknowledgements() {
         <br />
 
         <br />
-        <Typography>
-          Vector silhouettes were obtained from{" "}
+        <Typography paragraph>
+          Vector silhouettes for heat wave deaths were obtained from{" "}
           <a
             href="https://www.freevector.com/elderly-people-silhouettes"
             className={classes.linkStyle}
           >
             freevector.com
+          </a>{" "}
+          and{" "}
+          <a
+            className={classes.linkStyle}
+            href="https://www.vecteezy.com/free-vector/human-silhouette-vector-free"
+          >
+            Vecteezy
           </a>
+          .
         </Typography>
 
         <Button className={classes.buttonStyle} onClick={handleClickOpen}>

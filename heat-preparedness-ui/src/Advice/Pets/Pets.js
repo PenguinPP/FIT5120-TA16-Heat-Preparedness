@@ -8,10 +8,7 @@ import { Typography } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
-import {
-  StayHome,
-  OutDoor,
-} from "./PetsContent";
+import { StayHome, OutDoor } from "./PetsContent";
 
 //Use SVG to create SVGIcons
 const useStyles = makeStyles((theme) => ({
@@ -96,7 +93,7 @@ export default function QuickGuide() {
             <OutDoor />
           </Grid>
         </Slide>
-        
+
         {/*Card Navigation*/}
         <IconButton
           onClick={handleBack}
