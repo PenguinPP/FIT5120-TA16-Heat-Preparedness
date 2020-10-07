@@ -7,9 +7,12 @@ import WarningIcon from "@material-ui/icons/Warning";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
 import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
+import Alert from '@material-ui/lab/Alert';
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const axios = require("axios").default;
+
+//const heatwaveAlert = FALSE;
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -75,7 +78,17 @@ export default function Weather(weatherInformation) {
         */
 
     <React.Fragment>
-      <Typography variant="h4">Weather Forecasts {"&"} Alerts</Typography>
+      <Typography variant="h4">Weather Forecasts  Alerts</Typography>
+      <br />
+
+      <Typography
+        variant="h8"
+        style={{ marginBottom: "1rem", marginTop: "1rem" }}
+      >
+        Find out if there are any upcoming heatwaves during next week's forecast.
+      </Typography>
+
+      <br />
 
       <Typography
         variant="h6"
@@ -118,6 +131,35 @@ export default function Weather(weatherInformation) {
           currentSuburb.suburb + " (" + currentSuburb.postcode + ")"}{" "}
         for the next week
       </Typography>
+      <br />
+
+      <Alert variant="filled" severity="info">
+        There are no heat wave alerts for the following week ;)
+      </Alert>
+      {//make an if statement to show if there is a heatwave alert or everything is ok.
+      }
+
+
+      {/*
+render() {
+      if (heatwaveAlert) {
+    
+      <Alert variant="filled" severity="warning">
+        WARNING — There is a heatwave alert during the following week!
+          </Alert>
+      } 
+      else {
+        return(
+        <Alert variant="filled" severity="info">
+          There are no heatwave alerts for the following week ;)
+      </Alert>
+      )
+        }
+      return () 
+      */
+      }
+
+
       <br />
       <Typography variant="h6">
         <WarningIcon /> next to the day indicates a heat wave alert
@@ -169,6 +211,8 @@ export default function Weather(weatherInformation) {
     </React.Fragment>
   );
 }
+
+
 
 /*
 import React from 'react';
