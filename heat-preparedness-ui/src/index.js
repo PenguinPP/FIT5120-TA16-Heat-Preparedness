@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from "./serviceWorker";
+import { subscribeUser } from "./subscription";
 
 const theme = createMuiTheme({
   overrides: {
@@ -51,3 +52,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 serviceWorker.register();
+subscribeUser();

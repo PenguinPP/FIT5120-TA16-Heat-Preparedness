@@ -10,7 +10,6 @@ import LandingPage from "./LandingPage";
 import Acknowledgements from "./Acknowledgments";
 import MenuDrawer from "./MenuDrawer/MenuDrawer";
 import QuizContextProvider from "./Contexts/QuizContext";
-
 const axios = require("axios").default;
 
 class App extends React.Component {
