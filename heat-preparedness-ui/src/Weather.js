@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
 import Alert from '@material-ui/lab/Alert';
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import Alerts from './Alerts/Alerts'
 
 const axios = require("axios").default;
 
@@ -49,7 +50,6 @@ export default function Weather(weatherInformation) {
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
-  //console.log(currentSuburb)
 
   React.useEffect(() => {
     let dataLink =
@@ -180,6 +180,10 @@ render() {
         ))}
       </List>
 
+            <Typography paragraph align="center" variant="h5">
+              Not sure where to start?
+            </Typography>
+            <Alerts suburbInfo={currentSuburb} />
       <HeatReadinessQuiz />
       <Grid container justify="center">
         <Link

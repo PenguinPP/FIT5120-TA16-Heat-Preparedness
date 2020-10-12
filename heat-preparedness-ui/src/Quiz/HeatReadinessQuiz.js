@@ -108,11 +108,6 @@ export default function HeatReadinessQuiz() {
     <React.Fragment>
       <Grid container justify="center">
         <Grid container item xs={12} wrap="wrap" justify="center">
-          <Grid item xs={12}>
-            <Typography paragraph align="center" variant="h5">
-              Not sure where to start?
-            </Typography>
-          </Grid>
           <Grid container item xs={12} justify="center">
             <Link
               activeClass="active"

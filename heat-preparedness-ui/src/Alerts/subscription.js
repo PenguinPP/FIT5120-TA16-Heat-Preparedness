@@ -18,8 +18,15 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-function sendSubscription(subscription) {
-  return fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe`, {
+function sendSubscription(subscription, suburb) {
+
+  console.log(subscription)
+  subscription['suburb'] = suburb
+  var formattedSubscription = JSON.stringify(subscription)
+
+  console.log(formattedSubscription)
+
+  return fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe/` + suburb, {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {
@@ -28,7 +35,7 @@ function sendSubscription(subscription) {
   });
 }
 
-export function subscribeUser() {
+export function subscribeUser(suburb) {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready
       .then(function (registration) {
@@ -49,7 +56,7 @@ export function subscribeUser() {
                 })
                 .then(function (newSubscription) {
                   console.log("New subscription added.");
-                  sendSubscription(newSubscription);
+                  sendSubscription(newSubscription, suburb);
                 })
                 .catch(function (e) {
                   if (Notification.permission !== "granted") {
