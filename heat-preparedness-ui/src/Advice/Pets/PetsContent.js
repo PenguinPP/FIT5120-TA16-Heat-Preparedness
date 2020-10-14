@@ -71,7 +71,7 @@ export function StayHome() {
             justify="space-evenly"
             spacing={3}
           >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Let them enjoy the cool tiles or provide them a sturdy icepack
                 or a frozen water bottle.
@@ -84,7 +84,7 @@ export function StayHome() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Be sure to provide them with numerous sources of cool water.
               </Typography>
@@ -96,7 +96,7 @@ export function StayHome() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} md={10} lg={4}>
               <Typography align="center">
                 If your pet seems to be in discomfort, try wetting their feet
                 and misting water onto their face as many animals control their
