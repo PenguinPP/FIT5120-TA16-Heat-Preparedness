@@ -27,39 +27,78 @@ webpush.setVapidDetails(
 
 app.get("/", (req, res) => res.send("Heat Preparedness Subscription Server"));
 
-app.post("/notifications/subscribe/:suburb",[param("suburb").not().isEmpty()], async function (req, res) {
+app.post("/notifications/subscribe", async function (req, res) {
   const subscription = req.body;
-  console.log('suburb id')
-  console.log(req.params.suburb)
-  console.log('subscription')
-  console.log(subscription);
 
+  var notiBody = "You are now subscribed to heat wave alerts for" + subscription[1]['suburbDetails']['suburb'] + ", " + subscription[1]['suburbDetails']['postcode']
 
-  const dbConnection = mysql.createConnection({
-      //open db connection
-      host: process.env.DB_ENDPOINT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-    });
-
-  suburbDetails = await getSuburbDetails(dbConnection, req.params.suburb)
-  dbConnection.end();
-  console.log("suburbDetails")
-  console.log(suburbDetails)
+  
+  if (subscription[1]["oneDay"] && subscription[1]["threeDay"]){
+    const notiFreq = " You will receive notifications 1 and 3 days before a heat wave."
+    notiBody = notiBody + notiFreq
+  }
+  else if(subscription[1]["oneDay"] && !subscription[1]["threeDay"]){
+    const notiFreq = " You will receive a notification 1 day before a heat wave."
+    notiBody = notiBody + notiFreq
+  }
+   else if(!subscription[1]["oneDay"] && subscription[1]["threeDay"]){
+    const notiFreq = " You will receive a notification 3 days before a heat wave."
+    notiBody = notiBody + notiFreq
+  }
 
   const payload = JSON.stringify({
     title: "Hello!",
-    body: "You are now subscribed to heat wave alerts for " + suburbDetails[0]['suburb'] + ", " + suburbDetails[0]['postcode'],
+    body: notiBody,
   });
 
+  // insertSubscription(subscription)
+
   webpush
-    .sendNotification(subscription, payload)
+    .sendNotification(subscription[0], payload)
     .then((result) => console.log(result))
     .catch((e) => console.log(e.stack));
 
+  
+
   res.status(200).json({ success: true });
 });
+
+
+function insertSubscription(subscription){
+    console.log(subscription)
+
+    const dbConnection = mysql.createConnection({
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
+
+  const webPushDetails = subscription[0]
+  const subscriptionDetails = subscription[1]
+
+  const endPoint = webPushDetails['endpoint']
+  const expirationTime =  webPushDetails['expirationTime'] === undefined ? null : webPushDetails['expirationTime']
+  const pdh = webPushDetails['keys']['p256dh']
+  const auth = webPushDetails['keys']['auth']
+
+  dbConnection.query(
+          //Run query to insert or update data on database
+          ``,
+          [forecastDate, councilId, minTemp, maxTemp, avgTemp, update_time],
+          function (error, result, fields) {
+            if (error) {
+              //Log error message
+              console.log(error);
+
+              console.log("Failed to update forecast");
+            } else {
+              // console.log("Database updated")
+            }
+          }
+        );
+
+}
 
 async function getSuburbDetails(dbConnection, suburbId){
 return new Promise((resultData) => {
@@ -86,5 +125,7 @@ return new Promise((resultData) => {
   });
 
 }
+
+
 
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`));

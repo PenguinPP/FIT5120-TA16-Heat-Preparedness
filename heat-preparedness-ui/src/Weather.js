@@ -179,11 +179,10 @@ render() {
           </ListItem>
         ))}
       </List>
-
             <Typography paragraph align="center" variant="h5">
               Not sure where to start?
             </Typography>
-            <Alerts suburbInfo={currentSuburb} />
+            <Alerts suburbInfo={[currentSuburb, suburbData]} />
       <HeatReadinessQuiz />
       <Grid container justify="center">
         <Link
