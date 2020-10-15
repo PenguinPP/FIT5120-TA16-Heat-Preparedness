@@ -25,7 +25,7 @@ webpush.setVapidDetails(
   process.env.PRIVATE_VAPID_KEY
 );
 
-app.get("/", (req, res) => res.send("Heat Preparedness Subscription Server"));
+app.get("/notifications", (req, res) => res.send("Heat Preparedness Subscription Server"));
 
 app.post("/notifications/subscribe", async function (req, res) {
   const subscription = req.body;
