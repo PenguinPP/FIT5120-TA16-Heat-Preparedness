@@ -31,6 +31,16 @@ console.log(subDetails)
   });
 }
 
+function changeSubscription(existedSubscription, subDetails){
+  return fetch(`${process.env.REACT_APP_API_URL}/notifications/change`, {
+    method: "POST",
+    body: JSON.stringify([existedSubscription, subDetails]),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
 export function subscribeUser(subDetails) {
   console.log(subDetails)
   if ("serviceWorker" in navigator) {
@@ -67,7 +77,7 @@ export function subscribeUser(subDetails) {
                 });
             } else {
               console.log("Existed subscription detected.");
-              sendSubscription(existedSubscription);
+              changeSubscription(existedSubscription, subDetails);
             }
           });
       })

@@ -56,16 +56,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const axios = require("axios").default;
+
 export default function Alerts(suburbInfo) {
     const classes = useStyles()
     
-    
-    const handleSubscribe = () =>{
-        console.log('subbing')
-        subscribeUser(suburbInfo['suburbInfo'])
-    }
-    
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -75,44 +71,11 @@ export default function Alerts(suburbInfo) {
       setOpen(false);
     };
 
-    return(
-        <Grid container justify="center">
-        <Grid container item xs={12} wrap="wrap" justify="center">
-          <Grid container item xs={12} justify="center">
-              <Grid container wrap="wrap" justify="center">
-                <Button
-                  variant="contained"
-                  onClick={handleClickOpen}
-                  className={classes.buttonStyle}
-                >
-                  <Typography variant="h4">
-                    Subscribe to Heat Wave Alerts!
-                  </Typography>
-                </Button>
-                
-     <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="about-us-dialog-title"
-          aria-describedby="about-us-dialog-description"
-        >
-<AlertSubscription suburbInfo={suburbInfo['suburbInfo']}/>
-        </Dialog>
-              </Grid>
-          </Grid>
-        </Grid>
-        </Grid>
-    )
-}
-
-
-function AlertSubscription(suburbInfo){
-const classes = useStyles()
-const [suburbId, setSuburbId] = React.useState(suburbInfo['suburbInfo'][0]['suburb_id'])
-const suburbData = suburbInfo['suburbInfo'][1]
-const [oneDay, setOneDay] = React.useState(false)
-const [threeDay, setThreeDay] = React.useState(false)
-const [page, setPage] = React.useState(1)
+  const [suburbId, setSuburbId] = React.useState(suburbInfo['suburbInfo']['suburb_id'])
+  const suburbData = suburbInfo['suburbInfo'][1]
+  const [oneDay, setOneDay] = React.useState(false)
+  const [threeDay, setThreeDay] = React.useState(false)
+  const [page, setPage] = React.useState(1)
 
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
@@ -152,10 +115,31 @@ const [page, setPage] = React.useState(1)
           threeDay: threeDay
         }
         subscribeUser(subDetails)
+
     }
 
-  return(
-    <React.Fragment>
+
+    return(
+        <Grid container justify="center">
+        <Grid container item xs={12} wrap="wrap" justify="center">
+          <Grid container item xs={12} justify="center">
+              <Grid container wrap="wrap" justify="center">
+                <Button
+                  variant="contained"
+                  onClick={handleClickOpen}
+                  className={classes.buttonStyle}
+                >
+                  <Typography variant="h4">
+                    Subscribe to Heat Wave Alerts!
+                  </Typography>
+                </Button>
+                
+      <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="about-us-dialog-title"
+          aria-describedby="about-us-dialog-description"
+        >
           <DialogTitle id="subscription-dialog-title">Heat Alert Subscription</DialogTitle>
             <DialogContent  className={page !== 1 && classes.hidePage}>
           <Autocomplete
@@ -246,6 +230,38 @@ const [page, setPage] = React.useState(1)
                   </Typography>
                 </Button>
       </DialogContent>
-    </React.Fragment>
-  )
+      </Dialog>
+              </Grid>
+          </Grid>
+        </Grid>
+        </Grid>
+    )
+}
+
+async function getSubscriptionDetails(){
+  
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.ready
+    .then(function (registration) {
+        if (!registration.pushManager) {
+          console.log("Push manager unavailable.");
+          return null;
+        }
+        registration.pushManager
+          .getSubscription()
+          .then(function (existedSubscription) {
+            if (existedSubscription !== null) {
+              return existedSubscription
+            } else {
+              return null;
+            }
+          });
+      })
+      .catch(function (e) {
+        console.error(
+          "An error ocurred during Service Worker registration.",
+          e
+        );
+      });
+  }
 }
