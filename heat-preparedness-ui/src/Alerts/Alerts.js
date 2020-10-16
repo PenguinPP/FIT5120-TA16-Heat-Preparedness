@@ -1,5 +1,5 @@
 import React from 'react';
-import { subscribeUser } from "./subscription";
+import { subscribeUser} from "./subscription";
 import {Button, Grid, Typography} from '@material-ui/core';
 import { Link } from "react-scroll";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -76,7 +76,24 @@ export default function Alerts(suburbInfo) {
   const [oneDay, setOneDay] = React.useState(false)
   const [threeDay, setThreeDay] = React.useState(false)
   const [page, setPage] = React.useState(1)
+  const [compatible, setCompatible] = React.useState(false)
 
+  console.log(compatible)
+  React.useEffect(() => {
+    const fetchCompat = async () => {
+     checkCompatibility().then(function(compat){
+
+     console.log("compat")
+     console.log(compat)
+     setCompatible(compat);
+     })
+  }
+
+  fetchCompat();
+  }, [])
+
+  console.log('compatibility')
+  console.log(compatible)
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
@@ -141,6 +158,8 @@ export default function Alerts(suburbInfo) {
           aria-describedby="about-us-dialog-description"
         >
           <DialogTitle id="subscription-dialog-title">Heat Alert Subscription</DialogTitle>
+          {compatible ?
+          <React.Fragment>
             <DialogContent  className={page !== 1 && classes.hidePage}>
           <Autocomplete
         id="combo-box-demo"
@@ -230,6 +249,8 @@ export default function Alerts(suburbInfo) {
                   </Typography>
                 </Button>
       </DialogContent>
+      </React.Fragment>
+     : <Typography>Shit aint compatible bruh</Typography> }
       </Dialog>
               </Grid>
           </Grid>
@@ -238,30 +259,6 @@ export default function Alerts(suburbInfo) {
     )
 }
 
-async function getSubscriptionDetails(){
-  
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.ready
-    .then(function (registration) {
-        if (!registration.pushManager) {
-          console.log("Push manager unavailable.");
-          return null;
-        }
-        registration.pushManager
-          .getSubscription()
-          .then(function (existedSubscription) {
-            if (existedSubscription !== null) {
-              return existedSubscription
-            } else {
-              return null;
-            }
-          });
-      })
-      .catch(function (e) {
-        console.error(
-          "An error ocurred during Service Worker registration.",
-          e
-        );
-      });
-  }
+async function checkCompatibility(){
+   return 'PushManager' in window;
 }

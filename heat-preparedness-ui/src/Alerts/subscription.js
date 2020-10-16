@@ -89,3 +89,23 @@ export function subscribeUser(subDetails) {
       });
   }
 }
+
+export function checkCompatibility(){
+   if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.ready
+      .then(function (registration) {
+        if (!registration.pushManager) {
+          return false;
+        }
+        else{
+          return true;
+        }
+      })
+      .catch(function (e) {
+        console.error(
+          "An error ocurred during Service Worker registration.",
+          e
+        );
+      });
+  }
+}
