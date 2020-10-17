@@ -2,12 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import AppBarClose from "./AppBarClose";
 import { ReactComponent as TeamIcon } from "../icons/victoria-heat-icon.svg";
-import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import { useScrollTrigger, IconButton, makeStyles } from "@material-ui/core";
+import {
+  useScrollTrigger,
+  IconButton,
+  makeStyles,
+  Button,
+  Avatar,
+} from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+import teamLogo from "../images/victoria-heat-icon.png";
 
 const useStyles = makeStyles((theme) => ({
   logoStyle: {
@@ -66,9 +72,7 @@ export default function MenuDrawer(props) {
                 onClick={(event) => (window.location.href = "/")}
                 className={classes.buttonStyle}
               >
-                <SvgIcon viewBox="0 0 600 476.6">
-                  <TeamIcon className={classes.logoStyle} />
-                </SvgIcon>
+                <Avatar src={teamLogo} style={{ padding: "1px" }} />
               </IconButton>
             </IconScroll>
           </Toolbar>

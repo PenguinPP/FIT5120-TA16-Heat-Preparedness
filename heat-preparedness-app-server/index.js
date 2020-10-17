@@ -1,31 +1,62 @@
-require('dotenv').config()
-const { check, validationResult, query, body, param } = require('express-validator');
-const bodyParser = require('body-parser');
-const express = require('express')
-const app = express()
-const dateFormat = require('dateformat');
-const axios = require('axios').default;
+require("dotenv").config();
+const {
+  check,
+  validationResult,
+  query,
+  body,
+  param,
+} = require("express-validator");
+const bodyParser = require("body-parser");
+const express = require("express");
+const app = express();
+const dateFormat = require("dateformat");
+const axios = require("axios").default;
 app.use(bodyParser.json());
-const mysql = require('mysql');
+const mysql = require("mysql");
 const port = 5000;
+const webpush = require("web-push");
 
-const cors = require('cors')
-app.use(cors())
+const cors = require("cors");
+app.use(cors());
 
+webpush.setVapidDetails(
+  process.env.WEB_PUSH_CONTACT,
+  process.env.PUBLIC_VAPID_KEY,
+  process.env.PRIVATE_VAPID_KEY
+);
 
-app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`))
+app.post("/notifications/subscribe", (req, res) => {
+  const subscription = req.body;
+
+  console.log(subscription);
+
+  const payload = JSON.stringify({
+    title: "Hello!",
+    body: "It works.",
+  });
+
+  webpush
+    .sendNotification(subscription, payload)
+    .then((result) => console.log(result))
+    .catch((e) => console.log(e.stack));
+
+  res.status(200).json({ success: true });
+});
+
+app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`));
 
 //Example Weather API Call
 //https://api.openweathermap.org/data/2.5/onecall?lat=-38.2551&lon=144.6726&exclude=hourly,current,minutely&units=metric&appid=process.env.OPEN_WEATHER_ONE_CALL_API
 
-app.get('/', (req, res) => res.send("Heat Preparedness Application Server"))
+app.get("/", (req, res) => res.send("Heat Preparedness Application Server"));
 
-const schedule = require('node-schedule');
-const tempUpdateSchedule = schedule.scheduleJob('0 0 */6 * * *', //schedule weather data update to occur every 4 hours
-    function () {
-        updateAllWeatherData()
-    });
-
+const schedule = require("node-schedule");
+const tempUpdateSchedule = schedule.scheduleJob(
+  "0 0 */6 * * *", //schedule weather data update to occur every 4 hours
+  function () {
+    updateAllWeatherData();
+  }
+);
 
 //Going to include threshold data in temperature data pull
 // //Check for heat threshold for user's suburb required parameter
@@ -54,7 +85,7 @@ const tempUpdateSchedule = schedule.scheduleJob('0 0 */6 * * *', //schedule weat
 //              WHERE s.council_id = c.council_id
 //              AND c.district_id = d.district_id
 //              AND s.suburb = ?;`, //? Represents a parameter
-//             userSuburb, //parameter you want inserted where the ? is 
+//             userSuburb, //parameter you want inserted where the ? is
 //             function (error, result, fields) {
 //                 if (error) {
 //                     //Log error message
@@ -75,24 +106,30 @@ const tempUpdateSchedule = schedule.scheduleJob('0 0 */6 * * *', //schedule weat
 // }
 
 //Check for Weather Forecast for user's Suburb required parameter
-app.get('/api/SuburbForecast/:suburb', [param('suburb').not().isEmpty()],
-    async function (req, res) {
-        const dbConnection = mysql.createConnection({ //open db connection
-            host: process.env.DB_ENDPOINT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
-        });
-        weatherForecast = await getWeatherForecastSuburb(dbConnection, req.params.suburb) //call appropriate function
-        dbConnection.end() //close db connection   
-        res.json(weatherForecast) //send response
-    })
-
+app.get(
+  "/api/SuburbForecast/:suburb",
+  [param("suburb").not().isEmpty()],
+  async function (req, res) {
+    const dbConnection = mysql.createConnection({
+      //open db connection
+      host: process.env.DB_ENDPOINT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    });
+    weatherForecast = await getWeatherForecastSuburb(
+      dbConnection,
+      req.params.suburb
+    ); //call appropriate function
+    dbConnection.end(); //close db connection
+    res.json(weatherForecast); //send response
+  }
+);
 
 async function getWeatherForecastSuburb(dbConnection, suburbId) {
-    return new Promise(resultData => {
-        dbConnection.query(
-            `SELECT f.date,
+  return new Promise((resultData) => {
+    dbConnection.query(
+      `SELECT f.date,
                 f.min,
                 f.max,
                 f.avg,
@@ -110,49 +147,46 @@ async function getWeatherForecastSuburb(dbConnection, suburbId) {
                 AND c.district_id = d.district_id
                 AND c.council_id = s.council_id
                 AND s.suburb_id = ?;`, //? Represents a parameter
-            suburbId, //parameter you want inserted where the ? is 
-            function (error, result, fields) {
-                if (error) {
-                    //Log error message
-                    console.log(error)
-                    console.log("Failed to retrieve user weather forecast Data")
-                }
-                try {
-                    //set resultData to query result
-                    resultData(result);
-
-                } catch (error) {
-                    resultData({}); //Set resultData to empty
-                    console.log("There was an error with the promise");
-                }
-            }
-        )
-    })
+      suburbId, //parameter you want inserted where the ? is
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve user weather forecast Data");
+        }
+        try {
+          //set resultData to query result
+          resultData(result);
+        } catch (error) {
+          resultData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
 }
 
 //Check for weather forecast for Melbourne required parameter
-app.get('/api/MelbourneForecast',
-    async function (req, res) {
+app.get("/api/MelbourneForecast", async function (req, res) {
+  const dbConnection = mysql.createConnection({
+    //open db connection
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
 
-        const dbConnection = mysql.createConnection({ //open db connection
-            host: process.env.DB_ENDPOINT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
-        });
+  defaultWeatherForecast = await getDefaultWeatherForecast(dbConnection); //call appropriate function
 
-        defaultWeatherForecast = await getDefaultWeatherForecast(dbConnection) //call appropriate function
+  dbConnection.end(); //close db connection
 
-        dbConnection.end() //close db connection   
-
-        res.json(defaultWeatherForecast) //send response
-    })
-
+  res.json(defaultWeatherForecast); //send response
+});
 
 async function getDefaultWeatherForecast(dbConnection) {
-    return new Promise(resultData => {
-        dbConnection.query(
-            `SELECT f.date,
+  return new Promise((resultData) => {
+    dbConnection.query(
+      `SELECT f.date,
                 f.min,
                 f.max,
                 f.avg,
@@ -169,24 +203,23 @@ async function getDefaultWeatherForecast(dbConnection) {
             WHERE f.council_id = c.council_id
                 AND c.district_id = d.district_id
                 AND c.council_id = s.council_id
-                AND s.suburb_id = 1794;`, //? Represents a parameter 
-            function (error, result, fields) {
-                if (error) {
-                    //Log error message
-                    console.log(error)
-                    console.log("Failed to retrieve melbourne weather forecast Data")
-                }
-                try {
-                    //set resultData to query result
-                    resultData(result);
-
-                } catch (error) {
-                    resultData({}); //Set resultData to empty
-                    console.log("There was an error with the promise");
-                }
-            }
-        )
-    })
+                AND s.suburb_id = 1794;`, //? Represents a parameter
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve melbourne weather forecast Data");
+        }
+        try {
+          //set resultData to query result
+          resultData(result);
+        } catch (error) {
+          resultData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
 }
 
 //Going to include threshold data in temperature data pull
@@ -202,7 +235,7 @@ async function getDefaultWeatherForecast(dbConnection) {
 
 //         defaultSuburbThreshold = await getDefaultThreshold(dbConnection) //call appropriate function
 
-//         dbConnection.end() //close db connection   
+//         dbConnection.end() //close db connection
 
 //         res.json(defaultSuburbThreshold) //send response
 //     })
@@ -235,261 +268,275 @@ async function getDefaultWeatherForecast(dbConnection) {
 // }
 
 //Check for heatwave preparation advice required parameter
-app.get('/api/Advice_pre',
-    async function (req, res) {
-        const dbConnection = mysql.createConnection({ //open db connection
-            host: process.env.DB_ENDPOINT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
-        });
+app.get("/api/Advice_pre", async function (req, res) {
+  const dbConnection = mysql.createConnection({
+    //open db connection
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
 
-        heatPrepAdvice = await getHeatPrep(dbConnection) //call appropriate function
+  heatPrepAdvice = await getHeatPrep(dbConnection); //call appropriate function
 
-        dbConnection.end() //close db connection   
+  dbConnection.end(); //close db connection
 
-        res.json(heatPrepAdvice) //send response
-    })
+  res.json(heatPrepAdvice); //send response
+});
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
 async function getHeatPrep(dbConnection) {
-    return new Promise(resultData => {
-        dbConnection.query(
-            `SELECT *
+  return new Promise((resultData) => {
+    dbConnection.query(
+      `SELECT *
              FROM Advice_pre;`, //? Represents a parameter
-            function (error, result, fields) {
-                if (error) {
-                    //Log error message
-                    console.log(error)
-                    console.log("Failed to retrieve preparation advice content Data")
-                }
-                try {
-                    //set resultData to query result
-                    resultData(result);
-
-                } catch (error) {
-                    resultData({}); //Set resultData to empty
-                    console.log("There was an error with the promise");
-                }
-            }
-        )
-    })
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve preparation advice content Data");
+        }
+        try {
+          //set resultData to query result
+          resultData(result);
+        } catch (error) {
+          resultData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
 }
 
 //Check for heatwave advice required parameter
-app.get('/api/Advice',
-    async function (req, res) {
+app.get("/api/Advice", async function (req, res) {
+  const dbConnection = mysql.createConnection({
+    //open db connection
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
 
-        const dbConnection = mysql.createConnection({ //open db connection
-            host: process.env.DB_ENDPOINT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
-        });
+  heatAdvice = await getHeatAdvice(dbConnection); //call appropriate function
 
-        heatAdvice = await getHeatAdvice(dbConnection) //call appropriate function
+  dbConnection.end(); //close db connection
 
-        dbConnection.end() //close db connection  
-
-        res.json(heatAdvice) //send response
-    })
+  res.json(heatAdvice); //send response
+});
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
 async function getHeatAdvice(dbConnection) {
-    return new Promise(adviceData => {
-        dbConnection.query(
-            `SELECT *
+  return new Promise((adviceData) => {
+    dbConnection.query(
+      `SELECT *
              FROM Advice;`, //? Represents a parameter
-            function (error, result, fields) {
-                if (error) {
-                    //Log error message
-                    console.log(error)
-                    console.log("Failed to retrieve advice content Data")
-                }
-                try {
-                    //set resultData to query result
-                    adviceData(result);
-
-                } catch (error) {
-                    adviceData({}); //Set resultData to empty
-                    console.log("There was an error with the promise");
-                }
-            }
-        )
-    })
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve advice content Data");
+        }
+        try {
+          //set resultData to query result
+          adviceData(result);
+        } catch (error) {
+          adviceData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
 }
 
 //Check for all suburbs required parameter
-app.get('/api/SuburbList',
-    async function (req, res) {
-        const dbConnection = mysql.createConnection({ //open db connection
-            host: process.env.DB_ENDPOINT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
-        });
+app.get("/api/SuburbList", async function (req, res) {
+  const dbConnection = mysql.createConnection({
+    //open db connection
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
 
-        allSuburbs = await getAllSuburbs(dbConnection) //call appropriate function
+  allSuburbs = await getAllSuburbs(dbConnection); //call appropriate function
 
-        res.json(allSuburbs) //send response
+  res.json(allSuburbs); //send response
 
-        dbConnection.end() //close db connection  
-    })
+  dbConnection.end(); //close db connection
+});
 
 //con.query(<sql query>, <parameters you want to pass>, function to return)
 
 async function getAllSuburbs(dbConnection) {
-    return new Promise(resultData => {
-        dbConnection.query(
-            `SELECT s.suburb_id, s.suburb, s.council_id, s.postcode, c.council 
+  return new Promise((resultData) => {
+    dbConnection.query(
+      `SELECT s.suburb_id, s.suburb, s.council_id, s.postcode, c.council 
          FROM Suburb s, Council c
-         WHERE s.council_id = c.council_id;`,//? Represents a parameter
-            function (error, result, fields) {
-                if (error) {
-                    //Log error message
-                    console.log(error)
-                    console.log("Failed to retrieve Council Data")
-                }
-                try {
-                    //set resultData to query result
-                    resultData(result);
-
-                } catch (error) {
-                    resultData({}); //Set resultData to empty
-                    console.log("There was an error with the promise");
-                }
-            }
-        )
-    })
+         WHERE s.council_id = c.council_id;`, //? Represents a parameter
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve Council Data");
+        }
+        try {
+          //set resultData to query result
+          resultData(result);
+        } catch (error) {
+          resultData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
 }
 
 async function getAllCouncils() {
-    //This function retrieves the details of all Local Government Councils
-    //from the mysql db
+  //This function retrieves the details of all Local Government Councils
+  //from the mysql db
 
-    //Establish mySQL connection
-    const conTemp = mysql.createConnection({
-        host: process.env.DB_ENDPOINT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME
-    });
+  //Establish mySQL connection
+  const conTemp = mysql.createConnection({
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
 
-    //run query and return as a promise
-    return new Promise(resultData => {
-        conTemp.query(
-            `SELECT *
+  //run query and return as a promise
+  return new Promise((resultData) => {
+    conTemp.query(
+      `SELECT *
          FROM Council;`,
-            function (error, result, fields) {
-                if (error) {
-                    //Log error message
-                    console.log(error)
-                    console.log("Failed to retrieve Council Data")
-                }
-                try {
-                    //set resultData to query result
-                    resultData(result);
-                    conTemp.end();
-
-                } catch (error) {
-                    resultData({}); //Set resultData to empty
-                    console.log("There was an error with the promise");
-                }
-
-            }
-        )
-    })
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve Council Data");
+        }
+        try {
+          //set resultData to query result
+          resultData(result);
+          conTemp.end();
+        } catch (error) {
+          resultData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
 }
 
-
 async function updateAllWeatherData() {
+  //Establish mySQL connection
+  const conTemp = mysql.createConnection({
+    host: process.env.DB_ENDPOINT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
 
-    //Establish mySQL connection
-    const conTemp = mysql.createConnection({
-        host: process.env.DB_ENDPOINT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME
-    });
+  console.log("UpdateAllWeatherData() ran at " + new Date());
+  const councilData = await getAllCouncils(); //get council data
+  //console.log(councilData)
+  console.log("UpdateAllWeatherData() received council data at" + new Date());
 
-    console.log('UpdateAllWeatherData() ran at ' + new Date())
-    const councilData = await getAllCouncils() //get council data
-    //console.log(councilData)
-    console.log('UpdateAllWeatherData() received council data at' + new Date())
+  for (let i in councilData) {
+    //weather API link format:
+    //https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=hourly,current,minutely&units=metric&appid=process.env.OPEN_WEATHER_ONE_CALL_API
+    //console.log(councilData[i])
+    const tempRequestStart = "https://api.openweathermap.org/data/2.5/onecall?";
+    const tempRequestEnd =
+      "&exclude=hourly,current,minutely&units=metric&appid=" +
+      process.env.OPEN_WEATHER_ONE_CALL_API;
 
+    const tempRequestFinal =
+      tempRequestStart +
+      "lat=" +
+      councilData[i]["latitude"] +
+      "&lon=" +
+      councilData[i]["longitude"] +
+      tempRequestEnd; //create request URL
 
-    for (let i in councilData) {
-        //weather API link format:
-        //https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=hourly,current,minutely&units=metric&appid=process.env.OPEN_WEATHER_ONE_CALL_API
-        //console.log(councilData[i])
-        const tempRequestStart = "https://api.openweathermap.org/data/2.5/onecall?"
-        const tempRequestEnd = "&exclude=hourly,current,minutely&units=metric&appid=" + process.env.OPEN_WEATHER_ONE_CALL_API
+    let temperatureData = undefined;
 
-        const tempRequestFinal = tempRequestStart + "lat=" + councilData[i]["latitude"] + "&lon=" + councilData[i]["longitude"] + tempRequestEnd //create request URL
+    await axios
+      .get(tempRequestFinal) //Request temperature data
+      .then(function (response) {
+        //console.log("temperatureRequested")
+        temperatureData = response.data;
+        //console.log(temperatureData)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+    console.log(
+      "Temperature data for " +
+        councilData[i]["council"] +
+        " received at " +
+        new Date()
+    );
+    for (let forecast in temperatureData["daily"]) {
+      // console.log("Temperature processing starts here")
+      if (forecast < 7) {
+        //Average temperature calculation requires next day's minimum temperature, hence the final day is excluded.
+        //Obtain data for each day
+        var forecastDate = new Date(
+          temperatureData["daily"][forecast]["dt"] * 1000
+        );
+        forecastDate = dateFormat(forecastDate, "dd-mm-yyyy");
+        const maxTemp = temperatureData["daily"][forecast]["temp"]["max"];
+        const minTemp = temperatureData["daily"][forecast]["temp"]["min"];
+        const nextMinTemp =
+          temperatureData["daily"][parseInt(forecast) + 1]["temp"]["min"];
+        var avgTemp = (
+          (parseFloat(maxTemp) + parseFloat(nextMinTemp)) /
+          2
+        ).toFixed(2);
+        const councilId = councilData[i]["council_id"];
+        const update_time =
+          dateFormat(new Date(), "dd-mm-yyyy") +
+          " " +
+          dateFormat(new Date(), "HH:MM:ss");
 
-        let temperatureData = undefined
+        // console.log(councilId, councilData[i]["council"], forecastDate)
 
-        await axios.get(tempRequestFinal) //Request temperature data
-            .then(function (response) {
-                //console.log("temperatureRequested")
-                temperatureData = response.data
-                //console.log(temperatureData)
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-        console.log("Temperature data for " + councilData[i]["council"] + " received at " + new Date())
-        for (let forecast in temperatureData["daily"]) {
-            // console.log("Temperature processing starts here")
-            if (forecast < 7) { //Average temperature calculation requires next day's minimum temperature, hence the final day is excluded.
-                //Obtain data for each day
-                var forecastDate = new Date(temperatureData["daily"][forecast]["dt"] * 1000)
-                forecastDate = dateFormat(forecastDate, 'dd-mm-yyyy')
-                const maxTemp = temperatureData["daily"][forecast]["temp"]["max"]
-                const minTemp = temperatureData["daily"][forecast]["temp"]["min"]
-                const nextMinTemp = temperatureData["daily"][parseInt(forecast) + 1]["temp"]["min"]
-                var avgTemp = ((parseFloat(maxTemp) + parseFloat(nextMinTemp)) / 2).toFixed(2)
-                const councilId = councilData[i]["council_id"]
-                const update_time = dateFormat(new Date(), 'dd-mm-yyyy') + " " + dateFormat(new Date(), 'HH:MM:ss')
+        //console.log("Query starts here at " + new Date())
 
-                // console.log(councilId, councilData[i]["council"], forecastDate)
-
-                //console.log("Query starts here at " + new Date())
-
-                conTemp.query( //Run query to insert or update data on database
-                    `INSERT INTO Forecast (date, council_id, min, max, avg, update_time)
+        conTemp.query(
+          //Run query to insert or update data on database
+          `INSERT INTO Forecast (date, council_id, min, max, avg, update_time)
                          VALUES (STR_TO_DATE(?, '%d-%m-%Y'), ?, ?, ?, ?, STR_TO_DATE(?, '%d-%m-%Y %H:%i:%s')) ON DUPLICATE KEY
                          UPDATE min = VALUES(min),
                                 max =values(max),
                                 avg = values(avg),
                                 update_time = values(update_time);`,
-                    [
-                        forecastDate, councilId, minTemp, maxTemp, avgTemp, update_time
-                    ],
-                    function (error, result, fields) {
-                        if (error) {
-                            //Log error message
-                            console.log(error)
+          [forecastDate, councilId, minTemp, maxTemp, avgTemp, update_time],
+          function (error, result, fields) {
+            if (error) {
+              //Log error message
+              console.log(error);
 
-                            console.log("Failed to update forecast")
-                        }
-                        else {
-                            // console.log("Database updated")
-                        }
-
-                    }
-                )
-
+              console.log("Failed to update forecast");
+            } else {
+              // console.log("Database updated")
             }
-
-        }
-        console.log("Temperature data for " + councilData[i]["council"] + " updated in db at " + new Date())
-
+          }
+        );
+      }
     }
+    console.log(
+      "Temperature data for " +
+        councilData[i]["council"] +
+        " updated in db at " +
+        new Date()
+    );
+  }
 
-    console.log("All weather data updated")
-    conTemp.end()
+  console.log("All weather data updated");
+  conTemp.end();
 }

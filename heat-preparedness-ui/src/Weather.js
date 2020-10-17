@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
-import { List, ListItem, makeStyles } from "@material-ui/core";
+import { List, ListItem, makeStyles, Grid } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
 import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
+import Alert from "@material-ui/lab/Alert";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import Alerts from "./Alerts/Alerts";
 
 const axios = require("axios").default;
+
+//const heatwaveAlert = FALSE;
 
 const useStyles = makeStyles((theme) => ({
   active: {
     //Style for active category button
     background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
+  },
+  callToAction: {
+    background: theme.palette.primary.main,
+    textTransform: "none",
     color: theme.palette.primary.contrastText,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
@@ -30,12 +44,12 @@ export default function Weather(weatherInformation) {
     weatherInformation["weatherInformation"],
   ]);
 
+  console.log(weatherData);
   const classes = useStyles();
 
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
-  //console.log(currentSuburb)
 
   React.useEffect(() => {
     let dataLink =
@@ -45,6 +59,9 @@ export default function Weather(weatherInformation) {
       .get(dataLink)
       .then((results) => results.data)
       .then((data) => {
+        for (let day in data) {
+          data[day]["date"] = new Date(Date.parse(data[day]["date"]));
+        }
         setWeatherData(data);
         //console.log(weatherData)
       })
@@ -61,7 +78,18 @@ export default function Weather(weatherInformation) {
         */
 
     <React.Fragment>
-      <Typography variant="h4">Weather Forecasts {"&"} Alerts</Typography>
+      <Typography variant="h4">Weather Forecasts Alerts</Typography>
+      <br />
+
+      <Typography
+        variant="h8"
+        style={{ marginBottom: "1rem", marginTop: "1rem" }}
+      >
+        Find out if there are any upcoming heatwaves during next week's
+        forecast.
+      </Typography>
+
+      <br />
 
       <Typography
         variant="h6"
@@ -105,6 +133,33 @@ export default function Weather(weatherInformation) {
         for the next week
       </Typography>
       <br />
+
+      <Alert variant="filled" severity="info">
+        There are no heat wave alerts for the following week ;)
+      </Alert>
+      {
+        //make an if statement to show if there is a heatwave alert or everything is ok.
+      }
+
+      {/*
+render() {
+      if (heatwaveAlert) {
+    
+      <Alert variant="filled" severity="warning">
+        WARNING — There is a heatwave alert during the following week!
+          </Alert>
+      } 
+      else {
+        return(
+        <Alert variant="filled" severity="info">
+          There are no heatwave alerts for the following week ;)
+      </Alert>
+      )
+        }
+      return () 
+      */}
+
+      <br />
       <Typography variant="h6">
         <WarningIcon /> next to the day indicates a heat wave alert
       </Typography>
@@ -112,32 +167,49 @@ export default function Weather(weatherInformation) {
         {weatherData.map((item) => (
           <ListItem key={item.date}>
             {item.date
-              ? item.date.toString().replace(/T.+/, "").substring(5, 10)
+              ? item.date.getDate() +
+                "-" +
+                (item.date.getMonth() + 1) +
+                "-" +
+                item.date.getFullYear()
               : ""}{" "}
             : max {item.max ? item.max : ""}° | min {item.min ? item.min : ""}°
             | avg {item.avg ? item.avg : ""}°
           </ListItem>
         ))}
       </List>
-
+      <Typography paragraph align="center" variant="h5">
+        Not sure where to start?
+      </Typography>
+      <Alerts suburbInfo={[currentSuburb, suburbData]} />
       <HeatReadinessQuiz />
-      <Link
-        activeClass="active"
-        to={"Prep"}
-        spy={true}
-        smooth={true}
-        offset={-80}
-        duration={700}
-      >
-        <Button
-          variant="contained"
-          fullWidth={true}
-          color="primary"
-          className={classes.active}
+      <Grid container justify="center">
+        <Link
+          activeClass="active"
+          to={"Prep"}
+          spy={true}
+          smooth={true}
+          offset={-80}
+          duration={700}
         >
-          <Typography variant="h6">Be Prepared!</Typography>
-        </Button>
-      </Link>
+          <Grid container wrap="wrap" justify="center">
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.callToAction}
+            >
+              <Grid container wrap="wrap" justify="center">
+                <Grid item xs={12}>
+                  <Typography variant="h6">Be Prepared!</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <KeyboardArrowDownIcon />
+                </Grid>
+              </Grid>
+            </Button>
+          </Grid>
+        </Link>
+      </Grid>
     </React.Fragment>
   );
 }

@@ -2,17 +2,17 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  CardMedia,
-} from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
+import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
+import eskyImage from "../KeepingHomeCool/images/esky.png";
+import thermosImage from "../KeepingHomeCool/images/thermos.png";
+import ReactPlayer from "react-player";
+import northWindow from "../KeepingHomeCool/images/north-window.png";
+import eastWestWindow from "../KeepingHomeCool/images/east-west-window.png";
+import ambulance from "../KeepingHomeCool/images/ambulance.png";
+import doctor from "../KeepingHomeCool/images/doctor.png";
+import mineralWater from "../KeepingHomeCool/images/mineralWater.png";
+
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -21,123 +21,288 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.tertiary.main,
     color: theme.palette.tertiary.contrastText,
   },
-  mediaCoffee: {
+  imgContainer: {
+    textAlign: "center",
+    width: "100%",
+    padding: "1rem",
+    marginBottom: "1rem",
+  },
+  videoContainer: {
+    justifyContent: "center",
+    textAlign: "center",
+    display: "flex",
+    padding: "3px 0",
+    marginBottom: "1rem",
+  },
+  eskyStyle: {
     height: 200,
-    width: 200,
+    maxWidth: "95%",
   },
-  mediaExercise: {
+  thermosStyle: {
+    height: 220,
+    maxWidth: "95%",
+  },
+  windowStyle: {
+    height: 250,
+    maxWidth: "95%",
+  },
+  ambulance: {
     height: 200,
-    width: 200,
+    maxWidth: "95%",
   },
-  crossStyle: {
-    color: theme.palette.cross.main,
+  doctor: {
+    height: 200,
+    maxWidth: "95%",
   },
-  tickStyle: {
-    color: theme.palette.tick.main,
+  mineralwater: {
+    height: 200,
+    maxWidth: "95%",
   },
 }));
 
 export function HeatCramps() {
-  const content = [
-    {
-      title: "Heat Cramps",
-      content: [
-        "Keep a full drink bottle with you and take small sips of water frequently.",
-        "Avoid Caffeine and alcohol.",
-        "Avoid heavy activity like sport, renovating and gardening.",
-      ],
-      icons: ["Do", "Dont", "Dont"],
-    },
-  ];
-
   const classes = useStyles();
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Grid container alignItems="flex-start">
+        <Grid container alignItems="flex-start" justify="center">
           <Grid item xs={12}>
-            <Typography variant="h5">{content[0]["title"]}</Typography>
-            <List>
-              {content[0]["content"].map((item, index) => (
-                <React.Fragment>
-                  <ListItem id={index}>
-                    <ListItemIcon>
-                      {content[0]["icons"][index] === "Do" ? (
-                        <CheckIcon className={classes.tickStyle} />
-                      ) : (
-                        <ClearIcon className={classes.crossStyle} />
-                      )}
-                    </ListItemIcon>
-                    <Typography variant="body1">{item}</Typography>
-                  </ListItem>
-                </React.Fragment>
-              ))}
-            </List>
+            <Typography variant="h5" paragraph align="center">
+              Heat Cramps
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <div className={classes.imgContainer}>
+              <img
+                src={mineralWater}
+                className={classes.mineralwater}
+              />
+            </div>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={8}
+            alignItems="flex-start"
+            justify="space-around"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Symptoms:
+                <br></br>
+                <br></br>
+                • Muscle pains
+                <br></br>
+                • Spasms in the abdomen, arms or legs
+
+              </Typography>
+
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">What to do:
+              <br></br>
+                <br></br>
+• Stop activity and sit quietly in a cool place
+<br></br>
+• Increase fluid intake
+<br></br>
+• Rest a few hours before returning to activity
+<br></br>
+• Seek medical help if cramps persist
+</Typography>
+              {/*<div className={classes.imgContainer}>
+                <img
+                  src={eskyImage}
+                  alt="esky cool inside"
+                  className={classes.eskyStyle}
+                />
+  </div>*/}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            {/* <Typography align="center">
+              You can find out more about insulation on the{" "}
+              <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Building-and-renovating/Insulation">
+                Sustainability Victoria website
+              </a>
+              .
+</Typography>*/}
           </Grid>
         </Grid>
       </CardContent>
     </Card>
   );
 }
-
 export function HeatExhaustion() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Heat Exhaustion",
-      content: [
-        "Draw your blinds",
-        "Close-off any rooms that you are not using",
-        "Open the windows when there is a cool breeze or when the temperature inside rises above the outside temperature",
-      ],
-    },
-  ];
-
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">
-                  {index + 1}. {item}
-                </Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start" justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Heat Exhaustion
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <div className={classes.imgContainer}>
+              <img
+                src={doctor}
+                className={classes.doctor}
+              />
+            </div>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={8}
+            alignItems="flex-start"
+            justify="space-around"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Symptoms:
+                <br></br>
+                <br></br>
+                • Pale complexion and sweating
+                <br></br>
+                • Rapid heart rate
+                <br></br>
+                • Muscle cramps
+                <br></br>
+                • Weakness
+                <br></br>
+                • Dizziness
+                <br></br>
+                • Headache
+                <br></br>
+                • Nausea {"&"} Vomiting
+                <br></br>
+                • Fainting
+
+
+
+              </Typography>
+
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">What to do:
+              <br></br>
+                <br></br>
+• Lay them down on a cool area
+<br></br>
+• Remove outer clothing
+<br></br>
+• Wet skin with cool water or wet cloths
+<br></br>
+• Seek medical advice from a doctor
+</Typography>
+              {/*<div className={classes.imgContainer}>
+                <img
+                  src={eskyImage}
+                  alt="esky cool inside"
+                  className={classes.eskyStyle}
+                />
+  </div>*/}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            {/* <Typography align="center">
+              You can find out more about insulation on the{" "}
+              <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Building-and-renovating/Insulation">
+                Sustainability Victoria website
+              </a>
+              .
+</Typography>*/}
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
 }
-
 export function HeatStroke() {
   const classes = useStyles();
-  const content = [
-    {
-      title: "Heat Stroke",
-      content: [
-        "If using a fan, ensure there is adequate ventilation and that it is set-up to bring cooler air in from the outside.",
-        "If using an air conditioner, make sure it is on the right setting (snowflake symbol)",
-      ],
-    },
-  ];
-
   return (
     <Card raised={true}>
       <CardContent className={classes.cardContentStyle}>
-        <Typography variant="h5">{content[0]["title"]}</Typography>
-        <List>
-          {content[0]["content"].map((item, index) => (
-            <React.Fragment>
-              <ListItem id={index}>
-                <Typography variant="body1">{item}</Typography>
-              </ListItem>
-            </React.Fragment>
-          ))}
-        </List>
+        <Grid container alignItems="flex-start" justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph align="center">
+              Heat Stroke
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <div className={classes.imgContainer}>
+              <img
+                src={ambulance}
+                className={classes.ambulance}
+              />
+            </div>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={10}
+            lg={8}
+            alignItems="flex-start"
+            justify="space-around"
+            spacing={3}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography align="center">
+                Symptoms:
+                <br></br>
+                <br></br>
+                • Same symptoms as heat exhaustion.
+                <br></br>
+                • Dry skin with no sweating
+                <br></br>
+                • Mental condition worsens
+                <br></br>
+                • Confusion, headache, dizziness and nausea.
+                <br></br>
+                • Seizures or convulsions
+                <br></br>
+                • Disorientation, delirium or collapsing
+                <br></br>
+                • Unconsciousness
+              </Typography>
+
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography align="center">What to do:
+              <br></br>
+                <br></br>
+• Call an ambulance
+<br></br>
+• Get the person to a cool area and lay them down, remove their clothing, wet their skin with water, fanning continuously, position the unconscious person on their side and clean their airway
+</Typography>
+              {/*<div className={classes.imgContainer}>
+                <img
+                  src={eskyImage}
+                  alt="esky cool inside"
+                  className={classes.eskyStyle}
+                />
+  </div>*/}
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            {/* <Typography align="center">
+              You can find out more about insulation on the{" "}
+              <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Building-and-renovating/Insulation">
+                Sustainability Victoria website
+              </a>
+              .
+</Typography>*/}
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
