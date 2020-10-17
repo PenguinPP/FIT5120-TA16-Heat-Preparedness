@@ -7,9 +7,9 @@ import WarningIcon from "@material-ui/icons/Warning";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
 import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
-import Alert from '@material-ui/lab/Alert';
+import Alert from "@material-ui/lab/Alert";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import Alerts from './Alerts/Alerts'
+import Alerts from "./Alerts/Alerts";
 
 const axios = require("axios").default;
 
@@ -78,14 +78,15 @@ export default function Weather(weatherInformation) {
         */
 
     <React.Fragment>
-      <Typography variant="h4">Weather Forecasts  Alerts</Typography>
+      <Typography variant="h4">Weather Forecasts Alerts</Typography>
       <br />
 
       <Typography
         variant="h8"
         style={{ marginBottom: "1rem", marginTop: "1rem" }}
       >
-        Find out if there are any upcoming heatwaves during next week's forecast.
+        Find out if there are any upcoming heatwaves during next week's
+        forecast.
       </Typography>
 
       <br />
@@ -136,9 +137,9 @@ export default function Weather(weatherInformation) {
       <Alert variant="filled" severity="info">
         There are no heat wave alerts for the following week ;)
       </Alert>
-      {//make an if statement to show if there is a heatwave alert or everything is ok.
+      {
+        //make an if statement to show if there is a heatwave alert or everything is ok.
       }
-
 
       {/*
 render() {
@@ -156,9 +157,7 @@ render() {
       )
         }
       return () 
-      */
-      }
-
+      */}
 
       <br />
       <Typography variant="h6">
@@ -179,10 +178,10 @@ render() {
           </ListItem>
         ))}
       </List>
-            <Typography paragraph align="center" variant="h5">
-              Not sure where to start?
-            </Typography>
-            <Alerts suburbInfo={[currentSuburb, suburbData]} />
+      <Typography paragraph align="center" variant="h5">
+        Not sure where to start?
+      </Typography>
+      <Alerts suburbInfo={[currentSuburb, suburbData]} />
       <HeatReadinessQuiz />
       <Grid container justify="center">
         <Link
@@ -214,8 +213,6 @@ render() {
     </React.Fragment>
   );
 }
-
-
 
 /*
 import React from 'react';

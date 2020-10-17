@@ -19,9 +19,9 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function sendSubscription(subscription, subDetails) {
-  console.log('Suburb')
-console.log(subscription)
-console.log(subDetails)
+  console.log("Suburb");
+  console.log(subscription);
+  console.log(subDetails);
   return fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe`, {
     method: "POST",
     body: JSON.stringify([subscription, subDetails]),
@@ -31,7 +31,7 @@ console.log(subDetails)
   });
 }
 
-function changeSubscription(existedSubscription, subDetails){
+function changeSubscription(existedSubscription, subDetails) {
   return fetch(`${process.env.REACT_APP_API_URL}/notifications/change`, {
     method: "POST",
     body: JSON.stringify([existedSubscription, subDetails]),
@@ -42,7 +42,7 @@ function changeSubscription(existedSubscription, subDetails){
 }
 
 export function subscribeUser(subDetails) {
-  console.log(subDetails)
+  console.log(subDetails);
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready
       .then(function (registration) {
@@ -90,14 +90,13 @@ export function subscribeUser(subDetails) {
   }
 }
 
-export function checkCompatibility(){
-   if ("serviceWorker" in navigator) {
+export function checkCompatibility() {
+  if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready
       .then(function (registration) {
         if (!registration.pushManager) {
           return false;
-        }
-        else{
+        } else {
           return true;
         }
       })
