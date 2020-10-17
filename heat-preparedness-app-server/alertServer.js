@@ -42,6 +42,8 @@ function sendAlerts() {
     database: process.env.DB_NAME,
   });
 
+  console.log("database connection opened");
+
   /*Insert code here.
     Check for suburbs that have heat waves 3 days from now or 1 day from now
     Check for users that have not received notifications for these suburbs
@@ -50,4 +52,5 @@ function sendAlerts() {
 
   //close db connection
   dbConnection.end();
+  console.log("connection close");
 }

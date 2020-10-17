@@ -71,7 +71,7 @@ export default function Preparation(preparationData) {
   const classes = useStyles();
 
   const { prepActiveCategory, setPrepCategory } = useContext(QuizContext);
-  console.log(prepActiveCategory);
+  //console.log(prepActiveCategory);
   var messages = {
     //Message to display for each category before bullet points
     "Heat Short Term":
@@ -97,7 +97,8 @@ export default function Preparation(preparationData) {
       </Typography>
 
       <Typography variant="h8" paragraph>
-        Mitigate risks by having the necessary preparations in place for when a heat wave comes.
+        Mitigate risks by having the necessary preparations in place for when a
+        heat wave comes.
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>

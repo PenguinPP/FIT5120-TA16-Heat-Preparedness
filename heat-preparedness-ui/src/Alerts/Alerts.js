@@ -79,13 +79,17 @@ export default function Alerts(suburbInfo) {
   const [threeDay, setThreeDay] = React.useState(false);
   const [page, setPage] = React.useState(1);
   const [compatible, setCompatible] = React.useState(false);
+  const [previousSubscription, setPreviousSubscription] = React.useState(false);
+  const [currentSubscription, setCurrentSubscription] = React.useState(null);
 
+  console.log("current sub", currentSubscription);
+
+  console.log("prev", previousSubscription);
   console.log(compatible);
+
   React.useEffect(() => {
     const fetchCompat = async () => {
-      checkCompatibility().then(function (compat) {
-        console.log("compat");
-        console.log(compat);
+      checkCompatibility().then(async function (compat) {
         setCompatible(compat);
       });
     };
@@ -93,8 +97,6 @@ export default function Alerts(suburbInfo) {
     fetchCompat();
   }, []);
 
-  console.log("compatibility");
-  console.log(compatible);
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
@@ -132,6 +134,7 @@ export default function Alerts(suburbInfo) {
       threeDay: threeDay,
     };
     subscribeUser(subDetails);
+    setOpen(false);
   };
 
   return (
@@ -279,7 +282,14 @@ export default function Alerts(suburbInfo) {
                   </DialogContent>
                 </React.Fragment>
               ) : (
-                <Typography>Shit aint compatible bruh</Typography>
+                <DialogContent>
+                  <Typography paragraph>
+                    Unfortunately, our notificiations are not compatible with
+                    your device. We're working on making our notifications
+                    compatible with as many devices as possible. Thank you for
+                    your patience!
+                  </Typography>
+                </DialogContent>
               )}
             </Dialog>
           </Grid>
@@ -292,3 +302,5 @@ export default function Alerts(suburbInfo) {
 async function checkCompatibility() {
   return "PushManager" in window;
 }
+
+async function getSubscriptionDetails() {}

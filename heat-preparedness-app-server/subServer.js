@@ -41,7 +41,7 @@ app.post("/notifications/subscribe", async function (req, res) {
 
   //Create text for subscription confirmation notification
   var notiBody =
-    "You are now subscribed to heat wave alerts for" +
+    "You are now subscribed to heat wave alerts for " +
     subscription[1]["suburbDetails"]["suburb"] +
     ", " +
     subscription[1]["suburbDetails"]["postcode"];
@@ -64,8 +64,9 @@ app.post("/notifications/subscribe", async function (req, res) {
 
   //Create confirmation notification payload
   const payload = JSON.stringify({
-    title: "Hello!",
+    title: "Heat Wave Alert Confirmation",
     body: notiBody,
+    icon: "https://i.imgur.com/WPV6TmI.png",
   });
 
   console.log(subscription);
@@ -150,6 +151,7 @@ app.post("/notifications/change", async function (req, res) {
   //close db connection
   dbConnection.end();
 
+  console.log(subscription[1]["suburbDetails"]["suburb"]);
   //construct confirmation notification
   var notiBody =
     "You are now subscribed to heat wave alerts for " +
@@ -161,7 +163,7 @@ app.post("/notifications/change", async function (req, res) {
   //3 days before, one day before or both
   if (subscription[1]["oneDay"] && subscription[1]["threeDay"]) {
     const notiFreq =
-      " You will receive notifications 1 and 3 days before a heat wave.";
+      ". You will receive notifications 1 and 3 days before a heat wave.";
     notiBody = notiBody + notiFreq;
   } else if (subscription[1]["oneDay"] && !subscription[1]["threeDay"]) {
     const notiFreq =
@@ -175,8 +177,9 @@ app.post("/notifications/change", async function (req, res) {
 
   //construct confirmation notification payload
   const payload = JSON.stringify({
-    title: "Hello!",
+    title: "Heat Wave Alert Confirmation",
     body: notiBody,
+    icon: "https://i.imgur.com/WPV6TmI.png",
   });
 
   //send confirmation notification
@@ -188,8 +191,54 @@ app.post("/notifications/change", async function (req, res) {
 
 //API to retrieve user notification details
 // app.post("/notifications/details", async function (req, res) {
-//   const subscription = req.body;
-// })
+//   const endPoint = req.body.sub;
+//   console.log(endPoint);
+//   //create db connection
+//   const dbConnection = mysql.createConnection({
+//     host: process.env.DB_ENDPOINT,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_NAME,
+//   });
+
+//   //Obtain subscription id from db using endPoint
+//   const subscriptionIdData = await getSubscriptionId(dbConnection, endPoint);
+//   console.log(subscriptionIdData);
+//   const subscriptionId = subscriptionIdData[0]["subscrip_id"];
+
+//   //Obtain user choice and sent to front-end
+//   const userChoice = await getUserChoice(dbConnection, subscriptionId);
+
+//   dbConnection.end();
+//   console.log("userchoice");
+//   console.log(userChoice);
+//   res.json(userChoice);
+// });
+
+async function getUserChoice(dbConnection, subscriptionId) {
+  return new Promise((resultData) => {
+    dbConnection.query(
+      `SELECT *
+         FROM User_choice
+         WHERE subscrip_id = ?;`, //? Represents a parameter
+      subscriptionId, //parameter you want inserted where the ? is
+      function (error, result, fields) {
+        if (error) {
+          //Log error message
+          console.log(error);
+          console.log("Failed to retrieve Subscription ID");
+        }
+        try {
+          //set resultData to query result
+          resultData(result);
+        } catch (error) {
+          resultData({}); //Set resultData to empty
+          console.log("There was an error with the promise");
+        }
+      }
+    );
+  });
+}
 
 //Insert subscription into db
 async function insertSubscription(subscription) {
@@ -287,6 +336,8 @@ async function getSubscriptionId(dbConnection, endPoint) {
         }
         try {
           //set resultData to query result
+          // console.log(endPoint);
+          //console.log("sub id query", result);
           resultData(result);
         } catch (error) {
           resultData({}); //Set resultData to empty

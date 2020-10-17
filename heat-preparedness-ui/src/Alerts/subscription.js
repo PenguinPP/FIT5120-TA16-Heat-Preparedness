@@ -77,7 +77,7 @@ export function subscribeUser(subDetails) {
                 });
             } else {
               console.log("Existed subscription detected.");
-              changeSubscription(existedSubscription, subDetails);
+              sendSubscription(existedSubscription, subDetails);
             }
           });
       })
