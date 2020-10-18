@@ -60,6 +60,7 @@ export default function Weather(weatherInformation) {
       .then((results) => results.data)
       .then((data) => {
         for (let day in data) {
+          //Convert mysql date to javascript date
           data[day]["date"] = new Date(Date.parse(data[day]["date"]));
         }
         setWeatherData(data);
