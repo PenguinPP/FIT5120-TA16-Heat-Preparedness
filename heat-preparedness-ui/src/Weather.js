@@ -229,8 +229,7 @@ export default function Weather(weatherInformation) {
               onClick={handleEssentialsGuideScroll}
               variant="contained"
             >
-              <EssentialGuideIcon fontSize="small" />
-              Check our Essentials Guide!
+              Take Precautions!
             </Button>
           </Link>
           <br />
@@ -264,7 +263,7 @@ render() {
       <br />
       <Grid container spacing={2} justify="center">
         {weatherData.map((item) => (
-          <Grid item xs={5} sm={4} md={3} lg={2}>
+          <Grid item xs={5} sm={4} md={3}>
             <Card>
               <CardContent>
                 <Typography paragraph variant="body1">

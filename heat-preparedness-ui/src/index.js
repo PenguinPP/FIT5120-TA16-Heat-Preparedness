@@ -13,9 +13,6 @@ const theme = createMuiTheme({
         // Some CSS
         fontSize: "5rem",
       },
-      fontSizeSmall: {
-        fontSize: "4rem",
-      },
     },
   },
   typography: {

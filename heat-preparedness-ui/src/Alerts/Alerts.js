@@ -164,6 +164,12 @@ export default function Alerts(suburbInfo) {
               {compatible ? (
                 <React.Fragment>
                   <DialogContent className={page !== 1 && classes.hidePage}>
+                    <Typography>
+                      Subscribe to receive heat wave alerts through your
+                      device's browser! The browser will listen for our
+                      notifications in the background so you do not have to have
+                      our website open!
+                    </Typography>
                     <Autocomplete
                       id="combo-box-demo"
                       options={suburbData}
@@ -234,9 +240,7 @@ export default function Alerts(suburbInfo) {
                   </DialogContent>
                   <DialogContent className={page !== 2 && classes.hidePage}>
                     <Typography paragraph variant="body1">
-                      Confirm your subscription details below. Once confirmed
-                      you will have to allow notifications when your browser
-                      asks.
+                      Please review your subscription details below.
                     </Typography>
                     <Typography paragraph variant="body1">
                       You have selected
@@ -262,7 +266,12 @@ export default function Alerts(suburbInfo) {
                     ) : (
                       ""
                     )}
-
+                    <Typography>
+                      Once you confirm your details, you will have to allow
+                      notifications if your browser asks. Once allowed, you will
+                      receive a test notification on your device with the
+                      details of your subscription. Stay Ready, Stay Safe!
+                    </Typography>
                     <Button
                       variant="contained"
                       onClick={handleSubscribe}
