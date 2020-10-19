@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import ambulance from "../KeepingHomeCool/images/ambulance.png";
 import doctor from "../KeepingHomeCool/images/doctor.png";
@@ -98,7 +98,6 @@ export function HeatCramps() {
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   What to do:
                 </Box>
-                <br></br>
                 <br></br>• Stop activity and sit quietly in a cool place
                 <br></br>• Increase fluid intake
                 <br></br>• Rest a few hours before returning to activity
@@ -173,7 +172,6 @@ export function HeatExhaustion() {
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   What to do:
                 </Box>
-                <br></br>
                 <br></br>• Lay them down on a cool area
                 <br></br>• Remove outer clothing
                 <br></br>• Wet skin with cool water or wet cloths
@@ -251,7 +249,6 @@ export function HeatStroke() {
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   What to do:
                 </Box>
-                <br></br>
                 <br></br>• Call an ambulance
                 <br></br>• Get the person to a cool area and lay them down,
                 remove their clothing, wet their skin with water, fanning

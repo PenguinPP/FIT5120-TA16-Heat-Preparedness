@@ -13,7 +13,7 @@ import { QuizContext } from "../Contexts/QuizContext";
 import Symptoms from "./Symptoms/Symptoms";
 import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import Pdf from "../Preparation/leaflet.pdf";
+import Pdf from "../Preparation/Victoria-Heat-Guide.pdf";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -98,9 +98,9 @@ export default function Preparation(preparationData) {
       </Typography>
       <Typography variant="h8" paragraph>
         Mitigate risks by having the necessary preparations in place for when a
-        heat wave comes,
+        heat wave comes.
         <a href={Pdf} download>
-          Stick our guide onto your Fridge.
+          Stick our guide onto your fridge!
         </a>
       </Typography>
       <Grid container>
