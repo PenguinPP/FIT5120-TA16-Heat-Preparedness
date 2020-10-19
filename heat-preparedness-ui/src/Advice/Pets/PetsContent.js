@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Typography, List, ListItem, CardMedia } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import onTile from "./images/onTile.png";
 import coolWater from "./images/coolWater.png";
 import wetFeet from "./images/wetFeet.png";

@@ -1,12 +1,9 @@
 import React from "react";
 import { subscribeUser } from "./subscription";
 import { Button, Grid, Typography } from "@material-ui/core";
-import { Link } from "react-scroll";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -56,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const axios = require("axios").default;
-
 export default function Alerts(suburbInfo) {
   const classes = useStyles();
 
@@ -80,12 +75,14 @@ export default function Alerts(suburbInfo) {
   const [page, setPage] = React.useState(1);
   const [compatible, setCompatible] = React.useState(false);
 
-  console.log(compatible);
+  // console.log("current sub", currentSubscription);
+
+  // console.log("prev", previousSubscription);
+  // console.log(compatible);
+
   React.useEffect(() => {
     const fetchCompat = async () => {
-      checkCompatibility().then(function (compat) {
-        console.log("compat");
-        console.log(compat);
+      checkCompatibility().then(async function (compat) {
         setCompatible(compat);
       });
     };
@@ -93,8 +90,6 @@ export default function Alerts(suburbInfo) {
     fetchCompat();
   }, []);
 
-  console.log("compatibility");
-  console.log(compatible);
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
@@ -132,6 +127,7 @@ export default function Alerts(suburbInfo) {
       threeDay: threeDay,
     };
     subscribeUser(subDetails);
+    setOpen(false);
   };
 
   return (
@@ -161,6 +157,12 @@ export default function Alerts(suburbInfo) {
               {compatible ? (
                 <React.Fragment>
                   <DialogContent className={page !== 1 && classes.hidePage}>
+                    <Typography>
+                      Subscribe to receive heat wave alerts through your
+                      device's browser! The browser will listen for our
+                      notifications in the background so you do not have to have
+                      our website open!
+                    </Typography>
                     <Autocomplete
                       id="combo-box-demo"
                       options={suburbData}
@@ -231,9 +233,7 @@ export default function Alerts(suburbInfo) {
                   </DialogContent>
                   <DialogContent className={page !== 2 && classes.hidePage}>
                     <Typography paragraph variant="body1">
-                      Confirm your subscription details below. Once confirmed
-                      you will have to allow notifications when your browser
-                      asks.
+                      Please review your subscription details below.
                     </Typography>
                     <Typography paragraph variant="body1">
                       You have selected
@@ -259,7 +259,12 @@ export default function Alerts(suburbInfo) {
                     ) : (
                       ""
                     )}
-
+                    <Typography>
+                      Once you confirm your details, you will have to allow
+                      notifications if your browser asks. Once allowed, you will
+                      receive a test notification on your device with the
+                      details of your subscription. Stay Ready, Stay Safe!
+                    </Typography>
                     <Button
                       variant="contained"
                       onClick={handleSubscribe}
@@ -279,7 +284,14 @@ export default function Alerts(suburbInfo) {
                   </DialogContent>
                 </React.Fragment>
               ) : (
-                <Typography>Shit aint compatible bruh</Typography>
+                <DialogContent>
+                  <Typography paragraph>
+                    Unfortunately, our notifications are not compatible with
+                    your device. We're working on making our notifications
+                    compatible with as many devices as possible. Thank you for
+                    your patience!
+                  </Typography>
+                </DialogContent>
               )}
             </Dialog>
           </Grid>
