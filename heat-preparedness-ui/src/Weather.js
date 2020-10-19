@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
   avgAlert: {
     color: theme.palette.secondary.dark,
   },
+  cardStyle: {
+    height: "200px",
+  },
 }));
 
 const EssentialGuideIcon = (props) => {
@@ -264,7 +267,7 @@ render() {
       <Grid container spacing={2} justify="center">
         {weatherData.map((item) => (
           <Grid item xs={5} sm={4} md={3}>
-            <Card>
+            <Card className={classes.cardStyle}>
               <CardContent>
                 <Typography paragraph variant="body1">
                   {item.date

@@ -293,7 +293,7 @@ export default function Alerts(suburbInfo) {
               ) : (
                 <DialogContent>
                   <Typography paragraph>
-                    Unfortunately, our notificiations are not compatible with
+                    Unfortunately, our notifications are not compatible with
                     your device. We're working on making our notifications
                     compatible with as many devices as possible. Thank you for
                     your patience!
@@ -311,5 +311,3 @@ export default function Alerts(suburbInfo) {
 async function checkCompatibility() {
   return "PushManager" in window;
 }
-
-async function getSubscriptionDetails() {}
