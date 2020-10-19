@@ -219,3 +219,60 @@ DELIMITER ;
 
 ALTER TABLE `VictoriaHeat`.`LGA` 
 RENAME TO  `VictoriaHeat`.`Council` ;
+
+
+
+-- Add new tables for subscription for notification
+CREATE TABLE `VictoriaHeat`.`Subscription` (
+  `subscrip_id` INT NOT NULL AUTO_INCREMENT,
+  `end_point` VARCHAR(500) NOT NULL,
+  `p256dh` VARCHAR(200) NOT NULL,
+  `auth` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`subscrip_id`));
+
+CREATE TABLE `VictoriaHeat`.`User_choice` (
+  `subscrip_id` INT NOT NULL,
+  `suburb_id` INT NOT NULL,
+  `council_id` INT NOT NULL,
+  `noti_1day` INT NULL,
+  `noti_3day` INT NULL,
+  PRIMARY KEY (`subscrip_id`, `suburb_id`),
+  CONSTRAINT `subscription_choice_fk`
+    FOREIGN KEY (`subscrip_id`)
+    REFERENCES `VictoriaHeat`.`Subscription` (`subscrip_id`)
+    ON DELETE NO CASCADE
+    ON UPDATE NO CASCADE);
+
+
+ALTER TABLE `VictoriaHeat`.`User_choice` 
+ADD CONSTRAINT `suburb_choice_fk`
+  FOREIGN KEY (`suburb_id`)
+  REFERENCES `VictoriaHeat`.`Suburb` (`suburb_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+CREATE TABLE `VictoriaHeat`.`Notification_1day` (
+  `subscrip_id` INT NOT NULL,
+  `suburb_id` INT NOT NULL,
+  `council_id` INT NULL,
+  `noti_time` DATETIME NULL,
+  `noti_targ_date` DATETIME NOT NULL,
+  PRIMARY KEY (`subscrip_id`, `suburb_id`, `noti_tag_date`),
+  CONSTRAINT `choice_notification1_fk`
+    FOREIGN KEY (`subscrip_id` , `suburb_id`)
+    REFERENCES `VictoriaHeat`.`User_choice` (`subscrip_id` , `suburb_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `VictoriaHeat`.`Notification_3day` (
+  `subscrip_id` INT NOT NULL,
+  `suburb_id` INT NOT NULL,
+  `council_id` INT NULL,
+  `noti_time` DATETIME NULL,
+  `noti_targ_date` DATETIME NOT NULL,
+  PRIMARY KEY (`subscrip_id`, `suburb_id`, `noti_targ_date`),
+  CONSTRAINT `choice_notification3_fk`
+    FOREIGN KEY (`subscrip_id` , `suburb_id`)
+    REFERENCES `VictoriaHeat`.`User_choice` (`subscrip_id` , `suburb_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
