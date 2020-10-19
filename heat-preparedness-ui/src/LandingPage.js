@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "600px",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "325px",
+    },
   },
   landingText: {
     color: "white",

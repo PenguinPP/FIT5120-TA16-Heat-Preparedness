@@ -98,7 +98,7 @@ export default function Preparation(preparationData) {
       </Typography>
       <Typography variant="h8" paragraph>
         Mitigate risks by having the necessary preparations in place for when a
-        heat wave comes.
+        heat wave comes.{" "}
         <a href={Pdf} download>
           Stick our guide onto your fridge!
         </a>
