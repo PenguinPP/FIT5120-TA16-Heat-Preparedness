@@ -62,8 +62,7 @@ export default function HeatWaves() {
           <Typography>
             Heat waves are Australia's deadliest natural hazard. From 1900 until
             2011, extreme heat has been responsible for more deaths in Australia
-            than all other natural hazards combined. Each plane on the right
-            represents approximately 250 people, the capacity of a Airbus A330.
+            than all other natural hazards combined.
           </Typography>
         </Grid>
         <Grid item xs={12} md={6} lg={5}>

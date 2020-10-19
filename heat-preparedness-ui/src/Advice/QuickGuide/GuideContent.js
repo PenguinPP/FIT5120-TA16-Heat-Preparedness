@@ -75,7 +75,7 @@ export function StayHydrated() {
             justify="space-evenly"
             spacing={3}
           >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Keep a full drink bottle with you and take small sips of water
                 frequently.
@@ -88,7 +88,7 @@ export function StayHydrated() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Avoid Caffeine and alcohol.
               </Typography>
@@ -100,7 +100,7 @@ export function StayHydrated() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} md={10} lg={4}>
               <Typography align="center">
                 Avoid heavy activity like sport, renovating and gardening.
               </Typography>
@@ -141,7 +141,7 @@ export function CoolEnvironment() {
             justify="space-evenly"
             spacing={3}
           >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">Draw your blinds</Typography>
               <div
                 style={{
@@ -161,7 +161,7 @@ export function CoolEnvironment() {
                 ></img>
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Close-off any rooms that you are not using
               </Typography>
@@ -183,7 +183,7 @@ export function CoolEnvironment() {
                 ></img>
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Open the windows when there is a cool breeze or when the
                 temperature inside rises above the outside temperature
@@ -235,7 +235,7 @@ export function FanAirconUse() {
             justify="space-evenly"
             spacing={3}
           >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 If using a fan, ensure there is adequate ventilation and that it
                 is set-up to bring cooler air in from the outside.
@@ -244,7 +244,7 @@ export function FanAirconUse() {
                 <img src={fan} alt="Fan" className={classes.mediaFan} />
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 It is dangerous to use a fan without proper ventilation if the
                 temperature inside is more than 34 degrees! This can cause a
@@ -254,7 +254,7 @@ export function FanAirconUse() {
                 <img src={oven} alt="Oven" className={classes.mediaOven} />
               </div>
             </Grid>
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 If using an air conditioner, make sure it is on the right
                 setting (snowflake symbol)
