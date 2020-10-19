@@ -71,6 +71,7 @@ async function sendAlerts() {
     var payload = JSON.stringify({
       title: "Notification!",
       body: notiBody,
+      icon: "https://vic-heat-deployment-files.s3-ap-southeast-2.amazonaws.com/vic-heat-noti.png",
     });
 
     console.log(payload);
