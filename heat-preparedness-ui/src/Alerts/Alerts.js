@@ -1,12 +1,9 @@
 import React from "react";
 import { subscribeUser } from "./subscription";
 import { Button, Grid, Typography } from "@material-ui/core";
-import { Link } from "react-scroll";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -56,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const axios = require("axios").default;
-
 export default function Alerts(suburbInfo) {
   const classes = useStyles();
 
@@ -79,8 +74,6 @@ export default function Alerts(suburbInfo) {
   const [threeDay, setThreeDay] = React.useState(false);
   const [page, setPage] = React.useState(1);
   const [compatible, setCompatible] = React.useState(false);
-  const [previousSubscription, setPreviousSubscription] = React.useState(false);
-  const [currentSubscription, setCurrentSubscription] = React.useState(null);
 
   // console.log("current sub", currentSubscription);
 

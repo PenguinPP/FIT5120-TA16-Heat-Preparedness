@@ -1,15 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AppBarClose from "./AppBarClose";
-import { ReactComponent as TeamIcon } from "../icons/victoria-heat-icon.svg";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import SvgIcon from "@material-ui/core/SvgIcon";
 import {
   useScrollTrigger,
   IconButton,
   makeStyles,
-  Button,
   Avatar,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";

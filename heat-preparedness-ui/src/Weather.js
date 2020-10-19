@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Typography from "@material-ui/core/Typography";
-import {
-  List,
-  ListItem,
-  makeStyles,
-  Grid,
-  Card,
-  CardContent,
-} from "@material-ui/core";
+import { makeStyles, Grid, Card, CardContent } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -17,9 +10,7 @@ import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
 import Alert from "@material-ui/lab/Alert";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import Alerts from "./Alerts/Alerts";
-import { ReactComponent as GuideIcon } from "./icons/guide-icon.svg";
 import { QuizContext } from "./Contexts/QuizContext";
-import SvgIcon from "@material-ui/core/SvgIcon";
 
 const axios = require("axios").default;
 
@@ -65,17 +56,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EssentialGuideIcon = (props) => {
-  return (
-    <SvgIcon
-      {...props}
-      component={GuideIcon}
-      style={{ color: "#000000", position: "relative" }}
-      viewBox="0 0 600 476.6"
-    ></SvgIcon>
-  );
-};
-
 export default function Weather(weatherInformation) {
   const suburbData = weatherInformation["suburbList"];
 
@@ -84,7 +64,7 @@ export default function Weather(weatherInformation) {
     weatherInformation["weatherInformation"],
   ]);
 
-  const { adviceActiveCategory, setAdviceCategory } = useContext(QuizContext);
+  const { setAdviceCategory } = useContext(QuizContext);
 
   const classes = useStyles();
 
