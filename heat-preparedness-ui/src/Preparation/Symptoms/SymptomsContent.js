@@ -9,6 +9,7 @@ import thermosImage from "../KeepingHomeCool/images/thermos.png";
 import ReactPlayer from "react-player";
 import northWindow from "../KeepingHomeCool/images/north-window.png";
 import eastWestWindow from "../KeepingHomeCool/images/east-west-window.png";
+import Box from "@material-ui/core/Box";
 import ambulance from "../KeepingHomeCool/images/ambulance.png";
 import doctor from "../KeepingHomeCool/images/doctor.png";
 import mineralWater from "../KeepingHomeCool/images/mineralWater.png";
@@ -91,9 +92,11 @@ export function HeatCramps() {
           >
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                Symptoms:
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  Symptoms:
+              </Box>
                 <br></br>
-                <br></br>
+
                 • Muscle pains
                 <br></br>
                 • Spasms in the abdomen, arms or legs
@@ -102,8 +105,10 @@ export function HeatCramps() {
 
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography align="center">What to do:
-              <br></br>
+              <Typography align="center">
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  What to do:
+              </Box>
                 <br></br>
 • Stop activity and sit quietly in a cool place
 <br></br>
@@ -167,8 +172,9 @@ export function HeatExhaustion() {
           >
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                Symptoms:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  Symptoms:
+              </Box>
                 <br></br>
                 • Pale complexion and sweating
                 <br></br>
@@ -192,8 +198,10 @@ export function HeatExhaustion() {
 
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography align="center">What to do:
-              <br></br>
+              <Typography align="center">
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  What to do:
+              </Box>
                 <br></br>
 • Lay them down on a cool area
 <br></br>
@@ -257,8 +265,9 @@ export function HeatStroke() {
           >
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                Symptoms:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  Symptoms:
+              </Box>
                 <br></br>
                 • Same symptoms as heat exhaustion.
                 <br></br>
@@ -277,8 +286,10 @@ export function HeatStroke() {
 
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography align="center">What to do:
-              <br></br>
+              <Typography align="center">
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  What to do:
+              </Box>
                 <br></br>
 • Call an ambulance
 <br></br>

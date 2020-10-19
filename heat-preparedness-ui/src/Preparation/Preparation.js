@@ -13,6 +13,8 @@ import { QuizContext } from "../Contexts/QuizContext";
 import Symptoms from "./Symptoms/Symptoms";
 import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import Pdf from "../Preparation/leaflet.pdf";
+
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -67,6 +69,7 @@ const PowerFailureIcon = (props) => {
   );
 };
 
+
 export default function Preparation(preparationData) {
   const classes = useStyles();
 
@@ -90,14 +93,16 @@ export default function Preparation(preparationData) {
     Pets: <h1>Pets Not created yet</h1>,
   };
 
+
+
+
   return (
     <React.Fragment>
       <Typography variant="h4" style={{ marginBottom: "1rem" }}>
         Be Prepared!
       </Typography>
-
       <Typography variant="h8" paragraph>
-        Mitigate risks by having the necessary preparations in place for when a heat wave comes.
+        Mitigate risks by having the necessary preparations in place for when a heat wave comes,<a href={Pdf} download>Stick our guide onto your Fridge.</a>
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
