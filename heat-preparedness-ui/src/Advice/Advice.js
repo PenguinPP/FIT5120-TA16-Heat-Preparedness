@@ -73,7 +73,8 @@ export default function Advice(adviceData) {
         On the Day
       </Typography>
       <Typography variant="h8" paragraph>
-        Check what things you should and what you should not do during a heat wave!
+        Check what things you should and what you should not do during a heat
+        wave!
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
