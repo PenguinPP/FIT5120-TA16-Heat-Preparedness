@@ -46,13 +46,14 @@ const useStyles = makeStyles((theme) => ({
   warningStyle: {
     color: theme.palette.secondary.main,
     position: "relative",
-    top: theme.spacing.unit,
+    top: theme.spacing(),
   },
   avgAlert: {
     color: theme.palette.secondary.dark,
   },
   cardStyle: {
     height: "200px",
+    backgroundColor: "#efefef",
   },
 }));
 
@@ -141,6 +142,9 @@ export default function Weather(weatherInformation) {
         Select your suburb
       </Typography>
       <Autocomplete
+        defaultValue={
+          suburbData.filter((suburb) => suburb.suburb_id === 1794)[0]
+        }
         id="combo-box-demo"
         options={suburbData}
         getOptionLabel={(option) => option.suburb + ", " + option.postcode}

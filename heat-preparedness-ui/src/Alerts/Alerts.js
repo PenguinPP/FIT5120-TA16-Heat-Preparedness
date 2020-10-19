@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
   imageStyle: {
     maxWidth: 250,
   },
+  warningText: {
+    color: theme.palette.cross.main,
+  },
 }));
 
 export default function Alerts(suburbInfo) {
@@ -67,18 +70,16 @@ export default function Alerts(suburbInfo) {
   };
 
   const [suburbId, setSuburbId] = React.useState(
-    suburbInfo["suburbInfo"]["suburb_id"]
+    suburbInfo["suburbInfo"][0] !== undefined
+      ? suburbInfo["suburbInfo"][0]["suburb_id"]
+      : 1794
   );
   const suburbData = suburbInfo["suburbInfo"][1];
   const [oneDay, setOneDay] = React.useState(false);
   const [threeDay, setThreeDay] = React.useState(false);
   const [page, setPage] = React.useState(1);
   const [compatible, setCompatible] = React.useState(false);
-
-  // console.log("current sub", currentSubscription);
-
-  // console.log("prev", previousSubscription);
-  // console.log(compatible);
+  const [showWarning, setShowWarning] = React.useState(false);
 
   React.useEffect(() => {
     const fetchCompat = async () => {
@@ -99,6 +100,7 @@ export default function Alerts(suburbInfo) {
       setOneDay(false);
     } else if (!oneDay) {
       setOneDay(true);
+      setShowWarning(false);
     }
   };
 
@@ -107,11 +109,16 @@ export default function Alerts(suburbInfo) {
       setThreeDay(false);
     } else if (!threeDay) {
       setThreeDay(true);
+      setShowWarning(false);
     }
   };
 
   const nextPage = () => {
-    setPage(2);
+    if (!oneDay && !threeDay) {
+      setShowWarning(true);
+    } else {
+      setPage(2);
+    }
   };
 
   const prevPage = () => {
@@ -156,14 +163,21 @@ export default function Alerts(suburbInfo) {
               </DialogTitle>
               {compatible ? (
                 <React.Fragment>
-                  <DialogContent className={page !== 1 && classes.hidePage}>
-                    <Typography>
+                  <DialogContent className={page !== 1 ? classes.hidePage : ""}>
+                    <Typography paragraph>
                       Subscribe to receive heat wave alerts through your
-                      device's browser! The browser will listen for our
-                      notifications in the background so you do not have to have
-                      our website open!
+                      device's browser!
+                    </Typography>
+                    <Typography paragraph>
+                      The browser will listen for our notifications in the
+                      background so you do not have to have our website open!
                     </Typography>
                     <Autocomplete
+                      defaultValue={
+                        suburbData.filter(
+                          (suburb) => suburb.suburb_id === 1794
+                        )[0]
+                      }
                       id="combo-box-demo"
                       options={suburbData}
                       getOptionLabel={(option) =>
@@ -222,6 +236,14 @@ export default function Alerts(suburbInfo) {
                         label="3 days before"
                       />
                     </FormGroup>
+                    <Typography
+                      paragraph
+                      className={
+                        showWarning ? classes.warningText : classes.hidePage
+                      }
+                    >
+                      You must choose at least one of the above options!
+                    </Typography>
                     <Button
                       variant="contained"
                       onClick={nextPage}
@@ -231,7 +253,7 @@ export default function Alerts(suburbInfo) {
                       <Typography variant="h4">Next</Typography>
                     </Button>
                   </DialogContent>
-                  <DialogContent className={page !== 2 && classes.hidePage}>
+                  <DialogContent className={page !== 2 ? classes.hidePage : ""}>
                     <Typography paragraph variant="body1">
                       Please review your subscription details below.
                     </Typography>
@@ -259,12 +281,13 @@ export default function Alerts(suburbInfo) {
                     ) : (
                       ""
                     )}
-                    <Typography>
+                    <Typography paragraph variant="body2">
                       Once you confirm your details, you will have to allow
                       notifications if your browser asks. Once allowed, you will
                       receive a test notification on your device with the
-                      details of your subscription. Stay Ready, Stay Safe!
+                      details of your subscription.
                     </Typography>
+                    <Typography paragraph>Stay Ready, Stay Safe!</Typography>
                     <Button
                       variant="contained"
                       onClick={handleSubscribe}
