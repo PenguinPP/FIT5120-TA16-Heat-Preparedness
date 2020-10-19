@@ -2,15 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  CardMedia,
-} from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
+import { Typography, List, ListItem } from "@material-ui/core";
 import noCoffeeAlcohol from "./images/nocoffeealcohol.png";
 import noExercise from "./images/no-exercise.png";
 import fan from "./images/fan.png";
@@ -19,7 +11,6 @@ import closethedoor from "./images/close_the_door.png";
 import drawyourblinds from "./images/Draw_your_blinds.png";
 import openwindow from "./images/open_window.png";
 import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
 import water from "./images/water.png";
 import oven from "./images/oven.png";
 import noSun from "./images/out-of-sun.png";
@@ -300,7 +291,6 @@ export function FinalTips() {
       <CardContent className={classes.cardContentStyle}>
         <Grid
           container
-          alignItems="flex-start"
           spacing={2}
           wrap="wrap"
           alignItems="center"

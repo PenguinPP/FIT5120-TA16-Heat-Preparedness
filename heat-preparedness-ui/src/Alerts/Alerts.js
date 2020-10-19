@@ -82,10 +82,10 @@ export default function Alerts(suburbInfo) {
   const [previousSubscription, setPreviousSubscription] = React.useState(false);
   const [currentSubscription, setCurrentSubscription] = React.useState(null);
 
-  console.log("current sub", currentSubscription);
+  // console.log("current sub", currentSubscription);
 
-  console.log("prev", previousSubscription);
-  console.log(compatible);
+  // console.log("prev", previousSubscription);
+  // console.log(compatible);
 
   React.useEffect(() => {
     const fetchCompat = async () => {

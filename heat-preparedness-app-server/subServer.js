@@ -66,7 +66,8 @@ app.post("/notifications/subscribe", async function (req, res) {
   const payload = JSON.stringify({
     title: "Heat Wave Alert Confirmation",
     body: notiBody,
-    icon: "https://i.imgur.com/WPV6TmI.png",
+    icon:
+      "https://vic-heat-deployment-files.s3-ap-southeast-2.amazonaws.com/vic-heat-noti.png",
   });
 
   console.log(subscription);
@@ -179,7 +180,8 @@ app.post("/notifications/change", async function (req, res) {
   const payload = JSON.stringify({
     title: "Heat Wave Alert Confirmation",
     body: notiBody,
-    icon: "https://i.imgur.com/WPV6TmI.png",
+    icon:
+      "https://vic-heat-deployment-files.s3-ap-southeast-2.amazonaws.com/vic-heat-noti.png",
   });
 
   //send confirmation notification

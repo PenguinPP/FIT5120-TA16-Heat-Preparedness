@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Typography from "@material-ui/core/Typography";
-import { List, ListItem, makeStyles, Grid } from "@material-ui/core";
+import {
+  List,
+  ListItem,
+  makeStyles,
+  Grid,
+  Card,
+  CardContent,
+} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -10,6 +17,9 @@ import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
 import Alert from "@material-ui/lab/Alert";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import Alerts from "./Alerts/Alerts";
+import { ReactComponent as GuideIcon } from "./icons/guide-icon.svg";
+import { QuizContext } from "./Contexts/QuizContext";
+import SvgIcon from "@material-ui/core/SvgIcon";
 
 const axios = require("axios").default;
 
@@ -34,7 +44,34 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.secondary.contrastText,
     },
   },
+  heatAlert: {
+    background: theme.palette.secondary.main,
+    color: theme.palette.secondary.contrastText,
+    marginBottom: "1rem",
+  },
+  noHeatAlert: {
+    background: theme.palette.primary.light,
+  },
+  warningStyle: {
+    color: theme.palette.secondary.main,
+    position: "relative",
+    top: theme.spacing.unit,
+  },
+  avgAlert: {
+    color: theme.palette.secondary.dark,
+  },
 }));
+
+const EssentialGuideIcon = (props) => {
+  return (
+    <SvgIcon
+      {...props}
+      component={GuideIcon}
+      style={{ color: "#000000", position: "relative" }}
+      viewBox="0 0 600 476.6"
+    ></SvgIcon>
+  );
+};
 
 export default function Weather(weatherInformation) {
   const suburbData = weatherInformation["suburbList"];
@@ -44,12 +81,37 @@ export default function Weather(weatherInformation) {
     weatherInformation["weatherInformation"],
   ]);
 
-  console.log(weatherData);
+  const { adviceActiveCategory, setAdviceCategory } = useContext(QuizContext);
+
   const classes = useStyles();
 
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
+
+  const heatDays = weatherData.filter((day) => day.avg >= day.threshold);
+  const heatDayCount = heatDays.length;
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let currentDayForecast = weatherData[0];
+  let heatWaveToday = false;
+
+  if (currentDayForecast.avg >= currentDayForecast.threshold) {
+    heatWaveToday = true;
+  }
+
+  const handleEssentialsGuideScroll = () => {
+    setAdviceCategory("Essentials Guide");
+  };
 
   React.useEffect(() => {
     let dataLink =
@@ -81,7 +143,6 @@ export default function Weather(weatherInformation) {
     <React.Fragment>
       <Typography variant="h4">Weather Forecasts Alerts</Typography>
       <br />
-
       <Typography
         variant="h8"
         style={{ marginBottom: "1rem", marginTop: "1rem" }}
@@ -89,23 +150,22 @@ export default function Weather(weatherInformation) {
         Find out if there are any upcoming heatwaves during next week's
         forecast.
       </Typography>
-
       <br />
-
       <Typography
         variant="h6"
         style={{ marginBottom: "1rem", marginTop: "1rem" }}
       >
         Select your suburb
       </Typography>
-
       <Autocomplete
         id="combo-box-demo"
         options={suburbData}
         getOptionLabel={(option) => option.suburb + ", " + option.postcode}
         fullWidth={true}
         onChange={(event, newValue) => {
-          newValue !== undefined && setSuburbId(newValue.suburb_id);
+          if (newValue !== undefined && newValue !== null) {
+            setSuburbId(newValue.suburb_id);
+          }
         }}
         renderInput={(params) => (
           <TextField
@@ -116,7 +176,6 @@ export default function Weather(weatherInformation) {
           />
         )}
       />
-
       {/* <TextField
                     fullWidth={true}
                     value={suburb}
@@ -134,14 +193,52 @@ export default function Weather(weatherInformation) {
         for the next week
       </Typography>
       <br />
-
-      <Alert variant="filled" severity="info">
-        There are no heat wave alerts for the following week ;)
-      </Alert>
+      {heatDayCount === 0 ? (
+        <Alert variant="filled" severity="info" className={classes.noHeatAlert}>
+          There are no heat wave alerts for the next 7 days :)
+        </Alert>
+      ) : (
+        <Alert
+          variant="filled"
+          className={classes.heatAlert}
+          severity="warning"
+        >
+          WARNING — There are {heatDayCount} heat wave alerts over the next 7
+          days!
+        </Alert>
+      )}{" "}
+      {heatWaveToday && (
+        <React.Fragment>
+          <Alert
+            variant="filled"
+            className={classes.heatAlert}
+            severity="warning"
+          >
+            WARNING — There is a heat wave today!
+          </Alert>
+          <Link
+            activeClass="active"
+            to={"Advice"}
+            spy={true}
+            smooth={true}
+            offset={-80}
+            duration={700}
+          >
+            <Button
+              className={classes.active}
+              onClick={handleEssentialsGuideScroll}
+              variant="contained"
+            >
+              <EssentialGuideIcon fontSize="small" />
+              Check our Essentials Guide!
+            </Button>
+          </Link>
+          <br />
+        </React.Fragment>
+      )}
       {
         //make an if statement to show if there is a heatwave alert or everything is ok.
       }
-
       {/*
 render() {
       if (heatwaveAlert) {
@@ -159,12 +256,46 @@ render() {
         }
       return () 
       */}
-
       <br />
       <Typography variant="h6">
-        <WarningIcon /> next to the day indicates a heat wave alert
+        <WarningIcon className={classes.warningStyle} /> next to the day
+        indicates a heat wave alert
       </Typography>
-      <List>
+      <br />
+      <Grid container spacing={2} justify="center">
+        {weatherData.map((item) => (
+          <Grid item xs={5} sm={4} md={3} lg={2}>
+            <Card>
+              <CardContent>
+                <Typography paragraph variant="body1">
+                  {item.date
+                    ? days[item.date.getDay()] +
+                      ", " +
+                      item.date.getDate() +
+                      "/" +
+                      (item.date.getMonth() + 1)
+                    : ""}{" "}
+                  {item.avg >= item.threshold && (
+                    <WarningIcon className={classes.warningStyle} />
+                  )}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  {item.max ? item.max : ""}° / {item.min ? item.min : ""}°
+                </Typography>
+                <Typography
+                  variant="body1"
+                  className={item.avg >= item.threshold ? classes.avgAlert : ""}
+                >
+                  Avg. {item.avg ? item.avg : ""}°
+                </Typography>
+                <Typography></Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <br />
+      {/* <List>
         {weatherData.map((item) => (
           <ListItem key={item.date}>
             {item.date
@@ -178,7 +309,7 @@ render() {
             | avg {item.avg ? item.avg : ""}°
           </ListItem>
         ))}
-      </List>
+      </List> */}
       <Typography paragraph align="center" variant="h5">
         Not sure where to start?
       </Typography>
