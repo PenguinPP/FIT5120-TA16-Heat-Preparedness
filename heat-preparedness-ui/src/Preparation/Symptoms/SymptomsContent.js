@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import ambulance from "../KeepingHomeCool/images/ambulance.png";
 import doctor from "../KeepingHomeCool/images/doctor.png";
@@ -86,16 +86,18 @@ export function HeatCramps() {
           >
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                Symptoms:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  Symptoms:
+                </Box>
                 <br></br>• Muscle pains
                 <br></br>• Spasms in the abdomen, arms or legs
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                What to do:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  What to do:
+                </Box>
                 <br></br>• Stop activity and sit quietly in a cool place
                 <br></br>• Increase fluid intake
                 <br></br>• Rest a few hours before returning to activity
@@ -152,8 +154,9 @@ export function HeatExhaustion() {
           >
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                Symptoms:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  Symptoms:
+                </Box>
                 <br></br>• Pale complexion and sweating
                 <br></br>• Rapid heart rate
                 <br></br>• Muscle cramps
@@ -166,8 +169,9 @@ export function HeatExhaustion() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                What to do:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  What to do:
+                </Box>
                 <br></br>• Lay them down on a cool area
                 <br></br>• Remove outer clothing
                 <br></br>• Wet skin with cool water or wet cloths
@@ -228,8 +232,9 @@ export function HeatStroke() {
           >
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                Symptoms:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  Symptoms:
+                </Box>
                 <br></br>• Same symptoms as heat exhaustion.
                 <br></br>• Dry skin with no sweating
                 <br></br>• Mental condition worsens
@@ -241,8 +246,9 @@ export function HeatStroke() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography align="center">
-                What to do:
-                <br></br>
+                <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
+                  What to do:
+                </Box>
                 <br></br>• Call an ambulance
                 <br></br>• Get the person to a cool area and lay them down,
                 remove their clothing, wet their skin with water, fanning

@@ -11,6 +11,7 @@ import QuickGuide from "./QuickGuide/QuickGuide";
 import Pets from "./Pets/Pets";
 import KeepCool from "./KeepCool/KeepCool";
 import { QuizContext } from "../Contexts/QuizContext";
+import Pdf from "../Preparation/Victoria-Heat-Guide.pdf";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -74,7 +75,10 @@ export default function Advice(adviceData) {
       </Typography>
       <Typography variant="h8" paragraph>
         Check what things you should and what you should not do during a heat
-        wave!
+        wave.{" "}
+        <a href={Pdf} download>
+          Stick our guide onto your fridge!
+        </a>
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>

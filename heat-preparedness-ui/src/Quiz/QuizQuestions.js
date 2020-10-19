@@ -120,7 +120,7 @@ export function QuestionOne(status) {
               alt="thermometer"
             />
           </div>
-          <Typography>
+          <Typography paragraph>
             The answer you have chosen is {answer}{" "}
             {answer === "Wrong" ? (
               <ClearIcon className={classes.crossStyle} />
@@ -129,9 +129,9 @@ export function QuestionOne(status) {
             )}
           </Typography>
           {answer === "Wrong" && (
-            <Typography>The correct answer is FALSE</Typography>
+            <Typography paragraph>The correct answer is FALSE</Typography>
           )}
-          <Typography>
+          <Typography paragraph>
             Heat strokes are fatal in up to 80% of cases. It is a medical
             emergency that requires urgent attention.
           </Typography>
@@ -211,7 +211,7 @@ export function QuestionTwo(status) {
               alt="cocktail glass"
             />
           </div>
-          <Typography>
+          <Typography paragraph>
             The answer you have chosen is {answer}{" "}
             {answer === "Wrong" ? (
               <ClearIcon className={classes.crossStyle} />
@@ -220,9 +220,9 @@ export function QuestionTwo(status) {
             )}
           </Typography>
           {answer === "Wrong" && (
-            <Typography>The correct answer is TRUE</Typography>
+            <Typography paragraph>The correct answer is TRUE</Typography>
           )}
-          <Typography>
+          <Typography paragraph>
             These can create conditions that make the body more vulnerable to
             heat stress.
           </Typography>
@@ -291,7 +291,7 @@ export function QuestionThree(status) {
           <div className={classes.imgContainer}>
             <img src={car} className={classes.car} alt="car" />
           </div>
-          <Typography>
+          <Typography paragraph>
             The answer you have chosen is {answer}{" "}
             {answer === "Wrong" ? (
               <ClearIcon className={classes.crossStyle} />
@@ -300,9 +300,9 @@ export function QuestionThree(status) {
             )}
           </Typography>
           {answer === "Wrong" && (
-            <Typography>The correct answer is YES</Typography>
+            <Typography paragraph>The correct answer is YES</Typography>
           )}
-          <Typography>
+          <Typography paragraph>
             It is illegal and dangerous to leave children and pets in cars,
             especially when experiencing extreme heat.
           </Typography>

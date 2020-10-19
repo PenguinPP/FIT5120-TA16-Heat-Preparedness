@@ -45,7 +45,7 @@ export function Coolyourself() {
             justify="space-evenly"
             spacing={3}
           >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Place a loose damp cloth or scarf on the back of your neck.
               </Typography>
@@ -67,7 +67,7 @@ export function Coolyourself() {
                 ></img>
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Spray or splash your face and the back of your neck with cold
                 water several times a day. You can also spray water over other
@@ -91,7 +91,7 @@ export function Coolyourself() {
                 ></img>
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Place your feet in cool water. Take cool (not too cold!)
                 showers.

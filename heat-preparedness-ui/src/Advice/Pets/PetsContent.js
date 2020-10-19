@@ -11,6 +11,7 @@ import sunCream from "./images/sunCream.png";
 import walkPet from "./images/walkPet.png";
 import Grid from "@material-ui/core/Grid";
 
+
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
     minHeight: "450px",
@@ -71,7 +72,7 @@ export function StayHome() {
             justify="space-evenly"
             spacing={3}
           >
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Let them enjoy the cool tiles or provide them a sturdy icepack
                 or a frozen water bottle.
@@ -84,7 +85,8 @@ export function StayHome() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+
+            <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
                 Be sure to provide them with numerous sources of cool water.
               </Typography>
@@ -96,7 +98,8 @@ export function StayHome() {
                 />
               </div>
             </Grid>
-            <Grid item xs={12} md={10}>
+
+            <Grid item xs={12} md={10} lg={4}>
               <Typography align="center">
                 If your pet seems to be in discomfort, try wetting their feet
                 and misting water onto their face as many animals control their
@@ -126,7 +129,7 @@ export function OutDoor() {
         <Grid container alignItems="flex-start" justify="center">
           <Grid item xs={12}>
             <Typography variant="h5" paragraph align="center">
-              Going outside with your pet
+              Going outside with your Pet
             </Typography>
           </Grid>
           <Grid
