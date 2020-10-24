@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Typography from "@material-ui/core/Typography";
-import { List, ListItem, makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Card, CardContent } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import WarningIcon from "@material-ui/icons/Warning";
 import { Link } from "react-scroll";
 import Button from "@material-ui/core/Button";
 import HeatReadinessQuiz from "./Quiz/HeatReadinessQuiz";
-import Alert from '@material-ui/lab/Alert';
+import Alert from "@material-ui/lab/Alert";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import Alerts from './Alerts/Alerts'
+import Alerts from "./Alerts/Alerts";
+import { QuizContext } from "./Contexts/QuizContext";
 
 const axios = require("axios").default;
 
@@ -34,6 +35,26 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.secondary.contrastText,
     },
   },
+  heatAlert: {
+    background: theme.palette.secondary.main,
+    color: theme.palette.secondary.contrastText,
+    marginBottom: "1rem",
+  },
+  noHeatAlert: {
+    background: theme.palette.primary.light,
+  },
+  warningStyle: {
+    color: theme.palette.secondary.main,
+    position: "relative",
+    top: theme.spacing(),
+  },
+  avgAlert: {
+    color: theme.palette.secondary.dark,
+  },
+  cardStyle: {
+    height: "200px",
+    backgroundColor: "#efefef",
+  },
 }));
 
 export default function Weather(weatherInformation) {
@@ -44,12 +65,37 @@ export default function Weather(weatherInformation) {
     weatherInformation["weatherInformation"],
   ]);
 
-  console.log(weatherData);
+  const { setAdviceCategory } = useContext(QuizContext);
+
   const classes = useStyles();
 
   var currentSuburb = suburbData.filter(
     (suburb) => suburb.suburb_id === suburbId
   )[0];
+
+  const heatDays = weatherData.filter((day) => day.avg >= day.threshold);
+  const heatDayCount = heatDays.length;
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let currentDayForecast = weatherData[0];
+  let heatWaveToday = false;
+
+  if (currentDayForecast.avg >= currentDayForecast.threshold) {
+    heatWaveToday = true;
+  }
+
+  const handleEssentialsGuideScroll = () => {
+    setAdviceCategory("Essentials Guide");
+  };
 
   React.useEffect(() => {
     let dataLink =
@@ -60,6 +106,7 @@ export default function Weather(weatherInformation) {
       .then((results) => results.data)
       .then((data) => {
         for (let day in data) {
+          //Convert mysql date to javascript date
           data[day]["date"] = new Date(Date.parse(data[day]["date"]));
         }
         setWeatherData(data);
@@ -78,32 +125,34 @@ export default function Weather(weatherInformation) {
         */
 
     <React.Fragment>
-      <Typography variant="h4">Weather Forecasts  Alerts</Typography>
+      <Typography variant="h4">Weather Forecasts Alerts</Typography>
       <br />
-
       <Typography
         variant="h8"
         style={{ marginBottom: "1rem", marginTop: "1rem" }}
       >
-        Find out if there are any upcoming heatwaves during next week's forecast.
+        Find out if there are any upcoming heatwaves during next week's
+        forecast.
       </Typography>
-
       <br />
-
       <Typography
         variant="h6"
         style={{ marginBottom: "1rem", marginTop: "1rem" }}
       >
         Select your suburb
       </Typography>
-
       <Autocomplete
+        defaultValue={
+          suburbData.filter((suburb) => suburb.suburb_id === 1794)[0]
+        }
         id="combo-box-demo"
         options={suburbData}
         getOptionLabel={(option) => option.suburb + ", " + option.postcode}
         fullWidth={true}
         onChange={(event, newValue) => {
-          newValue !== undefined && setSuburbId(newValue.suburb_id);
+          if (newValue !== undefined && newValue !== null) {
+            setSuburbId(newValue.suburb_id);
+          }
         }}
         renderInput={(params) => (
           <TextField
@@ -114,7 +163,6 @@ export default function Weather(weatherInformation) {
           />
         )}
       />
-
       {/* <TextField
                     fullWidth={true}
                     value={suburb}
@@ -132,14 +180,51 @@ export default function Weather(weatherInformation) {
         for the next week
       </Typography>
       <br />
-
-      <Alert variant="filled" severity="info">
-        There are no heat wave alerts for the following week ;)
-      </Alert>
-      {//make an if statement to show if there is a heatwave alert or everything is ok.
+      {heatDayCount === 0 ? (
+        <Alert variant="filled" severity="info" className={classes.noHeatAlert}>
+          There are no heat wave alerts for the next 7 days :)
+        </Alert>
+      ) : (
+        <Alert
+          variant="filled"
+          className={classes.heatAlert}
+          severity="warning"
+        >
+          WARNING — There are {heatDayCount} heat wave alerts over the next 7
+          days!
+        </Alert>
+      )}{" "}
+      {heatWaveToday && (
+        <React.Fragment>
+          <Alert
+            variant="filled"
+            className={classes.heatAlert}
+            severity="warning"
+          >
+            WARNING — There is a heat wave today!
+          </Alert>
+          <Link
+            activeClass="active"
+            to={"Advice"}
+            spy={true}
+            smooth={true}
+            offset={-80}
+            duration={700}
+          >
+            <Button
+              className={classes.active}
+              onClick={handleEssentialsGuideScroll}
+              variant="contained"
+            >
+              Take Precautions!
+            </Button>
+          </Link>
+          <br />
+        </React.Fragment>
+      )}
+      {
+        //make an if statement to show if there is a heatwave alert or everything is ok.
       }
-
-
       {/*
 render() {
       if (heatwaveAlert) {
@@ -156,15 +241,47 @@ render() {
       )
         }
       return () 
-      */
-      }
-
-
+      */}
       <br />
       <Typography variant="h6">
-        <WarningIcon /> next to the day indicates a heat wave alert
+        <WarningIcon className={classes.warningStyle} /> next to the day
+        indicates a heat wave alert
       </Typography>
-      <List>
+      <br />
+      <Grid container spacing={2} justify="center">
+        {weatherData.map((item) => (
+          <Grid item xs={5} sm={4} md={3}>
+            <Card className={classes.cardStyle}>
+              <CardContent>
+                <Typography paragraph variant="body1">
+                  {item.date
+                    ? days[item.date.getDay()] +
+                      ", " +
+                      item.date.getDate() +
+                      "/" +
+                      (item.date.getMonth() + 1)
+                    : ""}{" "}
+                  {item.avg >= item.threshold && (
+                    <WarningIcon className={classes.warningStyle} />
+                  )}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  {item.max ? item.max : ""}° / {item.min ? item.min : ""}°
+                </Typography>
+                <Typography
+                  variant="body1"
+                  className={item.avg >= item.threshold ? classes.avgAlert : ""}
+                >
+                  Avg. {item.avg ? item.avg : ""}°
+                </Typography>
+                <Typography></Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <br />
+      {/* <List>
         {weatherData.map((item) => (
           <ListItem key={item.date}>
             {item.date
@@ -178,12 +295,11 @@ render() {
             | avg {item.avg ? item.avg : ""}°
           </ListItem>
         ))}
-      </List>
-
-            <Typography paragraph align="center" variant="h5">
-              Not sure where to start?
-            </Typography>
-            <Alerts suburbInfo={currentSuburb} />
+      </List> */}
+      <Typography paragraph align="center" variant="h5">
+        Not sure where to start?
+      </Typography>
+      <Alerts suburbInfo={[currentSuburb, suburbData]} />
       <HeatReadinessQuiz />
       <Grid container justify="center">
         <Link
@@ -215,8 +331,6 @@ render() {
     </React.Fragment>
   );
 }
-
-
 
 /*
 import React from 'react';

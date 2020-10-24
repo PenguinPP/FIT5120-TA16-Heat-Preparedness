@@ -13,8 +13,7 @@ import { QuizContext } from "../Contexts/QuizContext";
 import Symptoms from "./Symptoms/Symptoms";
 import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import Pdf from "../Preparation/leaflet.pdf";
-
+import Pdf from "../Preparation/Victoria-Heat-Guide.pdf";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -69,12 +68,11 @@ const PowerFailureIcon = (props) => {
   );
 };
 
-
 export default function Preparation(preparationData) {
   const classes = useStyles();
 
   const { prepActiveCategory, setPrepCategory } = useContext(QuizContext);
-  console.log(prepActiveCategory);
+  //console.log(prepActiveCategory);
   var messages = {
     //Message to display for each category before bullet points
     "Heat Short Term":
@@ -93,16 +91,17 @@ export default function Preparation(preparationData) {
     Pets: <h1>Pets Not created yet</h1>,
   };
 
-
-
-
   return (
     <React.Fragment>
       <Typography variant="h4" style={{ marginBottom: "1rem" }}>
         Be Prepared!
       </Typography>
       <Typography variant="h8" paragraph>
-        Mitigate risks by having the necessary preparations in place for when a heat wave comes,<a href={Pdf} download>Stick our guide onto your Fridge.</a>
+        Mitigate risks by having the necessary preparations in place for when a
+        heat wave comes.{" "}
+        <a href={Pdf} download>
+          Stick our guide onto your fridge!
+        </a>
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>

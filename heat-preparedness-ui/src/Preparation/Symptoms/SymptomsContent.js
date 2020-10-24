@@ -2,18 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import eskyImage from "../KeepingHomeCool/images/esky.png";
-import thermosImage from "../KeepingHomeCool/images/thermos.png";
-import ReactPlayer from "react-player";
-import northWindow from "../KeepingHomeCool/images/north-window.png";
-import eastWestWindow from "../KeepingHomeCool/images/east-west-window.png";
-import Box from "@material-ui/core/Box";
 import ambulance from "../KeepingHomeCool/images/ambulance.png";
 import doctor from "../KeepingHomeCool/images/doctor.png";
 import mineralWater from "../KeepingHomeCool/images/mineralWater.png";
-
 
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
@@ -77,6 +70,7 @@ export function HeatCramps() {
               <img
                 src={mineralWater}
                 className={classes.mineralwater}
+                alt="water bottle"
               />
             </div>
           </Grid>
@@ -94,30 +88,21 @@ export function HeatCramps() {
               <Typography align="center">
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   Symptoms:
-              </Box>
-                <br></br>
-
-                • Muscle pains
-                <br></br>
-                • Spasms in the abdomen, arms or legs
-
+                </Box>
+                <br></br>• Muscle pains
+                <br></br>• Spasms in the abdomen, arms or legs
               </Typography>
-
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography align="center">
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   What to do:
-              </Box>
-                <br></br>
-• Stop activity and sit quietly in a cool place
-<br></br>
-• Increase fluid intake
-<br></br>
-• Rest a few hours before returning to activity
-<br></br>
-• Seek medical help if cramps persist
-</Typography>
+                </Box>
+                <br></br>• Stop activity and sit quietly in a cool place
+                <br></br>• Increase fluid intake
+                <br></br>• Rest a few hours before returning to activity
+                <br></br>• Seek medical help if cramps persist
+              </Typography>
               {/*<div className={classes.imgContainer}>
                 <img
                   src={eskyImage}
@@ -154,10 +139,7 @@ export function HeatExhaustion() {
           </Grid>
           <Grid item xs={12} md={8}>
             <div className={classes.imgContainer}>
-              <img
-                src={doctor}
-                className={classes.doctor}
-              />
+              <img src={doctor} className={classes.doctor} alt="doctor" />
             </div>
           </Grid>
           <Grid
@@ -174,43 +156,27 @@ export function HeatExhaustion() {
               <Typography align="center">
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   Symptoms:
-              </Box>
-                <br></br>
-                • Pale complexion and sweating
-                <br></br>
-                • Rapid heart rate
-                <br></br>
-                • Muscle cramps
-                <br></br>
-                • Weakness
-                <br></br>
-                • Dizziness
-                <br></br>
-                • Headache
-                <br></br>
-                • Nausea {"&"} Vomiting
-                <br></br>
-                • Fainting
-
-
-
+                </Box>
+                <br></br>• Pale complexion and sweating
+                <br></br>• Rapid heart rate
+                <br></br>• Muscle cramps
+                <br></br>• Weakness
+                <br></br>• Dizziness
+                <br></br>• Headache
+                <br></br>• Nausea {"&"} Vomiting
+                <br></br>• Fainting
               </Typography>
-
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography align="center">
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   What to do:
-              </Box>
-                <br></br>
-• Lay them down on a cool area
-<br></br>
-• Remove outer clothing
-<br></br>
-• Wet skin with cool water or wet cloths
-<br></br>
-• Seek medical advice from a doctor
-</Typography>
+                </Box>
+                <br></br>• Lay them down on a cool area
+                <br></br>• Remove outer clothing
+                <br></br>• Wet skin with cool water or wet cloths
+                <br></br>• Seek medical advice from a doctor
+              </Typography>
               {/*<div className={classes.imgContainer}>
                 <img
                   src={eskyImage}
@@ -250,6 +216,7 @@ export function HeatStroke() {
               <img
                 src={ambulance}
                 className={classes.ambulance}
+                alt="ambulance"
               />
             </div>
           </Grid>
@@ -267,34 +234,27 @@ export function HeatStroke() {
               <Typography align="center">
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   Symptoms:
-              </Box>
-                <br></br>
-                • Same symptoms as heat exhaustion.
-                <br></br>
-                • Dry skin with no sweating
-                <br></br>
-                • Mental condition worsens
-                <br></br>
-                • Confusion, headache, dizziness and nausea.
-                <br></br>
-                • Seizures or convulsions
-                <br></br>
-                • Disorientation, delirium or collapsing
-                <br></br>
-                • Unconsciousness
+                </Box>
+                <br></br>• Same symptoms as heat exhaustion.
+                <br></br>• Dry skin with no sweating
+                <br></br>• Mental condition worsens
+                <br></br>• Confusion, headache, dizziness and nausea.
+                <br></br>• Seizures or convulsions
+                <br></br>• Disorientation, delirium or collapsing
+                <br></br>• Unconsciousness
               </Typography>
-
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography align="center">
                 <Box fontWeight="fontWeightBold" fontSize={23} m={1}>
                   What to do:
-              </Box>
-                <br></br>
-• Call an ambulance
-<br></br>
-• Get the person to a cool area and lay them down, remove their clothing, wet their skin with water, fanning continuously, position the unconscious person on their side and clean their airway
-</Typography>
+                </Box>
+                <br></br>• Call an ambulance
+                <br></br>• Get the person to a cool area and lay them down,
+                remove their clothing, wet their skin with water, fanning
+                continuously, position the unconscious person on their side and
+                clean their airway
+              </Typography>
               {/*<div className={classes.imgContainer}>
                 <img
                   src={eskyImage}

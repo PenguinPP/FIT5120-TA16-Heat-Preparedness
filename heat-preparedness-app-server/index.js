@@ -24,25 +24,6 @@ webpush.setVapidDetails(
   process.env.PUBLIC_VAPID_KEY,
   process.env.PRIVATE_VAPID_KEY
 );
-
-app.post("/notifications/subscribe", (req, res) => {
-  const subscription = req.body;
-
-  console.log(subscription);
-
-  const payload = JSON.stringify({
-    title: "Hello!",
-    body: "It works.",
-  });
-
-  webpush
-    .sendNotification(subscription, payload)
-    .then((result) => console.log(result))
-    .catch((e) => console.log(e.stack));
-
-  res.status(200).json({ success: true });
-});
-
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`));
 
 //Example Weather API Call

@@ -18,24 +18,31 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-function sendSubscription(subscription, suburb) {
-
-  console.log(subscription)
-  subscription['suburb'] = suburb
-  var formattedSubscription = JSON.stringify(subscription)
-
-  console.log(formattedSubscription)
-
-  return fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe/` + suburb, {
+function sendSubscription(subscription, subDetails) {
+  console.log("Suburb");
+  console.log(subscription);
+  console.log(subDetails);
+  return fetch(`${process.env.REACT_APP_API_URL}/notifications/subscribe`, {
     method: "POST",
-    body: JSON.stringify(subscription),
+    body: JSON.stringify([subscription, subDetails]),
     headers: {
       "Content-Type": "application/json",
     },
   });
 }
 
-export function subscribeUser(suburb) {
+function changeSubscription(existedSubscription, subDetails) {
+  return fetch(`${process.env.REACT_APP_API_URL}/notifications/change`, {
+    method: "POST",
+    body: JSON.stringify([existedSubscription, subDetails]),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+export function subscribeUser(subDetails) {
+  console.log(subDetails);
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready
       .then(function (registration) {
@@ -56,7 +63,7 @@ export function subscribeUser(suburb) {
                 })
                 .then(function (newSubscription) {
                   console.log("New subscription added.");
-                  sendSubscription(newSubscription, suburb);
+                  sendSubscription(newSubscription, subDetails);
                 })
                 .catch(function (e) {
                   if (Notification.permission !== "granted") {
@@ -70,9 +77,28 @@ export function subscribeUser(suburb) {
                 });
             } else {
               console.log("Existed subscription detected.");
-              sendSubscription(existedSubscription);
+              sendSubscription(existedSubscription, subDetails);
             }
           });
+      })
+      .catch(function (e) {
+        console.error(
+          "An error ocurred during Service Worker registration.",
+          e
+        );
+      });
+  }
+}
+
+export function checkCompatibility() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.ready
+      .then(function (registration) {
+        if (!registration.pushManager) {
+          return false;
+        } else {
+          return true;
+        }
       })
       .catch(function (e) {
         console.error(

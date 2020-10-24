@@ -73,15 +73,16 @@ export function QuestionOne(status) {
       {!status.status ? (
         <CardContent className={classes.quizContent}>
           <FormControl component="fieldset">
-
             <div className={classes.imgContainer}>
               <img
                 src={temperature}
                 className={classes.temperature}
+                alt="thermometer"
               />
             </div>
 
-            {//<Typography>Is the following statement TRUE or FALSE?</Typography>
+            {
+              //<Typography>Is the following statement TRUE or FALSE?</Typography>
             }
             <Typography>
               Heat strokes are fatal in up to 25% of cases.
@@ -111,30 +112,31 @@ export function QuestionOne(status) {
           </FormControl>
         </CardContent>
       ) : (
-          <CardContent className={classes.quizContent}>
-            <div className={classes.imgContainer}>
-              <img
-                src={temperature}
-                className={classes.temperature}
-              />
-            </div>
-            <Typography>
-              The answer you have chosen is {answer}{" "}
-              {answer === "Wrong" ? (
-                <ClearIcon className={classes.crossStyle} />
-              ) : (
-                  <CheckIcon className={classes.tickStyle} />
-                )}
-            </Typography>
-            {answer === "Wrong" && (
-              <Typography>The correct answer is FALSE</Typography>
+        <CardContent className={classes.quizContent}>
+          <div className={classes.imgContainer}>
+            <img
+              src={temperature}
+              className={classes.temperature}
+              alt="thermometer"
+            />
+          </div>
+          <Typography paragraph>
+            The answer you have chosen is {answer}{" "}
+            {answer === "Wrong" ? (
+              <ClearIcon className={classes.crossStyle} />
+            ) : (
+              <CheckIcon className={classes.tickStyle} />
             )}
-            <Typography>
-              Heat strokes are fatal in up to 80% of cases. It is a medical
-              emergency that requires urgent attention.
           </Typography>
-          </CardContent>
-        )}
+          {answer === "Wrong" && (
+            <Typography paragraph>The correct answer is FALSE</Typography>
+          )}
+          <Typography paragraph>
+            Heat strokes are fatal in up to 80% of cases. It is a medical
+            emergency that requires urgent attention.
+          </Typography>
+        </CardContent>
+      )}
     </React.Fragment>
   );
 }
@@ -166,9 +168,11 @@ export function QuestionTwo(status) {
               <img
                 src={cocktail}
                 className={classes.cocktail}
+                alt="cocktail glass"
               />
             </div>
-            {//<Typography>Is the following statement TRUE or FALSE?</Typography>
+            {
+              //<Typography>Is the following statement TRUE or FALSE?</Typography>
             }
             <Typography>
               During a heatwave people should avoid the consumption of caffeine
@@ -199,30 +203,31 @@ export function QuestionTwo(status) {
           </FormControl>
         </CardContent>
       ) : (
-          <CardContent className={classes.quizContent}>
-            <div className={classes.imgContainer}>
-              <img
-                src={cocktail}
-                className={classes.cocktail}
-              />
-            </div>
-            <Typography>
-              The answer you have chosen is {answer}{" "}
-              {answer === "Wrong" ? (
-                <ClearIcon className={classes.crossStyle} />
-              ) : (
-                  <CheckIcon className={classes.tickStyle} />
-                )}
-            </Typography>
-            {answer === "Wrong" && (
-              <Typography>The correct answer is TRUE</Typography>
+        <CardContent className={classes.quizContent}>
+          <div className={classes.imgContainer}>
+            <img
+              src={cocktail}
+              className={classes.cocktail}
+              alt="cocktail glass"
+            />
+          </div>
+          <Typography paragraph>
+            The answer you have chosen is {answer}{" "}
+            {answer === "Wrong" ? (
+              <ClearIcon className={classes.crossStyle} />
+            ) : (
+              <CheckIcon className={classes.tickStyle} />
             )}
-            <Typography>
-              These can create conditions that make the body more vulnerable to
-              heat stress.
           </Typography>
-          </CardContent>
-        )}
+          {answer === "Wrong" && (
+            <Typography paragraph>The correct answer is TRUE</Typography>
+          )}
+          <Typography paragraph>
+            These can create conditions that make the body more vulnerable to
+            heat stress.
+          </Typography>
+        </CardContent>
+      )}
     </React.Fragment>
   );
 }
@@ -251,10 +256,7 @@ export function QuestionThree(status) {
         <CardContent className={classes.quizContent}>
           <FormControl component="fieldset">
             <div className={classes.imgContainer}>
-              <img
-                src={car}
-                className={classes.car}
-              />
+              <img src={car} className={classes.car} alt="car" />
             </div>
             <Typography>
               Should you call “000” if you see a child or a pet left inside a
@@ -285,30 +287,27 @@ export function QuestionThree(status) {
           </FormControl>
         </CardContent>
       ) : (
-          <CardContent className={classes.quizContent}>
-            <div className={classes.imgContainer}>
-              <img
-                src={car}
-                className={classes.car}
-              />
-            </div>
-            <Typography>
-              The answer you have chosen is {answer}{" "}
-              {answer === "Wrong" ? (
-                <ClearIcon className={classes.crossStyle} />
-              ) : (
-                  <CheckIcon className={classes.tickStyle} />
-                )}
-            </Typography>
-            {answer === "Wrong" && (
-              <Typography>The correct answer is YES</Typography>
+        <CardContent className={classes.quizContent}>
+          <div className={classes.imgContainer}>
+            <img src={car} className={classes.car} alt="car" />
+          </div>
+          <Typography paragraph>
+            The answer you have chosen is {answer}{" "}
+            {answer === "Wrong" ? (
+              <ClearIcon className={classes.crossStyle} />
+            ) : (
+              <CheckIcon className={classes.tickStyle} />
             )}
-            <Typography>
-              It is illegal and dangerous to leave children and pets in cars,
-              especially when experiencing extreme heat.
           </Typography>
-          </CardContent>
-        )}
+          {answer === "Wrong" && (
+            <Typography paragraph>The correct answer is YES</Typography>
+          )}
+          <Typography paragraph>
+            It is illegal and dangerous to leave children and pets in cars,
+            especially when experiencing extreme heat.
+          </Typography>
+        </CardContent>
+      )}
     </React.Fragment>
   );
 }
