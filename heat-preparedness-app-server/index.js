@@ -14,16 +14,10 @@ const axios = require("axios").default;
 app.use(bodyParser.json());
 const mysql = require("mysql");
 const port = 5000;
-const webpush = require("web-push");
 
 const cors = require("cors");
 app.use(cors());
 
-webpush.setVapidDetails(
-  process.env.WEB_PUSH_CONTACT,
-  process.env.PUBLIC_VAPID_KEY,
-  process.env.PRIVATE_VAPID_KEY
-);
 app.listen(port, () => console.log(`Heat Prep listening on port ${port}!`));
 
 //Example Weather API Call
@@ -33,7 +27,7 @@ app.get("/", (req, res) => res.send("Heat Preparedness Application Server"));
 
 const schedule = require("node-schedule");
 const tempUpdateSchedule = schedule.scheduleJob(
-  "0 0 */6 * * *", //schedule weather data update to occur every 4 hours
+  "0 0 */6 * * *", //schedule weather data update to occur every 6 hours
   function () {
     updateAllWeatherData();
   }
@@ -391,7 +385,8 @@ async function getAllCouncils() {
   return new Promise((resultData) => {
     conTemp.query(
       `SELECT *
-         FROM Council;`,
+         FROM Council
+         WHERE council_id < 81;`,
       function (error, result, fields) {
         if (error) {
           //Log error message
@@ -423,7 +418,7 @@ async function updateAllWeatherData() {
   console.log("UpdateAllWeatherData() ran at " + new Date());
   const councilData = await getAllCouncils(); //get council data
   //console.log(councilData)
-  console.log("UpdateAllWeatherData() received council data at" + new Date());
+  //console.log("UpdateAllWeatherData() received council data at" + new Date());
 
   for (let i in councilData) {
     //weather API link format:
@@ -466,12 +461,15 @@ async function updateAllWeatherData() {
       if (forecast < 7) {
         //Average temperature calculation requires next day's minimum temperature, hence the final day is excluded.
         //Obtain data for each day
-        var forecastDate = new Date(
-          temperatureData["daily"][forecast]["dt"] * 1000
-        );
+        //console.log(temperatureData["daily"][forecast]);
+
+        const currentDay = temperatureData["daily"][forecast];
+
+        var forecastDate = new Date(currentDay["dt"] * 1000);
+        //console.log(forecastDate);
         forecastDate = dateFormat(forecastDate, "dd-mm-yyyy");
-        const maxTemp = temperatureData["daily"][forecast]["temp"]["max"];
-        const minTemp = temperatureData["daily"][forecast]["temp"]["min"];
+        const maxTemp = currentDay["temp"]["max"];
+        const minTemp = currentDay["temp"]["min"];
         const nextMinTemp =
           temperatureData["daily"][parseInt(forecast) + 1]["temp"]["min"];
         var avgTemp = (
@@ -488,15 +486,99 @@ async function updateAllWeatherData() {
 
         //console.log("Query starts here at " + new Date())
 
+        const sunrise =
+          dateFormat(new Date(currentDay["sunrise"] * 1000), "dd-mm-yyyy") +
+          " " +
+          dateFormat(new Date(currentDay["sunrise"] * 1000), "HH:MM:ss");
+
+        const sunset =
+          dateFormat(new Date(currentDay["sunset"] * 1000), "dd-mm-yyyy") +
+          " " +
+          dateFormat(new Date(currentDay["sunset"] * 1000), "HH:MM:ss");
+
+        const tempDay = currentDay["temp"]["day"];
+        const tempNight = currentDay["temp"]["night"];
+        const tempEve = currentDay["temp"]["eve"];
+        const tempMorn = currentDay["temp"]["morn"];
+        const feelsDay = currentDay["feels_like"]["day"];
+        const feelsNight = currentDay["feels_like"]["night"];
+        const feelsEve = currentDay["feels_like"]["eve"];
+        const feelsMorn = currentDay["feels_like"]["morn"];
+        const pressure = currentDay["pressure"];
+        const humidity = currentDay["humidity"];
+        const dewPoint = currentDay["dew_point"];
+        const windSpeed = currentDay["wind_speed"];
+        const windDeg = currentDay["wind_deg"];
+        const weather = currentDay["weather"][0]["main"];
+        const weatherDesc = currentDay["weather"][0]["description"];
+        const clouds = currentDay["clouds"];
+        const pop = currentDay["pop"];
+        const rain = currentDay["rain"];
+        const uvi = currentDay["uvi"];
+
         conTemp.query(
           //Run query to insert or update data on database
-          `INSERT INTO Forecast (date, council_id, min, max, avg, update_time)
-                         VALUES (STR_TO_DATE(?, '%d-%m-%Y'), ?, ?, ?, ?, STR_TO_DATE(?, '%d-%m-%Y %H:%i:%s')) ON DUPLICATE KEY
+          `INSERT INTO Forecast (date, council_id, min, max, avg, update_time, sunrise, sunset, temp_day, temp_night, temp_eve, temp_morn, feels_like_day,
+                                feels_like_night, feels_like_eve, feels_like_morn, pressure, humidity, dew_point, wind_speed, wind_degree, 
+                                weather, weather_description, clouds, pop, rain, uvi 
+                                )
+                         VALUES (STR_TO_DATE(?, '%d-%m-%Y'), ?, ?, ?, ?, STR_TO_DATE(?, '%d-%m-%Y %H:%i:%s'),
+                                STR_TO_DATE(?, '%d-%m-%Y %H:%i:%s'), STR_TO_DATE(?, '%d-%m-%Y %H:%i:%s'), ?, ?, ?, ?, ?
+                                , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY
                          UPDATE min = VALUES(min),
                                 max =values(max),
                                 avg = values(avg),
-                                update_time = values(update_time);`,
-          [forecastDate, councilId, minTemp, maxTemp, avgTemp, update_time],
+                                update_time = values(update_time),
+                                sunrise = values(sunrise),
+                                sunset = values(sunset),
+                                temp_day = values(temp_day),
+                                temp_night = values(temp_night),
+                                temp_eve = values(temp_eve),
+                                temp_morn = values(temp_morn),
+                                feels_like_day = values(feels_like_day),
+                                feels_like_night = values(feels_like_night),
+                                feels_like_eve = values(feels_like_eve),
+                                feels_like_morn = values(feels_like_morn),
+                                pressure = values(pressure),
+                                humidity = values(humidity),
+                                dew_point = values(dew_point),
+                                wind_speed = values(wind_speed),
+                                wind_degree = values(wind_degree),
+                                weather = values(weather),
+                                weather_description = values(weather_description),
+                                clouds = values(clouds),
+                                pop = values(pop),
+                                rain = values(rain),
+                                uvi = values(uvi);`,
+          [
+            forecastDate,
+            councilId,
+            minTemp,
+            maxTemp,
+            avgTemp,
+            update_time,
+            sunrise,
+            sunset,
+            tempDay,
+            tempNight,
+            tempEve,
+            tempMorn,
+            feelsDay,
+            feelsNight,
+            feelsEve,
+            feelsMorn,
+            pressure,
+            humidity,
+            dewPoint,
+            windSpeed,
+            windDeg,
+            weather,
+            weatherDesc,
+            clouds,
+            pop,
+            rain,
+            uvi,
+          ],
           function (error, result, fields) {
             if (error) {
               //Log error message
