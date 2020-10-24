@@ -105,10 +105,7 @@ async function getWeatherForecastSuburb(dbConnection, suburbId) {
   return new Promise((resultData) => {
     dbConnection.query(
       `SELECT f.date,
-                f.min,
-                f.max,
-                f.avg,
-                f.update_time,
+                f.*,
                 c.council,
                 s.suburb,
                 s.postcode,
