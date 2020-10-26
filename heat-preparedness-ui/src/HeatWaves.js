@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import eightyPercent from "./images/eighty-percent.png";
 import heatDeaths from "./images/heat-deaths.png";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import HotDays from "./HotDays/HotDays";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -210,9 +209,6 @@ export default function HeatWaves() {
             maximum and minimum temperatures are observed for three or more
             days.
           </Typography>
-        </Grid>
-        <Grid item xs={12} lg={8}>
-          <HotDays />
         </Grid>
 
         <Grid container item xs={12} justify="center">

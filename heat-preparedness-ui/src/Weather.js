@@ -11,8 +11,63 @@ import Alert from "@material-ui/lab/Alert";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import Alerts from "./Alerts/Alerts";
 import { QuizContext } from "./Contexts/QuizContext";
+import sunIcon from "./icons/weather/1/016-sun.png";
+import partlyCloudyIcon from "./icons/weather/1/011-cloudy.png";
+import CloudyIcon from "./icons/weather/1/015-cloud.png";
+import rainIcon from "./icons/weather/1/010-raining.png";
+import stormIcon from "./icons/weather/1/012-storm.png";
+import HotDays from "./HotDays/HotDays";
+import sunIcon2 from "./icons/weather/2/029-sunrise.png";
+import partlyCloudyIcon2 from "./icons/weather/2/013-cloudy.png";
+import CloudyIcon2 from "./icons/weather/2/014-cloud.png";
+import rainIcon2 from "./icons/weather/2/002-rain.png";
+import stormIcon2 from "./icons/weather/2/004-storm.png";
+import sunIcon3 from "./icons/weather/3/012-sun.png";
+import partlyCloudyIcon3 from "./icons/weather/3/007-clouds and sun.png";
+import CloudyIcon3 from "./icons/weather/3/028-clouds.png";
+import rainIcon3 from "./icons/weather/3/006-cloud.png";
+import stormIcon3 from "./icons/weather/3/019-storm.png";
 
 const axios = require("axios").default;
+
+const weatherIcons = {
+  Clear: sunIcon,
+  Clouds: {
+    "scattered clouds": partlyCloudyIcon,
+    "few clouds": partlyCloudyIcon,
+    "broken clouds": CloudyIcon,
+    "overcast clouds": CloudyIcon,
+  },
+  Rain: rainIcon,
+  Storm: stormIcon,
+  Drizzle: rainIcon,
+};
+
+const weatherIcons2 = {
+  Clear: sunIcon2,
+  Clouds: {
+    "scattered clouds": partlyCloudyIcon2,
+    "few clouds": partlyCloudyIcon2,
+    "broken clouds": CloudyIcon2,
+    "overcast clouds": CloudyIcon2,
+  },
+  Rain: rainIcon2,
+  Storm: stormIcon2,
+  Drizzle: rainIcon2,
+};
+
+const weatherIcons3 = {
+  Clear: sunIcon3,
+  Clouds: {
+    "scattered clouds": partlyCloudyIcon3,
+    "few clouds": partlyCloudyIcon3,
+    "broken clouds": CloudyIcon3,
+    "overcast clouds": CloudyIcon3,
+  },
+  Rain: rainIcon3,
+  Storm: stormIcon3,
+  Drizzle: rainIcon3,
+};
 
 //const heatwaveAlert = FALSE;
 
@@ -54,6 +109,19 @@ const useStyles = makeStyles((theme) => ({
   cardStyle: {
     height: "200px",
     backgroundColor: "#efefef",
+    [theme.breakpoints.down("xs")]: { height: 270 },
+  },
+  imgContainer: {
+    textAlign: "center",
+    width: "100%",
+    padding: "1rem",
+  },
+  weatherIconStyle: {
+    width: 100,
+    height: 100,
+    [theme.breakpoints.down("md")]: { width: 75, height: 75 },
+    [theme.breakpoints.down("sm")]: { width: 60, height: 60 },
+    [theme.breakpoints.down("xs")]: { width: 68, height: 68 },
   },
 }));
 
@@ -117,6 +185,7 @@ export default function Weather(weatherInformation) {
       });
   }, [suburbId]);
 
+  console.log(weatherData);
   //if (suburbList.includes(suburb)) {
   return (
     /*        <Button onClick = {() => setSuburb("Bellfield")>
@@ -250,31 +319,52 @@ render() {
       <br />
       <Grid container spacing={2} justify="center">
         {weatherData.map((item) => (
-          <Grid item xs={5} sm={4} md={3}>
+          <Grid item xs={6} sm={4} md={3}>
             <Card className={classes.cardStyle}>
               <CardContent>
-                <Typography paragraph variant="body1">
-                  {item.date
-                    ? days[item.date.getDay()] +
-                      ", " +
-                      item.date.getDate() +
-                      "/" +
-                      (item.date.getMonth() + 1)
-                    : ""}{" "}
-                  {item.avg >= item.threshold && (
-                    <WarningIcon className={classes.warningStyle} />
-                  )}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  {item.max ? item.max : ""}° / {item.min ? item.min : ""}°
-                </Typography>
-                <Typography
-                  variant="body1"
-                  className={item.avg >= item.threshold ? classes.avgAlert : ""}
-                >
-                  Avg. {item.avg ? item.avg : ""}°
-                </Typography>
-                <Typography></Typography>
+                <Grid container>
+                  <Grid item xs={12} sm={7} lg={6}>
+                    <Typography paragraph variant="body1">
+                      {item.date
+                        ? days[item.date.getDay()] +
+                          ", " +
+                          item.date.getDate() +
+                          "/" +
+                          (item.date.getMonth() + 1)
+                        : ""}{" "}
+                      {item.avg >= item.threshold && (
+                        <WarningIcon className={classes.warningStyle} />
+                      )}
+                    </Typography>
+                    <Typography variant="body2">
+                      {item.max ? item.max : ""}° / {item.min ? item.min : ""}°
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={5} lg={6} alignItems="center">
+                    <div className={classes.imgContainer}>
+                      <img
+                        className={classes.weatherIconStyle}
+                        src={
+                          item.weather === "Clouds"
+                            ? weatherIcons2["Clouds"][item.weather_description]
+                            : weatherIcons2[item.weather]
+                        }
+                        alt={item.weather + " icon"}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid xs={12}>
+                    <Typography
+                      paragraph
+                      variant="body1"
+                      className={
+                        item.avg >= item.threshold ? classes.avgAlert : ""
+                      }
+                    >
+                      Avg. {item.avg ? item.avg : ""}°
+                    </Typography>
+                  </Grid>
+                </Grid>
               </CardContent>
             </Card>
           </Grid>
@@ -296,11 +386,31 @@ render() {
           </ListItem>
         ))}
       </List> */}
-      <Typography paragraph align="center" variant="h5">
-        Not sure where to start?
-      </Typography>
-      <Alerts suburbInfo={[currentSuburb, suburbData]} />
-      <HeatReadinessQuiz />
+      <Grid container justify="center">
+        <Grid item xs={12} lg={8}>
+          <Typography align="center">
+            The number of unusually hot days in Victoria is increasing every
+            year, meaning heatwaves will occur more often!
+          </Typography>
+        </Grid>
+        <Grid item xs={12} lg={8}>
+          <HotDays />
+        </Grid>
+        <Grid item xs={12} lg={8} align="center">
+          <Typography paragraph variant="h5">
+            We can notify you if a heatwave is going to occur in your area!
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Alerts suburbInfo={[currentSuburb, suburbData]} />
+        </Grid>
+        <Grid item xs={12} lg={8} align="center">
+          <Typography paragraph variant="h5">
+            Already subscribed?
+          </Typography>
+        </Grid>
+        <HeatReadinessQuiz />
+      </Grid>
       <Grid container justify="center">
         <Link
           activeClass="active"
