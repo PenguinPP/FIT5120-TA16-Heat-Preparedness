@@ -12,6 +12,7 @@ import Pets from "./Pets/Pets";
 import KeepCool from "./KeepCool/KeepCool";
 import { QuizContext } from "../Contexts/QuizContext";
 import Pdf from "../Preparation/Victoria-Heat-Guide.pdf";
+import downloadicon from "./button.png"
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -28,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
     },
+  },
+  mediadownload: {
+    height: 25,
+    maxWidth: "95%",
   },
 }));
 
@@ -55,6 +60,7 @@ const KeepCoolIcon = (props) => {
   );
 };
 
+
 export default function Advice(adviceData) {
   const { adviceActiveCategory, setAdviceCategory } = useContext(QuizContext);
 
@@ -79,6 +85,11 @@ export default function Advice(adviceData) {
         <a href={Pdf} download>
           Stick our guide onto your fridge!
         </a>
+        <img
+          src={downloadicon}
+          alt="download lead"
+          className={classes.mediadownload}
+        />
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
