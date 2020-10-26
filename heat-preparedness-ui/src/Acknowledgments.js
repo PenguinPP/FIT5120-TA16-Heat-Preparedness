@@ -127,6 +127,21 @@ export default function Acknowledgements() {
           </a>
           .
         </Typography>
+        <Typography paragraph>
+          Statistics on unusually hot days in Victoria were acquired from the{" "}
+          <a
+            href="https://www.climatechange.vic.gov.au/climate-science-report-2019"
+            className={classes.linkStyle}
+          >
+            Victorian Climate Change Report 2019.
+          </a>
+        </Typography>
+        <Typography paragraph>
+          Weather icons were acquired from{" "}
+          <a href="http://www.flaticon.com" className={classes.linkStyle}>
+            flaticon.
+          </a>
+        </Typography>
 
         <Button className={classes.buttonStyle} onClick={handleClickOpen}>
           About Us

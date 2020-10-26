@@ -11,22 +11,12 @@ import Alert from "@material-ui/lab/Alert";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import Alerts from "./Alerts/Alerts";
 import { QuizContext } from "./Contexts/QuizContext";
-import sunIcon from "./icons/weather/1/016-sun.png";
-import partlyCloudyIcon from "./icons/weather/1/011-cloudy.png";
-import CloudyIcon from "./icons/weather/1/015-cloud.png";
-import rainIcon from "./icons/weather/1/010-raining.png";
-import stormIcon from "./icons/weather/1/012-storm.png";
 import HotDays from "./HotDays/HotDays";
-import sunIcon2 from "./icons/weather/2/029-sunrise.png";
-import partlyCloudyIcon2 from "./icons/weather/2/013-cloudy.png";
-import CloudyIcon2 from "./icons/weather/2/014-cloud.png";
-import rainIcon2 from "./icons/weather/2/002-rain.png";
-import stormIcon2 from "./icons/weather/2/004-storm.png";
-import sunIcon3 from "./icons/weather/3/012-sun.png";
-import partlyCloudyIcon3 from "./icons/weather/3/007-clouds and sun.png";
-import CloudyIcon3 from "./icons/weather/3/028-clouds.png";
-import rainIcon3 from "./icons/weather/3/006-cloud.png";
-import stormIcon3 from "./icons/weather/3/019-storm.png";
+import sunIcon from "./icons/weather/012-sun.png";
+import partlyCloudyIcon from "./icons/weather/007-clouds and sun.png";
+import CloudyIcon from "./icons/weather/028-clouds.png";
+import rainIcon from "./icons/weather/006-cloud.png";
+import stormIcon from "./icons/weather/019-storm.png";
 
 const axios = require("axios").default;
 
@@ -41,32 +31,6 @@ const weatherIcons = {
   Rain: rainIcon,
   Storm: stormIcon,
   Drizzle: rainIcon,
-};
-
-const weatherIcons2 = {
-  Clear: sunIcon2,
-  Clouds: {
-    "scattered clouds": partlyCloudyIcon2,
-    "few clouds": partlyCloudyIcon2,
-    "broken clouds": CloudyIcon2,
-    "overcast clouds": CloudyIcon2,
-  },
-  Rain: rainIcon2,
-  Storm: stormIcon2,
-  Drizzle: rainIcon2,
-};
-
-const weatherIcons3 = {
-  Clear: sunIcon3,
-  Clouds: {
-    "scattered clouds": partlyCloudyIcon3,
-    "few clouds": partlyCloudyIcon3,
-    "broken clouds": CloudyIcon3,
-    "overcast clouds": CloudyIcon3,
-  },
-  Rain: rainIcon3,
-  Storm: stormIcon3,
-  Drizzle: rainIcon3,
 };
 
 //const heatwaveAlert = FALSE;
@@ -110,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     height: "200px",
     backgroundColor: "#efefef",
     [theme.breakpoints.down("xs")]: { height: 270 },
+    [theme.breakpoints.up("lg")]: { height: 220 },
   },
   imgContainer: {
     textAlign: "center",
@@ -117,8 +82,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
   },
   weatherIconStyle: {
-    width: 100,
-    height: 100,
+    width: 90,
+    height: 90,
     [theme.breakpoints.down("md")]: { width: 75, height: 75 },
     [theme.breakpoints.down("sm")]: { width: 60, height: 60 },
     [theme.breakpoints.down("xs")]: { width: 68, height: 68 },
@@ -340,18 +305,28 @@ render() {
                       {item.max ? item.max : ""}° / {item.min ? item.min : ""}°
                     </Typography>
                   </Grid>
-                  <Grid item xs={12} sm={5} lg={6} alignItems="center">
+                  <Grid
+                    item
+                    xs={12}
+                    sm={5}
+                    lg={6}
+                    alignItems="flex-start"
+                    justify="center"
+                  >
                     <div className={classes.imgContainer}>
                       <img
                         className={classes.weatherIconStyle}
                         src={
                           item.weather === "Clouds"
-                            ? weatherIcons2["Clouds"][item.weather_description]
-                            : weatherIcons2[item.weather]
+                            ? weatherIcons["Clouds"][item.weather_description]
+                            : weatherIcons[item.weather]
                         }
                         alt={item.weather + " icon"}
                       />
                     </div>
+                    <Typography align="center" variant="body2">
+                      {item.weather}
+                    </Typography>
                   </Grid>
                   <Grid xs={12}>
                     <Typography
@@ -386,6 +361,7 @@ render() {
           </ListItem>
         ))}
       </List> */}
+      <br />
       <Grid container justify="center">
         <Grid item xs={12} lg={8}>
           <Typography align="center">
