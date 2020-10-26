@@ -14,6 +14,7 @@ import Symptoms from "./Symptoms/Symptoms";
 import KeepingHomeCool from "./KeepingHomeCool/KeepingHomeCool";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import Pdf from "../Preparation/Victoria-Heat-Guide.pdf";
+import downloadicon from "./button.png"
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -40,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.secondary.contrastText,
     },
   },
+  mediadownload: {
+    height: 25,
+    maxWidth: "95%",
+  }
 }));
 
 const SymptomsIcon = (props) => {
@@ -102,6 +107,11 @@ export default function Preparation(preparationData) {
         <a href={Pdf} download>
           Stick our guide onto your fridge!
         </a>
+        <img
+          src={downloadicon}
+          alt="download lead"
+          className={classes.mediadownload}
+        />
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
