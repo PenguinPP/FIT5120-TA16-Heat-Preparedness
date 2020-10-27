@@ -11,7 +11,6 @@ import sunCream from "./images/sunCream.png";
 import walkPet from "./images/walkPet.png";
 import Grid from "@material-ui/core/Grid";
 
-
 const useStyles = makeStyles((theme) => ({
   cardContentStyle: {
     minHeight: "450px",
@@ -170,7 +169,7 @@ export function OutDoor() {
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <Typography align="center">
-                it is better to walk them early in the morning or in the
+                It is better to walk them early in the morning or in the
                 evening. Remember, ground that feels hot to touch can do serious
                 damage to your pooch’s paws!
               </Typography>

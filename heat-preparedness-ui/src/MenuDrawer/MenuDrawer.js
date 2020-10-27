@@ -8,6 +8,7 @@ import {
   IconButton,
   makeStyles,
   Avatar,
+  Typography,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import teamLogo from "../images/victoria-heat-icon.png";
@@ -72,6 +73,8 @@ export default function MenuDrawer(props) {
                 <Avatar src={teamLogo} style={{ padding: "1px" }} />
               </IconButton>
             </IconScroll>
+
+            <Typography>Heat Preparedness</Typography>
           </Toolbar>
         </AppBar>
       </ScrollHandler>

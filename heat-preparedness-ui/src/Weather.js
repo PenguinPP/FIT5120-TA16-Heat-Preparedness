@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   cardStyle: {
     height: "200px",
     backgroundColor: "#efefef",
-    [theme.breakpoints.down("xs")]: { height: 270 },
+    [theme.breakpoints.down("xs")]: { height: 320 },
     [theme.breakpoints.up("lg")]: { height: 220 },
   },
   imgContainer: {
@@ -324,13 +324,12 @@ render() {
                         alt={item.weather + " icon"}
                       />
                     </div>
-                    <Typography align="center" variant="body2">
+                    <Typography paragraph align="center" variant="body2">
                       {item.weather}
                     </Typography>
                   </Grid>
                   <Grid xs={12}>
                     <Typography
-                      paragraph
                       variant="body1"
                       className={
                         item.avg >= item.threshold ? classes.avgAlert : ""

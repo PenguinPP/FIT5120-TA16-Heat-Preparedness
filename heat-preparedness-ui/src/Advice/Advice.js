@@ -12,7 +12,7 @@ import Pets from "./Pets/Pets";
 import KeepCool from "./KeepCool/KeepCool";
 import { QuizContext } from "../Contexts/QuizContext";
 import Pdf from "../Preparation/Victoria-Heat-Guide.pdf";
-import downloadicon from "./button.png"
+import downloadicon from "./button.png";
 
 const useStyles = makeStyles((theme) => ({
   active: {
@@ -60,7 +60,6 @@ const KeepCoolIcon = (props) => {
   );
 };
 
-
 export default function Advice(adviceData) {
   const { adviceActiveCategory, setAdviceCategory } = useContext(QuizContext);
 
@@ -84,12 +83,12 @@ export default function Advice(adviceData) {
         wave.{" "}
         <a href={Pdf} download>
           Stick our guide onto your fridge!
+          <img
+            src={downloadicon}
+            alt="download lead"
+            className={classes.mediadownload}
+          />
         </a>
-        <img
-          src={downloadicon}
-          alt="download lead"
-          className={classes.mediadownload}
-        />
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>

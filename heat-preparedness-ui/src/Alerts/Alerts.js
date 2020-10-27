@@ -1,6 +1,6 @@
 import React from "react";
 import { subscribeUser } from "./subscription";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -10,6 +10,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles((theme) => ({
   quizCard: {
@@ -53,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
   },
   warningText: {
     color: theme.palette.cross.main,
+  },
+  closeStyle: {
+    color: theme.palette.primary.main,
+    marginRight: "1rem",
   },
 }));
 
@@ -158,9 +163,23 @@ export default function Alerts(suburbInfo) {
               aria-labelledby="about-us-dialog-title"
               aria-describedby="about-us-dialog-description"
             >
-              <DialogTitle id="subscription-dialog-title">
-                Heat Alert Subscription
-              </DialogTitle>
+              <Grid container justify="flex-start" alignItems="center">
+                <Grid item xs={10}>
+                  <DialogTitle id="subscription-dialog-title">
+                    Heat Alert Subscription
+                  </DialogTitle>
+                </Grid>
+                <Grid container item xs={2} justify="flex-end">
+                  <Grid item>
+                    <IconButton
+                      onClick={handleClose}
+                      className={classes.closeStyle}
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              </Grid>
               {compatible ? (
                 <React.Fragment>
                   <DialogContent className={page !== 1 ? classes.hidePage : ""}>

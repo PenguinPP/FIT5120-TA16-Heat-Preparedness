@@ -9,7 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 const styles = (theme) => ({
   buttonCollapse: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       display: "none",
     },
     margin: "10px",
