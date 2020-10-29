@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     height: "200px",
     backgroundColor: "#efefef",
     [theme.breakpoints.down("xs")]: { height: 320 },
-    [theme.breakpoints.up("lg")]: { height: 220 },
+    [theme.breakpoints.up("lg")]: { height: 230 },
   },
   imgContainer: {
     textAlign: "center",
