@@ -128,6 +128,16 @@ export default function Acknowledgements() {
           .
         </Typography>
         <Typography paragraph>
+          Statistics regarding deaths from heat waves were acquired from a study
+          by{" "}
+          <a
+            href="https://www.sciencedirect.com/science/article/pii/S1462901114000999"
+            className={classes.linkStyle}
+          >
+            Coates el al., 2014.
+          </a>
+        </Typography>
+        <Typography paragraph>
           Statistics on unusually hot days in Victoria were acquired from the{" "}
           <a
             href="https://www.climatechange.vic.gov.au/climate-science-report-2019"
