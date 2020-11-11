@@ -20,9 +20,6 @@ export default function HotDays() {
     <ReactEcharts
       style={{ minHeight: "400px" }}
       option={{
-        title: {
-          text: "Unusually Hot Days in Victoria",
-        },
         tooltip: {
           trigger: "axis",
           backgroundColor: "white",
