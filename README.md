@@ -24,7 +24,7 @@ The site has two informative sections. The "Be Prepared" section contains advice
 # Technology / Frameworks
 We have constructed a web-app that targeted specifically at the elderly, to provide them with the crucial information they need to safeguard their own health during periods of extreme heat. We have utilised a three tier architecture, using Nodejs for the front-end and application server, and mySQL for the backend database. Specifically for the front-end we used ReactJS and for the application server we used ExpressJS.
 
-Our front-end and application server are both hosted on an Amazon EC2 instance. We use an Nginx web server to deliver our site to users and to act as a reverse proxy for API calls. The application server only responds to a set of pre-defined requests, and upon receiving these requests, queries the database to obtain the required data, and return it to the user through the front-end. The mySQL database is hosted on the AWS RDS platform.
+Our front-end and application server are both hosted on an Amazon EC2 instance. We use an Nginx web server to deliver our site to users and to act as a reverse proxy for API calls. The application server only responds to a set of pre-defined requests, and upon receiving these requests, queries the database to obtain the required data, and return it to the user through the front-end. The mySQL database is hosted on the AWS RDS platform. The application server is also responsible for periodically checking weather data and sending out notifications to users as required.
 
 ## List of Libraries/Packages Used
 
