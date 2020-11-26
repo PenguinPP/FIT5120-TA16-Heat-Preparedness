@@ -78,7 +78,7 @@ The definition of heat waves, preparations and other pieces of advice provided a
  
 Advice on improving your home's cooling efficiency was sourced from <a href="https://www.sustainability.vic.gov.au/You-and-your-home/Save-energy/Cooling/Cool-your-home-in-summer">Sustainability Victoria</a>
    
-Vector silhouettes for heat wave deaths were obtained from <ahref="https://www.freevector.com/elderly-people-silhouettes">freevector.com</a> and <a href="https://www.vecteezy.com/free-vector/human-silhouette-vector-free">Vecteezy</a>.
+Vector silhouettes for heat wave deaths were obtained from <a href="https://www.freevector.com/elderly-people-silhouettes">freevector.com</a> and <a href="https://www.vecteezy.com/free-vector/human-silhouette-vector-free">Vecteezy</a>.
  
 Statistics regarding deaths from heat waves were acquired from a study by <a href="https://www.sciencedirect.com/science/article/pii/S1462901114000999">Coates el al., 2014.</a>
 
