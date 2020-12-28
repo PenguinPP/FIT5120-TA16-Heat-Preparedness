@@ -1,4 +1,4 @@
-# FIT5120-TA16-Heat-Preparedness
+# Victoria Heat
 
 This project was completed as part of the Industry Experience Studio Project for final semester postgraduate IT students from Monash University
 
