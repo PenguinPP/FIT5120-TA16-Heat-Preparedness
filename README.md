@@ -6,6 +6,8 @@ We are a highly motivated team with a diverse range of skills and educational ba
 
 The final version of the web app be accessed from <a href="https://victoria-heat.ga">www.victoria-heat.ga</a>
 
+Note: the SSL certificate for the site is currently expired.
+
  
 # Features
 
