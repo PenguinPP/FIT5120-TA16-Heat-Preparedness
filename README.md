@@ -4,6 +4,10 @@ This project was completed as part of the Industry Experience Studio Project for
 
 We are a highly motivated team with a diverse range of skills and educational backgrounds. As a team we hoped to develop a project that will have a positive impact on the lives of others. Upon receiving our topic, we recognised that high temperatures are a growing public health concern in Australia, and we are determined to provide vulnerable individuals with the knowledge and resources they will need to safeguard their health. To that end, our site is targeted at elderly Victorians as we determined through our research they make up a large majority of the vulnerable population.
 
+ The final version of the web app be accessed from <a href="https://victoria-heat.ga">www.victoria-heat.ga</a>
+
+Note: the SSL certificate for the site is currently expired and the weather function does not work as the RDS database has been taken down to avoid charges.
+ 
  
 # Features
 
